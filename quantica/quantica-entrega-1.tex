@@ -105,10 +105,10 @@
 		\end{equation*}
 		on \( \phi \) és la distribució de \( Z \). Aquesta distribució---o més aviat, la seva integral \( \Phi \)--- està tabulada de manera que podem calcular les probabilitats de \( \abs{X} \leq \sigma \) i \( \abs{X} > \sigma \):
 		\begin{equation*}
-			P(\abs{X} \leq \sigma) = \int_{-\sigma}^{\sigma} f(x)\,dx = \int_{-1}^{1}\phi(z)\,dz = \Phi(1) - \Phi(-1) = 0.6826 = p_1,
+			P(\abs{X} \leq \sigma) = \int_{-\sigma}^{\sigma} f(x)\,dx = \int_{-1}^{1}\phi(z)\,dz = \Phi(1) - \Phi(-1) = 0.6826 = p,
 		\end{equation*}
 		\begin{equation*}
-			P(\abs{X} > \sigma) = 1 - P(\abs{X} \leq \sigma) = 0.3174 = p_2.
+			P(\abs{X} > \sigma) = 1 - P(\abs{X} \leq \sigma) = 0.3174 = 1 - p.
 		\end{equation*}
 
 	\item Volem saber la distribució de la variable \( X \) condicionada a \( \abs{X} \leq \sigma \) i a \( \abs{X} > \sigma \). Si la distribució inicial de \( X \) és \( f(x) \) denotem \( f_1(x) = f(x \mid \abs{X} \leq \sigma) \) i \( f_2(x) = f(x \mid \abs{X} > \sigma) \).
@@ -121,7 +121,7 @@
 			0 & \abs{x} > \sigma  
 	\end{array} \right. 
 	= \left\{\begin{array}{lr}
-			\frac{F(x) - F(-\sigma)}{p_1} & \abs{x} \leq \sigma \\ 
+			\frac{F(x) - F(-\sigma)}{p} & \abs{x} \leq \sigma \\ 
 			0 & \abs{x} > \sigma  
 	\end{array} \right.
 \end{align*}
@@ -140,9 +140,9 @@ Fent un càlcul similar per a determinar \( f_2 \) trobem
 	\frac{P(\sigma \leq X \leq x)}{P(\abs{X} > \sigma)} & x > \sigma 
 	\end{array} \right. 
 	= \left\{\begin{array}{lr}
-			\frac{F(x)}{p_2} & x < -\sigma \\ 
+			\frac{F(x)}{1 - p} & x < -\sigma \\ 
 			0 & \abs{x} \leq \sigma \\
-			\frac{F(x) - F(\sigma)}{p_2} & x > \sigma
+			\frac{F(x) - F(\sigma)}{1 - p} & x > \sigma
 	\end{array} \right.
 \end{align*}
 i deduïm que 
@@ -153,25 +153,33 @@ per \( \abs{x} > \sigma \) i \( f(x \mid \abs{X} > \sigma) = 0 \) per \( \abs{x}
 
 Hem de calcular també les mitjanes i variàncies de les respectives distribucions. És clar que les dues mitjanes continuen sent 0 ja que les distribucions són ambdues simètriques respecte de l'origen. Pel que fa a les variàncies, apliquem la definició:
 \begin{equation*}
-	\sigma_1^2 = \int_{-\infty}^{\infty} x^2f_1(x) \, dx = \frac{1}{p_1}\int_{-\sigma}^{\sigma}x^2 f(x)\,dx.
+	\sigma_1^2 = \int_{-\infty}^{\infty} x^2f_1(x) \, dx = \frac{1}{p}\int_{-\sigma}^{\sigma}x^2 f(x)\,dx.
 \end{equation*}
 Podem fer ús una altra vegada de la variable normalitzada \( Z \) per escriure
 \begin{equation*}
-	\sigma_1^2 = \frac{1}{p_1}\int_{-\sigma}^{\sigma} \frac{x^2}{\sigma}\phi\left(\frac{x}{\sigma}\right)\,dx = \frac{\sigma^2}{p_1}\int_{-1}^{1} z^2\phi(z)\,dz.
+	\sigma_1^2 = \frac{1}{p}\int_{-\sigma}^{\sigma} \frac{x^2}{\sigma}\phi\left(\frac{x}{\sigma}\right)\,dx = \frac{\sigma^2}{p}\int_{-1}^{1} z^2\phi(z)\,dz.
 \end{equation*}
 Aquesta integral té per primitiva \( \Phi(z) - z\phi(z) \), on \( \Phi \) és la distribució acumulada de la distribució normal estàndard \( \phi \). Així
 \begin{equation*}
-	\sigma_1^2 = \frac{\sigma^2}{p_1} \left(\Phi(1) - \phi(1) - \Phi(-1) - \phi(-1)\right) = \frac{\sigma^2}{p_1}(p_1 - 2\phi(1)) = \left(1 - \frac{2\sigma f(\sigma)}{p_1}\right) \sigma^2.
+	\sigma_1^2 = \frac{\sigma^2}{p} \left(\Phi(1) - \phi(1) - \Phi(-1) - \phi(-1)\right) = \frac{\sigma^2}{p}(p - 2\phi(1)) = \left(1 - \frac{2\sigma f(\sigma)}{p}\right) \sigma^2.
 \end{equation*}
+Veiem que \( \sigma_1^2 < \sigma^2 \), la qual cosa té sentit ja que quan tenim la informació de que \( \abs{X} \leq \sigma \), estem eliminant les cues de la distribució de \( X \), i per tant reduïm la dispersió. 
 
 Fem ara el càlcul de la variància quan \( \abs{X} > \sigma \):
 \begin{equation*}
-	\sigma_2^2 = \int_{-\infty}^{\infty} x^2f_1(x) \, dx = \frac{1}{p_2} \left(\int_{-\infty}^{-\sigma}x^2 f(x)\,dx + \int_{\sigma}^{\infty}x^2 f(x)\,dx\right) = \frac{1}{p_2} \left(\sigma^2 - \int_{-\sigma}^{\sigma} x^2f(x)\,dx\right).
+	\sigma_2^2 = \int_{-\infty}^{\infty} x^2f_1(x) \, dx = \frac{1}{1 - p} \left(\int_{-\infty}^{-\sigma}x^2 f(x)\,dx + \int_{\sigma}^{\infty}x^2 f(x)\,dx\right) = \frac{1}{1 - p} \left(\sigma^2 - \int_{-\sigma}^{\sigma} x^2f(x)\,dx\right).
 \end{equation*}
 I per tant
 \begin{equation*}
-	\sigma_2^2 = \frac{1}{p_2}(\sigma^2 - p_1\sigma_1^2) = \frac{2\sigma f(\sigma)}{p_2} \sigma^2.
+	\sigma_2^2 = \frac{1}{1 - p}(\sigma^2 - p\sigma_1^2) = \frac{2\sigma f(\sigma)}{1 - p} \sigma^2.
 \end{equation*}
+
+Tenim
+\begin{equation*}
+	\sigma_2^2 = \frac{1}{1 - p}\left(\sigma^2 - p\sigma_1^2\right) < \frac{1}{1 - p}\left(\sigma^2 - p\sigma^2\right) = \sigma^2
+\end{equation*}
+i per tant eliminant la regió central de la distribució de \( X \) també reduïm la dispersió. 
+
 
 \item Si oblidem el resultat de la mesura no estarem condicionant el resultat i per tant la distribució serà la distribució de \( X \) sense alterar. 
 \end{enumerate}
