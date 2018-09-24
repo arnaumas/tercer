@@ -1,0 +1,252 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Ry}{\mathit{Ry}}
+\DeclareMathOperator{\gr}{gr}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\inn}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+=}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Entrega 1:} Els orígens de la quàntica}{}{\sffamily Arnau Mas}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\titleformat{\section}[hang]{ \sffamily \Large}{\bfseries Problema \thesection. }{0pt}{}{\thispagestyle{plain}}
+
+\title{\sffamily {\bfseries Entrega 1:} Els orígens de la quàntica}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 25 de setembre 2018}
+
+\begin{document}
+\maketitle
+
+\section{El teorema de Bayes}
+\begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
+	\item Denotem per \( B \) l'esdeveniment ``hem triat la porta correcta''. Aleshores és clar que la probabilitat marginal de \( B \) és \( \frac{1}{3} \). També és clar que \( B^c \) és l'esdeveniment ``hem triat una porta incorrecta'', i que té probabilitat marginal \( \frac{2}{3} \). Denotem per \( C \) l'esdeveniment ''el presentador obre una porta que no conté l'examen''. El nostre objectiu, doncs, és caclular \( P(B \mid C) \). Pel teorema de Bayes tenim
+		\begin{equation*}
+			P(B \mid C) = \frac{P(C \mid B)}{P(C)} P(B).
+		\end{equation*}
+		És clar que \( P(C \mid B) = 1 \), ja que el presentador sempre tria una porta incorrecta, independentment de la nostra tria inicial. A més tenim 
+		\begin{equation*}
+			P(C) = P(C \cap B) + P(C \cap B^c) = P(C \mid B)P(B) + P(C \mid B^c)P(B^c),
+		\end{equation*}
+		i com que \( P(C \mid B^c) = 1 \) ---com abans, el presentador sempre tria una porta incorrecta, independentment de la porta que hem triat---, queda que \( P(B \mid C) = P(B) = \frac{1}{3} \). Similarment \( P(B^c \mid C) = P(B^c) = \frac{2}{3} \). Així doncs, les probabilitats no canvien un cop el presentador ha obert una porta incorrecta. Ara bé, un cop això ha passat només queden dues portes. Sabem que hem triat la porta correcta amb una probabilitat de \( \frac{1}{3} \), i la porta incorrecta amb probabilitat \( \frac{2}{3} \). Per tant la millor estratègia és canviar de porta, ja que si hem triat la porta incorrecta, sabem del cert que l'examen es troba darrera de l'única altra porta restant. És a dir, si no canviem guanyem amb \( \frac{1}{3} \) de probabilitat, mentre que si canviem guanyarem amb un \( \frac{2}{3} \) de probabilitat.  
+
+	\item Tenim que la variable aleatòria \( X \) té una distribució gaussiana de mitjana 0 i desviació estàndard \( \sigma \). La podem normalitzar a una variable \( Z = X/\sigma \) de mitjana 0 i desviació estàndard 1 de manera que la distribució de \( X \), diguem-li \( f \), verifica
+		\begin{equation*}
+			f(x) = \frac{1}{\sigma} \phi\left(\frac{x}{\sigma}\right),
+		\end{equation*}
+		on \( \phi \) és la distribució de \( Z \). Aquesta distribució---o més aviat, la seva integral \( \Phi \)--- està tabulada de manera que podem calcular les probabilitats de \( \abs{X} \leq \sigma \) i \( \abs{X} > \sigma \):
+		\begin{equation*}
+			P(\abs{X} \leq \sigma) = \int_{-\sigma}^{\sigma} f(x)\,dx = \int_{-1}^{1}\phi(z)\,dz = \Phi(1) - \Phi(-1) = 0.6826 = p_1,
+		\end{equation*}
+		\begin{equation*}
+			P(\abs{X} > \sigma) = 1 - P(\abs{X} \leq \sigma) = 0.3174 = p_2.
+		\end{equation*}
+
+	\item Volem saber la distribució de la variable \( X \) condicionada a \( \abs{X} \leq \sigma \) i a \( \abs{X} > \sigma \). Si la distribució inicial de \( X \) és \( f(x) \) denotem \( f_1(x) = f(x \mid \abs{X} \leq \sigma) \) i \( f_2(x) = f(x \mid \abs{X} > \sigma) \).
+
+		Calculem primer \( f_1 \) determinant-ne la distribució acumulada \( F_1 \). Tenim
+		\begin{align*}
+			F_1(x) &= P(X \leq x \mid \abs{X} \leq \sigma) = \frac{P(X \leq x \text{ i } \abs{X} \leq \sigma)}{P(\abs{X} \leq \sigma)} \\
+						 &= \left\{\begin{array}{lr}
+			\frac{P(-\sigma \leq X \leq x)}{P(\abs{X} \leq \sigma)} & \abs{x} \leq \sigma \\ 
+			0 & \abs{x} > \sigma  
+	\end{array} \right. 
+	= \left\{\begin{array}{lr}
+			\frac{F(x) - F(-\sigma)}{p_1} & \abs{x} \leq \sigma \\ 
+			0 & \abs{x} > \sigma  
+	\end{array} \right.
+\end{align*}
+on \( F(x) \) és la distribució acumulada de \( X \) sense condicionar. I per tant, derivant respecte \( x \) trobem
+\begin{equation*}
+	f(x \mid \abs{X} \leq \sigma) = \frac{f(x)}{P(\abs{X} \leq \sigma)}	
+\end{equation*}
+per \( \abs{x} \leq \sigma \)	i \( f(x \mid \abs{X} \leq \sigma) = 0 \) per \( \abs{x} > \sigma \). 	
+
+Fent un càlcul similar per a determinar \( f_2 \) trobem
+\begin{align*}
+	F_1(x) &= P(X \leq x \mid \abs{X} > \sigma) = \frac{P(X \leq x \text{ i } \abs{X} > \sigma)}{P(\abs{X} > \sigma)} \\
+				 &= \left\{\begin{array}{lr}
+	\frac{P(X \leq x)}{P(\abs{X} > \sigma)} & x < -\sigma \\ 
+	0 & \abs{x} \leq \sigma \\
+	\frac{P(\sigma \leq X \leq x)}{P(\abs{X} > \sigma)} & x > \sigma 
+	\end{array} \right. 
+	= \left\{\begin{array}{lr}
+			\frac{F(x)}{p_2} & x < -\sigma \\ 
+			0 & \abs{x} \leq \sigma \\
+			\frac{F(x) - F(\sigma)}{p_2} & x > \sigma
+	\end{array} \right.
+\end{align*}
+i deduïm que 
+\begin{equation*}
+	f(x \mid \abs{X} > \sigma) = \frac{f(x)}{P(\abs{X} > \sigma)}	
+\end{equation*}
+per \( \abs{x} > \sigma \) i \( f(x \mid \abs{X} > \sigma) = 0 \) per \( \abs{x} \leq \sigma \).
+
+Hem de calcular també les mitjanes i variàncies de les respectives distribucions. És clar que les dues mitjanes continuen sent 0 ja que les distribucions són ambdues simètriques respecte de l'origen. Pel que fa a les variàncies, apliquem la definició:
+\begin{equation*}
+	\sigma_1^2 = \int_{-\infty}^{\infty} x^2f_1(x) \, dx = \frac{1}{p_1}\int_{-\sigma}^{\sigma}x^2 f(x)\,dx.
+\end{equation*}
+Podem fer ús una altra vegada de la variable normalitzada \( Z \) per escriure
+\begin{equation*}
+	\sigma_1^2 = \frac{1}{p_1}\int_{-\sigma}^{\sigma} \frac{x^2}{\sigma}\phi\left(\frac{x}{\sigma}\right)\,dx = \frac{\sigma^2}{p_1}\int_{-1}^{1} z^2\phi(z)\,dz.
+\end{equation*}
+Aquesta integral té per primitiva \( \Phi(z) - z\phi(z) \), on \( \Phi \) és la distribució acumulada de la distribució normal estàndard \( \phi \). Així
+\begin{equation*}
+	\sigma_1^2 = \frac{\sigma^2}{p_1} \left(\Phi(1) - \phi(1) - \Phi(-1) - \phi(-1)\right) = \frac{\sigma^2}{p_1}(p_1 - 2\phi(1)) = \left(1 - \frac{2\sigma f(\sigma)}{p_1}\right) \sigma^2.
+\end{equation*}
+
+Fem ara el càlcul de la variància quan \( \abs{X} > \sigma \):
+\begin{equation*}
+	\sigma_2^2 = \int_{-\infty}^{\infty} x^2f_1(x) \, dx = \frac{1}{p_2} \left(\int_{-\infty}^{-\sigma}x^2 f(x)\,dx + \int_{\sigma}^{\infty}x^2 f(x)\,dx\right) = \frac{1}{p_2} \left(\sigma^2 - \int_{-\sigma}^{\sigma} x^2f(x)\,dx\right).
+\end{equation*}
+I per tant
+\begin{equation*}
+	\sigma_2^2 = \frac{1}{p_2}(\sigma^2 - p_1\sigma_1^2) = \frac{2\sigma f(\sigma)}{p_2} \sigma^2.
+\end{equation*}
+
+\item Si oblidem el resultat de la mesura no estarem condicionant el resultat i per tant la distribució serà la distribució de \( X \) sense alterar. 
+\end{enumerate}
+
+\section{El model de Bohr de l'àtom d'heli}
+\begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
+	\item Pensem l'àtom d'heli com dos electrons de càrrega \( e \) que orbiten un nucli de càrrega \( Ze \) a punts diametralment oposats de la mateixa òrbita. En particular es mouen els dos a la mateixa velocitat. Cada àtom està sotmès a un potencial de Coulomb 
+		\begin{equation*}
+			U_C = -\frac{1}{4\pi\epsilon_0}\frac{Ze^2}{r}.
+		\end{equation*}
+		A més, els electrons interaccionen amb una força
+		\begin{equation*}
+			F_i = -\frac{1}{4\pi\epsilon_0} \frac{e^2}{(2r)^2},
+		\end{equation*}
+		que és conservativa, de manera que podem escriure un potencial d'interacció
+		\begin{equation*}
+			U_i = \frac{1}{4\pi\epsilon_0}\frac{e^2}{4r}.
+		\end{equation*}
+		Així doncs, el potencial que descriu l'àtom és
+		\begin{equation*}
+			U = U_C + U_i = -\frac{1}{4\pi\epsilon_0} \frac{(Z - \tfrac{1}{4})e^2}{r}.
+		\end{equation*}
+
+		Com que els electrons descriuen moviment circular uniforme, la segona llei de Newton ens dóna
+		\begin{equation*}
+			-\frac{dU}{dr} = \frac{1}{4\pi\epsilon_0}\frac{(Z - \frac{1}{4})}{r^2} = \frac{mv^2}{r}.
+		\end{equation*}
+		De manera que l'energia cinètica de cada electró és
+		\begin{equation}\label{eq:cinetica}
+			T = \frac{1}{2}mv^2 = \frac{1}{4\pi\epsilon_0}\frac{(Z - \frac{1}{4})e^2}{2r}
+		\end{equation}
+		i per tant l'energia de cada electró és
+		\begin{equation} \label{eq:energia total}
+			E = T + U = -\frac{1}{4\pi\epsilon_0}\frac{(Z - \frac{1}{4})e^2}{2r}.
+		\end{equation}
+
+		Ara podem introduir la hipòtesi de Bohr, imposant que el moment angular de cada electró verifiqui \( L = n\hbar \) amb \( n \in \N \). Així doncs \( mvr = n\hbar \), i substituint a l'\cref{eq:cinetica} trobem els radis permesos:
+		\begin{align*}
+			v^2 = \frac{n^2 \hbar^2}{m^2r^2} &\implies T = \frac{1}{4\pi\epsilon_0}\frac{(Z - \frac{1}{4})e^2}{2r} = \frac{n^2\hbar^2}{2mr^2} \\
+																	 		 &\implies r_n = \frac{4\pi\epsilon_0\hbar^2}{me^2}\frac{n^2}{Z - \frac{1}{4}} = \frac{n^2}{Z - \frac{1}{4}}a_0
+		\end{align*}
+		amb \( a_0 \) el primer radi de Bohr. 
+
+		Ara podem substituir l'expressió dels radis permesos a l'energia, \cref{eq:energia total}, per trobar els nivells energètics de cada electró:
+		\begin{equation*}
+			E_n = -\frac{(Z - \tfrac{1}{4})e^2}{4\pi\epsilon_0}\frac{Z - \tfrac{1}{4}}{2n^2a_0} = - \frac{(Z - \frac{1}{4})^2}{n^2} \Ry
+		\end{equation*}
+		amb \( \Ry = \SI{13.6}{eV} \) la constant de Rydberg. Així doncs, l'energia d'un electró en el nivell fonamental és
+		\begin{equation*}
+			E_1 = -(2 - \tfrac{1}{4})^2 Ry = -\SI{41.65}{eV}. 
+		\end{equation*}
+		I per tant l'energia total de l'àtom seria \SI{-83.3}{eV}. Comparat amb el valor experimental, tenim una diferència de \SI{5.6}{\percent}.
+
+	\item Hem de realitzar el mateix càlcul però amb una versió modificada de l'hipòtesi de Bohr. Ara imposarem que la suma dels moments angulars dels electrons sigui un múltiple enter de \( \hbar \). És a dir, imposem que \( 2mvr = n\hbar \). Així doncs tenim
+		\begin{equation*}
+			v^2 = \frac{n^2 \hbar^2}{4m^2r^2}. 
+		\end{equation*}
+		Podem fer servir la mateixa forma que haviem obtingut per a l'energia cinética, \cref{eq:cinetica}, i obtenim
+		\begin{equation*}
+			T = \frac{1}{4\pi\epsilon_0} \frac{(Z - \frac{1}{4})e^2}{2r} = \frac{n^2 \hbar^2}{4mr^2}.
+		\end{equation*}
+		I els radis permesos ara són
+		\begin{equation*}
+			r_n = \frac{\pi\epsilon_0\hbar^2}{me^2}\frac{n^2}{Z-\frac{1}{4}} = \frac{n^2}{4(Z - \frac{1}{4})}a_0.
+		\end{equation*}
+		Observem que és el mateix resultat que haviem trobat a l'apartat anterior amb un factor \( \frac{1}{4} \). Per tant, com que l'energia és inversament proporcional al radi, els nivells energètics per un electró als que dóna lloc aquesta hipòtesi de bohr modificada són els mateixos que abans amb un factor 4:
+		\begin{equation*}
+			E_n = -\frac{4(Z - \frac{1}{4})^2}{n^2}\Ry.
+		\end{equation*}
+		De manera que l'energia de l'àtom al nivell fonamental serà
+		\begin{equation*}
+			-8(2 - \tfrac{1}{4})^2 \Ry = \SI{333,2}{eV}.
+		\end{equation*}
+En aquest cas tenim una discrepància del \SI{322}{\percent} i per tant és clar que aquest model no s'adequa als resultats experimentals.
+
+\end{enumerate}
+
+\end{document}
