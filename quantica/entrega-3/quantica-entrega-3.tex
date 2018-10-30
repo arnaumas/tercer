@@ -1,0 +1,163 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Ry}{\mathit{Ry}}
+\newcommand{\inn}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\proj}[1]{\ketbra{#1}{#1}}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Entrega 3:} Discriminació d'estats quàntics}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\titleformat{\section}[hang]{ \sffamily \Large}{\bfseries Problema \thesection}{0pt}{}{\thispagestyle{plain}}
+
+\title{\sffamily {\bfseries Entrega 3:} Discriminació d'estats quàntics}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 31 d'octubre de 2018}
+
+\begin{document}
+\maketitle
+\section{}
+Si \( \ket{\psi_1} \) i \( \ket{\psi_2} \) són estats ortonormals aleshores l'operador \( A = \proj{\psi_1} - \proj{\psi_2} \) és hermític i per tant es correspon a un observable. Aleshores, si \( \ket{\psi} \) és l'estat desconegut i mesurem \( A \) sobre \( \ket{\psi} \) obtindrem 1 amb probabilitat 1 si \( \ket{\psi} = \ket{\psi_1} \) i \( -1 \) amb probabilitat 1 si \( \ket{\psi} = \ket{\psi_2} \).
+
+\section{}
+Si \( \ket{\psi_1} \) i \( \ket{\psi_2} \) són estats no ortogonals aleshores no hi ha cap mesura que els pugui diferenciar. Si existís aquesta mesura, el corresponent operador hauria de tenir-los com a vectors propis ---de manera que obtindriem amb probabilitat 1 un dels resultats si l'estat és \( \ket{\psi_1} \) i amb probabilitat 1 l'altre resultat si l'estat és \( \ket{\psi_2} \)---. Però això no pot ser ja que els vectors propis amb valor propi diferent d'un operador hermític són ortogonals. 
+
+\section{}
+Tenim \( \ket{\psi_1} = \ket{0} \) i \( \ket{\psi_2} = \frac{\sqrt{3}}{2}\ket{0} - \frac{1}{2}\ket{1} \) amb \( \braket{0}{1} = 0 \), i triem un estat d'entre els dos de manera aleatòria. 
+
+\begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
+	\item Tenim
+		\begin{equation*}
+			\braket{\psi_1}{\psi_2} = \frac{\sqrt{3}}{2}\braket{0}{1} - \frac{1}{2}\braket{0}{1} = \frac{\sqrt{3}}{2} \neq 0.
+		\end{equation*}
+	\item Considerem \( A = \proj{1} \). És clar que \( \ket{1} \) és vector propi de \( A \) amb valor propi 1. I com que \( A\ket{0} = \ket{1}\braket{1}{0} = 0 \), tenim que \( \ket{0} \) és l'altre vector propi amb valor propi 0. 
+	\item Com que si mesurem \( A \) sobre \( \ket{\psi_1} \) obtenim 0 amb probabilitat 1, obtindrem 1 amb probabilitat 0. I per tant si obtenim 1 sabem segur que l'estat previ a la mesura era \( \ket{\psi_2} \). 
+	\item	Per determinar per quin estat hem d'apostar hem de calcular les probabilitats \( p(\psi_1 \vert 0) \) i \( p(\psi_2 \vert 0) \). Tenim
+		\begin{equation*}
+			p(0 \vert \psi_1) = \abs{\braket{0}{\psi_1}}^2 = 1
+		\end{equation*}
+		i
+		\begin{equation*}
+			p(1 \vert \psi_2) = \abs{\braket{0}{\psi_2}}^2 = \abs{\frac{\sqrt{3}}{2}}^2 = \frac{3}{4}. 
+		\end{equation*}
+		Ara, aplicant el teorema de Bayes obtenim
+		\begin{equation*}
+			p(\psi_1 \vert 0) = \frac{p(\psi_1) p(0 \vert \psi_1)}{p(0)} = \frac{p(\psi_1) p(0 \vert \psi_1)}{p(\psi_1)p(0 \vert \psi_1) + p(\psi_2) p(0 \vert \psi_2)} = \frac{\frac{1}{2}}{\frac{1}{2}\cdot 1 + \frac{1}{2} \cdot \frac{3}{4}} = \frac{4}{7}.
+		\end{equation*}
+		I com que \( p(\psi_2 \vert 0) = 1 - p(\psi_1 \vert 0) = \frac{3}{7} \) i per tant si obtenim 0 hem d'apostar per l'estat \( \ket{\psi_1} \). 
+	\item La probabilitat d'encertar serà \( p(1)p(\psi_2 \vert 1) + p(0)p(\psi_1 \vert 0) \). Tenim 
+		\begin{equation*}
+			p(1) = p(1 \vert \psi_1)p(\psi_1) + p(1 \vert \psi_2)p(\psi_2) = 0 \cdot \frac{1}{2} + \frac{1}{4}\cdot \frac{1}{2} = \frac{1}{8}. 
+		\end{equation*}
+		I per tant \( p(0) = 1 - p(1) = \frac{7}{8} \). I així la probabilitat d'encertar és
+		\begin{equation*}
+			\frac{1}{8}\cdot 1 + \frac{7}{8}\cdot \frac{4}{7} = \frac{5}{8} = \num{0.625}. 
+		\end{equation*}
+\end{enumerate}
+
+\section{}
+Si fixem l'eix \( z \) al llarg de l'spin que correspon a \( \ket{0} \) aleshores \( A = \proj{0} \) és precisament l'operador que correspon a un Stern-Gerlach en la direcció \( z \). 
+
+Fixem coordenades a l'esfera de Bloch de manera que l'eix \( z \) estigui alineat amb \( \ket{\psi_1} \) i l'origen de \( \phi \) estigui al semipla generat per \( \ket{\psi_1} \) i \( \ket{\psi_2} \). L'opoerador que correspon a un Stern-Gerlach qualsevol ve donat per 
+\begin{equation*}
+	\sigma_{\vec{n}} = \proj{+n} - \proj{-n}
+\end{equation*}
+amb
+\begin{equation*}
+	\ket{+n} = \cos{\tfrac{\theta}{2}} \ket{0} + e^{i\phi}\sin{\tfrac{\theta}{2}} \ket{1}
+\end{equation*}
+i
+\begin{equation*}
+	\ket{-n} = \sin{\tfrac{\theta}{2}} \ket{0} - e^{i\phi}\cos{\tfrac{\theta}{2}} \ket{1}.
+\end{equation*}
+Observem que per simetria, \( \phi = 0 \) o \( \phi = \pi \). 
+
+Repetim els càlculs de l'apartat anterior, tenint en compte que \( \ket{\psi_2} = \cos{\tfrac{\pi}{6}} \ket{0} - \sin{\tfrac{\pi}{6}}\ket{1} \). Calculem primer les probabilitats de la mesura de \( \sigma_\vec{n} \) sobre els estats:
+\begin{gather*}
+	\braket{\psi_1}{+n} = \cos{\tfrac{\theta}{2}} \implies p(+n \vert \psi_1) = \cos{\left(\tfrac{\theta}{2}\right)}^2 \\
+	\braket{\psi_1}{-n} = \sin{\tfrac{\theta}{2}} \implies p(-n \vert \psi_1) = \sin{\left(\tfrac{\theta}{2}\right)}^2 \\
+	\braket{\psi_2}{+n} = \cos{\tfrac{\pi}{6}} \cos{\tfrac{\theta}{2}} \mp \sin{\tfrac{\pi}{6}}\sin{\tfrac{\theta}{2}} = \cos{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)} \implies p(+n \vert \psi_2) = \cos{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)}^2 \\
+	\braket{\psi_2}{-n} = \cos{\tfrac{\pi}{6}} \sin{\tfrac{\theta}{2}} \pm \sin{\tfrac{\pi}{6}}\cos{\tfrac{\theta}{2}} = \sin{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)} \implies p(-n \vert \psi_2) = \sin{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)}^2. 
+\end{gather*}
+
+Per calcular la probabilitat d'encertar hauriem de trobar les probabilitats \( p(\psi_1 \vert \pm n) \) i \( p(\psi_2 \vert \pm n) \) per determinar quina és la millor estratègia, és a dir, per decidir per quin estat hem d'apostar en funció del resultat de la mesura. Ara bé, sigui com sigui hi ha només dues estratègies possibles: apostar per \( \psi_1 \) si obtenim \( +n \), o bé apostar per \( \psi_2 \) si obtenim \( +n \). En el primer cas, la probabilitat d'encertar serà \( p(+n)p(\psi_1 \vert +n) + p(-n)p(\psi_2 \vert -n) \). I en el segon serà \( p(+n)p(\psi_2 \vert +n) + p(-n)p(\psi_1 \vert -n) \). Però pel teorema de Bayes tenim
+\begin{gather*}
+	p = p(+n)p(\psi_1 \vert +n) + p(-n)p(\psi_2 \vert -n) = p(\psi_1)p(+n \vert \psi_1) + p(\psi_2)p(-n \vert \psi_2) \\
+1 - p = p(+n)p(\psi_2 \vert +n) + p(-n)p(\psi_1 \vert -n) = p(\psi_2)p(+n \vert \psi_2) + p(\psi_1)p(-n \vert \psi_1). \end{gather*}
+
+Tenim que per tot \( \theta \in [0,\pi]  \), \( \cos{} \)
+
+\end{document}
