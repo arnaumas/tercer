@@ -84,7 +84,7 @@
 \titleformat{\section}[hang]{ \sffamily \Large}{\bfseries Problema \thesection}{0pt}{}{\thispagestyle{plain}}
 
 \title{\sffamily {\bfseries Entrega 3:} Discriminació d'estats quàntics}
-\author{\sffamily Arnau Mas}
+\author{\sffamily Sandro Barissi, Arnau Mas}
 \date{\sffamily 31 d'octubre de 2018}
 
 \begin{document}
@@ -131,7 +131,11 @@ Tenim \( \ket{\psi_1} = \ket{0} \) i \( \ket{\psi_2} = \frac{\sqrt{3}}{2}\ket{0}
 \section{}
 Si fixem l'eix \( z \) al llarg de l'spin que correspon a \( \ket{0} \) aleshores \( A = \proj{0} \) és precisament l'operador que correspon a un Stern-Gerlach en la direcció \( z \). 
 
-Fixem coordenades a l'esfera de Bloch de manera que l'eix \( z \) estigui alineat amb \( \ket{\psi_1} \) i l'origen de \( \phi \) estigui al semipla generat per \( \ket{\psi_1} \) i \( \ket{\psi_2} \). L'opoerador que correspon a un Stern-Gerlach qualsevol ve donat per 
+Fixem a l'esfera de Bloch les coordenades que corresponen a la base \( \ket{0}, \ket{1} \) de manera que podem escriure 
+\begin{equation*}
+ 	\ket{\psi_2} = \cos{\tfrac{\pi}{6}} \ket{0} + e^{i\pi} \sin{\tfrac{\pi}{6}}\ket{1} = \cos{\tfrac{\pi}{6}} \ket{0} - \sin{\tfrac{\pi}{6}}\ket{1} 
+\end{equation*}
+ L'operador que correspon a un Stern-Gerlach qualsevol ve donat per 
 \begin{equation*}
 	\sigma_{\vec{n}} = \proj{+n} - \proj{-n}
 \end{equation*}
@@ -145,19 +149,67 @@ i
 \end{equation*}
 Observem que per simetria, \( \phi = 0 \) o \( \phi = \pi \). 
 
-Repetim els càlculs de l'apartat anterior, tenint en compte que \( \ket{\psi_2} = \cos{\tfrac{\pi}{6}} \ket{0} - \sin{\tfrac{\pi}{6}}\ket{1} \). Calculem primer les probabilitats de la mesura de \( \sigma_\vec{n} \) sobre els estats:
+Repetim els càlculs de l'apartat anterior. Calculem primer les probabilitats de la mesura de \( \sigma_\vec{n} \) sobre els estats:
 \begin{gather*}
 	\braket{\psi_1}{+n} = \cos{\tfrac{\theta}{2}} \implies p(+n \vert \psi_1) = \cos{\left(\tfrac{\theta}{2}\right)}^2 \\
 	\braket{\psi_1}{-n} = \sin{\tfrac{\theta}{2}} \implies p(-n \vert \psi_1) = \sin{\left(\tfrac{\theta}{2}\right)}^2 \\
-	\braket{\psi_2}{+n} = \cos{\tfrac{\pi}{6}} \cos{\tfrac{\theta}{2}} \mp \sin{\tfrac{\pi}{6}}\sin{\tfrac{\theta}{2}} = \cos{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)} \implies p(+n \vert \psi_2) = \cos{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)}^2 \\
+	\braket{\psi_2}{+n} = \cos{\tfrac{\pi}{6}} \cos{\tfrac{\theta}{2}} \pm \sin{\tfrac{\pi}{6}}\sin{\tfrac{\theta}{2}} = \cos{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)} \implies p(+n \vert \psi_2) = \cos{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)}^2 \\
 	\braket{\psi_2}{-n} = \cos{\tfrac{\pi}{6}} \sin{\tfrac{\theta}{2}} \pm \sin{\tfrac{\pi}{6}}\cos{\tfrac{\theta}{2}} = \sin{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)} \implies p(-n \vert \psi_2) = \sin{\left(\tfrac{\theta}{2} \pm \tfrac{\pi}{6}\right)}^2. 
 \end{gather*}
 
-Per calcular la probabilitat d'encertar hauriem de trobar les probabilitats \( p(\psi_1 \vert \pm n) \) i \( p(\psi_2 \vert \pm n) \) per determinar quina és la millor estratègia, és a dir, per decidir per quin estat hem d'apostar en funció del resultat de la mesura. Ara bé, sigui com sigui hi ha només dues estratègies possibles: apostar per \( \psi_1 \) si obtenim \( +n \), o bé apostar per \( \psi_2 \) si obtenim \( +n \). En el primer cas, la probabilitat d'encertar serà \( p(+n)p(\psi_1 \vert +n) + p(-n)p(\psi_2 \vert -n) \). I en el segon serà \( p(+n)p(\psi_2 \vert +n) + p(-n)p(\psi_1 \vert -n) \). Però pel teorema de Bayes tenim
+Per calcular la probabilitat d'encertar hauriem de trobar les probabilitats \( p(\psi_1 \vert \pm n) \) i \( p(\psi_2 \vert \pm n) \) per determinar quina és la millor estratègia, és a dir, per decidir per quin estat hem d'apostar en funció del resultat de la mesura. Ara bé, sigui com sigui hi ha només dues estratègies possibles: apostar per \( \psi_1 \) si obtenim \( +n \), o bé apostar per \( \psi_2 \) si obtenim \( +n \). En el primer cas, la probabilitat d'encertar serà \( p(+n)p(\psi_1 \vert +n) + p(-n)p(\psi_2 \vert -n) \). I en el segon serà \( p(+n)p(\psi_2 \vert +n) + p(-n)p(\psi_1 \vert -n) \). Però pel teorema de Bayes tenim:
 \begin{gather*}
 	p = p(+n)p(\psi_1 \vert +n) + p(-n)p(\psi_2 \vert -n) = p(\psi_1)p(+n \vert \psi_1) + p(\psi_2)p(-n \vert \psi_2) \\
-1 - p = p(+n)p(\psi_2 \vert +n) + p(-n)p(\psi_1 \vert -n) = p(\psi_2)p(+n \vert \psi_2) + p(\psi_1)p(-n \vert \psi_1). \end{gather*}
+1 - p = p(+n)p(\psi_2 \vert +n) + p(-n)p(\psi_1 \vert -n) = p(\psi_2)p(+n \vert \psi_2) + p(\psi_1)p(-n \vert \psi_1).
+\end{gather*}
 
-Tenim que per tot \( \theta \in [0,\pi]  \), \( \cos{} \)
+Per tant la probabilitat de encertar serà \( \max{\{p, 1 - p\}} \). Tenim, amb \( \phi = 0 \),
+\begin{equation*}
+	p_0 = \frac{1}{2}\left(\cos{\left(\tfrac{\theta}{2}\right)}^2 + \sin{\left(\tfrac{\theta}{2} + \tfrac{\pi}{6}\right)}^2\right).
+\end{equation*}
+i amb \( \phi = \pi \),
+\begin{equation*}
+	p_\pi = \frac{1}{2}\left(\cos{\left(\tfrac{\theta}{2}\right)}^2 + \sin{\left(\tfrac{\theta}{2} - \tfrac{\pi}{6}\right)}^2\right).
+\end{equation*}
+I per tot \( \theta \in [0, \pi] \), \( p_0 > p_\pi \), per tant, amb la primera estatègia tindrem probabilitat màxima amb \( \phi = 0 \). Si maximitzem \( p_0 \) respecte \( \theta \), trobem que \( p \) assoleix un valor màxim de \( \frac{3}{4} \) per \( \theta = \frac{\pi}{3} \). La representació en la base que hem triat d'aquest observable és
+\begin{equation*}
+\sigma_0 = \frac{1}{2}\begin{pmatrix}
+	1 & \sqrt{3} \\
+	\sqrt{3} & 1
+\end{pmatrix}.
+\end{equation*}
+
+Obtenim també probabilitat d'encertar \( \frac{3}{4} \) seguint l'altra estratègia quan \( \phi = \pi \) i \( \theta = \frac{2\pi}{3} \). Si representem el corresponent observable obtenim
+\begin{equation*}
+\sigma_\pi = -\frac{1}{2}\begin{pmatrix}
+	1 & \sqrt{3} \\
+	\sqrt{3} & 1
+\end{pmatrix} = -\sigma_0.
+\end{equation*}
+Observem, però, que de fet \( \sigma_\pi \) té els mateixos vectors propis amb els valors propis canviats de signe. Així que obtenir \( +n \) com a resultat d'una mesura de \( \sigma_0 \) és el mateix que obtenir \( -n \) com a resultat d'una mesura de \( \sigma_\pi \). Per tant, l'estratègia que ens ha portat a \( \sigma_\pi \) de fet és exactament la mateixa que seguim quan mesurem \( \sigma_0 \). En termes més planers, \( \sigma_\pi \) no és més que capgirar \( \sigma_0 \). 
+
+\section{}
+Considerem ara una parella d'estats qualssevol, \( \ket{\psi_1} \) i \( \ket{\psi_2} \). Fixem coordenades a l'esfera de Bloch de manera que l'eix \( z \) es correspongui amb l'spin \( \psi_1 \), i l'origen de \( \phi \) estigui al semipla generat per \( \psi_1 \)	i \( \psi_2 \). D'aquesta manera, si \( \ket{0} \) i \( \ket{1} \) són els estats propis de l'Stern-Gerlach en la direcció \( z \) en les coordenades que hem triat, podem escriure
+\begin{gather*}
+\ket{\psi_1} = \ket{0} \\
+\ket{\psi_2} = \cos{\tfrac{\alpha}{2}} \ket{0} + \sin{\tfrac{\alpha}{2}} \ket{1} 
+\end{gather*}
+amb \( \alpha \in [0, \pi] \) l'angle que separa els espins \( \psi_1 \) i \( \psi_2 \). Ens preguntem per l'Stern-Gerlach que maximitza la probabilitat de distingir entre els estats, tenint en compte que el sistema està en l'estat \( \ket{\psi_1} \) amb probabilitat \( p \), i per tant amb probabilitat \( 1 - p \) en l'estat \( \ket{\psi_2} \). Els càlculs són idèntics a l'apartat anterior, amb \( \frac{\alpha}{2} \) en lloc de \( \frac{\pi}{6} \) i \( p \) i \( 1 -p  \) en lloc de \( \frac{1}{2} \).
+
+Amb \( \phi = 0 \), denotem per \( P_0 \) la probabilitat d'encertar apostant per \( \psi_1 \) si obtenim \( +n \) i per \( \psi_2 \) si obtenim \( -n \), i per \( P_\pi \) la probabilitat d'encertar seguint la mateixa estratègia si \( \phi = \pi \). Aleshores
+\begin{gather}
+	P_0(\theta) = p \cos{\left(\tfrac{\theta}{2}\right)}^2 + (1-p) \sin{\left(\tfrac{\theta - \alpha}{2}\right)}^2 \\
+	P_\pi(\theta) = p \cos{\left(\tfrac{\theta}{2}\right)}^2 + (1-p) \sin{\left(\tfrac{\theta + \alpha}{2}\right)}^2 
+\end{gather}
+Les probabilitats d'encertar seguint les estratègies oposades són, naturalment, \( 1 - P_0 \) i \( 1 - P_\pi \). Observem que \( P_0(\theta) = 1 - P_\pi(\pi - \theta) \), Que es correspon amb el que hem argumentat abans: capgirar l'aparell Stern-Gerlach i canviar l'estratègia ens porta al mateix resultat. Així la probabilitat d'encertar serà \( P(\theta) = \max{\{P_0(\theta), 1 - P_0(\theta)\}} \). 
+
+Les pitjors condicions per encertar es donaran pels \( \alpha \) i \( \theta \)	tals que \( P(\theta) = \frac{1}{2} \), ja que això vol dir que la millor estratègia és equivalent a triar a l'atzar. Quan \( \alpha \to 0 \), \( P_0(\theta) \to \frac{1}{2} \), de manera que com més propers són dos espins, més díficil és de distingir-los. Evidentment si \( \alpha = 0 \) aleshores tenim dos estats idèntics i per tant la probabilitat d'encertar és 1. 
+
+\section{}
+Demostrem que poder clonar estats és equivalent a poder distingir estats. Per una banda, si podem distingir dos estats qualssevol, tenim un observable que els té com a estats propis. Per tant, si anem fent mesures d'aquest observable sobre estats qualssevol, anirem obtenint còpies dels dos estats originals.
+
+D'altra banda, suposem que volem distingir entre dos estats qualssevol \( \ket{\psi_1} \) i \( \ket{\psi_2} \). Si \( \psi \) és el nostre estat desconegut i podem clonar-lo, podem fer tantes mesures sobre \( \psi \) sense alterar-lo (una sobre cada còpia). Si anem mesurant els observables \( \proj{\psi_1} \) i \( \proj{\psi_2} \) sobre \( \psi \) en algun moment obtindrem 0 com a resultat d'alguna de les mesures. Si obtenim 0 com a resultat de mesurar \( \proj{\psi_1} \), sabem segur que \( \ket{\psi} = \ket{\psi_2} \) ja que si \( \ket{\psi} \) fos \( \ket{\psi_1} \), el resultat de mesurar \( \proj{\psi_1} \)	és 1 amb probabilitat 1. De la mateixa manera, si obtenim 0 quan mesurem \( \proj{\psi_2} \) sabem del cert que \( \ket{\psi} = \ket{\psi_1} \).
+
+Així doncs, com que poder distingir entre estats qualssevol i poder clonar-los és equivalent, com que ja hem vist que no es poden distingir estats no ortogonals, tampoc podem clonar-los. 
 
 \end{document}
