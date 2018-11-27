@@ -1,0 +1,33 @@
+set terminal cairolatex pdf colortext color size 10cm, 8cm header '\small'
+set output 'model-2.tex'
+
+# Format dels eixos
+set xlabel '$\mathsfit t$ (\si{dies})' offset 0,-1
+set ylabel '$\mathsfit T$ (\si{\celsius})' offset -3,0
+set format '\num{%g}'
+set border linewidth 1.5
+set lmargin at screen 0.2
+set rmargin at screen 0.99
+
+set style line 1 linecolor rgb "dark-violet" linewidth 1.5
+set style line 2 linecolor rgb "dark-orange" linewidth 1.5 dashtype 4
+set style line 3 linecolor rgb "gray" linewidth 1 dashtype 2
+
+set xrange [0:10]
+set yrange [10:30]
+set samples 10000
+set xtics scale 1,0.5 offset 0,-0.5
+set mxtics 2
+set ytics scale 1,0.5 offset -0.5,0
+set mytics 2
+set grid xtics ytics mxtics mytics linestyle 3
+
+k = 0.1
+w = pi/12
+Tb = 0.5*(20 + 8)
+DT = (20 - 8)
+q(t) = k*(22 - Te(t))
+Te(t) = Tb + 0.5*DT*sin(w*t)
+T(t) = 18*exp(-k*t) + 22*(1 - exp(-k*t))
+
+plot T(24*x) notitle with lines linestyle 1, 22 notitle with lines linestyle 2
