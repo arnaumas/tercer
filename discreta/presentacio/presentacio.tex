@@ -5,6 +5,7 @@
 \usepackage[catalan]{babel}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb}
+\usepackage{mathtools}
 \usepackage{graphicx}
 \usepackage{bm}
 
@@ -152,7 +153,7 @@
 
 \end{frame}
 
-\section{Resultats principals}
+\section{Distribucions estacionàries}
 
 \begin{frame}
 	\frametitle{Distribució estacionària}
@@ -162,7 +163,12 @@
 		Una distribució és \emph{estacionària} si \( \P(V(t) = u) = \P(V(t - 1) = u) \) per tot \( u \in V(G) \).
 	\end{block} \pause
 
-	En termes de la matriu de transició, \[ P\vec{\pi} = \vec{\pi}. \]
+	En termes de la matriu de transició, \[ P\vec{\pi} = \vec{\pi}. \] \pause
+	Per tant
+	\begin{equation*}
+		\vec{\pi}(u) = \sum_{v \in V(G)}\frac{a(u,v)}{\gr(v)}
+	\end{equation*}
+
 \end{frame}
 
 \begin{frame}
@@ -177,6 +183,8 @@
 		\begin{equation*}
 			\vec{\pi}(u^\ast) = \sum_{v \in V(G)} \frac{a(u^\ast,v)}{\gr(v)} \vec{\pi}(v) \pause \leq \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)} \sum_{v \in V(G)} a(u^{\ast},v) \pause = \vec{\pi}(u^\ast)
 		\end{equation*}
+		Aleshores \[ \sum_{v \in V(G)} a(u^\ast,v) \frac{\vec{\pi}(v)}{\gr(v)}  = \sum_{v \in V(G)} a(u^\ast,v) \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)}. \] \pause 
+		
 		Per tant \( \frac{\vec{\pi}(v)}{\gr(v)} = \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)} \) per tot \( v \) adjacent a \( u^\ast \). 
 	\end{proof}
 \end{frame}
@@ -184,15 +192,46 @@
 \begin{frame}
 	\frametitle{Existència i unicitat de distribucions estacionàries}
 	\begin{proof}
-		Per \( v \) no adjacents, com que \( G \) és connex, per \( n \) prou gran, \[ \P(V(t + n) = u^\ast \mid V(t) = v) > 0 \] per tot \( v \in V(G) \), i podem reproduir l'argument ja que \( \vec{\pi} = P^n \vec{\pi} \) per tot \( n \). \pause
+		Podem extendre l'argument a tots els vèrtexs de \( G \) fent servir que és connex. \pause
 
-		Com que \( \vec{\pi}(u) \propto \gr(u) \), normalitzant
+		Com que \( \vec{\pi}(u) \propto \gr(u) \) aleshores \( \vec{\pi}(u) = C\gr(u) \). \pause
+		
+		Si imposem que \( \sum_{u \in V(G)} \vec{\pi}(u) = 1 \) podem determinar \( C \) i 
 		\begin{equation*}
-			\vec{\pi}(u) = \frac{\gr(u)}{\sum_{v \in V(G)} \gr(v)} \pause = \frac{\gr(u)}{2 \abs{E(G)}}
+			\vec{\pi}(u) =  \frac{\gr(u)}{\sum_{v \in V(G)} \gr(v)} \pause = \frac{\gr(u)}{2 \abs{E(G)}}
 		\end{equation*}
 
 	\end{proof}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Convergència a la distribució estacionària}
+	\begin{theorem}
+		Tota distribució de probabilitats en un graf connex no bipartit convergeix a la distribució estacionària. 
+	\end{theorem}
+	\pause
+	\begin{proof}
+\( P \) és similar a una matriu simètrica:
+\[ D^{-1/2}PD^{1/2} = D^{-1/2}AD^{-1/2}. \] \pause
+Per tant diagonalitza. \pause
+\( \vec{\pi} \) és l'únic vector propi de valor propi 1. Posem \[ \vec{p}_0 = \alpha_1 \vec{\pi} + \sum_k \alpha_k \vec{v}_k \]
+\end{proof}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Convergència a la distribució estacionària}
+	\begin{proof}
+		Es pot demostrar que \( \alpha_1 = 1 \). \pause Aleshores
+		\begin{equation*}
+			P^t \vec{p}_0 = \vec{\pi} + \sum_k \lambda_k^t \alpha_k \vec{v}_k. 
+		\end{equation*} \pause
+		Per qualsevol graf, \( \abs{\lambda_k} \leq 1 \) i per un graf no bipartit \( \lambda_k > -1 \). \pause Per tant 
+		\begin{equation*}
+			P^t \vec{p}_0 \xrightarrow{t \to \infty} \vec{\pi}.
+		\end{equation*}
+	\end{proof}
+\end{frame}
+
 \section{PageRank}
 
 \section{Altres aplicacions}
