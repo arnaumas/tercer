@@ -20,11 +20,13 @@
 \renewcommand{\vec}[1]{\mathbf{\bm #1}}
 \DeclareMathOperator{\gr}{gr}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 
 \title{Passejos aleatoris en grafs}
 \author{Gerard Castro, Kim López, Ga\l.la Mora, Arnau Mas}
 \date{5 de desembre de 2018}
+
 
 \begin{document}
 \begin{frame}
@@ -232,9 +234,45 @@ Per tant diagonalitza. \pause
 	\end{proof}
 \end{frame}
 
+\begin{frame}
+\frametitle{Grafs bipartits}
+Pels grafs bipartits la convergència no es dóna, tal i com hem vist a l'exemple al principi. \pause
+
+\centering
+\includegraphics[scale = 0.7]{bipartit.png}
+\end{frame}
+
 \section{PageRank}
 
-\section{Altres aplicacions}
+\section{El teorema de Pólya}
+\begin{frame}
+	\frametitle{Grafs infinits}
+	Podem considerar passejos a grafs infinits. L'exemple més senzill són passejos aleatoris a \( \Z^d \)
 
-\section{Problemes oberts}
+	\centering
+	\includegraphics[width=50mm]{reticle.png}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Passejos recurrents i transitoris}
+	\begin{block}{Definició}
+		Anomenarem \emph{probabilitat d'escapament}, $p_\text{esc}$, a la probabilitat que el passeig aleatori mai retorni a l'origen.
+	\end{block} \pause
+	\begin{block}{Definició}
+		Un passeig aleatori és \emph{recurrent} si i només si $p_\text{esc}=0$. 
+		Un passeig aleatori és \emph{transitori} si i només si $p_\text{esc}>0$.
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Teorema de Pólya}
+	\begin{theorem}
+		Un passeig aleatori simple en una xarxa d-dimensional $\mathbb{Z}^d$ és recurrent si $d=1$ o $d=2$, i transitori si $d\geq 3$.
+	\end{theorem} \pause
+
+	\begin{block}{ }
+		"A drunk man will find his way home, but a drunk bird may get lost forever." \\
+		\textit{Shizuo Kakutani}
+	\end{block}
+\end{frame}
 \end{document}
