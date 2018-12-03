@@ -5,6 +5,7 @@
 \usepackage[catalan]{babel}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb}
+\usepackage{graphicx}
 \usepackage{bm}
 
 \uselanguage{Catalan}
@@ -60,10 +61,38 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Matriu de transició}
+	\frametitle{Probabilitats de transició}
 	Com que \[ \P(V(t) = u \mid V(t - 1) = v) = \frac{a(u,v)}{\gr(v)}, \] \pause
 	tenim
 	\[ P(V(t) = u) = \sum_{v \in V(G)} \frac{a(u,v)}{\gr(v)}P(V(t - 1) = v). \]
+\end{frame}
+
+\begin{frame}
+	\frametitle{Un exemple}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\only<2>{
+				\[ \P(V(0) = i_1) = 1 \]
+			}
+			\only<3>{
+				\begin{align*}
+					\P(V(1) = i_2) & = \P(V(1) = i_3) \\
+												 & = \P(V(1) = i_4) = \frac{1}{3}
+				\end{align*}
+			}
+			\only<4>{
+				\[ \P(V(3) = i_1) = 1 \]
+			}
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+			\centering
+			\only<2,4>{\includegraphics[scale = 0.15]{exemple-1.png}}
+			\only<3>{\includegraphics[scale = 0.15]{exemple-2.png}}
+
+		\end{column}
+	\end{columns}
+
 \end{frame}
 
 \begin{frame}
@@ -74,8 +103,58 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Matriu de transició}
-	Si comencem a un vèrtex \( u \), \( \vec{p}_0(u) = 1 \) i \( \vec{p}_0(v) = 0 \) per la resta. \pause Però podríem triar el vèrtex inicial d'una distribució, que serà \( \vec{p}_0 \). 
+	\frametitle{Un exemple}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\only<2>{
+				\begin{equation*}
+					A = \begin{pmatrix}
+						0 & 1 & 1 & 1 \\
+						1 & 0 & 0 & 0 \\
+						1 & 0 & 0 & 0 \\
+						1 & 0 & 0 & 0
+					\end{pmatrix} 
+					\, D = \begin{pmatrix}
+						6 & 0 & 0 & 0 \\
+						0 & 2 & 0 & 0 \\
+						0 & 0 & 2 & 0 \\
+						0 & 0 & 0 & 2
+					\end{pmatrix}
+				\end{equation*}
+				\begin{equation*}
+					P = \begin{pmatrix}
+						0 & 1 & 1 & 1 \\
+						1/3 & 0 & 0 & 0 \\
+						1/3 & 0 & 0 & 0 \\
+						1/3 & 0 & 0 & 0
+					\end{pmatrix}
+				\end{equation*}
+			}
+			\only<3>{
+				\begin{equation*}
+					\vec{p}_0 = (1,0,0,0)	
+				\end{equation*}
+			}
+			\only<4>{
+				\begin{equation*}
+					\vec{p}_1 = \left(0,\frac{1}{3},\frac{1}{3},\frac{1}{3}\right) = P\vec{p}_0	
+				\end{equation*}
+			}
+			\only<5>{
+				\begin{equation*}
+					\vec{p}_2 = (1,0,0,0)	= P\vec{p}_1 = P^2\vec{p}_0
+				\end{equation*}
+			}
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+			\centering
+			\only<2,3,5>{\includegraphics[scale = 0.15]{exemple-1.png}}
+			\only<4>{\includegraphics[scale = 0.15]{exemple-2.png}}
+
+		\end{column}
+	\end{columns}
+
 \end{frame}
 
 \section{Resultats principals}
@@ -116,7 +195,7 @@
 		\begin{equation*}
 			\vec{\pi}(u) = \frac{\gr(u)}{\sum_{v \in V(G)} \gr(v)} \pause = \frac{\gr(u)}{2 \abs{E(G)}}
 		\end{equation*}
-		
+
 	\end{proof}
 \end{frame}
 \section{PageRank}
@@ -124,6 +203,4 @@
 \section{Altres aplicacions}
 
 \section{Problemes oberts}
-
-
 \end{document}
