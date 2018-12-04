@@ -6,13 +6,32 @@
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb}
 \usepackage{mathtools}
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{bm}
 
 \uselanguage{Catalan}
 \languagepath{Catalan}
-\usecolortheme{seahorse}
+\usetheme{Frankfurt}
+\useoutertheme{infolines}
+\useinnertheme{rounded}
+\usecolortheme{orchid}
 \setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+\setbeamerfont{frametitle}{series = \bf}
+\setbeamerfont{title}{series = \bf}
+\setbeamerfont{headline}{series = \bf}
+
+\AtBeginSection[]{
+  \begin{frame}[plain]
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
 
 \let\P\relax
 \DeclareMathOperator{\P}{P}
@@ -29,12 +48,14 @@
 
 
 \begin{document}
-\begin{frame}
+\begin{frame}[plain]
 	\titlepage
 \end{frame}
 
+
 \begin{frame}
 	\frametitle{Esquema}
+	\centering
 	\tableofcontents
 
 \end{frame}
@@ -185,16 +206,15 @@
 		\begin{equation*}
 			\vec{\pi}(u^\ast) = \sum_{v \in V(G)} \frac{a(u^\ast,v)}{\gr(v)} \vec{\pi}(v) \pause \leq \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)} \sum_{v \in V(G)} a(u^{\ast},v) \pause = \vec{\pi}(u^\ast)
 		\end{equation*}
-		Aleshores \[ \sum_{v \in V(G)} a(u^\ast,v) \frac{\vec{\pi}(v)}{\gr(v)}  = \sum_{v \in V(G)} a(u^\ast,v) \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)}. \] \pause 
-		
-		Per tant \( \frac{\vec{\pi}(v)}{\gr(v)} = \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)} \) per tot \( v \) adjacent a \( u^\ast \). 
-	\end{proof}
+		Aleshores \[ \sum_{v \in V(G)} a(u^\ast,v) \frac{\vec{\pi}(v)}{\gr(v)}  = \sum_{v \in V(G)} a(u^\ast,v) \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)}. \]  
+\end{proof}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Existència i unicitat de distribucions estacionàries}
 	\begin{proof}
-		Podem extendre l'argument a tots els vèrtexs de \( G \) fent servir que és connex. \pause
+		Per tant \( \frac{\vec{\pi}(v)}{\gr(v)} = \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)} \) per tot \( v \) adjacent a \( u^\ast \). \pause
+			Podem extendre l'argument a tots els vèrtexs de \( G \) fent servir que és connex. \pause
 
 		Com que \( \vec{\pi}(u) \propto \gr(u) \) aleshores \( \vec{\pi}(u) = C\gr(u) \). \pause
 		
@@ -242,7 +262,33 @@ Pels grafs bipartits la convergència no es dóna, tal i com hem vist a l'exempl
 \includegraphics[scale = 0.7]{bipartit.png}
 \end{frame}
 
+\begin{frame}
+\frametitle{Grafs bipartits}
+Si permetem repetir vèrtexs aleshores obtenim un \emph{passeig aleatori mandrós}. \pause La matriu de transició és \[ \frac{1}{2}(I + P). \]
+\end{frame}
+
+
 \section{PageRank}
+\begin{frame}
+\frametitle{L'algorisme PageRank}
+\begin{itemize}[<+->]
+	\item Google desenvolupa un algoritme per determinar la rellevància de pàgines web. 
+	\item Considera el graf dirigit dels híperenllaços entre pàgines i assigna a cada pàgina la probabilitat que li correspon a la distribució estacionària.  
+	\item Per garantir la convergència es fan servir passejos mandrosos. 
+	\item Com que el passeig és dirigit ja no tenim l'expressió de la distribució estacionària per a grafs no dirigits.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probabilitat de teletransport}
+El caminant es teletransporta a un vèrtex aleatori amb probabilitat \( \alpha \). \pause 
+\begin{equation*}
+	P_\text{PR} = \frac{\alpha}{2\abs{V(G)}}\bm{1} + \frac{1 - \alpha}{2}(I + P).
+\end{equation*} \pause
+
+A PageRank personalitzat ens trasalladem a un vèrtex concret: obtenim un rànquin relatiu a aquell vèrtex. \pause En general podem teletransportar-nos seguint una distribució qualsevol i obtindrem resultats rellevants a aquesta.pause En general podem teletransportar-nos seguint una distribució qualsevol i obtindrem resultats rellevants a aquesta. 
+
+\end{frame}
 
 \section{El teorema de Pólya}
 \begin{frame}
