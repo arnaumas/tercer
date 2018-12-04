@@ -128,10 +128,10 @@
 			\only<2>{
 				\begin{equation*}
 					A = \begin{pmatrix}
-						0 & 1 & 1 & 1 \\
-						1 & 0 & 0 & 0 \\
-						1 & 0 & 0 & 0 \\
-						1 & 0 & 0 & 0
+						0 & 2 & 2 & 2 \\
+						2 & 0 & 0 & 0 \\
+						2 & 0 & 0 & 0 \\
+						2 & 0 & 0 & 0
 					\end{pmatrix} 
 					\, D = \begin{pmatrix}
 						6 & 0 & 0 & 0 \\
@@ -201,26 +201,30 @@
 	\end{theorem}
 	\pause
 
-	\begin{proof}
+	\begin{block}{Demostració}
 		\( \vec{\pi} \) estacionària. Veurem que \( \vec{\pi}(u) \propto \gr{u} \). \pause Sigui \( u^\ast \) tal que \( \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)} \) és màxim: \pause 
 		\begin{equation*}
 			\vec{\pi}(u^\ast) = \sum_{v \in V(G)} \frac{a(u^\ast,v)}{\gr(v)} \vec{\pi}(v) \pause \leq \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)} \sum_{v \in V(G)} a(u^{\ast},v) \pause = \vec{\pi}(u^\ast)
 		\end{equation*}
 		Aleshores \[ \sum_{v \in V(G)} a(u^\ast,v) \frac{\vec{\pi}(v)}{\gr(v)}  = \sum_{v \in V(G)} a(u^\ast,v) \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)}. \]  
-\end{proof}
+	\end{block}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Existència i unicitat de distribucions estacionàries}
 	\begin{proof}
 		Per tant \( \frac{\vec{\pi}(v)}{\gr(v)} = \frac{\vec{\pi}(u^\ast)}{\gr(u^\ast)} \) per tot \( v \) adjacent a \( u^\ast \). \pause
-			Podem extendre l'argument a tots els vèrtexs de \( G \) fent servir que és connex. \pause
+		Podem extendre l'argument a tots els vèrtexs de \( G \) fent servir que és connex. \pause
 
 		Com que \( \vec{\pi}(u) \propto \gr(u) \) aleshores \( \vec{\pi}(u) = C\gr(u) \). \pause
-		
-		Si imposem que \( \sum_{u \in V(G)} \vec{\pi}(u) = 1 \) podem determinar \( C \) i 
+
+		Aleshores
 		\begin{equation*}
-			\vec{\pi}(u) =  \frac{\gr(u)}{\sum_{v \in V(G)} \gr(v)} \pause = \frac{\gr(u)}{2 \abs{E(G)}}
+			\sum_{u \in V(G)} \vec{\pi}(u) = C \sum_{u \in V(G)} \gr(u) \pause \implies C = \frac{1}{\sum_{u \in V(G)} \gr(u)} = \frac{1}{2\abs{E(G)}}
+		\end{equation*} \pause
+		I per tant 
+		\begin{equation*}
+			\vec{\pi}(u) = \frac{\gr(u)}{2 \abs{E(G)}}
 		\end{equation*}
 
 	\end{proof}
@@ -232,12 +236,12 @@
 		Tota distribució de probabilitats en un graf connex no bipartit convergeix a la distribució estacionària. 
 	\end{theorem}
 	\pause
-	\begin{proof}
+	\begin{block}{Demostració}
 \( P \) és similar a una matriu simètrica:
 \[ D^{-1/2}PD^{1/2} = D^{-1/2}AD^{-1/2}. \] \pause
 Per tant diagonalitza. \pause
 \( \vec{\pi} \) és l'únic vector propi de valor propi 1. Posem \[ \vec{p}_0 = \alpha_1 \vec{\pi} + \sum_k \alpha_k \vec{v}_k \]
-\end{proof}
+\end{block}
 \end{frame}
 
 \begin{frame}
@@ -283,10 +287,10 @@ Si permetem repetir vèrtexs aleshores obtenim un \emph{passeig aleatori mandró
 \frametitle{Probabilitat de teletransport}
 El caminant es teletransporta a un vèrtex aleatori amb probabilitat \( \alpha \). \pause 
 \begin{equation*}
-	P_\text{PR} = \frac{\alpha}{2\abs{V(G)}}\bm{1} + \frac{1 - \alpha}{2}(I + P).
+	P_\text{PR} = \frac{\alpha}{\abs{V(G)}}\bm{1} + \frac{1 - \alpha}{2}(I + P).
 \end{equation*} \pause
 
-A PageRank personalitzat ens trasalladem a un vèrtex concret: obtenim un rànquin relatiu a aquell vèrtex. \pause En general podem teletransportar-nos seguint una distribució qualsevol i obtindrem resultats rellevants a aquesta.pause En general podem teletransportar-nos seguint una distribució qualsevol i obtindrem resultats rellevants a aquesta. 
+A PageRank personalitzat ens trasalladem a un vèrtex concret: obtenim un rànquin relatiu a aquell vèrtex. \pause En general podem teletransportar-nos seguint una distribució qualsevol i obtindrem resultats rellevants a aquesta. 
 
 \end{frame}
 
