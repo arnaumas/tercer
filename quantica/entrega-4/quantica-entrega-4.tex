@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Ry}{\mathit{Ry}}
+\newcommand{\inn}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\ket}[1]{\vert #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 \vert}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Entrega 4:} Osci\l.lador harmònic}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Entrega 4:} Osci\l.lador harmònic}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 10 de desembre de 2018}
+
+\begin{document}
+\maketitle
+L'equació d'Schrödinger per l'osci\l.lador harmònic quàntic és
+\begin{equation*}
+	i\hbar\partial_t\ket{\psi} = \left(\frac{1}{2m} \hat{P}^2 +  \frac{1}{2}m\omega\hat{X}^2\right).
+\end{equation*}
+Els estats propis són, escrits en la base de la posició,
+\begin{equation*}
+	\Psi_n(x) = C_n H_n(\xi) e^{-\xi^2/2}
+\end{equation*}
+on \( C_n \) és una constant de normalització de valor
+\begin{equation*}
+	C_n = \sqrt{\frac{\alpha}{\sqrt{\pi}2^n n!}},
+\end{equation*}
+la constant \( \alpha \) és
+\begin{equation*}
+	\alpha = \sqrt{\frac{m\omega}{\hbar}},
+\end{equation*}
+i \( \xi = \alpha x \). Les corresponents energies són
+\begin{equation*}
+	E_n = \hbar \omega\left(n + \tfrac{1}{2}\right).
+\end{equation*}
+
+Considerem l'estat
+\begin{equation*}
+	\Psi(x) = \tfrac{1}{2}\Psi_0(x) + \tfrac{1}{\sqrt{2}}\Psi_1(x) - \tfrac{1}{2}\Psi_2(x).
+\end{equation*}
+
+
+\begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
+	\item Tenim que l'estat \( \ket{\Psi} \) evoluciona com
+		\begin{equation*}
+			\Psi(x,t) = \tfrac{1}{2}\Psi_0(x)e^{-\frac{i}{\hbar}E_0 t} + \tfrac{1}{\sqrt{2}}\Psi_1(x)e^{-\frac{i}{\hbar}E_1 t} - \tfrac{1}{2}\Psi_2(x)e^{-\frac{i}{\hbar}E_2 t}. 
+		\end{equation*}
+Així
+\begin{equation*}
+	\langle \hat{X}(t) \rangle = \bra{\Psi(t)} \hat{X} \ket{\Psi(t)} = \int_{-\infty}^{\infty}\, x \Psi^\ast(x,t) \Psi(x,t) \,dx. 
+\end{equation*}	
+Fent servir les relacions d'ortogonalitat i de recurrència dels polinomis d'Hermite veiem que dels 9 termes de la integral, només en contribuiran 4 i resulta
+\begin{align*}
+	\langle \hat{X}(t) \rangle & = \int_{-\infty}^{\infty}\, x \left(\tfrac{1}{\sqrt{2}}\cos{\left(\tfrac{E_0 - E_1}{\hbar}t\right)}\Psi_0(x)\Psi_1(x) - \tfrac{1}{\sqrt{2}}\cos{\left(\tfrac{E_1 - E_2}{\hbar}t\right)}\Psi_1(x)\Psi_2(x)\right) \,dx \\
+														 & = \tfrac{1}{\alpha^2 \sqrt{2}}\cos{\omega t} \left(C_0 C_1 \int_{-\infty}^{\infty} \, \xi H_0(\xi)H_1(\xi) e^{-\xi^2} \,d\xi - C_1 C_2 \int_{-\infty}^{\infty} \, \xi H_1(\xi)H_2(\xi) e^{-\xi^2} \,d\xi \right) \\
+														 & = \tfrac{1}{\alpha^2 \sqrt{2}}\cos{\omega t} \left(\frac{C_0C_1}{2}\int_{-\infty}^{\infty} \, H_1(\xi)^2 e^{-\xi^2} \, d\xi - \frac{C_1C_2}{2}\int_{-\infty}^{\infty} \, H_2(\xi)^2 e^{-\xi^2} \right) \\
+														 & = \tfrac{1}{\alpha^2 \sqrt{2}}\cos{\omega t} \left(\frac{C_0C_1\alpha}{2C_0^2} - \frac{C_1C_2\alpha}{2C_2^2}\right) = \frac{1 - \sqrt{2}}{2\alpha} \cos{\omega t}.
+\end{align*}
+
+Fem ara els càlculs per a \( \langle \hat{P}(t) \rangle \). Abans, però, observem que
+\begin{equation*}
+	\partial_x \Psi_n(x) = \alpha C_n \left(\partial_\xi H_n(\xi) + \xi H_n(\xi)\right)e^{-\xi^2/2} = \alpha C_n \left(nH_{n-1}(\xi) - \tfrac{1}{2}H_{n+1}(\xi)\right) e^{-\xi^2/2}. 
+\end{equation*}
+Tenim
+\begin{equation*}
+	\langle \hat{P}(t) \rangle	= \bra{\Psi(t)} \hat{P} \ket{\Psi(t)} = -i\hbar \int_{-\infty}^\infty \, \Psi^{\ast}(x,t) \partial_x\Psi(x,t) \, dx.
+\end{equation*}
+Com abans, molts termes no contribueixen. Els termes que sobreviuen només són quatre:
+\begin{align*}
+	\langle \hat{P}(t) \rangle & = -\frac{i\hbar}{2\sqrt{2}}\left(e^{\frac{i}{\hbar}(E_0 - E_1)t} \int_{-\infty}^\infty\,\Psi_0(x)\partial_x \Psi_1(x) \,dx + e^{\frac{i}{\hbar}(E_1 - E_0)t} \int_{-\infty}^\infty\,\Psi_1(x)\partial_x \Psi_0(x) \,dx \right. \\
+														 & \left. {} - e^{\frac{i}{\hbar}(E_1 - E_2)t} \int_{-\infty}^\infty\,\Psi_1(x)\partial_x \Psi_2(x) \,dx + e^{\frac{i}{\hbar}(E_2 - E_1)t} \int_{-\infty}^\infty\,\Psi_2(x)\partial_x \Psi_1(x) \,dx \right). \\
+														 & = -\frac{i\hbar}{2\sqrt{2}}\left(C_0 C_1 e^{\frac{i}{\hbar}(E_0 - E_1)t} \int_{-\infty}^\infty\,H_0(\xi)^2 e^{-\xi^2} \,d\xi - \tfrac{1}{2} C_0C_1 e^{\frac{i}{\hbar}(E_1 - E_0)t} \int_{-\infty}^\infty\, H_1(\xi)^2 e^{-\xi^2} \, d\xi \right. \\
+														 & \left. {} -  2C_1 C_2 e^{\frac{i}{\hbar}(E_1 - E_2)t} \int_{-\infty}^\infty \, H_1(\xi)^2 e^{-\xi^2} \,d\xi - \tfrac{1}{2} C_1C_2 e^{\frac{i}{\hbar}(E_2 - E_1)t} \int_{-\infty}^\infty\, H_2(\xi)^2  e^{-\xi^2} \, d\xi \right) \\
+														 & = -\frac{\alpha \hbar}{2}\sin{\omega t} + \frac{\alpha \hbar}{\sqrt{2}} \sin{\omega t} = \frac{\sqrt{2} - 1}{2} \alpha \hbar \sin{\omega t}. 
+\end{align*}
+
+\item Per calcular \( \langle \hat{X}^2(t) \rangle \) podem aprofitar els càlculs anteriors. A la integral ara sobreviuen quatre termes diferents:
+	\begin{align*}
+		\langle \hat{X}^2(t) \rangle & = \frac{1}{4}\int_{-\infty}^{\infty} x^2 \Psi_0(x)^2 \, dx + \frac{1}{2}\int_{-\infty}^{\infty} x^2 \Psi_1(x)^2 \, dx \\
+																 & {} + \frac{1}{4}\int_{-\infty}^{\infty} x^2 \Psi_2(x)^2 \, dx - \frac{1}{2} \cos{\left(\tfrac{E_2 - E_0}{\hbar}t\right)} \int_{-\infty}^{\infty} x^2 \Psi_0(x)\Psi_2(x) \, dx \\
+																 & = \frac{1}{4} \frac{C_0^2}{4\alpha^2 C_1^2} + \frac{1}{2}\left(\frac{C_1^2}{4\alpha^2C_2^2} + \frac{C_1^2}{\alpha^2 C_0^2}\right) + \frac{1}{4}\left(\frac{C_2^2}{4\alpha^2 C_3^2} + \frac{4C_2^2}{\alpha^2C_1^2}\right) \\
+																 & {} -\frac{1}{2\sqrt{2}\alpha^2} \cos{2\omega t} \\
+																 & = \frac{3}{2\alpha^2} - \frac{1}{2\sqrt{2}\alpha^2} \cos{2\omega t}.
+	\end{align*}
+
+	Per calcular \( \langle \hat{P}^2(t) \rangle \) podem fer servir l'expressió del hamiltonià del sistema:
+	\begin{equation*}
+		\langle \hat{H} \rangle = \frac{1}{2m} \langle \hat{P}^2 \rangle + \frac{1}{2} m\omega^2 \langle \hat{X}^2 \rangle \implies \langle \hat{P}^2 \rangle = 2m\langle \hat{H} \rangle -  m^2\omega^2 \langle \hat{X}^2 \rangle
+	\end{equation*}
+
+	Tenim
+	\begin{equation*}
+		\langle \hat{H}(t) \rangle = \bra{\Psi(t)}\hat{H}\ket{\Psi(t)} = \frac{E_0}{4} + \frac{E_1}{2} + \frac{E_2}{4} = \frac{3}{2}\hbar \omega.
+	\end{equation*}
+	Així queda \( \langle \hat{P}^2(t) \rangle = m\omega\hbar\left(\tfrac{3}{2} + \tfrac{1}{2 \sqrt{2}}\cos{2\omega t}\right) \). 
+
+\item Podem calcular \( \Delta \hat{X} \) i \( \Delta \hat{P} \) immediatament a partir dels apartats anteriors:
+	\begin{align*}
+		(\Delta \hat{X})^2 & = \frac{\hbar}{m\omega}\left(\frac{1 + 3\sqrt{2}}{2 \sqrt{2}} - \frac{3}{4}\cos{(\omega t)}^2\right)	\\
+		(\Delta \hat{P})^2 & = m\omega\hbar \left(\frac{1 + 3\sqrt{2}}{2 \sqrt{2}} - \frac{3}{4}\sin{(\omega t)}^2\right).
+	\end{align*}
+	
+\item El teorema d'Ehrenfest ens dóna un sistema d'equacions diferencials per \( \bar{x} = \langle \hat{X} \rangle \) i \( \bar{p} = \langle \hat{P} \rangle \):
+	\begin{gather*}
+		m \bar{x}' = \bar{p} \\
+		\bar{p}' = - \langle V'(\hat{X}) \rangle = - m\omega^2 \bar{x}. 
+	\end{gather*}
+
+	Aquestes són les equacions de l'osci\l.lador harmònic clàssic, i imposant les condicions inicials \( \bar{x}(0) = \bra{\Psi(0)}\hat{X} \ket{\Psi(0)} \) i \( \bar{p}(0) = \bra{\Psi(0)}\hat{P}\ket{\Psi(0)} \) obtenim les expressions dels apartats anteriors. Això només passa perquè el potencial és quadràtic, de manera que \( V' \) és lineal i es té \( \langle V'(\hat{X}) \rangle = V'(\langle \hat{X} \rangle) \). Així, en general, sempre que se satisfa aquesta condició, les mitjanes evolucionen segons les equacions clàssiques. Per a potencials més complicats això ja no és cert.  
+
+\end{enumerate}
+\end{document}
