@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\set}[1]{\left\{ #1\right\}}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Seminari 3:} Compacitat i successions}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Seminari 3:} Compacitat i successions}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 11 de desembre de 2018}
+
+\begin{document}
+\maketitle
+
+\section*{Problema 2}
+\begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
+	\item Per veure que \( \N \) amb aquesta topologia no és Hausdorff és suficient veure que hi ha un punt que no es pot separar de la resta. Tenim que 0 és a tot obert de la topologia diferent del buit. Així, si \( n \in \N \) amb \( n \neq 0 \) i \( N \) un entorn  de \( n \), \( 0 \in N \). Per tant no podem separar 0 de cap altre punt. De fet no hi ha cap parella de punts separable, ja que si un obert conté un natural \( n \) també conté tot \( m \leq n \).
+
+	\item La successió donada no convergeix a 0 ja que \( \set{0} \) és un entorn de 0 que no conté cap punt de la successió. Tampoc convergeix a 1 ja que \( \set{0,1} \) és un entorn de 1 i si \( x_n \in \set{0,1} \) aleshores \( x_{n} = 1 \). Així \( x_{n+1} = 2 \notin \set{1,2} \).
+
+Si denotem \( \set{0,1,\dots,n} \) per \( U_n \) aleshores tenim \( U_n \subseteq U_{m} \) si i només si \( n \leq m \), i \( n \in U_m \) si i només si \( n \leq m \). Així, \( x_n \in U_2 \) per tot \( n \in \N \). Per tot \( N \) entorn de \( m \geq 2 \) tenim un obert \( U \subseteq N \) tal que \( m \in U \subseteq N \). Per la definició de la topologia que tenim, o bé \( U = U_k \) per algun \( k \geq m \) o bé \( U = \N \). En qualsevol cas, \( U_m \subseteq U \), i per tant, per tot \( n \in \N \), \( x_n \in U_2 \subseteq U_m \subseteq N \). I així \( x_n \to m \) per tot \( m \geq 2 \).
+
+\item Si fem servir la notació de l'apartat anterior, tenim que 
+	\begin{equation*}
+	\bigcup_{n = 0}^\infty U_n = \N,
+	\end{equation*}
+	de manera que \( \set{U_n}_{n \in \N} \) és un recobriment de \( \N \). Veurem que no en podem extreure un subrecobriment finit, i per tant que \( \N \) no és compacte. En efecte, si \( \set{U_{n_1}, \dots, U_{n_k}} \) és un subrecobriment finit aleshores, si \( N = \max_{1 \leq i \leq k} n_k \)
+	\begin{equation*}
+	\bigcup_{i = 1}^k U_{n_i} = U_N \subset \N.
+	\end{equation*}
+	Per tant no podem recobrir \( \N \) amb un subrecobriment finit de \( \set{U_n}_{n \in \N} \), ergo \( \N \) no és compacte amb aquesta topologia. 
+\end{enumerate}
+
+\section*{Problema 3}
+\begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
+	\item 
+	\item Suposem, buscant una contradicció, que \( S \) és un subconjunt infinit d'un espai topològic compacte \( X \) que no té punts d'acumulació. Això vol dir que tot \( x \in X \) té un entorn \( N_x \) tal que \( N_x \) no té punts de \( S \) tret de possiblement \( x \). Considerem \( U_x \) l'obert tal que \( x \in U_x \subseteq N_x \), que existeix per la definició d'entorn. És clar que 
+		\begin{equation*}
+		X = \bigcup_{x \in X} U_x,
+		\end{equation*}
+		i per tant \( \set{U_x}_{x \in X} \) és un recobriment de \( X \). Aquest recobriment, però, no té cap subrecobriment finit. En efecte, si \( \set{U_{x_1}, \dots, U_{x_N}} \) és un subrecobriment finit, aquest no pot recobrir \( X \). Això és perquè cada \( U_{x_k} \) conté, com a màxim, un punt de \( S \), i per tant no pot ser que la seva unió contingui \( S \), puix que és infinit. Però \( X \) és compacte, de manera que hauria de ser possible trobar un subrecobriment finit, de manera que hem arribat a contradicció.  
+\end{enumerate}
+
+\end{document}
