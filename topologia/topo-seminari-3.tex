@@ -61,7 +61,7 @@
 \newcommand*{\defeq}{\mathrel{\rlap{%
     \raisebox{0.3ex}{$\m@th\cdot$}}%
   \raisebox{-0.3ex}{$\m@th\cdot$}}%
-=
+	=
 }
 \makeatother
 
@@ -84,33 +84,76 @@
 \begin{document}
 \maketitle
 
+\section*{Problema 1}
+\begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
+	\item Considerem una successió \( (x_n) \) a un espai Hausdorff \( X \) convergent a dos punts \( x \) i \( y \). Si \( U \) és un entorn de \( x \) i \( V \) un entorn de \( y \) aleshores tots dos entorns contenen una cua de la successió i per tant no poden tenir intersecció nu\l.la. Així \( x \) i \( y \) no són separables i per tant han de ser el mateix punt.   
+
+	\item Sigui \( (x_n) \) una successió a un espai de Hausdorff i \( (x_{n_k} \) una parcial de la successió. Per definició de successió parcial, la successió \( (n_k) \) és estrictament creixent. Si \( x_n \to x \), tenim que per tot entorn \( U \) de \( x \), existeix un \( N \in \N \) tal que \( x_n \in U \) quan \( n > N \). Com que \( n_k \) és estrictament creixent, existeix \( K \in \N \) tal que \( n_K > N \), i per tant, si \( k > K \), \( n_k > n_K > N \) de manera que \( x_{n_k} \in U \). Concloem que \( (x_{n_k}) \) també convergeix a \( x \).
+\end{enumerate}
+
 \section*{Problema 2}
 \begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
-	\item Per veure que \( \N \) amb aquesta topologia no és Hausdorff és suficient veure que hi ha un punt que no es pot separar de la resta. Tenim que 0 és a tot obert de la topologia diferent del buit. Així, si \( n \in \N \) amb \( n \neq 0 \) i \( N \) un entorn  de \( n \), \( 0 \in N \). Per tant no podem separar 0 de cap altre punt. De fet no hi ha cap parella de punts separable, ja que si un obert conté un natural \( n \) també conté tot \( m \leq n \).
+	\item Per veure que \( \N \) amb aquesta topologia no és Hausdorff és suficient veure que tots els oberts no buits tenen intersecció no buida. Si denotem \( \set{0,1,\dots,n} \) per \( U_n \) tenim que els oberts no buits de la topologia són o bé el total o bé \( U_n \) per algun \( n \in \N \). És clar que si \( n \leq m \), 
+		\begin{equation*}
+			U_n \subseteq U_m,
+		\end{equation*}	
+		de manera que no hi ha oberts no trivials amb intersecció no buida, i per tant l'espai no pot ser Hausdorff. 	
 
-	\item La successió donada no convergeix a 0 ja que \( \set{0} \) és un entorn de 0 que no conté cap punt de la successió. Tampoc convergeix a 1 ja que \( \set{0,1} \) és un entorn de 1 i si \( x_n \in \set{0,1} \) aleshores \( x_{n} = 1 \). Així \( x_{n+1} = 2 \notin \set{1,2} \).
+	\item La successió donada no convergeix a 0 ja que \( \set{0} \) és un entorn de 0 que no conté cap punt de la successió. Tampoc convergeix a 1 ja que \( \set{0,1} \) és un entorn de 1 i si \( x_n \in \set{0,1} \) aleshores \( x_{n} = 1 \). Així \( x_{n+1} = 2 \notin \set{1,2} \), de manera que hi ha un entorn de 1 que no conté cap cua de la successió, i per tant aquesta no convergeix a 1. 
 
-Si denotem \( \set{0,1,\dots,n} \) per \( U_n \) aleshores tenim \( U_n \subseteq U_{m} \) si i només si \( n \leq m \), i \( n \in U_m \) si i només si \( n \leq m \). Així, \( x_n \in U_2 \) per tot \( n \in \N \). Per tot \( N \) entorn de \( m \geq 2 \) tenim un obert \( U \subseteq N \) tal que \( m \in U \subseteq N \). Per la definició de la topologia que tenim, o bé \( U = U_k \) per algun \( k \geq m \) o bé \( U = \N \). En qualsevol cas, \( U_m \subseteq U \), i per tant, per tot \( n \in \N \), \( x_n \in U_2 \subseteq U_m \subseteq N \). I així \( x_n \to m \) per tot \( m \geq 2 \).
+		Tenim que tots els termes de la successió són a \( U_2 \) i per tant a \( U_m \) per tot \( m \geq 2 \). És clar que qualsevol entorn d'un punt \( m \in \N \) conté \( U_m \), ja que \( U_m \) és l'obert més petit que conté \( m \). Així tots els termes de la successió estan continguts a qualsevol entorn de \( m \geq 2 \), i per tant aquesta convergeix a tot \( m \) més gran o igual que 2.
 
-\item Si fem servir la notació de l'apartat anterior, tenim que 
-	\begin{equation*}
-	\bigcup_{n = 0}^\infty U_n = \N,
-	\end{equation*}
-	de manera que \( \set{U_n}_{n \in \N} \) és un recobriment de \( \N \). Veurem que no en podem extreure un subrecobriment finit, i per tant que \( \N \) no és compacte. En efecte, si \( \set{U_{n_1}, \dots, U_{n_k}} \) és un subrecobriment finit aleshores, si \( N = \max_{1 \leq i \leq k} n_k \)
-	\begin{equation*}
-	\bigcup_{i = 1}^k U_{n_i} = U_N \subset \N.
-	\end{equation*}
-	Per tant no podem recobrir \( \N \) amb un subrecobriment finit de \( \set{U_n}_{n \in \N} \), ergo \( \N \) no és compacte amb aquesta topologia. 
+	\item Si fem servir la notació de l'apartat anterior, tenim que 
+		\begin{equation*}
+			\bigcup_{n = 0}^\infty U_n = \N,
+		\end{equation*}
+		de manera que \( \set{U_n}_{n \in \N} \) és un recobriment de \( \N \). Veurem que no en podem extreure un subrecobriment finit, i per tant que \( \N \) no és compacte. En efecte, si \( \set{U_{n_1}, \dots, U_{n_k}} \) és un subrecobriment finit aleshores, si \( N = \max_{1 \leq i \leq k} n_k \)
+		\begin{equation*}
+			\bigcup_{i = 1}^k U_{n_i} = U_N \subset \N.
+		\end{equation*}
+		Per tant no podem recobrir \( \N \) amb un subrecobriment finit de \( \set{U_n}_{n \in \N} \), ergo \( \N \) no és compacte amb aquesta topologia. 
 \end{enumerate}
 
 \section*{Problema 3}
 \begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
-	\item 
+	\item Aquest és el teorema de Bolzano-Weierstraß que se segueix immediatament de l'apartat \textbf{\textsf{(d)}}. 
+
+		Per veure que \( (0,1] \) no és compacte per successions, considerem la successió \( \left(\tfrac{1}{n}\right) \). Sabem que, mirada a \( \R \), és convergent a 0. I per tant qualsevol parcial també convergeix a \( 0 \). Això vol dir que per tot \( \epsilon > 0 \) existeix \( N \in \N \) tal que si \( n > N \), \( x_n \in B(0, \epsilon) = (-\epsilon, \epsilon) \). Si ens ho mirem amb la topologia subespai a \( (0,1] \), tenim que per tot \( \epsilon > 0 \) existeix \( N \in \N \) tal que si \( n > N \), \( x_n \in (0, \epsilon) \). Això ens dóna que la successió ni cap de les seves parcials no poden convergir a cap punt de \( (0,1] \). Efectivament, per tot \( a \in (0,1] \), \( \left(\tfrac{1}{2}a, 1\right] \) és un entorn d'\( a \). Com hem vist, existeix \( N \in \N \) tal que si \( n > N \), \( x_n \in \left(0,\tfrac{1}{2}a\right) \), i per tant \( x_n \notin \left(\tfrac{1}{2}a, 1\right] \) i per tant \( \left(\tfrac{1}{n}\right) \) no té cap parcial convergent a \( (0,1] \).
+
 	\item Suposem, buscant una contradicció, que \( S \) és un subconjunt infinit d'un espai topològic compacte \( X \) que no té punts d'acumulació. Això vol dir que tot \( x \in X \) té un entorn \( N_x \) tal que \( N_x \) no té punts de \( S \) tret de possiblement \( x \). Considerem \( U_x \) l'obert tal que \( x \in U_x \subseteq N_x \), que existeix per la definició d'entorn. És clar que 
 		\begin{equation*}
-		X = \bigcup_{x \in X} U_x,
+			X = \bigcup_{x \in X} U_x,
 		\end{equation*}
 		i per tant \( \set{U_x}_{x \in X} \) és un recobriment de \( X \). Aquest recobriment, però, no té cap subrecobriment finit. En efecte, si \( \set{U_{x_1}, \dots, U_{x_N}} \) és un subrecobriment finit, aquest no pot recobrir \( X \). Això és perquè cada \( U_{x_k} \) conté, com a màxim, un punt de \( S \), i per tant no pot ser que la seva unió contingui \( S \), puix que és infinit. Però \( X \) és compacte, de manera que hauria de ser possible trobar un subrecobriment finit, de manera que hem arribat a contradicció.  
+
+	\item Denotem per \( S \) el conjunt imatge d'una successió \( (x_n) \) a un espai mètric. Hem de veure que si \( x \) és un punt d'acumulació d'\( S \) aleshores \( (x_n) \) té una parcial convergent a \( x \).
+
+		Observem primer que per tot \( \epsilon > 0 \) la bola \( B(x, \epsilon) \) conté infinits termes de la successió. Com que \( B(x, \epsilon) \) és un entorn de \( x \), ha de contenir almenys un terme de la successió diferent de \( x \). Posem que \( B(x, \epsilon) \)	conté un conjunt finit d'aquests punts, \( \set{x_{n_1}, \dots, x_{n_k}} \). Aleshores
+		\begin{equation*}
+			d = \max_{1 \leq i \leq k} d(x, x_{n_i}) > 0
+		\end{equation*}
+		de manera que \( B(x, d) \) és un entorn de \( x \). Així ha de contenir almenys un terme de la successió diferent de \( x \), posem \( x_{n_{k+1}} \), tal que \( d(x,x_{n_{k+1}}) < d \), i que per tant és diferent dels altres \( x_{n_i} \) ---observem que els \( x_{n_i} \) poden ser iguals, però \( x_{n_{k+1}} \) ha de ser diferent de tots ells---. Així, si \( B(x, \epsilon) \) conté un nombre finit de termes de la successió, sempre en podem trobar un altre de diferent i concloem que en conté infinits.
+
+		Amb aquest resultat previ podem construir una parcial de \( (x_n) \) convergent a \( x \) iterativament. Com que \( B(x,1) \) és un entorn de \( x \) conté un terme de la successió diferent de \( x \), posem \( x_{n_1} \). Aleshores \( d_1 =  d(x_{n_1}, x) > 0 \). Així \( B(x, d_1) \) és un entorn de \( x \) que per tant conté infinits termes de la successió diferents de \( x \), i per tant infinits termes \( x_n \) amb \( n \geq n_1 \). Sigui \( n_2 \) el primer \( n \geq n_1 \) tal que \( x_n \in B(x,d_1) \). Aleshores \( 0 < d_2 = d(x,x_{n_2}) < d_1 \). Ja veiem, doncs, quin és el procés iteratiu que genera aquesta parcial: donat el terme \( x_{n_k} \),construïm el terme \( x_{n_{k+1}} \) considerant el primer \( n \) tal que \( n \geq n_k \) tal que \( x_{n_{k+1}} \in B(x, d_k) \), on \( d_k = d(x, x_k) \), que sempre existeix pel que hem argumentat abans. 
+
+		Només queda veure que aquesta successió efectivament convergeix a \( x \). Per veure això n'hi ha prou amb veure la convergència pels oberts bàsics, que en aquest cas són les boles ja que estem en un espai mètric. Considerem la successió \( d_k = d(x, x_{n_k}) \), que és decreixent. Veiem que no està fitada inferiorment per cap real positiu: si existeix \( a > 0 \) tal que \( d_k \geq a \) per tot \( k \in \N \) aleshores \( x_{n_k} \notin B(x,a) \). Com que \( a > 0 \), \( B(x, a) \) és obert i per tant conté algun terme de la successió diferent de \( x \), \( x_l \). Però això no pot ser ja que, com que \( (x_{n_k}) \) és una parcial, \( (n_k) \) és creixent, i per tant excedeix \( l \) en algun punt i per tant hi hauria algun \( x_{n_i} \) a \( B(x,a) \), una contradicció. Això vol dir que per tot \( \epsilon > 0 \), existeix \( K \in \N \) tal que \( d_K < \epsilon \). Per tant, si \( k > K \), \( d(x_{n_k}, x) < d_K < \epsilon \) i per tant \( x_{n_k} \in B(x,\epsilon) \), i concloem que \( (x_{n_k}) \) convergeix a \( x \). 
+
+	\item Sigui \( K \) un espai mètric compacte. Si \( K \) és finit és immediat que és compacte. Efectivament, si \( K = \set{y_1, \dots, y_n} \) i \( (x_n) \) és una successió a \( K \), pel principi del colomar, existeix \( 1 \leq i \leq N \) tal que \( x_n = y_i \) per infinits \( n \). És clar que la parcial formada per aquests termes convergeix a \( y_i \).  
+
+		Si \( K \) és infinit, per l'apartat \textbf{\textsf{(b)}} té un punt d'acumulació. Si \( (x_n) \) és una successió a \( K \) té, per l'apartat \textbf{\textsf{(c)}}, una parcial convergent al punt d'acumulació, i per tant \( K \) és compacte per successions.  
 \end{enumerate}
+
+\section*{Problema 4}
+Considerem l'espai \( X = \set{0,1}^{[0,1]} \). Aquest espai és un producte de \( \set{0,1} \) indexat a \( [0,1] \), o, equivalentment, el conjunt de funcions de \( [0,1] \) a \( \set{0,1} \). La topologia a \( X \) és la topologia producte, que té per oberts bàsics productes infinits d'oberts de \( \set{0,1} \) ---considerant la topologia discreta, només n'hi ha dos de no trivials: \( \set{0} \) i \( \set{1} \)--- on només un nombre finit dels factors pot diferir del total. Equivalentment, els oberts bàsics són conjunts de funcions que coincideixen en un nombre finit de punts, és a dir, conjunts de la forma
+\begin{equation*}
+	\set{f \colon [0,1] \to \set{0,1} \mid f(a_1) = \dots = f(a_n) = 0 \text{ i } f(b_1) = \dots = f(b_m) = 1}.
+\end{equation*}
+\( X \) és compacte pel teorema de Tychonoff, ja que és el producte de compactes --- \( \set{0,1} \) és trivialment compacte amb qualsevol topologia per ser finit---. 
+
+Per veure que \( X \) no és seqüencialment compacte hem de produir una successió de \( X \) que no tingui cap parcial convergent. Considerem la successió d'elements de \( X \), \( (f_n) \), definida per \( f_n\left(\tfrac{k}{n}\right) = 1 \) per tot \( k \in \N \) tal que \( 0 \leq k \leq n \) i \( f_n(x) = 0 \) per tota la resta de \( x \) a \( [0,1] \). Veurem que aquesta successió no té cap parcial convergent, de manera que \( X \) no és compacte per successions tot i ser compacte.
+
+Sigui \( U \) un obert bàsic de \( X \). Veurem que \( U \) no conté cap cua de \( (f_n) \). 
+
+Sigui \( g \in X \) i \( N \) un entorn de \( g \). \( N \) conté un obert que conté \( g \), que en particular conté un obert bàsic que conté \( g \), diguem-li \( U \). Els elements d'\( U \) són aquelles funcions que coincideixen amb \( g \) en un nombre finit de punts. Posem que han de satisfer que prenen el valor 1 als punts \( a_1, \dots, a_n \) i el valor 0 als punts \( b_1, \dots, b_m \). 
 
 \end{document}
