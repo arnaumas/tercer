@@ -144,16 +144,32 @@
 \end{enumerate}
 
 \section*{Problema 4}
-Considerem l'espai \( X = \set{0,1}^{[0,1]} \). Aquest espai és un producte de \( \set{0,1} \) indexat a \( [0,1] \), o, equivalentment, el conjunt de funcions de \( [0,1] \) a \( \set{0,1} \). La topologia a \( X \) és la topologia producte, que té per oberts bàsics productes infinits d'oberts de \( \set{0,1} \) ---considerant la topologia discreta, només n'hi ha dos de no trivials: \( \set{0} \) i \( \set{1} \)--- on només un nombre finit dels factors pot diferir del total. Equivalentment, els oberts bàsics són conjunts de funcions que coincideixen en un nombre finit de punts, és a dir, conjunts de la forma
+Considerem l'espai \( X = \set{0,1}^{[0,1]} \). Aquest espai és un producte de \( \set{0,1} \) indexat a \( [0,1] \), o, equivalentment, el conjunt de funcions de \( [0,1] \) a \( \set{0,1} \). La topologia a \( X \) és la topologia producte, que té per oberts bàsics productes infinits d'oberts de \( \set{0,1} \) on només un nombre finit dels factors pot diferir del total. Equivalentment, com que \( \set{0,1} \) amb la topologia discreta només té dos oberts no trivials: \( \set{0} \) i \( \set{1} \), els oberts bàsics són conjunts de funcions que coincideixen en un nombre finit de punts, és a dir, conjunts de la forma
 \begin{equation*}
 	\set{f \colon [0,1] \to \set{0,1} \mid f(a_1) = \dots = f(a_n) = 0 \text{ i } f(b_1) = \dots = f(b_m) = 1}.
 \end{equation*}
 \( X \) és compacte pel teorema de Tychonoff, ja que és el producte de compactes --- \( \set{0,1} \) és trivialment compacte amb qualsevol topologia per ser finit---. 
 
-Per veure que \( X \) no és seqüencialment compacte hem de produir una successió de \( X \) que no tingui cap parcial convergent. Considerem la successió d'elements de \( X \), \( (f_n) \), definida per \( f_n\left(\tfrac{k}{n}\right) = 1 \) per tot \( k \in \N \) tal que \( 0 \leq k \leq n \) i \( f_n(x) = 0 \) per tota la resta de \( x \) a \( [0,1] \). Veurem que aquesta successió no té cap parcial convergent, de manera que \( X \) no és compacte per successions tot i ser compacte.
+Observem que, en general, la noció de convergència que dóna la topologia producte és precisament la de convergència puntual. És a dir, una successió \( (f_n) \) a \( Y^X \) convergeix a \( f \in Y^X \) respecte la topologia producte si i només si per tot \( x \in X \) \( f_n(x) \) convergeix a \( f(x) \) en la topologia de \( Y \). Efectivament, si \( f_n \) convergeix a puntualment \( f \) i considerem un un entorn obert bàsic de \( f \) a \( Y^X \),
+\begin{equation*}
+	U = \set{g \colon X \to Y \mid g(x_1) \in U_1, \dots, g(x_n) \in U_n},
+\end{equation*}
+sent \( U_1, \dots, U_n \) oberts de \( Y \), aleshores per cada \( U_k \) existeix \( N_k \in \N \) tal que \( f_n(x_k) \in U_k \) quan \( n \geq N_k \). Prenem \( N \) el màxim d'aquests \( N_k \) i tenim que per tot \( n \geq N \), \( f_n(x_k) \in U_k \) per tot \( 1 \leq k \leq n \), i per tant \( f_n \in U \) per tot \( n \geq N \). Així tenim que \( f_n \) convergeix a \( f \) respecte la topologia producte. Recíprocament, suposem que \( f_n \) convergeix a \( f \) respecte la topologia producte. Per tot \( x \in X \) i \( U \subseteq Y \) obert que conté \( f(x) \),
+\begin{equation*}
+	\set{g \colon X \to Y \mid g(x) \in U}
+\end{equation*}
+és un entorn obert de \( f \), que per hipòtesi conté una cua de \( (f_n) \). Equivalentment, existeix \( N \in \N \) tal que si \( n > N \), \( f_n(x) \in U \). Per tant la successió \( (f_n(x)) \) convergeix a \( f(x) \) per tot \( x \in X \).  
 
-Sigui \( U \) un obert bàsic de \( X \). Veurem que \( U \) no conté cap cua de \( (f_n) \). 
+Per veure que \( X \) no és seqüencialment compacte hem de produir una successió de \( X \) que no tingui cap parcial convergent. Per fer això farem ús de la representació binària dels elements de \( [0,1] \). Per cada \( x \in [0,1] \) existeixen \( x_n \in \set{0,1} \) tals que
+\begin{equation*}
+x = \sum_{n = 0}^{\infty} \frac{x_n}{2^n}.
+\end{equation*}
+I si excloem cues infinites d'uns, els \( x_n \) són únics. Aleshores definim \( f_n \colon [0,1] \to \set{0,1} \) per \( f_n(x) = x_n \). És a dir, \( f_n(x) \) és l' \( n \)-èssim dígit en la representació binària d'\( x \). Necessitem excloure les cues d'uns precisament per garantir que \( f_n \) estigui ben definida. Veurem que cap parcial d'aqeusta successió és convergent.
 
-Sigui \( g \in X \) i \( N \) un entorn de \( g \). \( N \) conté un obert que conté \( g \), que en particular conté un obert bàsic que conté \( g \), diguem-li \( U \). Els elements d'\( U \) són aquelles funcions que coincideixen amb \( g \) en un nombre finit de punts. Posem que han de satisfer que prenen el valor 1 als punts \( a_1, \dots, a_n \) i el valor 0 als punts \( b_1, \dots, b_m \). 
+Per tota parcial \( (f_{n_k}) \) existeix \( a \in [0,1] \) tal que \( f_{n_k}(a) = \tfrac{1}{2}(1 + (-1)^k) \), és a dir, tal que les seves imatges per la successió alternen de 0 a 1. Per exemple
+\begin{equation*}
+	a = \frac{1}{2} \sum_{k = 0}^\infty \frac{1 + (-1)^k}{2^{n_k}},
+\end{equation*}
+que és simplement l'element que té totes les seves xifres iguals a 0 tret de les de les posicions \( n_k \), que alternen entre 0 i 1, com volem. És clar que la successió \( (f_{n_k}(a)) \) no pot convergir a \( \set{0,1} \) amb la topologia discreta. Així, per tot \( f \in X \), \( f_{n_k}(a) \) no convergeix a \( f(a) \), independenment el valor de \( f(a) \). Així \( f_{n_k} \) no convergeix puntualment a cap element de \( X \). I pel que hem argumentat anteriorment, això és equivalent a dir que no convergeix respecte la topologia producte, tal i com volíem.  
 
 \end{document}
