@@ -1,0 +1,171 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Ry}{\mathit{Ry}}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\ket}[1]{\vert #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 \vert}
+\newcommand{\braket}[2]{\langle #1 \vert #2 \rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Entrega 5:} Funcions d'ona multidimensionals}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Entrega 5:} Funcions d'ona multidimensionals}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 20 de desembre de 2018}
+
+\begin{document}
+\maketitle
+Considerem el següent hamiltonià en dues dimensions,
+\begin{equation*}
+	\hat{H} = \frac{1}{2m}\left(\hat{P}_x^2 + \hat{P}_y^2\right) + \frac{m\omega^2}{2}\left(\hat{X}^2 + \hat{Y}^2\right) + \frac{k}{4}\left(\hat{X} - \hat{Y}\right)^2. 
+\end{equation*}
+
+\begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
+	\item Si \( k = 0 \) podem separar el hamiltonià en un terme que només depèn de \( x \) i un que nomès depèn de \( y \),
+		\begin{equation*}
+			\hat{H} = \frac{1}{2m}\hat{P}_x^2 + \frac{m\omega^2}{2}\hat{X}^2 + \frac{1}{2m}\hat{P}_y^2 + \frac{m\omega^2}{2}\hat{Y}^2 = \hat{H_x}(\hat{X},\hat{P_x}) + \hat{H_y}(\hat{Y}, \hat{P_y}),
+		\end{equation*}
+		de manera que els seus estats propis seran productes dels estats propis de cada terme. Com que tenim la suma de dos osci\l.ladors harmònics de la mateixa freqüència els estats propis del sistema conjunt seran
+		\begin{equation*}
+			\Psi_{n_x n_y}(x,y) = C_{n_x}C_{n_y} H_{n_x}(\alpha x) H_{n_y}(\alpha y) e^{-\frac{\alpha^2}{2}\left(x^2 + y^2\right)} 
+		\end{equation*}
+		on \( C_n \) és la constant de normalització de l'\( n \)-èssim estat propi de l'osci\l.lador, 
+		\begin{equation*}
+			C_n = \sqrt{\frac{\alpha}{\sqrt{\pi}2^n n!}}
+		\end{equation*}
+		i
+		\begin{equation*}
+			\alpha = \sqrt{\frac{m\omega}{\hbar}}. 
+		\end{equation*}
+		L'energia total serà la suma de les energies de cada factor:
+		\begin{equation*}
+			E_{n_x n_y} = \hbar \omega(n_x + n_y + 1).
+		\end{equation*}
+
+		Havent calculat les energies possibles veiem que si que hi haurà estats degenerats. Per exemple, com que \( E_{20} = E_{11} = E_{02} \) \( \ket{\Psi_{20}} \), \( \ket{\Psi_{11}} \) i \( \ket{\Psi_{02}} \) són estats diferents amb la mateixa energia i per tant degenerats. 
+
+	\item Si \( \hat{A} \) i \( \hat{B} \) són operadors que commuten aleshores 
+		\begin{equation*}
+			\left[\frac{\hat{A} + \hat{B}}{\sqrt{2}}, \frac{\hat{A} - \hat{B}}{\sqrt{2}}\right] = \frac{1}{2} \left([\hat{A}, \hat{A}] - [\hat{A}, \hat{B}] + [\hat{B}, \hat{A}] + [\hat{B}, \hat{B}]\right) = 0
+		\end{equation*}
+		i per tant, definits com a l'enunciat, \( \hat{R}_+ \) i \( \hat{R}_- \) commuten, així com \( \hat{P}_+ \) i \( \hat{P}_- \). També es verifica
+		\begin{equation*}
+			[\hat{R}_+, \hat{P}_+] = \frac{1}{2}\left([\hat{X}, \hat{P}_x] + [\hat{X}, \hat{P}_y] + [\hat{Y}, \hat{P}_x] + [\hat{Y}, \hat{P}_y]\right) = i\hbar.
+		\end{equation*}
+		De la mateixa manera es comprova que \( [\hat{R}_-, \hat{P}_-] = i \hbar \) i \( [\hat{R}_+, \hat{P}_-] = [\hat{R}_-, \hat{P}_+] = 0 \).
+
+		Si reescrivim el hamiltonià amb aquests nous operadors tenim
+		\begin{align*}
+			\hat{H} &= \frac{1}{2m}\left(\hat{P}_+^2 + \hat{P}_-^2\right) + \frac{m\omega_+^2}{2}\left(\hat{R}_+^2 + \hat{R}_-^2\right) + \frac{k}{4} \hat{R}_-^2 \\
+							&= \frac{1}{2m}\hat{P}_+^2 + \frac{m\omega^2}{2}\hat{R}_+^2 + \frac{1}{2m}\hat{P}_-^2 + \frac{m}{2}\left(\omega^2 + \frac{k}{m}\right)\hat{R}_-^2 \\
+							&= \frac{1}{2m}\hat{P}_+^2 + \frac{m\omega_+^2}{2}\hat{R}_+^2 + \frac{1}{2m}\hat{P}_-^2 + \frac{m\omega_-^2}{2}\hat{R}_-^2 .
+		\end{align*}
+		Tenim, per tant, la suma de dos osci\l.ladors, un amb freqüència \( \omega_+ \) i l'altre amb \( \omega_- \). Els estats propis seran
+		\begin{equation*}
+			\Phi_{n_+ n_-}(x,y) = C_{n_+} C_{n_-} H_{n_+}(\alpha_+ r_+) H_{n_-}(\alpha_- r_-) e^{-\frac{\alpha_+^2}{2}r_+^2 -\frac{\alpha_-^2}{2}r_-^2},
+		\end{equation*}
+		on \( C_{n_+} \) i \( C_{n_-} \) són les corresponents constants de normalització, \( \alpha_+ = \sqrt{m\omega_+/\hbar} \) i \( \alpha_- = \sqrt{m\omega_-/ \hbar} \). Les energies possibles seran
+		\begin{equation*}
+			E'_{n_+ n_-} = \hbar \omega_{+}\left(n_+ + \tfrac{1}{2}\right) + \hbar \omega_-\left(n_- + \tfrac{1}{2}\right).
+		\end{equation*}
+		En general, per a cada parella de \( n_+ \) i \( n_- \) obtenim una energia diferent i per tant no tenim estats degenerats. Això no és així quan \( \omega_- \) és un múltiple enter de \( \omega_+ \) i viceversa. Per exemple, si \( \omega_- = 2\omega_+ \) aleshores
+		\begin{equation*}
+			E'_{n_+ n_-} = \hbar\omega_+\left(n_+ + \tfrac{1}{2}\right) + 2\hbar \omega_+\left(n_- + \tfrac{1}{2}\right) = \hbar \omega_+ \left(n_+ + 2n_- + \tfrac{3}{2}\right).
+		\end{equation*}
+		D'aquesta manera \( E'_{20} = E'_{01} \) i per tant tenim degeneració. 
+
+	\item Tenim que \( E'_{00} = \tfrac{1}{2}\hbar(\omega_+ + \omega_-) \), de manera que la probabilitat d'obtenir aquesta energia mesurant sobre l'estat propi \( \Psi_{00} \) és \( \abs{\braket{\Phi_{00}}{\Psi_{00}}}^2 \). Per a fer aquest càlcul és convenient escriure \( \Psi_{00} \) en termes de \( r_+ \) i \( r_- \):
+		\begin{equation*}
+			\Psi_{00}(x,y) = \frac{\alpha_+}{\sqrt{\pi}} e^{-\frac{\alpha_+^2}{2}(x^2 + y^2)} = \frac{\alpha_+}{\sqrt{\pi}} e^{-\frac{\alpha_+^2}{2}(r_+^2 + r_-^2)}. 
+		\end{equation*}
+		Per tant
+		\begin{align*}
+			\braket{\Phi_{00}}{\Psi_{00}} &= \frac{\alpha_+ \sqrt{\alpha_+ \alpha_-}}{\pi}\int_{-\infty}^\infty \int_{-\infty}^\infty e^{-\frac{\alpha_+^2}{2}(r_+^2 + r_-^2)} e^{-\frac{\alpha_+^2}{2}r_+^2 -\frac{\alpha_-^2}{2} r_-^2} \, dr_+ dr_-\\
+																		&= \frac{\alpha_+ \sqrt{\alpha_+ \alpha_-}}{\pi} \int_{-\infty}^\infty e^{-\alpha_+^2r_+^2} \, dr_+ \int_{-\infty}^\infty e^{-\frac{\alpha_+^2 + \alpha_-^2}{2} r_-} \, dr_- \\
+																		&= \frac{\alpha_+ \sqrt{\alpha_+ \alpha_-}}{\pi} \sqrt{\frac{\pi}{\alpha_+}} \sqrt{\frac{2\pi}{\alpha_+^2 + \alpha_-^2}} = \sqrt{\frac{2\alpha_+ \alpha_-}{\alpha_+^2 + \alpha_-^2}} \\
+																		&= \sqrt{\frac{2\sqrt{\omega_+ \omega_-}}{\omega_+ + \omega_-}}. 
+		\end{align*}
+		La probabilitat que busquem és, doncs,
+		\begin{equation*}
+			p = \frac{2\sqrt{\omega_+ \omega_-} }{\omega_+ + \omega_-}.
+		\end{equation*}
+Per la desigualtat aritmètica-geomètrica aquesta quantitat és sempre menor que 1 i per tant representa una probabilitat. 
+
+Quan \( k \to 0 \) aleshores \( \omega_- \to \omega_+ \) i \( E'_{00} \to E_{00} = \hbar \omega_+ \) i per tant \( p \to 1 \). Això és clar ja que quan \( k = 0 \) el canvi de potencial no té efecte i per tant l'estat \( \ket{\Psi_{00}} \) és propi amb energia \( E_{00} \) i per tant quan fem una mesura de l'energia obtenim aquest valor amb probabilitat 1. 
+
+Quan \( k \to \infty \), com que \( \sqrt{\omega_+ \omega_-} \) és \( O(k^{1/4}) \) i \( \omega_+ + \omega_- \) és \( O(k^{1/2}) \), \( p \to 0 \). Això vol dir que amb probabilitat propera a 1 mesurarem una energia per sobre de la fonamental.
+\end{enumerate}
+\end{document}
