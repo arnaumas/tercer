@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Ry}{\mathit{Ry}}
+\let\Im\relax
+\let\Re\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Re}{Re}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\ket}[1]{\vert {#1} \rangle}
+\newcommand{\bra}[1]{\langle #1 \vert}
+\newcommand{\braket}[2]{\langle {#1} \vert {#2} \rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Seminari 1:} Representació conforme i homografies}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Seminari 1:} Representació conforme i homografies}
+\author{\sffamily Arnau Mas --- 77633181Q}
+\date{\sffamily 21 de març de 2019}
+
+\begin{document}
+\maketitle
+
+\section*{Problema 4}
+Sigui \( \Pi^+ = \{ z \in \C \mid \Im{z} > 0 \} \) el semiplà superior i \( U = \C - [-1, 1] \). Volem trobar una representació conforme de \( \Pi^+ \) sobre \( U \), és a dir, una bijecció conforme \( T \colon \Pi^+ \to U \). 
+
+En primer lloc observem que l'aplicació 
+\begin{align*}
+	f \colon \Pi^+ & \longrightarrow \C - [0, \infty) \\
+	z & \longmapsto z^2
+\end{align*}
+és una bijecció. En efecte, si \( w \in \C - [0, \infty) \) aleshores sempre hi ha \( z \in \Pi^+ \) tal que \( z^2 = w \). Si triem a \( \C - [0, \infty) \) una determinació de l'argument entre 0 i \( 2\pi \) ---de manera que \( -1 \) té argument \( \pi \), \( i \) té argument \( \frac{\pi}{2} \), etc.--- aleshores podem escriure
+\begin{equation*}
+	w = \abs{w} e^{i\theta}
+\end{equation*}
+amb \( \theta \in (0, 2\pi) \), ja que un nombre complex té argument 0 o \( 2\pi \) si i només si és real positiu. Aleshores
+\begin{equation*}
+	z = \sqrt{\abs{w}}e^{i\frac{\theta}{2}} \in \Pi^+,
+\end{equation*}
+ja que \( \frac{\theta}{2} \in (0, \pi) \). I aleshores és clar que \( z^2 = w \). Per tant \( f \) és exhaustiva.
+
+D'altra banda, si \( z_1, z_2 \in \Pi^+ \) satisfan \( z_1^2 = z_2^2 \) aleshores o bé \( z_1 = z_2 \) o bé \( z_1 = -z_2 \). Aixó és perquè tot nombre complex té només dues arrels quadrades, les quals tenen arguments que estan separats \( \pi \), és a dir, l'una és l'oposat de l'altra. Però no pot ser que \( z_1 = -z_2 \), ja que, en general, si \( z \in \Pi^+ \) aleshores \( -z \in \Pi^+ \), perquè \( \Re{-z} = -\Re{z} \). Així doncs ha de ser \( z_1 = z_2 \) i per tant \( f \) és injectiva.    
+
+És clar que \( f \) és holomorfa ---de fet és entera--- amb \( f'(z) = 2z \). Veiem doncs que \( f' \) només s'anu\l.la a 0, però \( 0 \in \Pi^+ \). Per tant, com que és holomorfa amb derivada no nu\l.la a tot \( \Pi^+ \), \( f \) és una aplicació conforme.  
+
+Ara només hem de trobar una representació conforme de \( \C - [0, \infty) \) a \( U \). Considerem l'homografia \( T \colon \C_\infty \to \C_\infty \) tal que 
+\begin{gather*}
+	T(0) = -1, \\
+	T(1) = 0, \\
+	T(\infty) = 1,
+\end{gather*}
+sent \( \C_\infty \) l'esfera de Riemann. Aleshores \( T \) està donada per
+\begin{equation*}
+	T(z) = \frac{z - 1}{z + 1}.
+\end{equation*}
+És clar que la imatge de \( [0, \infty) \) per \( T \) és \( [-1, 1] \). Per tant la imatge de \( \C - [0, \infty) \) per \( T \) és \( \C - [-1, 1] = U \). Així doncs la composició \( T \circ f \) és una representació conforme de \( \Pi^+ \) sobre \( U \). Explícitament
+\begin{equation*}
+	(T \circ f)(z) = \frac{z^2 - 1}{z^2 + 1}.
+\end{equation*}
+
+\end{document}
