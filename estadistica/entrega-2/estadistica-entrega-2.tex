@@ -35,6 +35,9 @@
 
 \crefname{figure}{figura}{figures}
 \crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
 
 % Directori per les figures
 \graphicspath{{./figs/}}
@@ -52,6 +55,12 @@
 }
 \pagestyle{pagina}
 
+% Nous comands
+\newcommand{\cond}{\, \vert \,}
+\DeclareMathOperator{\DGamma}{Gamma}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+
 \title{\sffamily {\bfseries Entrega 2:} Comparació d'estimadors}
 \author{\sffamily Andreu Arderiu, Arnau Mas, Alejandro Plaza}
 \date{\sffamily 25 d'abril de 2019}
@@ -61,5 +70,44 @@
 \maketitle
 
 \section{Introducció}
+La funció de densitat d'una variable aleatòria \( X \) que segueix la distribució gamma és
+\begin{equation*}
+	f(x \cond \alpha, \nu) = \frac{\alpha^\nu x^{\nu - 1}}{\Gamma(\nu)} e^{-\alpha x}
+\end{equation*}
+on \( \alpha \) s'anomena el paràmetre de ràtio (\emph{rate} en anglès) i \( \nu \) rep el nom de paràmetre de forma (\emph{shape} en anglès). El nostre objectiu és produir estimadors per aquests dos paràmetres mitjançant els mètodes de màxima versemblança i dels moments i comparar-los.  
+
+\subsection{Mètode dels moments}
+La funció generatriu de moments d'una variable aleatòria de distribució gamma, \( X \sim \DGamma(\alpha, \nu) \) és
+\begin{equation*}
+	M_X(t) = \alpha^\nu (\alpha - t)^{\nu - 1},
+\end{equation*}
+i les successives derivades són
+\begin{gather*}
+	M'_X(t) = \nu \alpha^\nu (\alpha - t)^{-\nu - 1} \\
+	M''_X(t) = \nu(\nu + 1) \alpha^\nu (\alpha - t)^{-\nu - 2}, 
+\end{gather*}
+Per tant, per la definició de la funció generatriu tenim
+\begin{equation} \label{eq:moments}
+	\begin{gathered}
+		\E[X] = M'_X(0) = \frac{\nu}{\alpha} \\
+		\Var[X] = \E[X^2] - \E[X]^2 = M''_X(0) - M'_X(0)^2 = \frac{\nu(\nu + 1)}{\alpha^2} - \left( \frac{\nu}{\alpha} \right)^2 = \frac{\nu}{\alpha^2}. 
+	\end{gathered}
+\end{equation}
+Si invertim l'\cref{eq:moments} obtenim
+\begin{equation} \label{eq:moments invertit}
+	\begin{gathered}
+		\alpha = \frac{\E[X]}{\Var[X]} \\
+		\nu = \frac{\E[X]^2}{\Var[X]}
+	\end{gathered}
+\end{equation}
+Per tant els estimadors per als paràmetres que obtenim amb el mètode dels moments són
+\begin{equation} \label{eq:estimadors moments}
+\begin{gathered}
+	\hat{\alpha}_\text{Mom}(X) = \frac{\bar{X}}{S^2} \\
+	\hat{\nu}_\text{Mom}(X) = \frac{\bar{X}^2}{S^2} \\
+\end{gathered}
+\end{equation}
+on \( \bar{X} \) i \( S^2 \) són la mitjana i variància mostrals.   
+
 
 \end{document}
