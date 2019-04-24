@@ -1,0 +1,133 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+%\usepackage[pdftex]{graphicx} %Per a poder incloure imatges
+\usepackage{amsmath}   %  Paquets per
+\usepackage{amssymb}   %  matemàtics
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{fancyhdr} % Per als capÃ§als i peus de pàgina
+\usepackage{enumerate}
+\usepackage{subfig}
+\usepackage{anysize} % Control de marges
+\usepackage{fancyvrb}
+\usepackage{color}
+
+%Aspecte del document
+\RequirePackage{fancyhdr}
+\renewcommand{\baselinestretch}{1.1}
+\addtolength{\textwidth}{2cm}
+\addtolength{\oddsidemargin}{-1.5cm}
+\addtolength{\textheight}{3cm}
+\addtolength{\topmargin}{-1.5cm}
+\cfoot{\thepage}
+\setlength{\parindent}{0cm} %per treure la sangria
+
+\title{Entrega Estadística}
+\author{Andreu Arderiu i Romero }
+\date{Febrer 2019}
+
+\begin{document}
+\maketitle
+
+Definim primer els paràmetres que farem servir (alpha, nu, i nombre de mostres.)
+{\footnotesize
+  <<echo=T,results='hold',message=F, warning=F>>=
+  al<-0.2;nu<-1;n<-500;n.rep<-1000
+ @
+}
+Estimem els paràmetres pel mètode dels moments i pel mètode de màxima versemblança
+{\footnotesize
+  <<echo=T,results='hold',message=F, warning=F>>=
+  set.seed(0)#Per a que sempre ens surtin els mateixos resultats randoms
+ alm<-num<-numeric(n)#Definim alpha i nu com a vectors buits
+ als<-nus<-nusbis<-nuaux<-numeric(n.rep)
+ lpG<-function(nu){n*((nu-1)*mlog-lgamma(nu)+nu*log(nu)-nu*(1+log(mu)))}#Funció que cal optimitzarper a trobar nu
+ for(k in 1:n.rep){
+  xdat<-rgamma(n,shape=nu,scale=1/al)
+  mu<-mean(xdat);s2<-var(xdat);mlog<-mean(log(xdat));
+  alm[k]<-mu/s2
+  num[k]<-mu^2/s2
+  nus[k]<-optimize(lpG,lower=0.01,upper=5,maximum=TRUE)$maximum;
+  als[k]<-nus[k]/mu
+  nuaux[k]<-num[k]
+  for(j in 1:3){
+  nusbis[k]=1/nuaux[k]+(mlog-log(mu)+log(nuaux[k])-digamma(nuaux[k]))/(nuaux[k]^2*(1/nuaux[k]-trigamma(nuaux[k])))
+  nuaux[k]=1/nusbis[k]
+ }
+ }
+ mean(1/nusbis)
+ @
+}
+
+
+
+
+
+
+Fem el print de les mitjanes dels valors obtinguts i realitzem els plots comparatius dels dos mètodes.
+{\footnotesize
+  <<echo=T,results='hold',message=F, warning=F,fig.height=3,fig.width=5>>=
+ param<-as.data.frame(matrix(c(mean(alm),mean(als),al,mean(num),mean(nus),nu),nrow=3))
+ rownames(param)=c("moments","versemblança","real");colnames(param)=c("alpha","nu");param
+
+ par(mfrow=c(1,1))
+ hist(nus,xlim=c(0.4,3),ylim=c(0,350),xlab="num",ylab="Freq��ncia",main="Histograma per a nus (n=500)",col="orange",cex.main=1)
+ abline(v=mean(nus),col="red")
+ abline(v=nu,col="blue")
+ 
+ hist(1/nusbis,xlim=c(0.2,2),ylim=c(0,300))
+ abline(v=mean(1/nusbis),col="red")
+ abline(v=nu,col="blue")
+ 
+ hist(num,xlim=c(0.2,2),ylim=c(0,300))
+ abline(v=mean(num),col="red")
+ abline(v=nu,col="blue")
+ @
+}
+
+Càlcul dels errors quadràtics mitjans
+{\footnotesize
+  <<echo=T,results='hold',message=F, warning=F>>=
+ msenum<-msenus<-msealm<-mseals<-0
+ bnum<-bnus<-balm<-bals<-0
+ for(k in 1:n.rep){
+   msenum=msenum+1/n.rep*(num[k]-nu)^2
+   msenus=msenus+1/n.rep*(nus[k]-nu)^2
+   msealm=msealm+1/n.rep*(alm[k]-al)^2
+   mseals=mseals+1/n.rep*(als[k]-al)^2
+   
+   bnum=bnum+1/n.rep*(num[k]-nu)
+   bnus=bnus+1/n.rep*(nus[k]-nu)
+   balm=balm+1/n.rep*(alm[k]-al)
+   bals=bals+1/n.rep*(als[k]-al)
+ }
+ msenum;sqrt(msenum)
+ msenus;sqrt(msenus)
+ msealm;sqrt(msealm)
+ mseals;sqrt(mseals)
+ bnum;bnus;
+ balm;bals
+ 
+ @
+}
+Gràfics inicials
+{\footnotesize
+  <<echo=T,results='hold',message=F, warning=F>>=
+ hist(num,xlab="num",ylab="Freqüència",main="Histograma per a num (n=500)",cex.main=1,col="orange",xlim=c(0.4,3),ylim=c(0,300),breaks=15)
+ abline(v=mean(num),col="red")
+ abline(v=nu,col="blue")
+ 
+ hist(alm,xlab="alpham",ylab="Freqüència",main="Histograma per a alpham",cex.main=1,col='orange')
+ abline(v=mean(alm),col="red")
+ abline(v=al,col="blue")
+ 
+ #print de variables per a les taules
+ mean(num)
+ sqrt(msenum)
+ mean(alm)
+ sqrt(msealm)
+ 
+ @
+}
+\end{document}
