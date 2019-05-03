@@ -13,6 +13,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{thmtools}
@@ -68,6 +69,8 @@
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\C}{\ensuremath{\mathbb{C}}}
 \newcommand{\Cu}{\ensuremath{\mathbb{C}^\times}}
+\newcommand{\Ci}{\ensuremath{\hat{\mathbb{C}}}}
+\newcommand{\set}[2]{\left\{ #1 \mid #2 \right\}}
 \newcommand{\qedtriangle}{\ensuremath{\triangle}}
 \newcommand{\qedtriangledown}{\ensuremath{\bigtriangledown}}
 \renewcommand{\vec}[1]{\mathbf{#1}}
@@ -76,6 +79,7 @@
 \let\Im\relax
 \let\Re\relax
 \DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Ind}{Ind}
 \DeclareMathOperator{\Re}{Re}
 \DeclareMathOperator{\Arg}{Arg}
 \DeclareMathOperator{\Log}{Log}
@@ -122,14 +126,14 @@ Per tot \( z \in \Cu \), el complex \( \frac{z}{\abs{z}} \) té modul 1. Per tan
 \begin{equation*}
 	\frac{z}{\abs{z}} = \cos{\theta} + i \sin{\theta}.
 \end{equation*}
-Aquest \( \theta \), però, està definit mòdul \( 2\pi \), ja que tant el cosinus com el sinus són \( 2\pi \)-periòdics. Aquesta manca d'unicitat és una subtilesa important de l'análisi complexa. Escriurem \( \Arg z \) per denotar el conjunt de tots els possibles arguments de \( z \). Si \( \theta \) és un argument de \( z \) aleshores és clar que \( \Arg z = \theta + 2\pi\Z \), ja que dos angles tenen el mateix sinus i cosinus si i només si difereixen en un múltiple enter de \( 2\pi \). Per tant, el conjunt d'arguments de qualsevol \( z \in \Cu \) conté un únic element en l'interval \( (-\pi, \pi] \)\footnotemark[1], que rep el nom d'\emph{argument principal}. El denotem \( \arg z \). Aquesta tria defineix l'aplicació
+Aquest \( \theta \), però, està definit mòdul \( 2\pi \), ja que tant el cosinus com el sinus són \( 2\pi \)-periòdics. Aquesta manca d'unicitat és una subtilesa important de l'análisi complexa. Escriurem \( \Arg z \) per denotar el conjunt de tots els possibles arguments de \( z \). Si \( \theta \) és un argument de \( z \) aleshores és clar que \( \Arg z = \theta + 2\pi\Z \), ja que dos angles tenen el mateix sinus i cosinus si i només si difereixen en un múltiple enter de \( 2\pi \). Per tant, el conjunt d'arguments de qualsevol \( z \in \Cu \) conté un únic element en l'interval \( (-\pi, \pi] \)\footnote{De fet, el conjunt d'arguments conté un únic element de qualsevol interval semiobert de longitud \( 2\pi \). La tria de \( (-\pi, \pi] \) per a l'argument principal és arbitrària. També és molt comú considerar l'argument principal com aquell que està entre 0 i \( 2\pi \).}, que rep el nom d'\emph{argument principal}. El denotem \( \arg z \). Aquesta tria defineix l'aplicació
 \begin{align*}
 	\arg \colon \Cu & \longrightarrow (-\pi, \pi] \\
 	z & \longmapsto \arg{z}.
 \end{align*}
 L'aplicació argument, però, no és contínua al semieix negatiu. Si ens hi apropem amb complexos de part real positiva aleshores el límit és \( \pi \), mentre que si ho fem amb complexos de part real negativa el límit és \( -\pi \). Aquesta discontinuïtat és una altra important subtilesa de l'análisi complexa, responsable de la dificultat de definir conceptes com ara el logaritme complex. 
 
-\footnotetext[1]{De fet, el conjunt d'arguments conté un únic element de qualsevol interval semiobert de longitud \( 2\pi \). La tria de \( (-\pi, \pi] \) per a l'argument principal és arbitrària. També és molt comú considerar l'argument principal com aquell que està entre 0 i \( 2\pi \).} 
+ 
 
 Introduïm la següent notació:
 \begin{equation*}
@@ -261,8 +265,85 @@ La derivada complexa també satisfà les propietats que hom esperaria.
 	\end{punts}
 	Finalment si \( f \colon U \to V \) i \( g \colon V \to \C \) són holomorfes aleshores 
 	\begin{punts}[resume]
-	\item \( g \circ f \) és holomorfa a \( U \) i \( (f \circ g)' = (g' \circ f)f' \).
+	\item \( f \circ g \) és holomorfa a \( U \) i \( (f \circ g)' = (f' \circ g)g' \).
 	\end{punts}
 \end{prop}
+
+\section{La forma global del teorema de Cauchy}
+\subsection{Conjunts simplement connexos}
+Fins ara hem vist una versió local del teorema de Cauchy, és a fir, una versió que és vàlida per a funcions holomorfes en un disc. Per a poder enunciar la versió general del resultat ens cal introduir el concepte de conjunts simplement connexos. La definició que donem a continuació no és la definició estàndard, però és la que requereix menys conceptes previs.   
+
+\begin{defn}[Conjunt simplement connex]
+	Diem que un connex és \emph{simplement connex} si el seu complement a l'esfera de Riemann és connex.
+\end{defn}
+
+Recordem que l'esfera de Riemann \( \Ci \) és la compactificació del pla complex per un punt, que denotem \( \infty \). Si tenim un conjunt \( \Omega \subseteq \C \), també el podem pensar com a subconjunt de \( \Ci \) fent servir la inclusió \( \iota \colon \C \hookrightarrow \Ci \). En general, per qualsevol conjunt \( \Omega \subseteq \C \) identificarem \( \Omega \) amb \( \iota(\Omega) \). Això és perfectament legítim ja que com la inclusió \( \iota \) és un homeomorfisme entre \( \C \) i \( \iota(\C) \) i per tant \( \Omega \) i \( \iota(\Omega) \) són homeomorfs. Quan parlem del complement d'\( \Omega \) a l'esfera de Riemann volem dir \( \Ci - \iota(\Omega) \), però ho escriurem \( \C - \Omega \).
+
+La idea intuïtiva d'un conjunt simplement connex és la d'un conjunt que no té forats. Ara per ara no és del tot clar perquè la definició que hem donat reflecteix aquest concepte. A continuació donem algun exemple de conjunts simplement connexos per fer-ho més clar.
+\begin{exe}[Alguns conjunts simplement connexos]
+	\begin{itemize}
+		\item[]
+		\item El disc unitat \( D^1 \) és simplement connex. Ara bé, el disc unitat menys un punt interior \( z \) no és simplement connex, ja que el seu complement és la unió del complement de \( D^1 \) i \( z \). Per tant té un punt aïllat \( z \) i no és connex.
+		\item	\( \C - D^1 \) no és connex. El seu complement és la unió disjunta de \( D^1 \) i \( \infty \) ja que \( \infty \) no és un element de \( \C - D^1 \). 
+	\end{itemize}
+\end{exe}
+
+\begin{defn}[Cicle]
+	Un \emph{cicle} és un arc \( \gamma \) de la forma 
+	\begin{equation*}
+		\gamma = \sum_{k = 1}^{n} m_k \gamma_k
+	\end{equation*}
+	on \( m_k \in \Z \) i les \( \gamma_k \) són arcs tancats.
+\end{defn}
+
+\begin{defn}
+	Diem que un arc \( \gamma \) contingut a un domini \( \Omega \) és \emph{homòleg a 0 a \( \Omega \)} si \( \Ind(\gamma, a) \) per tot \( a \notin \Omega \). Ho escrivim \( \gamma \sim 0 \). 
+\end{defn}
+
+\begin{exe}[Arcs homòlegs a 0]
+	\begin{itemize}
+		\item[]
+		\item Qualsevol cicle contingut al disc unitat és homòleg a 0. Sabem que per qualsevol arc contingut dins del disc unitat, el seu índex al voltant de qualsevol punt exterior al disc és zero. Per tant, l'índex del cicle és la suma dels índexs dels arcs tancats que el formen, i per tant també 0. 
+		\item Considerem \( \Omega = \set{z \in \C}{0 < \abs{z} < 2} \). Observem que \( \Omega \) no és simplement connex. El cercle unitat és un arc contingut a \( \Omega \) que té índex 1 al voltant de 0, que no és un punt de \( \Omega \). Per tant no és homòloga a 0 dins de \( \Omega \).
+			Ara bé, si \( \gamma_1 \) és el cercle unitat i \( \gamma_2 \) és el cercle de radi \( 1/2 \) centrat a l'origen aleshores \( \gamma = \gamma_1 - \gamma_2 \) és homòleg a 0 a \( \Omega \). En efecte, si \( \abs{a} > 2 \) aleshores tant \( \gamma_1 \) i \( \gamma_2 \) tenen índex zero al voltant d'\( a \) ja que estan contingudes dins d'un disc al qual \( a \) és exterior. L'únic punt conflictiu és el 0 i tenim
+			\begin{equation*}
+				\Ind(\gamma, 0) = \Ind(\gamma_1, a) - \Ind(\gamma_2, a) = 1 - 1 = 0.
+			\end{equation*}
+	\end{itemize}
+\end{exe}
+
+Observem que aquests exemples semblen indicar que una corva és homòloga a 0 si no envolta un forat. El següent teorema confiram aquesta intuició.
+\begin{teo}[Caracterització dels simplement connexos]
+	Un conjunt és simplement connex si i només si tot cicle que hi està contingut és homòleg a 0.
+\end{teo}
+\begin{proof}
+	\( (\Rightarrow) \) Suposem que \( \Omega \subseteq \C \) és simplement connex, de manera que \( \Ci - \Omega \) és connex. Aleshores, si \( a \notin \Omega \), hi ha un arc \( \gamma \) contingut a \( \Ci - \Omega \) que connecta \( a \) amb \( \infty \).
+\end{proof}
+
+\chapter{El teorema dels residus}
+\section{Sèries de Laurent}
+Les sèries de Laurent suposaran una generalització de les sèries de Taylor. A continuació introduïm pel càlcul amb sèries de Laurent.  
+
+\begin{defn}[Sèries amb exponents enters]\label{def:series generalitzades}
+	Direm que la sèrie \[ \sum_{\mathclap{n = -\infty}}^{\infty}a_n  \] convergeix si i només si les sèries \[ \sum_{n = 0}^{\infty}a_n \] i \[ \sum_{\mathclap{n = -\infty}}^{-1}a_n \defeq \sum_{n = 1}^{\infty}a_{-n} \] són convergents. Naturalment direm que la sèrie original convergeix a la suma de les dues. 
+\end{defn}
+
+\begin{defn}[Sèries de potències amb exponents enters]
+	Una sèrie de potències amb exponents negatius, que anomenarem \emph{sèrie de potències generalitzada}, és una sèrie de la forma
+	\begin{equation*}
+		\sum_{\mathclap{n = -\infty}}^{\infty} a_n(z - z_0)^n, 
+	\end{equation*}
+	on la sèrie dels termes amb exponent negatiu s'anomena la \emph{part principal} de la sèrie de potències. La convergència d'aquesta mena l'entenem en termes de la \cref{def:series generalitzades}.
+\end{defn}
+
+\begin{prop}
+	Si una sèrie de potències generalitzada de centre \( z_0 \) convergeix a dos punts \( z_1 \) i \( z_2 \) amb \( \abs{z_0 - z_1} < \abs{z_0 - z_2} \) aleshores convergeix a la corona
+	\begin{equation*}
+		\set{z \in \C}{\abs{z_1 - z_0} < \abs{z - z_0} < \abs{z_2 - z_0}}.
+	\end{equation*}
+\end{prop}
+\begin{proof}
+	Prova
+\end{proof}
 
 \end{document}
