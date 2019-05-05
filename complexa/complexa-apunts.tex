@@ -1,0 +1,349 @@
+\documentclass[12pt,twoside]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{hyperref}
+\usepackage[catalan,sort]{cleveref}
+\usepackage[shortlabels]{enumitem}
+
+\geometry{
+	a4paper,
+	right = 3cm,
+	left = 3cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+\declaretheoremstyle[spaceabove=6pt, spacebelow=6pt, headfont=\bfseries, notefont=\normalfont, notebraces={(}{)}, qed=\qedtriangle]{definicio}
+\declaretheoremstyle[spaceabove=6pt, spacebelow=6pt, headfont=\bfseries, notefont=\normalfont, notebraces={(}{)}, qed=\qedtriangledown]{exemple}
+
+\declaretheorem[name=Teorema, refname={teorema,teoremes}, Refname={Teorema,Teoremes}, numberwithin=chapter]{teo}
+\declaretheorem[name=Proposició, refname={proposició,proposicions}, Refname={Proposició,Proposicions}, numberlike=teo]{prop}
+\declaretheorem[name=Definició, style=definicio, refname={definició,definicions}, Refname={Definició,Definicions}, numberwithin=chapter]{defn}
+\declaretheorem[name=Exemple, style=exemple, refname={exemple,exemples}, Refname={Exemple,Exemples}, numberwithin=chapter]{exe}
+
+\graphicspath{{./figs/}}
+
+\newlist{punts}{enumerate}{1}
+\setlist[punts,1]{label=\textup{(}{\itshape \roman*}\textup{)}, wide}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Cu}{\ensuremath{\mathbb{C}^\times}}
+\newcommand{\Ci}{\ensuremath{\hat{\mathbb{C}}}}
+\newcommand{\set}[2]{\left\{ #1 \mid #2 \right\}}
+\newcommand{\qedtriangle}{\ensuremath{\triangle}}
+\newcommand{\qedtriangledown}{\ensuremath{\bigtriangledown}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\let\Im\relax
+\let\Re\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\Arg}{Arg}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\Hol}{Hol}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}[\sffamily \footnotesize]{
+	\headrule
+	\sethead{{\bfseries Capítol \thechapter.} \chaptertitle}{}{\ifthesection{{\bfseries \thesection} \sectiontitle}{}}
+	\footrule
+	\setfoot*{}{}{\thepage}
+}
+\renewpagestyle{plain}[\sffamily \footnotesize]{
+	\footrule
+	\setfoot*{}{}{\thepage}
+}
+\assignpagestyle{\chapter}{plain}
+\pagestyle{pagina}
+
+\titleformat{\chapter}[block]{\sffamily \bfseries \Huge}{\filleft \large Capítol \Huge \thechapter\\}{0pt}{\Huge \titlerule[1pt] \vspace{1ex} \filleft}
+
+\title{Anàlisi Complexa i de Fourier}
+\author{Arnau Mas}
+\date{2019}
+
+\begin{document}
+\maketitle
+
+\chapter{Propietats fonamentals del pla complex}
+
+\section{Argument}
+Per tot \( z \in \Cu \), el complex \( \frac{z}{\abs{z}} \) té modul 1. Per tant podem escriure
+\begin{equation*}
+	\frac{z}{\abs{z}} = \cos{\theta} + i \sin{\theta}.
+\end{equation*}
+Aquest \( \theta \), però, està definit mòdul \( 2\pi \), ja que tant el cosinus com el sinus són \( 2\pi \)-periòdics. Aquesta manca d'unicitat és una subtilesa important de l'análisi complexa. Escriurem \( \Arg z \) per denotar el conjunt de tots els possibles arguments de \( z \). Si \( \theta \) és un argument de \( z \) aleshores és clar que \( \Arg z = \theta + 2\pi\Z \), ja que dos angles tenen el mateix sinus i cosinus si i només si difereixen en un múltiple enter de \( 2\pi \). Per tant, el conjunt d'arguments de qualsevol \( z \in \Cu \) conté un únic element en l'interval \( (-\pi, \pi] \)\footnote{De fet, el conjunt d'arguments conté un únic element de qualsevol interval semiobert de longitud \( 2\pi \). La tria de \( (-\pi, \pi] \) per a l'argument principal és arbitrària. També és molt comú considerar l'argument principal com aquell que està entre 0 i \( 2\pi \).}, que rep el nom d'\emph{argument principal}. El denotem \( \arg z \). Aquesta tria defineix l'aplicació
+\begin{align*}
+	\arg \colon \Cu & \longrightarrow (-\pi, \pi] \\
+	z & \longmapsto \arg{z}.
+\end{align*}
+L'aplicació argument, però, no és contínua al semieix negatiu. Si ens hi apropem amb complexos de part real positiva aleshores el límit és \( \pi \), mentre que si ho fem amb complexos de part real negativa el límit és \( -\pi \). Aquesta discontinuïtat és una altra important subtilesa de l'análisi complexa, responsable de la dificultat de definir conceptes com ara el logaritme complex. 
+
+ 
+
+Introduïm la següent notació:
+\begin{equation*}
+	e^{i\theta} \defeq \cos{\theta} + i\sin{\theta}.
+\end{equation*}
+Ara per ara, aquesta notació no és res més que una abreviació que, a priori, no té cap relació amb l'exponencial. Molt aviat veurem, però, que li podem donar sentit matemàtic de diverses maneres i totes consistents entre si. Introduïm ara una sèrie de propietats de l'argument. Donat \( z \in \Cu \) l'escrivim en \emph{forma polar} com \( z = \abs{z}e^{i\theta} \) on \( \theta \) és un argument de \( z \).
+
+\begin{prop}[name=Propietats de l'argument]\label{prop:propietats de l'argument}
+Per a qualssevol \( z, w \in \Cu \) es té
+	\begin{punts}
+	\item \( \Arg \bar{z} = \Arg z^{-1} = - \Arg{z}, \) 
+	\item \( \Arg{(zw)} = \Arg z + \Arg w. \)
+	\end{punts}
+\end{prop}
+
+\begin{proof}
+	\begin{punts}
+	\item	Si \( z = \abs{z}(\cos{\theta} + i \sin{\theta}) \) aleshores \[ \bar{z} = \abs{z}(\cos{\theta} - i\sin{\theta}) = \abs{\bar{z}}(\cos{(-\theta)} + i \sin{(-\theta)}), \] per tant \( -\theta \) és un argument de \( \bar{z} \), per tant \( \Arg{\bar{z}} = -\theta + 2\pi\Z = -\theta - 2\pi\Z = - \Arg{z}. \)
+
+	\item Per tot \( \theta, \phi \in \R \) es verifica \( e^{i\theta}e^{i\phi} = e^{i(\theta + \phi)} \). En efecte
+		\begin{align*}
+			e^{i\theta}e^{i\phi} & = (\cos{\theta} + i \sin{\theta})(\cos{\phi} + i \sin{\phi}) \\
+													 & = \cos{\theta}\cos{\phi} - \sin{\theta}\sin{\phi} + i(\cos{\theta}\sin{\phi} + \sin{\theta}\cos{\phi}) \\
+													 & = \cos{(\theta + \phi)} + i \sin{(\theta + \phi)} = e^{i(\theta + \phi)}.
+		\end{align*}
+		Per tant, si \( z = \abs{z}e^{i\theta} \) i \( w = \abs{w}e^{i\phi} \) aleshores \( zw = \abs{z}\abs{w} e^{i\theta} e^{i\phi} = \abs{zw} e^{i(\theta + \phi)}. \). Per tant \( \Arg{(zw)} = (\theta + \phi) + 2\pi\Z = \Arg{z} + \Arg{w} \). \qedhere
+	\end{punts}
+\end{proof}
+
+Cal remarcar que les anteriors propietats en general no són certes per als arguments principals. Sense anar més lluny, \( -i \) té argument principal \( \frac{-\pi}{2} \) però \( (-i)^2 = -1 \) té argument principal \( \pi \), que no és \( -\frac{\pi}{2} - \frac{\pi}{2} \). Quan fem la tria de l'argument principal guanyem en especificitat però perdem propietats.
+
+\section{Potències i arrels de nombres complexos}
+Donat un nombre complex \( z = a+bi \) podem calcular-ne potències naturals fent servir la fórmula del binomi i que \( i^2 = -1 \). També podem calcular-ne les potències negatives ja que \( z^{-1} = \frac{\bar{z}}{\abs{z}^2} \). Per exemple, \[ (a + bi)^2 = a^2 - b^2 - 2iab. \] Aquests càlculs, però, són complicats de visualitzar si els escrivim en forma binomial. El seu significat és més clar si els pensem en forma polar. Tenim
+\begin{equation*}
+	z^n = \left(\abs{z} e^{i\theta}\right)^n = \abs{z}^n (e^{i\theta})^n.
+\end{equation*}
+I per la \cref{prop:propietats de l'argument}, \( (e^{i\theta})^n = e^{in\theta} \). Per tant \( z^n \) és un nombre que té módul \( \abs{z}^n \) i argument (generalment no principal) \( n\theta \). 
+
+Més interessant és el càlcul d'arrels \( n \)-èssimes. Sabem que a \( \R \) no tots els nombres tenen arrels. En el cas de les arrels quadrades, els nombres negatius no tenen arrel quadrada real, mentre que els reals positius en tenen dues que difereixen en un signe. Com sabem, el patró general és que tot nombre real té una única arrel senar, mentre que només els nombres reals positius tenen arrels parelles, i en tenen dues. Veurem a continuació com aquesta aparent asimetria esdevé un patró regular quan ens mirem les coses a \( \C \). 
+
+Fem pas a pas el cas de l'arr
+
+\chapter{Funcions holomorfes}
+El principal objecte d'estudi de l'anàlisi complexa són les funcions complexes, és a dir, funcions de la forma \( f \colon \Omega \subseteq \C \to \C \). En els aspectes més senzills, les propietats de les funcions complexes són semblants a les de les funcions reals. Però ben aviat veurem que la noció de derivabilitat a \( \C \) és molt més restrictiva que a \( \R \) i dóna lloc a una classe de funcions amb molt més bones propietats que les funcions derivables reals.
+
+\section{Continuïtat al pla complex}
+El contingut d'aquesta secció és gairebé cerimonial, en el sentit de que la noció de continuïtat a \( \C \) no difereix de la que tenim a \( \R^n \). Així, si el lector ja ha vist anàlisi real, no trobarà cap novetat. No és sorprenent que això sigui així, ja que \( \C \) és homeomorf a \( \R^2 \) i per tant la continuïtat en un és la mateixa que en l'altre. 
+
+\begin{defn}[Continuïtat]
+	Diem que una funció \( f \colon \Omega \subseteq \C \to \C \) és \emph{contínua} al punt \( z \in \Omega \) si per tot \( \epsilon > 0 \) existeix un \( \delta > 0 \) tal que si \( \abs{z - w} < \delta \) aleshores \( \abs{f(z) - f(w)} < \epsilon \). I direm que \( f \) és contínua a \( \Omega \) si és contínua a tot \( z \in \Omega \). 
+\end{defn}
+
+\section{Derivabilitat al pla complex}
+Com que \( \C \) és un cos, la definició de derivada és exactament la mateixa que en el cas real. 
+\begin{defn}[Derivabilitat complexa]\label{def:funcio holomorfa}
+	Direm que una funció \( f \colon \Omega \to \C \) és \emph{derivable} al punt \( z \in \Omega \) si existeix
+	\begin{equation*}
+		\lim_{h \to 0}{\frac{f(z + h) - f(h)}{h}}.
+	\end{equation*}
+	Diem que \( f \) és derivable a \( \Omega \) si és derivable per tot \( z \in \Omega \). En aquest cas definim la seva funció derivada,
+	\begin{align*}
+		f' \colon \Omega & \longrightarrow \C \\
+		z & \longmapsto \lim_{h \to 0}{\frac{f(z + h)}{h}}. \qedhere
+	\end{align*}
+\end{defn}
+Com que tota funció de variable complexa es pot pensar com una funció de \( \R^2 \), i viceversa, ens podem preguntar per la relació entre la definició de derivada que acabem de donar i la definició de diferenciabilitat a \( \R^2 \). El següent exemple i\l.lustra que la primera és més forta que la segona.
+
+\begin{exe}[La conjugació no és una funció holomorfa]
+	Considerem la funció conjugació, \( f(z) = \bar{z} \). Si La pensem com a funció de \( \R^2 \) aleshores és \( f(x,y) = (x, -y) \), que és lineal i per tant diferenciable i de fet de classe \( C^{\infty} \).
+	
+	Provem de calcular-ne la derivada complexa al zero. Podem fer-ho apropant-nos per l'eix real:
+	\begin{equation*}
+		\lim_{t \to 0}{\frac{f(t) - f(0)}{t}} = \lim_{t \to 0}{\frac{t - 0}{t}} = 1.
+	\end{equation*}
+	Però si ens apropem per l'eix imaginari:
+	\begin{equation*}
+		\lim_{t \to 0}{\frac{f(it) - f(0)}{it}} = \lim_{t \to 0}{\frac{-it - 0}{it}} = -1.
+	\end{equation*}
+	Així doncs \( f \) no pot ser derivable a l'origen.
+\end{exe}
+
+El següent resultat clarifica la relació entre aquestes dues nocions de derivabilitat.
+\begin{prop}
+	Una funció \( f \colon \Omega \to \C \) és \( \C \)-derivable en un punt \( z \in \Omega \) (derivable en el sentit de la \cref{def:funcio holomorfa}) si i només si la seva diferencial (pensada com a funció de \( \R^2 \)) en aquest punt és de la forma 
+	\begin{equation*}
+		df(z) = \begin{pmatrix}
+			a & -b \\
+			b & a
+		\end{pmatrix}.
+	\end{equation*}
+\end{prop}
+
+\begin{proof}
+	Suposem que \( f \) és \( \C \)-derivable a \( z \). Una manera equivalent d'escriure-ho és que
+	\begin{equation*}
+		f(z + h) = f(z) + f'(z)h + o(h).
+	\end{equation*}
+	Posem que \( f'(z) = a + bi \) i \( h = h_1 + h_2i \) i \( x + yi \). Aleshores tenim
+	\begin{align*}
+		f(x + h_1 + i(y + h_2)) & = f(x + iy) + (a + bi)(h_i + h_2i) + o(h) \\
+														& = f(x + iy) + (ah_1 - bh_2 + i(bh_1 + ah_2)) + o(h) \tag{\( \ast \)}
+	\end{align*}
+	Si escrivim \( (\ast) \) com una igualtat a \( \R^2 \) tenim
+	\begin{align*}
+		f(x + h_1, y + h_2) & = f(x,y) + (ah_1 - bh_2, bh_1 + ah_2) + o(\norm{h}) \\
+												& = f(x,y) + \begin{pmatrix} a & -b \\ b & a \end{pmatrix} \begin{pmatrix}								h_1 \\ h_2 \end{pmatrix} + o(\norm{h}),
+	\end{align*}
+	on \( o(\norm{h}) \) es la notació \( o \)-petita de \( \R^2 \). El que hem escrit és cert perquè si un quocient de nombres complexos té límit zero, també el té el quocient dels seus mòduls. Per tant, per la definició de la diferencial,
+	\begin{equation*}
+		df(z) = \begin{pmatrix}
+			a & -b \\
+			b & a
+		\end{pmatrix},
+	\end{equation*}
+	com volíem. 	
+
+	Recíprocament, si \( df(z) \) té la forma en qüestió es demostra que aleshores \( f'(z) = a + bi \), essencialment desfent els passos anteriors.
+\end{proof}
+
+Com que el concepte de derivabilitat complexa és prou diferent del de diferenciabilitat a \( \R^2 \), s'introdueix un nom diferen. D'ara en endavant, direm que una funció és \emph{holomorfa} si és \( \C \)-derivable. I denotarem per \( \Hol{(\Omega)} \) el conjunt de funcions holomorfes sobre \( \Omega \). Finalment, direm que una funció holomorfa a \( \C \) és \emph{entera}.
+
+La derivada complexa també satisfà les propietats que hom esperaria.
+\begin{prop}[Propietats de la derivada]
+	Si \( f \) i \( g \) són holomorfes a \( \Omega \subseteq \C \) aleshores
+	\begin{punts}
+	\item \( f + g \) és holomorfa a \( \Omega \) i \( (f + g)' = f' + g' \),
+	\item \( fg \) és holomorfa a \( \Omega \) i \( (fg)' = f'g + fg' \),
+	\item	si \( g \) no s'anu\l.la a \( \Omega \) aleshores \( \frac{f}{g} \) és holomorfa a \( \Omega \) i \( \frac{f'g - fg'}{g^2} \).
+	\end{punts}
+	Finalment si \( f \colon U \to V \) i \( g \colon V \to \C \) són holomorfes aleshores 
+	\begin{punts}[resume]
+	\item \( f \circ g \) és holomorfa a \( U \) i \( (f \circ g)' = (f' \circ g)g' \).
+	\end{punts}
+\end{prop}
+
+\section{La forma global del teorema de Cauchy}
+\subsection{Conjunts simplement connexos}
+Fins ara hem vist una versió local del teorema de Cauchy, és a fir, una versió que és vàlida per a funcions holomorfes en un disc. Per a poder enunciar la versió general del resultat ens cal introduir el concepte de conjunts simplement connexos. La definició que donem a continuació no és la definició estàndard, però és la que requereix menys conceptes previs.   
+
+\begin{defn}[Conjunt simplement connex]
+	Diem que un connex és \emph{simplement connex} si el seu complement a l'esfera de Riemann és connex.
+\end{defn}
+
+Recordem que l'esfera de Riemann \( \Ci \) és la compactificació del pla complex per un punt, que denotem \( \infty \). Si tenim un conjunt \( \Omega \subseteq \C \), també el podem pensar com a subconjunt de \( \Ci \) fent servir la inclusió \( \iota \colon \C \hookrightarrow \Ci \). En general, per qualsevol conjunt \( \Omega \subseteq \C \) identificarem \( \Omega \) amb \( \iota(\Omega) \). Això és perfectament legítim ja que com la inclusió \( \iota \) és un homeomorfisme entre \( \C \) i \( \iota(\C) \) i per tant \( \Omega \) i \( \iota(\Omega) \) són homeomorfs. Quan parlem del complement d'\( \Omega \) a l'esfera de Riemann volem dir \( \Ci - \iota(\Omega) \), però ho escriurem \( \C - \Omega \).
+
+La idea intuïtiva d'un conjunt simplement connex és la d'un conjunt que no té forats. Ara per ara no és del tot clar perquè la definició que hem donat reflecteix aquest concepte. A continuació donem algun exemple de conjunts simplement connexos per fer-ho més clar.
+\begin{exe}[Alguns conjunts simplement connexos]
+	\begin{itemize}
+		\item[]
+		\item El disc unitat \( D^1 \) és simplement connex. Ara bé, el disc unitat menys un punt interior \( z \) no és simplement connex, ja que el seu complement és la unió del complement de \( D^1 \) i \( z \). Per tant té un punt aïllat \( z \) i no és connex.
+		\item	\( \C - D^1 \) no és connex. El seu complement és la unió disjunta de \( D^1 \) i \( \infty \) ja que \( \infty \) no és un element de \( \C - D^1 \). 
+	\end{itemize}
+\end{exe}
+
+\begin{defn}[Cicle]
+	Un \emph{cicle} és un arc \( \gamma \) de la forma 
+	\begin{equation*}
+		\gamma = \sum_{k = 1}^{n} m_k \gamma_k
+	\end{equation*}
+	on \( m_k \in \Z \) i les \( \gamma_k \) són arcs tancats.
+\end{defn}
+
+\begin{defn}
+	Diem que un arc \( \gamma \) contingut a un domini \( \Omega \) és \emph{homòleg a 0 a \( \Omega \)} si \( \Ind(\gamma, a) \) per tot \( a \notin \Omega \). Ho escrivim \( \gamma \sim 0 \). 
+\end{defn}
+
+\begin{exe}[Arcs homòlegs a 0]
+	\begin{itemize}
+		\item[]
+		\item Qualsevol cicle contingut al disc unitat és homòleg a 0. Sabem que per qualsevol arc contingut dins del disc unitat, el seu índex al voltant de qualsevol punt exterior al disc és zero. Per tant, l'índex del cicle és la suma dels índexs dels arcs tancats que el formen, i per tant també 0. 
+		\item Considerem \( \Omega = \set{z \in \C}{0 < \abs{z} < 2} \). Observem que \( \Omega \) no és simplement connex. El cercle unitat és un arc contingut a \( \Omega \) que té índex 1 al voltant de 0, que no és un punt de \( \Omega \). Per tant no és homòloga a 0 dins de \( \Omega \).
+			Ara bé, si \( \gamma_1 \) és el cercle unitat i \( \gamma_2 \) és el cercle de radi \( 1/2 \) centrat a l'origen aleshores \( \gamma = \gamma_1 - \gamma_2 \) és homòleg a 0 a \( \Omega \). En efecte, si \( \abs{a} > 2 \) aleshores tant \( \gamma_1 \) i \( \gamma_2 \) tenen índex zero al voltant d'\( a \) ja que estan contingudes dins d'un disc al qual \( a \) és exterior. L'únic punt conflictiu és el 0 i tenim
+			\begin{equation*}
+				\Ind(\gamma, 0) = \Ind(\gamma_1, a) - \Ind(\gamma_2, a) = 1 - 1 = 0.
+			\end{equation*}
+	\end{itemize}
+\end{exe}
+
+Observem que aquests exemples semblen indicar que una corva és homòloga a 0 si no envolta un forat. El següent teorema confiram aquesta intuició.
+\begin{teo}[Caracterització dels simplement connexos]
+	Un conjunt és simplement connex si i només si tot cicle que hi està contingut és homòleg a 0.
+\end{teo}
+\begin{proof}
+	\( (\Rightarrow) \) Suposem que \( \Omega \subseteq \C \) és simplement connex, de manera que \( \Ci - \Omega \) és connex. Aleshores, si \( a \notin \Omega \), hi ha un arc \( \gamma \) contingut a \( \Ci - \Omega \) que connecta \( a \) amb \( \infty \).
+\end{proof}
+
+\chapter{El teorema dels residus}
+\section{Sèries de Laurent}
+Les sèries de Laurent suposaran una generalització de les sèries de Taylor. A continuació introduïm pel càlcul amb sèries de Laurent.  
+
+\begin{defn}[Sèries amb exponents enters]\label{def:series generalitzades}
+	Direm que la sèrie \[ \sum_{\mathclap{n = -\infty}}^{\infty}a_n  \] convergeix si i només si les sèries \[ \sum_{n = 0}^{\infty}a_n \] i \[ \sum_{\mathclap{n = -\infty}}^{-1}a_n \defeq \sum_{n = 1}^{\infty}a_{-n} \] són convergents. Naturalment direm que la sèrie original convergeix a la suma de les dues. 
+\end{defn}
+
+\begin{defn}[Sèries de potències amb exponents enters]
+	Una sèrie de potències amb exponents negatius, que anomenarem \emph{sèrie de potències generalitzada}, és una sèrie de la forma
+	\begin{equation*}
+		\sum_{\mathclap{n = -\infty}}^{\infty} a_n(z - z_0)^n, 
+	\end{equation*}
+	on la sèrie dels termes amb exponent negatiu s'anomena la \emph{part principal} de la sèrie de potències. La convergència d'aquesta mena l'entenem en termes de la \cref{def:series generalitzades}.
+\end{defn}
+
+\begin{prop}
+	Si una sèrie de potències generalitzada de centre \( z_0 \) convergeix a dos punts \( z_1 \) i \( z_2 \) amb \( \abs{z_0 - z_1} < \abs{z_0 - z_2} \) aleshores convergeix a la corona
+	\begin{equation*}
+		\set{z \in \C}{\abs{z_1 - z_0} < \abs{z - z_0} < \abs{z_2 - z_0}}.
+	\end{equation*}
+\end{prop}
+\begin{proof}
+	Prova
+\end{proof}
+
+\end{document}

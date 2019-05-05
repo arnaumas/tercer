@@ -1,0 +1,276 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\renewcommand{\arraystretch}{1.4}
+
+\renewcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Ry}{\mathit{Ry}}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\ket}[1]{\left\vert {#1} \right\rangle}
+\newcommand{\bra}[1]{\left\langle #1 \right\vert}
+\newcommand{\braket}[2]{\langle {#1} \vert {#2} \rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Entrega 2:} Addició de del moment angular}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Entrega 2:} Addició del moment angular. Estats de barions}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 10 de maig de 2019}
+
+\begin{document}
+\maketitle
+
+\section{Spin}
+A continuació estudiem els possibles estats d'spin de tres quarks, tenint en compte que els quarks són partícules d'spin \( \tfrac{1}{2} \). Els estats més senzills són els de moment angular màxim, \( \ket{\up\up\up} \) i \( \ket{\down\down\down} \). Tenim
+\begin{gather*}
+	S_z \ket{\up\up\up} = \frac{\hbar}{2}\ket{\up\up\up} + \frac{\hbar}{2}\ket{\up\up\up} + \frac{\hbar}{2}\ket{\up\up\up} = \frac{3\hbar}{2}\ket{\up\up\up}, \\
+	S_z \ket{\down\down\down} = - \frac{\hbar}{2}\ket{\down\down\down} - \frac{\hbar}{2}\ket{\down\down\down} - \frac{\hbar}{2}\ket{\down\down\down} = -\frac{3\hbar}{2}\ket{\down\down\down}. \\
+\end{gather*}
+Per tant aquests dos estats són propis de \( S_z \) amb valors propis \( \frac{3}{2}\hbar \) i \( -\frac{3}{2}\hbar \) respectivament. Fent servir que
+\begin{equation} \label{eq:S2}
+	S^2 = S_z^2 + \hbar S_z + S_-S_+ = S_z^2 - \hbar S_z + S_+S_-
+\end{equation}
+obtenim
+\begin{align*}
+	S^2 \ket{\up\up\up} & = S_z^2\ket{\up\up\up} + \hbar S_z\ket{\up\up\up} + S_-S_+\ket{\up\up\up} = \left(\frac{3\hbar}{2}\right)^2\ket{\up\up\up} + \frac{3\hbar^2}{2}\ket{\up\up\up} + 0 \\ 
+											& = \tfrac{3}{2}\left(\tfrac{3}{2} + 1\right)\hbar^2\ket{\up\up\up}
+\end{align*}
+i
+\begin{align*}
+	S^2 \ket{\down\down\down} & = S_z^2\ket{\down\down\down} - \hbar S_z\ket{\down\down\down} + S_+S_-\ket{\down\down\down} = \left(\frac{3\hbar}{2}\right)^2\ket{\down\down\down} + \frac{3\hbar^2}{2}\ket{\down\down\down} + 0 \\ 
+											& = \tfrac{3}{2}\left(\tfrac{3}{2} + 1\right)\hbar^2\ket{\down\down\down}.
+\end{align*}
+Per tant aquests dos estats tenen spin total \( \frac{3}{2}\hbar \). D'aquí deduïm que \( \ket{\up\up\up} = \ket{\tfrac{3}{2}, \tfrac{3}{2}} \) i que \( \ket{\down\down\down} = \ket{\tfrac{3}{2}, -\tfrac{3}{2}} \). 
+
+\parbreak
+
+Per a trobar els altres dos estats amb spin total \( \frac{3}{2}\hbar \) podem fer servir que
+\begin{equation*}
+	S_- \ket{\tfrac{3}{2}, \tfrac{3}{2}} = \hbar \sqrt{\tfrac{3}{2}\left(\tfrac{3}{2} + 1\right) - \tfrac{3}{2}\left(\tfrac{3}{2} - 1\right)}\ket{\tfrac{3}{2}, \tfrac{1}{2}} = \sqrt{3}\hbar \ket{\tfrac{3}{2}, \tfrac{1}{2}},
+\end{equation*}
+i
+\begin{equation*}
+	S_+ \ket{\tfrac{3}{2}, -\tfrac{3}{2}} = \hbar \sqrt{\tfrac{3}{2}\left(\tfrac{3}{2} + 1\right) + \tfrac{3}{2}\left(- \tfrac{3}{2} + 1\right)}\ket{\tfrac{3}{2}, -\tfrac{1}{2}} = \sqrt{3}\hbar \ket{\tfrac{3}{2}, -\tfrac{1}{2}}.
+\end{equation*}
+D'altra banda
+\begin{equation*}
+	S_- \ket{\tfrac{3}{2}, \tfrac{3}{2}} = S_-\ket{\up\up\up} = \hbar\left(\ket{\up\up\down} + \ket{\up\down\up} + \ket{\down\up\up}\right)
+\end{equation*}
+i
+\begin{equation*}
+	S_+ \ket{\tfrac{3}{2}, -\tfrac{3}{2}} = S_+\ket{\down\down\down} = \hbar\left(\ket{\down\down\up} + \ket{\down\up\down} + \ket{\up\down\down}\right).
+\end{equation*}
+Per tant
+\begin{align*}
+	\ket{\tfrac{3}{2}, \tfrac{1}{2}} & = \frac{\ket{\up\up\down} + \ket{\up\down\up} + \ket{\down\up\up}}{\sqrt{3}} \\
+	\ket{\tfrac{3}{2}, -\tfrac{1}{2}} & = \frac{\ket{\down\down\up} + \ket{\down\up\down} + \ket{\up\down\down}}{\sqrt{3}}.
+\end{align*}
+
+\parbreak
+
+\begin{table}[htb]
+	\centering \sffamily \small
+	\caption{Estats propis d'spin de tres quarks}
+	\label{tab:estats d'spin}
+	\begin{tabular}{@{}llll@{}}
+		\toprule
+		\( S^2 \) & \( S_z \) & Estat \\
+		\midrule	
+		\( \tfrac{3}{2}\hbar \) & \( \tfrac{3}{2}\hbar \) & \( \ket{S_{123}^1} = \ket{\up\up\up} \) \\
+		\( \tfrac{3}{2}\hbar \) & \( \tfrac{1}{2}\hbar \) & \( \ket{S_{123}^2} = \frac{\ket{\up\up\down} + \ket{\up\down\up} + \ket{\down\up\up}}{\sqrt{3}} \) \\
+		\( \tfrac{3}{2}\hbar \) & \( -\tfrac{1}{2}\hbar \) & \( \ket{S_{123}^3} = \frac{\ket{\down\down\up} + \ket{\down\up\down} + \ket{\up\down\down}}{\sqrt{3}} \) \\
+		\( \tfrac{3}{2}\hbar \) & \( -\tfrac{3}{2}\hbar \) & \( \ket{S_{123}^4} = \ket{\down\down\down} \) \\
+		\( \tfrac{1}{2}\hbar \) & \( \tfrac{1}{2}\hbar \) & \( \ket{A_{12}^1} = \frac{\ket{\up\down\up} - \ket{\down\up\up}}{\sqrt{2}} \) \\
+		\( \tfrac{1}{2}\hbar \) & \( \tfrac{1}{2}\hbar \) & \( \ket{S_{12}^1} = \frac{2\ket{\up\up\down} - (\ket{\up\down\up} + \ket{\down\up\up})}{\sqrt{6}} \) \\
+		\( \tfrac{1}{2}\hbar \) & \( -\tfrac{1}{2}\hbar \) & \( \ket{A_{12}^2} = \frac{\ket{\down\up\down} - \ket{\up\down\down}}{\sqrt{2}} \) \\
+		\( \tfrac{1}{2}\hbar \) & \( -\tfrac{1}{2}\hbar \) & \( \ket{S_{12}^2} = \frac{2\ket{\down\down\up} - (\ket{\down\up\down} + \ket{\up\down\down})}{\sqrt{6}} \) \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+És clar que tots els vectors propis de \( S_z \) de valor propi \( \frac{1}{2}\hbar \) són combinacions lineals de \( \ket{\up\up\down}, \ket{\up\down\up} \text{ i } \ket{\down\up\up} \), que generen un subespai de dimensió 3. En aquest subespai hi ha \( \ket{\frac{3}{2}, \frac{1}{2}} \). Aquest estat és l'únic que pot tenir aquests valors propis ja que l'obtenim aplicant \( S_- \) a l'estat \( \ket{\up\up\up} \), que és l'únic estat propi de \( S_z \) amb valor propi \( \frac{3}{2}\hbar \). Així doncs, l'ortogonal de \( \ket{\frac{3}{2}, \frac{1}{2}} \)  és subespai propi de \( S^2 \) amb valor propi \( \frac{1}{2}\left(\frac{1}{2} + 1\right)\hbar \), de manera que tenim una degeneració pel que fa a l'estat \( \ket{\frac{1}{2}, \frac{1}{2}} \). Per a trencar aquesta degneració imposarem que els estats han de ser simètrics o antisimètrics respecte l'intercanvi dels quarks 1 i 2. Considerem un estat qualsevol \( \alpha\ket{\up\up\down} + \beta\ket{\up\down\up} + \gamma\ket{\down\up\up} \). L'ortogonalitat equival a \( \alpha + \beta + \gamma = 0 \). Si requerim que sigui antisimètric aleshores \( \alpha = 0 \) i \( \beta = -\gamma \), de manera que un cop normalitzat l'estat és
+\begin{equation*}
+	\frac{\ket{\up\down\up} - \ket{\down\up\up}}{\sqrt{2}}.
+\end{equation*}
+Si imposem que sigui simètric aleshores \( \beta = \gamma \), i per ortogonalitat, \( 2\beta = -\alpha \). Un cop normalitzat, l'estat és
+\begin{equation*}
+	\frac{2\ket{\up\up\down} - (\ket{\up\down\up} + \ket{\down\up\up})}{\sqrt{6}}.
+\end{equation*}
+
+Pel que fa als estats amb \( s = \frac{1}{2} \) i \( m_s = -\frac{1}{2} \), podem aplicar exactament els mateixos arguments simplement intercanviant \( \up \) per \( \down \) i viceversa. A la \cref{tab:estats d'spin} es mostren els diversos estats d'spin pels tres quarks.
+
+
+\section{Sabor}
+Si tenim quarks només de dos sabors, \emph{up} i \emph{down}, aleshores els estats \( \ket{u} \) i \( \ket{d} \) es comporten de la mateixa manera que els estats \( \ket{\up} \) i \( \ket{\down} \), és a dir, són propis d'uns operadors, anomenats d'isospin, que satisfan les relacions de commutació del moment angular d'una partícula d'spin \( \frac{1}{2} \). Per tant els càlculs que hauriem de fer per a trobar els estats de sabor són els mateixos que els de la secció anterior. A la \cref{tab:estats de sabor} es mostren tots els possibles estats de sabor amb els corresponents valors d'isospin co\l.lectiu. 
+
+\begin{table}[htb]
+	\centering \sffamily \small
+	\caption{Estats propis d'isospin per a tres quarks, considerant només els sabors \emph{up}, \( u \), i \emph{down}, \( d \)}
+	\label{tab:estats de sabor}
+	\begin{tabular}{@{}llll@{}}
+		\toprule
+		\( I^2 \) & \( I_z \) & Estat \\
+		\midrule	
+		\( \tfrac{3}{2} \) & \( \tfrac{3}{2} \) & \( \ket{S_{123}^1} = \ket{uuu} \) \\
+		\( \tfrac{3}{2} \) & \( \tfrac{1}{2} \) & \( \ket{S_{123}^2} = \frac{\ket{uud} + \ket{udu} + \ket{duu}}{\sqrt{3}} \) \\
+		\( \tfrac{3}{2} \) & \( -\tfrac{1}{2} \) & \( \ket{S_{123}^3} = \frac{\ket{ddu} + \ket{dud} + \ket{udd}}{\sqrt{3}} \) \\
+		\( \tfrac{3}{2} \) & \( -\tfrac{3}{2} \) & \( \ket{S_{123}^4} = \ket{ddd} \) \\
+		\( \tfrac{1}{2} \) & \( \tfrac{1}{2} \) & \( \ket{A_{12}^1} = \frac{\ket{udu} - \ket{duu}}{\sqrt{2}} \) \\
+		\( \tfrac{1}{2} \) & \( \tfrac{1}{2} \) & \( \ket{S_{12}^1} = \frac{2\ket{uud} - (\ket{udu} + \ket{duu})}{\sqrt{6}} \) \\
+		\( \tfrac{1}{2} \) & \( -\tfrac{1}{2} \) & \( \ket{A_{12}^2} = \frac{\ket{dud} - \ket{udd}}{\sqrt{2}} \) \\
+		\( \tfrac{1}{2} \) & \( -\tfrac{1}{2} \) & \( \ket{S_{12}^2} = \frac{2\ket{ddu} - (\ket{dud} + \ket{udd})}{\sqrt{6}} \) \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\section{Color}
+Els possibles estats ortogonals de color neutre de tres quarks són \( \ket{rgb} \), \( \ket{rbg} \), \( \ket{gbr} \), \( \ket{grb} \), \( \ket{brg} \) i \( \ket{bgr} \). Per tant, un estat de color neutre serà de la forma
+\begin{equation*}
+	\ket{\Psi} = \alpha_1 \ket{rgb} + \alpha_2 \ket{rbg} + \beta_1 \ket{gbr} + \beta_2 \ket{grb} + \gamma_1 \ket{brg} + \gamma_2 \ket{bgr}.
+\end{equation*}
+
+A la natura, però, només s'observen estats de color completament antisimètrics. Hem d'imposar \( P_{12}\ket{\Psi} = P_{23}\ket{\Psi} = P_{31}\ket{\Psi} = -\ket{\Psi} \). Quan requerim \( P_{12}\ket{\Psi} = -\ket{\Psi} \) trobem \( \alpha_1 = -\alpha_2 \), \( \beta_1 = -\beta_2 \) i \( \gamma_1 = -\gamma_2 \). Per tant podem escriure
+\begin{equation*}
+	\ket{\Psi} = \alpha(\ket{rgb} - \ket{rbg}) + \beta(\ket{gbr} - \ket{grb}) + \gamma(\ket{brg} - \ket{bgr}).
+\end{equation*}
+Aleshores
+\begin{equation*}
+	P_{12}\ket{\Psi} = \alpha(\ket{grb} - \ket{brg}) + \beta(\ket{bgr} - \ket{rgb}) + \gamma(\ket{rbg} - \ket{gbr}),
+\end{equation*}
+de manera que quan imposem \( P_{12}\ket{\Psi} = -\ket{\Psi} \) obtenim \( \alpha = \beta = \gamma \). I aleshores la condició \( P_{31}\ket{\Psi} = -\ket{\Psi} \) es compleix. Podem determinar l'últim paràmetre que queda per normalització, i per tant el singlet de color és 
+\begin{equation*}
+	\ket{\Psi} = \frac{\ket{rgb} - \ket{rbg} + \ket{gbr} - \ket{grb} + \ket{brg} - \ket{bgr}}{\sqrt{6}}.
+\end{equation*}
+
+\section{Estats bariònics}
+Els estats propis de tres quarks seran productes d'un dels possibles estats d'spin, de sabor i de color. El factor de color és únic, el singlet, que és antisimètric. Per tant el producte de l'estat d'spin i sabor ha de ser simètric. Hi ha 16 possibilitats òbvies, que són els estats de la forma \( \ket{S_{123}^n}_S\ket{S_{123}^m}_I \), on \( n \) i \( m \) varient de 1 a 4, és a dir, productes d'estats amb spin total \( \frac{3}{2}\hbar \) i isospin total \( \frac{3}{2} \), segons les \cref{tab:estats d'spin,tab:estats de sabor}.
+
+\parbreak
+
+Per a determinar els altres possibles estats és útil saber com actuen les transposicions \( P_{12} \), \( P_{23} \) i \( P_{31} \) sobre els estats d'spin i sabor que hem trobat. Farem els cálculs sobre els estats d'spin, però és clar que els estats de sabor satisfaran les mateixes relacions. És clar que sobre els 4 estats simètrics actuen com la identitat. També és clar que \( P_{12}\ket{S_{12}^i} = \ket{S_{12}^i} \) i \( P_{12}\ket{A_{12}^i} = -\ket{A_{12}^i} \), per construcció.
+
+Tenim
+\begin{equation*}
+	P_{23}\ket{A_{12}^1} = \frac{\ket{\up\up\down} - \ket{\down\up\up}}{\sqrt{2}}.
+\end{equation*}
+Per saber com s'escriu aquest estat en termes de la base que hem trobat podem calcular el seu producte amb la resta dels estats. Aquest estat té \( m_s = \frac{3}{2}\hbar \) i ortogonal a \( \ket{S_{123}^2} \), de manera que els únics productes que no són nuls són
+\begin{equation*}
+	\bra{A_{12}^1}P_{23}\ket{A_{12}^1} = \frac{1}{2} 
+\end{equation*}
+i
+\begin{equation*}
+	\bra{S_{12}^1}P_{23}\ket{A_{12}^1} = \frac{1}{\sqrt{3}} - \frac{1}{2\sqrt{3}} = \frac{\sqrt{3}}{2}.
+\end{equation*}
+És a dir
+\begin{equation}\label{eq:estat P23A12}
+	P_{23}\ket{A_{12}^i} = \frac{\ket{A_{12}^1} + \sqrt{3}\ket{S_{12}^1}}{2}.
+\end{equation}
+Similarment tenim
+\begin{equation*}
+	P_{31}\ket{A_{12}^1} = \frac{\ket{\up\down\up} - \ket{\up\up\down}}{2}.
+\end{equation*}
+Els productes són
+\begin{equation*}
+	\bra{A_{12}^1}P_{31}\ket{A_{12}^1} = \frac{1}{2}
+\end{equation*}
+i
+\begin{equation*}
+	\bra{S_{12}^1}P_{31}\ket{A_{12}^1} = -\frac{1}{\sqrt{3}} - \frac{1}{2\sqrt{3}} = -\frac{\sqrt{3}}{2}.
+\end{equation*}
+Per tant
+\begin{equation} \label{eqn:estat P31A12}
+	P_{31}\ket{A_{12}^1} = \frac{\ket{A_{12}^1} - \sqrt{3}\ket{S_{12}^1}}{2}.
+\end{equation}
+
+Fem els mateixos càlculs per \( P_{23}\ket{S_{12}^1} \) i \( P_{31}\ket{S_{12}^1} \). Com que
+\begin{equation*}
+	P_{23}\ket{S_{12j}^1} = \frac{2\ket{\up\down\up} - (\ket{\up\up\down} + \ket{\down\up\up})}{\sqrt{6}}
+\end{equation*}
+aleshores
+\begin{equation*}
+	\bra{A_{12}^1}P_{23}\ket{S_{12}^1} = \frac{1}{\sqrt{3}} + \frac{1}{2\sqrt{3}} = \frac{\sqrt{3}}{2}
+\end{equation*}
+i
+\begin{equation*}
+	\bra{S_{12}^1}P_{23}\ket{S_{12}^1} =  
+\end{equation*}
+
+
+
+\end{document}

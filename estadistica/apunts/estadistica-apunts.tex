@@ -1,0 +1,162 @@
+\documentclass[12pt,twoside]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{amsthm,thmtools}
+\usepackage[shortlabels]{enumitem}
+
+\geometry{
+	a4paper,
+	right = 3cm,
+	left = 3cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+\declaretheorem[name=Teorema, refname={teorema,teoremes}, Refname={Teorema,Teoremes}, numberwithin=chapter]{teo}
+\declaretheorem[name=Proposició, refname={proposició,proposicions}, Refname={Proposició,Proposicions}, numberlike=teo]{prop}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\cond}{\, \vert \,}
+\newcommand{\iid}{i.i.d.}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}[\sffamily \footnotesize]{
+	\headrule
+	\sethead*{\ifthesection{{\bfseries \thesection} \sectiontitle}{}}{}{{\bfseries Capítol \thechapter.} \chaptertitle}
+	\footrule
+	\setfoot*{}{}{\thepage}
+}
+\renewpagestyle{plain}[\sffamily \footnotesize]{
+	\footrule
+	\setfoot*{}{}{\thepage}
+}
+\assignpagestyle{\chapter}{plain}
+\pagestyle{pagina}
+
+\titleformat{\chapter}[block]{\sffamily \bfseries \Huge}{\filleft \large Capítol \Huge \thechapter\\}{0pt}{\Huge \titlerule[1pt] \vspace{1ex} \filleft}
+
+\title{Estadística}
+\author{Arnau Mas}
+\date{2019}
+
+\begin{document}
+\maketitle
+
+\chapter{Introducció}
+S'ha de fer una introducció
+
+\chapter{Estimació de paràmetres}
+Un dels problemes fonamentals de l'estadística és l'obtenció d'informació sobre algun procés tenint accés a un nombre limitat de dades. Situacions d'aquesta mena n'hi ha moltes i molt diverses: enquestes preelectorals, estudis econòmics, experiments científics... Tots aquests casos tenen en comú que l'accés a totes les possibles observacions no és factible, i en segons quins casos impossible. En aquestes circumstàncies apareixen tres preguntes naturals
+\begin{enumerate}
+	\item Com podem obtenir resultats útils a partir de les dades disponibles?
+	\item Quina relació hi ha entre els resultats que obtenim de les dades i el procés en qüestió?
+	\item Què podem dir amb certesa sobre 
+\end{enumerate}
+La primera pregunta és la que tractem en aquest capítol. 
+
+\section{Mostra i població}
+La manera de formalitzar la idea d'observacions limitades d'algun fenomen es basa en les eines de la teoria de la probabilitat. A partir d'ara suposarem que tenim una variable aleatòria que segueix una distribució la forma de la qual coneixem, però que depèn d'un o més paràmetres que desconeixem. Escriurem \( f_X(x \cond \theta) \)\footnotemark[1] per la densitat ---o funció de probabilitat si \( X \) és discreta--- de \( X \), on \( \theta \) són els paràmetres dels quals pot dependre. Direm que la variable \( X \) representa la \emph{població} que estem estudiant. 
+
+\footnotetext[1]{La notació fent servir \( \mid \) és comuna en l'estadística Bayesiana. En la comunitat freqüentista és més comuna la notació \( f_x(x ; \theta) \). La tria de la notació Bayesiana no té, ara per ara, cap significat més enllà de que és la que l'autor considera més estètica.}
+
+En general tindrem accés a unes quantes observacions de \( X \), \( \{x_1, \cdots x_n\} \). Aquests valors se solen anomenar observacions. Pensarem que aquestes dades o observacions provenen de \( n \) variables aleatòries \( X_1, \dots, X_n \) idènticament distribuïdes segons la distribució de \( X \). Si no es diu el contrari, les \( X_k \) les suposarem independents ---per abreviar farem servir \iid: independents i idènticament distribuïdes---. Diem que el vector \( \vec{X} = (X_1, \dots, X_n) \) és una \emph{mostra de mida \( n \)}. 
+
+\subsection{Mitjana i variància mostrals}
+Donada una mostra, existeixen diversos cálculs que podem fer per a tenir una idea de com estan distribuïdes les dades. Són les mesures de tendència central i de dispersió tradicionals. Les més bàsiques són la \emph{mitjana mostral}, \( \bar{x} \), i la \emph{variància mostral}, \( s^2 \):
+\begin{equation*}
+	\begin{gathered}
+		\bar{x} \defeq \frac{1}{n} \sum_{k = 1}^n x_k, \\
+		s^2 \defeq \frac{1}{n - 1} \sum_{k = 1}^n (x_k - \bar{x})^2.
+	\end{gathered}
+\end{equation*}
+
+De la mateixa manera que pensem en la mostra com un vector aleatori i no només com una seqüència de resultats concrets, també podem introduir la mitjana i variància mostrals com a variables aleatòries, que denotem per \( \bar{X} \) i \( S^2 \). És a dir
+\begin{equation*}
+\begin{gathered}
+\bar{X} \defeq \frac{1}{n} \sum_{k = 1}^n	X_k, \\
+S^2 \defeq	\frac{1}{n-1} \sum_{k = 1}^n (X_k - \bar{X})^2.
+\end{gathered}
+\end{equation*}
+Tret d'alguns casos concrets com ara la suma de normals independents, calcular la distribució d'una variable aleatòria que és la suma de dues altres variables aleatòries és en general un problema complicat, fins i tot si les variables que sumem són \iid. La distribució de la mitjana serà, doncs, desconeguda en la majoria dels casos. El cas de la variància mostral és encara pitjor ja que ara els sumands ja no són independents. Ara bé teoremes com el Teorema Central del Límit ens permeten conèixer com és la distribució asimptòtica de variables d'aquesta mena, és a dir, quan la mida de la mostra \( n \) és gran. El Teorema de Fisher és el que ens dóna la majoria de resultats asimptòtics d'aquest estil. Això té sentit ja que si tenim una mostra petita no esperem poder conèixer amb certesa la distribució de la població, però sí quan la mostra és gran. 
+
+El que sí que podem fer, però, és calcular l'esperança i la variància de la mitjana i variància mostrals. Per a la mitjana és un càlcul senzill. 
+
+\begin{prop}
+	Per una població \( X \) amb \( \E[X] = \mu \) i \( \Var[X] = \sigma^2 \), per una mostra de mida \( n \) se satisfà
+	\begin{enumerate}[label=\textup{(}{\itshape \roman*}\textup{)}]
+		\item\label{itm:mitjana primer} \( \E[\bar{X}] = \mu \),
+		\item\label{itm:mitjana segon} \( \Var[\bar{X}] = \frac{\sigma^2}{n} \).
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	Veure \ref{itm:mitjana primer} és immediat fent servir la linealitat de l'esperança:
+	\begin{equation*}
+		\E[\bar{X}] = \E\left[ \frac{1}{n} \sum_{k = 1}^n X_k \right] = \frac{1}{n} \sum_{k = 1}^n \E[X_k] = \frac{n\mu}{n} = \mu.
+	\end{equation*}
+
+	Per a \ref{itm:mitjana segon} podem fer servir que la variància de la suma de variables independents és la suma de les seves variàncies, i que la variància és homogènia de grau 2:
+	\begin{equation*}
+		\Var[\bar{X}] = \Var\left[ \frac{1}{n} \sum_{k = 1}^n X_k \right] = \frac{1}{n^2} \sum_{k = 1}^n \Var[X_k] = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}. \qedhere
+	\end{equation*}
+\end{proof}
+
+Aquest resultat tant senzill és la base d'un dels mantres més importants de l'estadística: \emph{els errors van com \( \frac{1}{\sqrt{n}} \)}.
+
+\chapter{Contrast d'hipòtesis}
+
+\chapter{Intervals de confiança}
+
+\chapter{Modelització}
+
+\end{document}

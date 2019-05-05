@@ -1,0 +1,199 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Ry}{\mathit{Ry}}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\ket}[1]{\vert {#1} \rangle}
+\newcommand{\bra}[1]{\langle #1 \vert}
+\newcommand{\braket}[2]{\langle {#1} \vert {#2} \rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Entrega 1:} Estats coherents}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Entrega 1:} Estats coherents}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 18 de març de 2019}
+
+\begin{document}
+\maketitle
+
+Considerem l'estat cat
+\begin{equation*}
+	\ket{\psi} = A \cos{\alpha a^{\dagger}} \ket{0}
+\end{equation*}
+on \( A \) és una constant de normalització i \( \alpha \) una constant positiva.
+
+\begin{enumerate}[label=(\alph*), font=\bfseries \sffamily, wide, labelwidth=!, labelindent=0pt]
+	\item Tenim que
+		\begin{equation*}
+		\cos{\alpha a^\dagger} = \frac{e^{i\alpha a^\dagger} + e^{-i \alpha a^\dagger}}{2}
+		\end{equation*}
+	i per tant
+	\begin{equation*}
+		\ket{\psi} = \frac{A}{2} \left(e^{i\alpha a^\dagger} \ket{0} + e^{-i \alpha a^\dagger} \ket{0} \right) = \frac{Ae^{\frac{\alpha^2}{2}}}{2}\left(\ket{i\alpha} + \ket{-i\alpha}\right).
+	\end{equation*}
+Aleshores
+\begin{align*}
+	\langle a \rangle_\psi & = \bra{\psi} a \ket{\psi} = \frac{A^2e^{\alpha^2}}{4} \left(\bra{i\alpha} a \ket{i\alpha} + \bra{-i\alpha} a \ket{-i\alpha} + \bra{i\alpha} a \ket{-i \alpha} + \bra{-i \alpha} a \ket{i \alpha} \right) \\
+												 & = \frac{A^2e^{\alpha^2}}{4} \left(i\alpha - i\alpha - i\alpha \braket{i\alpha}{-i\alpha} + i\alpha \braket{-i\alpha}{i\alpha} \right).
+\end{align*}
+En general, per \( \alpha, \beta \in \C \) es té
+\begin{equation*}
+	\braket{\alpha}{\beta} = e^{-i \Im{\left(\alpha \beta^\ast\right)}} e^{- \frac{\abs{\alpha - \beta}^2}{2}}.
+\end{equation*}
+En el cas que estem considerant el primer factor de fet és 1 ja que \( i\alpha(-i \alpha)^\ast \) de fet és real. Així
+\begin{equation*}
+	\braket{i\alpha}{-i\alpha} = \braket{-i\alpha}{i\alpha} = e^{-2\alpha^2}.
+\end{equation*}
+I per tant \( \langle a \rangle_\psi = \langle a^\dagger \rangle_\psi^{\ast} = 0 \). Per tant, com que \( x \) i \( p \) són combinacions lineals de \( a \) i \( a^\dagger \), deduïm que \( \langle x \rangle_\psi = \langle p \rangle_\psi = 0 \).
+
+\item Tenim
+	\begin{equation*}
+		a^2 \ket{\psi} = \frac{Ae^{\frac{\alpha^2}{2}}}{2}(a^2 \ket{i\alpha} + a^2 \ket{-i\alpha}) = \frac{Ae^{\frac{\alpha^2}{2}}}{2}(-\alpha^2 \ket{i\alpha} -\alpha^2 \ket{-i\alpha}) = -\alpha^2 \ket{\psi},
+	\end{equation*}
+	és a dir, \( \ket{\psi} \) és propi de \( a^2 \) amb valor propi \( -\alpha^2 \). 
+
+\item \( \ket{\psi} \) és propi de \( \cos{\alpha a} \) amb valor propi \( \cosh{\alpha^2} \). En efecte
+	\begin{align*}
+		\cos{(\alpha a)} \ket{\psi} & = \frac{Ae^{\frac{\alpha^2}{2}}}{2}(\cos{(\alpha a)} \ket{i\alpha} + \cos{(\alpha a)} \ket{-i\alpha}) = \frac{Ae^{\frac{\alpha^2}{2}}}{2}(\cos{(i\alpha^2)} \ket{i\alpha} + \cos{(-i\alpha^2)} \ket{-i\alpha}) \\
+																& = \frac{Ae^{\frac{\alpha^2}{2}}}{2}(\cos{(i\alpha^2)} \ket{i\alpha} + \cos{(i\alpha^2)} \ket{-i\alpha}) = \cos{(i\alpha^2)} \ket{\psi} = \cosh{(\alpha^2)} \ket{\psi}.
+	\end{align*}
+	
+\item Tenim, fent servir el resultat anterior,
+	\begin{equation*}
+		\braket{\psi}{\psi} = \bra{\psi} A \cos{(\alpha a^{\dagger})} \ket{0} = A \cosh{\alpha^2} \braket{\psi}{0}.
+	\end{equation*}
+D'altra banda
+\begin{equation*}
+	\braket{\psi}{0} = \frac{A^\ast e^{\frac{\alpha^2}{2}}}{2}\left(\braket{i \alpha}{0} + \braket{-i \alpha}{0} \right) = \frac{A^\ast e^{\frac{\alpha^2}{2}}}{2}\left(e^{-\frac{\alpha^2}{2}} + e^{-\frac{\alpha^2}{2}} \right) = A^\ast. 
+\end{equation*}
+Així doncs, si \( \braket{\psi}{\psi} = 1 \) ha de ser \( AA^\ast \cosh{\alpha^2} = \abs{A}^2 \cosh{\alpha^2} = 1 \). Com que l'estat \( \ket{\psi} \) està determinat mòdul una fase, podem triar la seva constant de normalització real i positiva de manera que podem escriure'l com 
+\begin{equation*}
+	\ket{\psi} = \frac{e^{\frac{\alpha^2}{2}}}{2 \sqrt{\cosh{\alpha^2}}} \left(\ket{i \alpha} + \ket{-i \alpha}\right) = \frac{\ket{i \alpha} + \ket{-i \alpha}}{\sqrt{2\left(1 + e^{-2\alpha^2}\right)}} . 
+\end{equation*}
+
+\item En aquest cas
+	\begin{equation*}
+		\ket{\phi} = B \sin{\alpha a^\dagger} \ket{0} = -\frac{iB e^{\frac{\alpha^2}{2}}}{2}(\ket{i \alpha} - \ket{-i \alpha}). 
+	\end{equation*}
+	Calculem \( \braket{\phi}{\phi} \):
+	\begin{align*}
+		\braket{\phi}{\phi} & = \frac{BB^\ast e^{\alpha^2}}{4}(\braket{i\alpha}{i\alpha} + \braket{-i\alpha}{-i\alpha} - \braket{-i\alpha}{i\alpha} - \braket{i\alpha}{-i\alpha}) \\
+												& = \frac{\abs{B}^2 e^{\alpha^2}}{4}(2 - \braket{-i\alpha}{i\alpha} - \braket{i\alpha}{-i\alpha}).
+	\end{align*}
+Aleshores
+\begin{equation*}
+	\braket{i\alpha}{-i\alpha} = e^{-i \Im{(i\alpha)(-i\alpha)^\ast}} e^{-\frac{\abs{i\alpha + i\alpha}^2}{2}} = e^{-2\alpha^2},
+\end{equation*}
+i per tant
+\begin{equation*}
+	\braket{\phi}{\phi} = \frac{\abs{B}^2 e^{\alpha^2}}{4}(2 - 2e^{-2\alpha^2}) = \abs{B}^2 \frac{e^{\alpha^2} - e^{-\alpha^2}}{2} = \abs{B}^2 \sinh{\alpha^2}.
+\end{equation*}
+Aleshores, si \( \braket{\phi}{\phi} = 1 \), ha de ser \( \abs{B}^2 \sinh{\alpha^2} = 1 \). Com abans, tenim llibertat de triar la fase de \( B \). Si fem \( B = \frac{i}{\sqrt{\sinh{\alpha^2}}} \) podem escriure
+\begin{equation*}
+	\ket{\phi} = \frac{e^{\frac{\alpha^2}{2}}}{2\sqrt{\sinh{\alpha^2}}}(\ket{i \alpha} - \ket{-i \alpha}) = \frac{\ket{i \alpha} - \ket{-i \alpha}}{\sqrt{2(1 - e^{-2\alpha^2})}}.
+\end{equation*}
+
+\item Calculem \( \langle H \rangle_\psi \) on \( H = \hbar \omega a^\dagger a \). Tenim
+	\begin{align*}
+		\langle a^\dagger a \rangle_\psi & = \bra{\psi} a^\dagger a	\ket{\psi} = \frac{e^{\alpha^2}}{4\cosh{\alpha^2}} (\bra{i\alpha} + \bra{-i\alpha})a^\dagger a(\ket{i\alpha} + \ket{-i\alpha}) \\
+																		 & = \frac{e^{\alpha^2}}{4\cosh{\alpha^2}} (-i\alpha\bra{i\alpha} + i\alpha\bra{-i\alpha})(i\alpha\ket{i\alpha} - i\alpha\ket{-i\alpha}) \\
+																		 & = \frac{e^{\alpha^2}}{4\cosh{\alpha^2}} (\bra{i\alpha} - \bra{-i\alpha})(\ket{i\alpha} - \ket{-i\alpha}) \\
+																		 & = \frac{e^{\alpha^2}}{4\cosh{\alpha^2}} \frac{4}{\abs{B}^2 e^{\alpha^2}} = \alpha^2 \frac{\sinh{\alpha^2}}{\cosh{\alpha^2}},
+	\end{align*}
+on hem fet servir l'apartat anterior. Per tant 
+\begin{equation*}
+\langle H \rangle_\psi = \hbar\omega\alpha \tanh{\alpha^2}.
+\end{equation*}
+
+\item Aquest hamiltonià és un osci\l.lador harmònic desplaçat \( \frac{1}{2} \), i per tant té per estats propis els estats de la base de Fock amb energies \( E_n = \hbar \omega n \). Aleshores, per un estat coherent qualsevol
+	\begin{equation*}
+		\ket{\alpha(t)} = \sum_{n = 0}^{\infty} \frac{\alpha^n}{\sqrt{n!}} e^{-\frac{iE_n t}{\hbar}}\ket{n} = \sum_{n = 0}^\infty \frac{\alpha^n}{\sqrt{n!}} e^{-i\omega t} \ket{n} = \sum_{n = 0}^\infty \frac{(\alpha e^{-i\omega t})^n}{\sqrt{n!}} = \ket{\alpha e^{-i\omega t}}. 
+	\end{equation*}
+Per tant l'evolució de l'estat \( \ket{\psi} \) sota el hamiltonià \( H \) és
+\begin{equation*}
+	\ket{\psi(t)} = \frac{\ket{i\alpha e^{-i\omega t}} + \ket{- i\alpha e^{-i \omega t}}}{\sqrt{2(1 - e^{-2\alpha^2})}}.
+\end{equation*}
+Evidentment, quan \( t = \frac{2 \pi}{\omega} \) se satisfà \( \ket{\psi(t)} = \ket{\psi} \). Però per \( t = \frac{\pi}{\omega} \) això també passa:
+\begin{equation*}
+	\ket{\psi(\tfrac{\pi}{\omega})} = \frac{\ket{i\alpha e^{-i\pi}} + \ket{- i\alpha e^{-i \pi}}}{\sqrt{2(1 - e^{-2\alpha^2})}} = \frac{\ket{-i\alpha} + \ket{i\alpha}}{\sqrt{2(1 - e^{-2\alpha^2})}} = \ket{\psi}.
+\end{equation*}
+
+
+\end{enumerate}
+\end{document}
