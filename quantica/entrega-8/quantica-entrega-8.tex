@@ -79,7 +79,7 @@
 
 \newpagestyle{pagina}{
 	\headrule
-	\sethead*{\sffamily {\bfseries Entrega 2:} Addició de del moment angular}{}{\theauthor}
+	\sethead*{\sffamily {\bfseries Entrega 2:} Addició del moment angular. Estats de barions}{}{\theauthor}
 	\footrule
 	\setfoot*{}{}{\sffamily \thepage}
 }
@@ -254,13 +254,13 @@ i
 	\bra{S_{12}^1}P_{31}\ket{A_{12}^1} = -\frac{1}{\sqrt{3}} - \frac{1}{2\sqrt{3}} = -\frac{\sqrt{3}}{2}.
 \end{equation*}
 Per tant
-\begin{equation} \label{eqn:estat P31A12}
+\begin{equation} \label{eq:estat P31A12}
 	P_{31}\ket{A_{12}^1} = \frac{\ket{A_{12}^1} - \sqrt{3}\ket{S_{12}^1}}{2}.
 \end{equation}
 
 Fem els mateixos càlculs per \( P_{23}\ket{S_{12}^1} \) i \( P_{31}\ket{S_{12}^1} \). Com que
 \begin{equation*}
-	P_{23}\ket{S_{12j}^1} = \frac{2\ket{\up\down\up} - (\ket{\up\up\down} + \ket{\down\up\up})}{\sqrt{6}}
+	P_{23}\ket{S_{12}^1} = \frac{2\ket{\up\down\up} - (\ket{\up\up\down} + \ket{\down\up\up})}{\sqrt{6}}
 \end{equation*}
 aleshores
 \begin{equation*}
@@ -268,9 +268,80 @@ aleshores
 \end{equation*}
 i
 \begin{equation*}
-	\bra{S_{12}^1}P_{23}\ket{S_{12}^1} =  
+	\bra{S_{12}^1}P_{23}\ket{S_{12}^1} =  \frac{-2 - 2 + 1}{6} = -\frac{1}{2},
 \end{equation*}
+de manera que
+\begin{equation} \label{eq:estat P23S12}
+	P_{23}\ket{S_{12}^1} = \frac{\sqrt{3}\ket{A_{12}^1} - \ket{S_{12}^1}}{2}.
+\end{equation}
 
+L'últim càlcul que cal fer és per \( P_{31}\ket{S_{12}^1} \). Tenim
+\begin{equation*}
+	P_{31}\ket{S_{12}^1} = \frac{2\ket{\down\up\up} - (\ket{\up\down\up} + \ket{\up\up\down})}{\sqrt{6}}.
+\end{equation*}
+Aleshores
+\begin{align*}
+	\bra{A_{12}^1}P_{31}\ket{S_{12}^1} &= -\frac{\sqrt{3}}{2} \\
+	\bra{S_{12}^1}P_{31}\ket{S_{12}^1} &= - \frac{1}{2}
+\end{align*}
+i per tant
+\begin{equation}\label{eq:estat P31S12}
+	P_{31}\ket{S_{12}^1} = - \frac{\sqrt{3}\ket{A_{12}^1} + \ket{S_{12}^1}}{2}.
+\end{equation}
 
+És clar que tots els càlculs que hem fet són vàlids si intercanviem \( \up \) per \( \down \), de manera que les \cref{eq:estat P23A12,eq:estat P31A12,eq:estat P23S12,eq:estat P31S12} continuen sent certes si canviem els superíndexs 1 per 2.
+
+\parbreak
+
+Per a trobar els estats que tenen spin total \( \frac{1}{2}\hbar \) i isospin total \( \frac{1}{2} \) considerem una combinació lineal dels estats propis d'spin i isospin amb aquests valors i la simetritzem. Concretament, posem
+\begin{equation*}
+	\ket{\Psi} = \alpha \ket{S_{12}^n}_S\ket{S_{12}^m}_I + \beta \ket{S_{12}^n}_S\ket{A_{12}^m}_I + \gamma \ket{A_{12}^n}_S\ket{S_{12}^m}_I + \delta \ket{A_{12}^n}_S\ket{A_{12}^m}_I
+\end{equation*}
+i aleshores requerim que \( P_{12}\ket{\Psi} = P_{23}\ket{\Psi} = P_{31}\ket{\Psi} = \ket{\Psi} \). Si \( P_{12}\ket{\Psi} = \ket{\Psi} \) aleshores \( \gamma = \delta = 0 \). També tenim, fent servir els resultats que hem obtingut prèviament,
+\begin{align*}
+	P_{23} \ket{\Psi} &= \alpha \left(\frac{\sqrt{3}\ket{A_{12}^n} - \ket{S_{12}^n}}{2}\right)\left(\frac{\sqrt{3}\ket{A_{12}^m} - \ket{S_{12}^m}}{2}\right) + \delta\left(\frac{\ket{A_{12}^n} + \sqrt{3}\ket{S_{12}^n}}{2}\right)\left(\frac{\ket{A_{12}^m} + \sqrt{3}\ket{S_{12}^m}}{2}\right) \\
+										&= \frac{3\alpha + \delta}{2}\ket{A_{12}^n}\ket{A_{12}^m} + \frac{\alpha + 3\delta}{2}\ket{S_{12}^n}\ket{S_{12}^m} + \frac{\sqrt{3}(\alpha - \delta)}{4}(\ket{A_{12}^n}\ket{S_{12}^m} + \ket{S_{12}^n}\ket{A_{12}^m}).
+\end{align*}
+Si requerim que \( P_{23}\ket{\Psi} = \ket{\Psi} \) aleshores deduïm que \( \alpha = \delta \). Finalment
+\begin{align*}
+	P_{31} \ket{\Psi} &= \alpha \left(\frac{\sqrt{3}\ket{A_{12}^n} + \ket{S_{12}^n}}{2}\right)\left(\frac{\sqrt{3}\ket{A_{12}^m} + \ket{S_{12}^m}}{2}\right) + \alpha\left(\frac{\ket{A_{12}^n} - \sqrt{3}\ket{S_{12}^n}}{2}\right)\left(\frac{\ket{A_{12}^m} - \sqrt{3}\ket{S_{12}^m}}{2}\right) \\
+										&= \alpha\ket{A_{12}^n}\ket{A_{12}^m} + \alpha\ket{S_{12}^n}\ket{S_{12}^m} = \ket{\Psi}, 
+\end{align*}
+i per tant se satisfà l'últim requeriment. Per normalització determinem que \( \alpha = \frac{1}{\sqrt{2}} \).
+
+\parbreak
+
+A continuació resumim els estats de tres quarks possibles. Només donem la part d'spin i sabor, ja que la part de color és sempre el singlet. Denotarem l'spin total per \( j_s \), l'spin en la direcció vertical per \( m_s \),  l'isospin total per \( j_I \) i el tercer component de l'isospin per \( m_I \).
+
+Per a \( j_I = \frac{3}{2} \) tenim els quatres barions \( \Delta \), classificats en funció de \( m_I \). Aquests estats corresponen als estats de la forma \( \ket{S_{123}^n}_S \ket{S_{123}^m}_I \), per tant la part d'spin ha de tenir \( j_s = \frac{3}{2}\hbar \). 
+\begin{equation*}
+	\begin{aligned}
+		m_I & = \frac{3}{2}, \\
+    m_I & = \frac{1}{2}, \\
+    m_I & = -\frac{1}{2}, \\
+    m_I & = -\frac{3}{2},
+	\end{aligned}
+	\qquad
+	\begin{aligned}
+	 	\ket{\Delta^{++}} & = \ket{S_{123}^n}_S\ket{S_{123}^1}_I = \ket{S_{123}^n}_S \ket{uuu} \\
+	 	\ket{\Delta^{+}} & = \ket{S_{123}^n}_S\ket{S_{123}^2}_I = \ket{S_{123}^n} \frac{\ket{uud} + \ket{udu} + \ket{duu}}{\sqrt{3}} \\
+	 	\ket{\Delta^{0}} & = \ket{S_{123}^n}_S\ket{S_{123}^3}_I = \ket{S_{123}^n} \frac{\ket{ddu} + \ket{dud} + \ket{udd}}{\sqrt{3}} \\
+	 	\ket{\Delta^{0}} & = \ket{S_{123}^n}_S\ket{S_{123}^4}_I = \ket{S_{123}^n}_S \ket{ddd}.
+	\end{aligned}
+\end{equation*}
+Per a \( n \) entre 1 i 4 obtenim estats amb \( m_s \) entre \( -\frac{3}{2}\hbar \) i \( \frac{3}{2}\hbar \).
+
+Per a \( j_I = \frac{1}{2} \) tenim el protó i el neutró, que es corresponen amb els estats de la forma \( \frac{1}{\sqrt{2}}(\ket{S_{12}^n}_S\ket{S_{12}^m}_I + \ket{A_{12}^n}_S\ket{A_{12}^m}_I) \). Veiem que \( j_S = \frac{1}{2}\hbar \), per tant els protons i els neutrons són partícules d'spin \( \frac{1}{2} \). El protó apareix amb \( m_I = \frac{1}{2} \):
+\begin{align*}
+	\ket{p^+} & = \frac{\ket{S_{12}^n}_S\ket{S_{12}^1}_I + \ket{A_{12}^n}_S\ket{A_{12}^1}_I}{\sqrt{2}} \\
+						& = \ket{S_{12}^n}_S \frac{2\ket{uud} - (\ket{udu} + \ket{duu})}{2\sqrt{3}} + \ket{A_{12}^n}_S \frac{\ket{udu} - \ket{duu}}{2}. 
+\end{align*}
+Amb \( n = 1 \) tenim l'estat amb spin \( \frac{1}{2}\hbar \) i amb \( n = 2 \) l'estat amb spin \( -\frac{1}{2}\hbar \).
+I el neutró té \( m_I = -\frac{1}{2} \):
+\begin{align*}
+	\ket{n^0} & = \frac{\ket{S_{12}^n}_S\ket{S_{12}^2}_I + \ket{A_{12}^n}_S\ket{A_{12}^2}_I}{\sqrt{2}} \\
+						& = \ket{S_{12}^n}_S \frac{2\ket{ddu} - (\ket{dud} + \ket{udd})}{2\sqrt{3}} + \ket{A_{12}^n}_S \frac{\ket{dud} - \ket{udd}}{2}. 
+\end{align*}
+Com abans, amb \( n = 1 \) tenim l'estat d'spin \( \frac{1}{2}\hbar \) i amb \( n = 2 \) l'estat d'spin \( -\frac{1}{2}\hbar \).
 
 \end{document}
