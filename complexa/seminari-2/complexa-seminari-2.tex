@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Ry}{\mathit{Ry}}
+\let\Im\relax
+\let\Re\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\Res}{Res}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\ket}[1]{\vert {#1} \rangle}
+\newcommand{\bra}[1]{\langle #1 \vert}
+\newcommand{\braket}[2]{\langle {#1} \vert {#2} \rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Seminari 1:} Representació conforme i homografies}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Seminari 2:} Càlcul d'integrals amb el teorema dels residus}
+\author{\sffamily Arnau Mas --- 77633181Q}
+\date{\sffamily 17 de maig de 2019}
+
+\begin{document}
+\maketitle
+
+Hem de calcular la integral
+\begin{equation*}
+	\int_0^\infty \frac{x^{-\lambda}}{1 + x^2} \, dx
+\end{equation*}
+per \( \lambda \in (0,1) \). Definim \( f(z) = \frac{z^{-\lambda}}{1 + z^2} \), triant la branca de \( z^{-\lambda} \) que ve determinada per la branca de l'argument a \( (0, 2\pi) \). Aleshores \( f \) és holomorfa al pla complex menys \( [0, \infty) \) i \( i \) i \( -i \), on hi té dos pols d'ordre 1. Integrarem \( f \) sobre un camí \( \gamma \) format per un semicercle de radi \( \epsilon < 1 \), \( \gamma_\epsilon \), que està connectat per dos segments \( \gamma_1 \) i \( \gamma_2 \) a un cercle \( \gamma_R \) de radi \( R \), de manera que l'origen queda a l'exterior del camí. Aleshores
+\begin{equation*}
+	\int_\gamma \frac{z^{-\lambda}}{1 + z^2} \, dz = \int_{\gamma_R} \frac{z^{-\lambda}}{1 + z^2} \, dz + \int_{\gamma_1} \frac{z^{-\lambda}}{1 + z^2} \, dz + \int_{\gamma_\epsilon} \frac{z^{-\lambda}}{1 + z^2} \, dz + \int_{\gamma_2} \frac{z^{-\lambda}}{1 + z^2} \, dz.
+\end{equation*}
+Analitzem cada integral per separat. Pel cercle petit de radi \( \epsilon \) tenim
+\begin{align*}
+	\abs{\int_{\gamma_\epsilon} \frac{z^{-\lambda}}{1 + z^2} \, dz} & = \abs{\int_{\frac{\pi}{2}}^{-\frac{\pi}{2}} \frac{\epsilon^{-\lambda}e^{-i\lambda\theta}}{1 + \epsilon^2 e^{2i\theta}} i\epsilon e^{i\theta} \, d\theta} \\
+																																	& \leq \int_{\frac{\pi}{2}}^{-\frac{\pi}{2}} \frac{\epsilon^{1 - \lambda}}{\abs{1 + \epsilon^2 e^{2i\theta}}} \, d\theta \\
+																																	& \leq \frac{\pi\epsilon^{2 - \lambda}}{1 - \epsilon^2} \xrightarrow{\epsilon \to 0} 0.
+\end{align*}
+
+De manera similar, pel cercle de radi \( R \)
+\begin{align*}
+	\abs{\int_{\gamma_R} \frac{z^{-\lambda}}{1 + z^2} \, dz} & = \abs{\int_{\theta_1}^{\theta_2} \frac{R^{-\lambda}e^{-i\lambda\theta}}{1 + R^2 e^{2i\theta}} iR e^{i\theta} \, d\theta} \\
+																													 & \leq \int_{\theta_1}^{\theta_2} \frac{R^{1 - \lambda}}{\abs{1 + R^2 e^{2i\theta}}} \, d\theta \\
+																													 & \leq \frac{2\pi R^{2 - \lambda}}{1 - R^2} \xrightarrow{R \to \infty} 0.
+\end{align*}
+Així doncs les úniques contribucions són les dels segments. Tenim
+\begin{equation*}
+	\int_{\gamma_1} \frac{z^{-\lambda}}{1 + z^2} \, dz + \int_{\gamma_2} \frac{z^{-\lambda}}{1 + z^2} \, dz  = \int_0^R \frac{(x + i\epsilon)^{-\lambda}}{1 + (x + i\epsilon)^2} \, dz + \int_R^0 \frac{(x - i\epsilon)^{-\lambda}}{1 + (x - i\epsilon)^2} \, dz.
+\end{equation*}
+Quan prenem límit \( \epsilon \to 0 \) ambdós denominadors van a \( 1 + x^2 \). D'altra banda, pels numeradors tenim
+\begin{equation*}
+	(x + i\epsilon)^{-\lambda} = e^{-\lambda \log(x + i\epsilon)} \xrightarrow{\epsilon \to 0} e^{-\lambda \log(x)} = x^{-\lambda}.
+\end{equation*}
+Però en canvi, quan ens apropem per sota de l'eix positiu tenim
+\begin{equation*}
+	(x - i\epsilon)^{-\lambda} = e^{-\lambda \log(x - i\epsilon)} \xrightarrow{\epsilon \to 0} e^{-\lambda (\log(x) + 2\pi i)} = e^{-2\pi \lambda i}x^{-\lambda},
+\end{equation*}
+degut a la determinació de l'argument que hem triat.
+
+Així obtenim
+\begin{equation*}
+	\int_\gamma \frac{z^{-\lambda}}{1 + z^2} \, dz = (1 - e^{-2\pi\lambda i}) \int_0^R \frac{x^{-\lambda}}{1 + x^2} \, dx.
+\end{equation*}
+La funció \( f \) té dos pols simples a \( i \) i \( -i \). Si \( R > 1 \) estan dins de l'interior de \( \gamma \). Així, prenent límit \( R \to \infty \) i aplicant el teorema dels residus obtenim
+\begin{equation*}
+	(1 - e^{-2\pi\lambda i}) \int_0^R \frac{x^{-\lambda}}{1 + x^2} \, dx = 2\pi i (\Res(f,i) + \Res(f,-i)).
+\end{equation*}
+Calculem, doncs, els dos residus:
+\begin{align*}
+	(z - i)f(z) = \frac{z^{-\lambda}}{z + i} \xrightarrow{z \to i} \frac{i^{-\lambda}}{2i} = \frac{e^{-\frac{i\pi\lambda}{2}}}{2i} = \Res(f,i)
+\end{align*}
+i
+\begin{align*}
+	(z + i)f(z) = \frac{z^{-\lambda}}{z - i} \xrightarrow{z \to -i} -\frac{(-i)^{-\lambda}}{2i} = \frac{e^{-\frac{3i\pi\lambda}{2}}}{2i} = \Res(f,-i).
+\end{align*}
+I finalment
+\begin{align*}
+	\int_0^\infty \frac{x^{-\lambda}}{1 + x^2} \, dx & = \frac{2\pi i(\Res(f,i) + \Res(f,-i))}{(1 - e^{-2\pi\lambda i})} = \frac{\pi(e^{-\frac{i\pi\lambda}{2}} - e^{-\frac{3i\pi\lambda}{2}})}{1 - e^{-2i\lambda\pi}} \\
+																									 & = \frac{\pi(e^{\frac{i\pi\lambda}{2}} - e^{-\frac{i\pi\lambda}{2}})}{e^{\pi\lambda i} - e^{-\pi\lambda i}} = \frac{\pi\sin\left(\frac{\lambda\pi}{2}\right)}{\sin(\lambda \pi)} = \frac{\pi}{2\cos\left(\frac{\lambda\pi}{2}\right)}.
+\end{align*}
+
+
+
+\end{document}
