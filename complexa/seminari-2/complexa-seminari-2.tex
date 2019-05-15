@@ -78,7 +78,7 @@
 
 \newpagestyle{pagina}{
 	\headrule
-	\sethead*{\sffamily {\bfseries Seminari 1:} Representació conforme i homografies}{}{\theauthor}
+	\sethead*{\sffamily {\bfseries Seminari 2:} Càlcul d'integrals amb el teorema dels residus}{}{\theauthor}
 	\footrule
 	\setfoot*{}{}{\sffamily \thepage}
 }
@@ -95,6 +95,7 @@
 \begin{document}
 \maketitle
 
+\section*{Problema 1}
 Hem de calcular la integral
 \begin{equation*}
 	\int_0^\infty \frac{x^{-\lambda}}{1 + x^2} \, dx
@@ -107,15 +108,16 @@ Analitzem cada integral per separat. Pel cercle petit de radi \( \epsilon \) ten
 \begin{align*}
 	\abs{\int_{\gamma_\epsilon} \frac{z^{-\lambda}}{1 + z^2} \, dz} & = \abs{\int_{\frac{\pi}{2}}^{-\frac{\pi}{2}} \frac{\epsilon^{-\lambda}e^{-i\lambda\theta}}{1 + \epsilon^2 e^{2i\theta}} i\epsilon e^{i\theta} \, d\theta} \\
 																																	& \leq \int_{\frac{\pi}{2}}^{-\frac{\pi}{2}} \frac{\epsilon^{1 - \lambda}}{\abs{1 + \epsilon^2 e^{2i\theta}}} \, d\theta \\
-																																	& \leq \frac{\pi\epsilon^{2 - \lambda}}{1 - \epsilon^2} \xrightarrow{\epsilon \to 0} 0.
+																																	& \leq \frac{\pi\epsilon^{1 - \lambda}}{\abs{1 - \epsilon^2}} \xrightarrow{\epsilon \to 0} 0.
 \end{align*}
 
 De manera similar, pel cercle de radi \( R \)
 \begin{align*}
 	\abs{\int_{\gamma_R} \frac{z^{-\lambda}}{1 + z^2} \, dz} & = \abs{\int_{\theta_1}^{\theta_2} \frac{R^{-\lambda}e^{-i\lambda\theta}}{1 + R^2 e^{2i\theta}} iR e^{i\theta} \, d\theta} \\
 																													 & \leq \int_{\theta_1}^{\theta_2} \frac{R^{1 - \lambda}}{\abs{1 + R^2 e^{2i\theta}}} \, d\theta \\
-																													 & \leq \frac{2\pi R^{2 - \lambda}}{1 - R^2} \xrightarrow{R \to \infty} 0.
+																													 & \leq \frac{(\theta_1 - \theta_2) R^{1 - \lambda}}{\abs{1 - R^2}} \xrightarrow{R \to \infty} 0.
 \end{align*}
+
 Així doncs les úniques contribucions són les dels segments. Tenim
 \begin{equation*}
 	\int_{\gamma_1} \frac{z^{-\lambda}}{1 + z^2} \, dz + \int_{\gamma_2} \frac{z^{-\lambda}}{1 + z^2} \, dz  = \int_0^R \frac{(x + i\epsilon)^{-\lambda}}{1 + (x + i\epsilon)^2} \, dz + \int_R^0 \frac{(x - i\epsilon)^{-\lambda}}{1 + (x - i\epsilon)^2} \, dz.
@@ -151,6 +153,84 @@ I finalment
 	\int_0^\infty \frac{x^{-\lambda}}{1 + x^2} \, dx & = \frac{2\pi i(\Res(f,i) + \Res(f,-i))}{(1 - e^{-2\pi\lambda i})} = \frac{\pi(e^{-\frac{i\pi\lambda}{2}} - e^{-\frac{3i\pi\lambda}{2}})}{1 - e^{-2i\lambda\pi}} \\
 																									 & = \frac{\pi(e^{\frac{i\pi\lambda}{2}} - e^{-\frac{i\pi\lambda}{2}})}{e^{\pi\lambda i} - e^{-\pi\lambda i}} = \frac{\pi\sin\left(\frac{\lambda\pi}{2}\right)}{\sin(\lambda \pi)} = \frac{\pi}{2\cos\left(\frac{\lambda\pi}{2}\right)}.
 \end{align*}
+
+\section*{Problema 2}
+Hem de calcular la integral
+\begin{equation*}
+	\int_0^{2\pi} \frac{\cos{nx}}{5 + 3\cos{x}} \, dx,
+\end{equation*}
+Per a \( n \in \N \).
+
+Per a integrals d'aquesta mena podem observar que si \( z \in S^1 \) aleshores \( z = e^{i\theta} \) i per tant
+\begin{equation*}
+	\cos{\theta} = \frac{z + \bar{z}}{2} = \frac{1}{2}\left(z + \frac{1}{z}\right),
+\end{equation*}
+ja que \( z^{-1} = \bar{z} \) per a \( z \in S^1 \). I per tant
+\begin{equation*}
+	\cos{n\theta} = \frac{1}{2}\left(z^n + \frac{1}{z^n}\right)
+\end{equation*}
+ja que \( z^n = e^{in\theta} \). Així, la integral que volem calcular és precisament
+\begin{equation*}
+	\frac{1}{i} \int_{S^1} \frac{1}{z}\frac{\frac{1}{2}(z^n + z^{-n})}{5 + \frac{3}{2}(z + z^{-1})} \, dz
+\end{equation*}
+amb la parametrització \( z = e^{ix} \). Si la desenvolupem una mica trobem
+\begin{equation*}
+	\int_0^{2\pi} \frac{\cos{nx}}{5 + 3\cos{x}} \, dx =	\frac{1}{i} \int_{S^1} \frac{1}{z}\frac{\frac{1}{2}(z^n + z^{-n})}{5 + \frac{3}{2}(z + z^{-1})} \, dz = \frac{1}{i} \int_{S^1} \frac{z^{2n} + 1}{z^n(10z + 3z^2 + 3)} \, dz.
+\end{equation*}
+El polinomi \( 3z^2 + 10z + 3 \) té dues arrels, \( -3 \) i \( -\frac{1}{3} \). Aleshores podem escriure
+\begin{equation*}
+	\int_0^{2\pi} \frac{\cos{nx}}{5 + 3\cos{x}} \, dx = \frac{1}{3i} \int_{S^1} \frac{z^{2n} + 1}{z^n (z+3)(z+\tfrac{1}{3})} \, dz.
+\end{equation*}
+Per a calcular aquesta integral aplicarem el teorema dels residus. La funció
+\begin{equation*}
+	f(z) = \frac{z^{2n} + 1}{z^n(z+3)(z + \frac{1}{3})}
+\end{equation*}
+té 3 pols: d'ordre 1 a \( -3 \) i \( -\frac{1}{3} \) i d'ordre \( n \) a 0. Com que estem integrant al voltant del disc unitat només contribuiran els residus de \( f \) a 0 i \( -\frac{1}{3} \). Així, aplicant el teorema dels residus tenim
+\begin{equation*}
+	\int_0^{2\pi} \frac{\cos{nx}}{5 + 3\cos{x}} \, dx = \tfrac{2\pi}{3}(\Res{(f,0)} + \Res{(f, - \tfrac{1}{3})}).
+\end{equation*}
+Hem de calcular, per tant, els residus als dos punts en qüestió.
+
+Per \( -\frac{1}{3} \), com que el pol és d'ordre 1 tenim
+\begin{equation*}
+	\Res{(f,-\tfrac{1}{3})} = \lim_{z \to -\frac{1}{3}} (z - \tfrac{1}{3})f(z) = \lim_{z \to -\frac{1}{3}} \frac{z^{2n} + 1}{z^n(z+3)} = \frac{\frac{1}{3^{2n}} + 1}{\frac{(-1)^n}{3^n}(3 - \frac{1}{3})} = \frac{(-1)^n}{8} \left(\frac{3^{2n} + 1}{3^{n-1}}\right).
+\end{equation*}
+
+D'altra banda, el càlcul del residu a 0 requereix més feina. Com que és un pol d'ordre \( n \) podem fer servir
+\begin{equation*}
+	\Res{(f,0)} = \lim_{z \to 0} \frac{1}{(n-1)!} \frac{d}{dz^{n-1}}(z^n f(z)) 
+\end{equation*}
+Per a calcular la \( n \)-èssima derivada de \( z^nf(z) \) podem fer servir la regla del producte generalitzada
+\begin{equation*}
+	\frac{d}{dz^n}\big(f(z)g(z)\big) = \sum_{k = 0}^{n} \binom{n}{k} f^{(k)}(z) g^{(n - k)}(z).
+\end{equation*}
+
+Per tant
+\begin{align*}
+	\frac{d}{dz^n}\big(z^nf(z)\big) &= \frac{d}{dz^n} \left(\frac{z^{2n} + 1}{(z + 3)(z + \frac{1}{3})}\right) \\
+																	&= \sum_{k = 0}^{n} \binom{n}{k} \frac{d}{dz^k}(z^{2n} + 1) \, \frac{d}{dz^{n-k}} \left(\frac{1}{(z+3)(z+\frac{1}{3})}\right) \\
+																	&= (z^{2n}+1) \frac{d}{dz^{n}} \left(\frac{1}{(z+3)(z+\frac{1}{3})}\right) + \sum_{k = 1}^{n} \binom{n}{k} \frac{2n!}{(2n - k)!}z^{2n - k} \, \frac{d}{dz^{n-k}} \left(\frac{1}{(z+3)(z+\frac{1}{3})}\right).
+\end{align*}
+Observem, doncs, que quan prenem el límit \( z \to 0 \) només sobreviu el primer terme, de manera que només hem de calcular l'\( n \)-èssima derivada del denominador. Per a fer això descomposem en fraccions simples:
+\begin{equation*}
+	\frac{1}{(z+3)(z+\frac{1}{3})} = \frac{3}{8}\left(\frac{1}{(z+\frac{1}{3})} - \frac{1}{(z + 3)}\right)
+\end{equation*}
+i per tant 
+\begin{align*}
+	\frac{d}{dz^n}\left(\frac{1}{(z+3)(z+\frac{1}{3})}\right) & = \frac{3}{8}\left(\frac{d}{dz^n}\frac{1}{(z+\frac{1}{3})} - \frac{d}{dz^n}\frac{1}{(z+3)}\right) \\
+																														& = (-1)^n \frac{3}{8} \left(\frac{n!}{(z+\frac{1}{3})^{n+1}} - \frac{n!}{(z+3)^{n+1}}\right).
+\end{align*}
+Aleshores arribem a que
+\begin{equation*}
+	\Res{(f,0)} = (-1)^{n-1} \frac{3}{8}\left(3^{n} - \frac{1}{3^{n}}\right) = \frac{(-1)^{n-1}}{8}\left(\frac{3^{2n} - 1}{3^{n-1}}\right).
+\end{equation*}
+
+Un cop calculats els dos residus podem finalment calcular la integral original:
+\begin{equation*}
+	\int_0^{2\pi} \frac{\cos{nx}}{5 + 3\cos{x}} \, dx = \frac{2\pi}{3} \left( \frac{(-1)^n}{8} \left(\frac{3^{2n} + 1}{3^{n-1}}\right) + \frac{(-1)^{n-1}}{8}\left(\frac{3^{2n} - 1}{3^{n-1}}\right)\right) = (-1)^n\frac{\pi}{2\cdot3^n}.
+\end{equation*}
+
+
 
 
 
