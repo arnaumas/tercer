@@ -15,7 +15,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath,amssymb}
-\usepackage[catalan,sort]{cleveref}
+\usepackage[sort]{cleveref}
 \usepackage{enumitem}
 
 \geometry{
@@ -57,8 +57,10 @@
 \newcommand{\Ry}{\mathit{Ry}}
 \let\Im\relax
 \let\Re\relax
+\let\div\relax
 \DeclareMathOperator{\Im}{Im}
 \DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\div}{div}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\inn}[2]{\left\langle #1 , #2 \right\rangle}
 \newcommand{\parbreak}{
@@ -260,7 +262,11 @@ Quan \( a = 1 \) i \( b > 1 \) la situació és diferent. Ara \( (1,0) \) es man
 
 \parbreak 
 
-Si interpretem el model en termes de població, veiem que és un model que té en compte una taxa de creixement fixa per a ambdues poblacions, així com competència tant intraespecífica com interespecífica. Aquesta última és la que governen els paràmetres \( a \) i \( b \). Quan \( a,b < 1 \) la competència interespecífica és prou petita i les poblacions poden conviure, ja que tota condició inicial tendeix cap al valor estable \( P \). En canvi, si \( a, b > 1 \) la competència és massa gran i només sobreviu una de les espècies, ja que tota condició inicial tendeix cap a \( (1,0) \), és a dir, l'extinció de l'espècie \( y \) o \( (0,1) \), l'extinció de l'espècie \( y \). Quina de les dues espècies s'extingeix ve determinat per l'òrbita heteroclínica que va de l'origen fins a \( P \), i que actua com a separatriu. Existeix la possibilitat de coexistència ja que tenim un punt de sella, però és molt fràgil. Si \( a \geq 1 \) i \( b < 1 \) aleshores l'espècie \( y \) és molt competitiva i l'espècie \( x \) és poc competitiva, de manera que s'acaba extingint, ja que tota trajectòria acaba tendint a \( (0,1) \), és a dir, a l'extinció de \( x \). Finalment, si	\( a = 1 \) i \( b > a \) aleshores s'extingirà l'espècie \( y \). En aquests dos últims casos no hi ha possibilitat de coexistència. 
+Si interpretem el model en termes de població, veiem que és un model que té en compte una taxa de creixement fixa per a ambdues poblacions, així com competència tant intraespecífica com interespecífica. Aquesta última és la que governen els paràmetres \( a \) i \( b \). Quan \( a,b < 1 \) la competència interespecífica és prou petita i les poblacions poden conviure, ja que tota condició inicial tendeix cap al valor estable \( P \). 
+
+En canvi, si \( a, b > 1 \) la competència és massa gran i només sobreviu una de les espècies, ja que tota condició inicial tendeix cap a \( (1,0) \), és a dir, l'extinció de l'espècie \( y \) o \( (0,1) \), l'extinció de l'espècie \( y \). Quina de les dues espècies s'extingeix ve determinat per l'òrbita heteroclínica que va de l'origen fins a \( P \), i que actua com a separatriu. Existeix la possibilitat de coexistència ja que tenim un punt de sella, però és molt fràgil. 
+
+Si \( a \geq 1 \) i \( b < 1 \) aleshores l'espècie \( y \) és molt competitiva i l'espècie \( x \) és poc competitiva, de manera que s'acaba extingint, ja que tota trajectòria acaba tendint a \( (0,1) \), és a dir, a l'extinció de \( x \). Finalment, si	\( a = 1 \) i \( b > a \) aleshores s'extingirà l'espècie \( y \). En aquests dos últims casos no hi ha possibilitat de coexistència. 
 
 \parbreak
 
@@ -286,9 +292,98 @@ Quan \( a = b = 1 \) aleshores la recta \( x + y = 1 \) esdevè una recta de pun
 \begin{equation*}
 	x\dot{y} - y\dot{x} = xy(1 - x - y) - yx(1 - x - y) = 0
 \end{equation*}
-i per tant \( \dot{theta} = 0 \). En particular tenim que totes les rectes que passen per l'origen són invariants. Si calculem els signes dels components del camp trobem el que es veu a la \cref{fig:retrat 6a}. Amb això ja tenim determinada la dinàmica: si un punt comença per sobre de la recta \( x + y = 1 \) aleshores es mou al llarg de la recta que l'uneix amb l'origen fins a la recta de punts fixos. I si comença per sota també es veu atret. Així l'\( \omega \)-límit de qualsevol punt no fix és la intersecció de la recta que l'uneix amb l'origen i la recta \( x+y = 1 \).  
+i per tant \( \dot{\theta} = 0 \). En particular tenim que totes les rectes que passen per l'origen són invariants. Si calculem els signes dels components del camp trobem el que es veu a la \cref{fig:retrat 6a}. Amb això ja tenim determinada la dinàmica: si un punt comença per sobre de la recta \( x + y = 1 \) aleshores es mou al llarg de la recta que l'uneix amb l'origen fins a la recta de punts fixos. I si comença per sota també es veu atret. Així l'\( \omega \)-límit de qualsevol punt no fix és la intersecció de la recta que l'uneix amb l'origen i la recta \( x+y = 1 \).  
 
 Pel que fa a la dinàmica de poblacions, el que passa és que si la població total \( x + y \) és més gran que 1, aleshores la població d'ambdues espècies decreix mantenint la proporció entre les poblacions constant fins a estabilitzar-se a una població total de 1. I si \( x+y < 1 \) l'evolució és la mateixa però la població total creix cap a 1. 
 
+\addtocounter{section}{2}
+\addtocounter{section}{-1}
+\setcounter{equation}{0}
+\section*{Problema 2}
+Hem d'analitzar la dinàmica del sistema de Liénard
+\begin{equation} \label{eqn:sistema lienard}
+	\left\{
+		\begin{aligned}
+			\dot{x} &= y - F(x) \\
+			\dot{y} &= -x.
+		\end{aligned}
+	\right.
+\end{equation}
+Concretament hem de donar condicions sobre \( F \) de manera que el sistema tingui com a màxim una o cap òrbita periòdica. L'eina idònia per aquesta mena de càlculs és el teorema de Bendixson-Dulac. Seguint la indicació, es proposa de trobar una funció de Dulac de la forma
+\begin{equation*}
+    B(x,y) = \frac{1}{y^2 + a(x)y + b(x)}
+\end{equation*}
+de manera que el numerador de \( \div{(B(x,y)X(x,y))} \) només depengui de \( x \), sent \( X \) el camp associat al sistema de Liénard. Si fem el càlcul obtenim
+\begin{align*}
+    \div{(B(x,y)X(x,y))} &= \frac{-(F'(x) + a'(x))y^2 + (a'(x)F(x) - a(x)F'(x) - b'(x) + 2x)y }{(y^2 + a(x)y + b(x))^2} \\
+    &+ \frac{- F'(x)b(x) + F(x)b'(x) + xa(x)}{(y^2 + a(x)y + b(x))^2}.
+\end{align*}
+Si volem que el numerador només depengui de \( x \) podem posar \( a(x) = -F(x) \). Aleshores el terme amb \( y \) es converteix en \( -b'(x) + 2x \). Si volem anu\l.lar-lo podem triar \( b(x) = x^2 \). Amb aquesta tria la funció de Dulac esdevé
+\begin{equation*}
+    B(x,y) = \frac{1}{y^2 - F(x)y + x^2}
+\end{equation*}
+i la divergència
+\begin{equation*}
+    \div{(B(x,y)X(x,y))} = \frac{xF(x) - x^2 F'(x)}{(y^2 - F(x)y + x^2)^2}.
+\end{equation*}
+Per a poder aplicar el teorema de Bendixson-Dulac necessitem que \( B \) estigui definida sobre una regió \( U \) i que \( \div{(BX)} \) no canviï de signe sobre \( U \), tret de sobre conjunts de mesura 0. En aquestes condicions, si \( U \) és simplement connex aleshores podem afirmar que el sistema no té òrbites periòdiques completament contingudes dins de \( U \). I si \( U \) té un forat aleshores el sistema pot tenir com a molt una òrbita periòdica que envolta el forat.
+
+Tenim que la funció de Dulac \( B \) està definida a tot arreu on el seu denominador no s'anu\l.li. Serà efectivament de Dulac si \( xF(x) - x^2F'(x) \) no canvia de signe sobre el domini de definició. Per tant ens interessa saber com és el conjunt
+\begin{equation*}
+    S = \{(x,y) \in \R^2 \mid y^2 - F(x)y + x^2 = 0 \}.
+\end{equation*}
+Sigui quina sigui \( F \), el punt \( (0,0) \) és de \( S \). Si aconseguim donar condicions de manera que \( S \) sigui un punt estarem en situació per aplicar Bendixson-Dulac, ja que tindrem una funció de Dulac definida sobre un conjunt amb un forat, i per tant podrem tenir com a molt una òrbita periòdica. Ara bé, si el punt en qüestió no és crític sabem que no hi haurà possibilitat de tenir cap òrbita periòdica. Com que l'únic punt crític del sistema de Liénard és \( (0, F(0)) \) és raonable requerir \( F(0) = 0 \) de manera que el punt en el qual la funció de Dulac no està definida coincideix amb el punt crític del sistema i per tant hi ha esperança de tenir una òrbita periòdica. 
+
+Volem, doncs, aconseguir que \( S \) estigui buit a part de \( (0,0) \). Això ho aconseguim imposant que el discriminant \( F(x)^2 - 4x^2 \) sigui negatiu, de manera que el conjunt de solucions de \( y^2 - F(x)y + x^2 = 0 \) sigui buit, tret de \( (0,0) \) quan \( x = 0 \). 
+
+En resum, si \( F \) satisfà
+\begin{itemize}
+    \item \( xF(x) - x^2F'(x) \) no canvia de signe sobre \( \R^2 - {(0,0)} \),
+    \item \( F(0) = 0 \),
+    \item i \( F(x)^2 < 4x^2 \) per \( \abs{x} > 0 \)
+\end{itemize}
+aleshores el sistema de Liènard corresponent pot tenir com a molt una òrbita periòdica que envolta l'origen.
+
+Pel que fa al cas en el que el sistema no tingui òrbites periòdiques, una bona font d'exemples és quan \( F \) és lineal. Posem \( F(x) = ax \), de manera que el sistema esdevé
+\begin{equation*}
+    \left\{
+		\begin{aligned}
+			\dot{x} &= y - ax \\
+			\dot{y} &= -x.
+		\end{aligned}
+	\right.
+\end{equation*}
+El sistema té valors propis
+\begin{equation*}
+    \lambda_1 = \frac{-a + \sqrt{a^2 - 4}}{2}
+\end{equation*}
+i 
+\begin{equation*}
+    \lambda_2 = \frac{-a - \sqrt{a^2 - 4}}{2}.
+\end{equation*}
+Només podrà tenir òrbites periòdiques si és un centre, i només serà un centre si la part real dels valors propis és 0. Per tant, si \( a \neq \) podem garantir que el sistema no tindrà òrbites periòdiques.
+
+\parbreak
+
+Considerem \( F(x) = \frac{x(1 - cx^2)}{1 + cx^2} \) amb \( c > 0 \) i comprovem si verifica les condicions de l'apartat anterior per a la possibilitat de tenit com a molt un cicle límit. És clar que \( F(0) = 0 \). També tenim 
+\begin{align*}
+    F(x)^2 - 4x^2 & = \frac{x^2(1 - cx^2)^2}{(1 + cx^2)^2} - \frac{4x^2(1 + cx^2)^2}{(1 + cx^2)^2} \\
+    & = -\frac{3x^2 + 10cx^2 - 3c^2x^6}{(1 + cx^2)^2} < 0
+\end{align*}
+si \( x \neq 0 \). 
+
+Finalment
+\begin{equation*}
+    xF(x) = \frac{x^2(1 - cx^2)(1 + cx^2)}{(1 + cx)^2} = \frac{x^2 - c^2x^6}{(1 + cx^2)^2}
+\end{equation*}
+i
+\begin{equation*}
+    F'(x) = \frac{1 - 4cx^2 - c^2x^4}{(1 + cx^2)^2}
+\end{equation*}
+per tant
+\begin{equation*}
+    xF(x) - x^2F'(x) = \frac{4cx^2}{(1 + cx^2)^2} > 0
+\end{equation*}
+si \( \abs{x} > 0 \). Així doncs estem en les hipòtesis de l'apartat anterior i podem afirmar, per Bendixson-Dulac, que el sistema té com a màxim una òrbita periòdica.
 \end{document}
 
