@@ -2,13 +2,14 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[catalan]{babel}
+\usepackage[spanish]{babel}
 \usepackage{lmodern}
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[bf,sf,pagestyles]{titlesec}
 \usepackage{titling}
+\usepackage[runin]{abstract}
 \usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
 \usepackage{siunitx}
 \usepackage{graphicx}
@@ -32,8 +33,6 @@
 	linktoc = page
 }
 
-\crefname{figure}{figura}{figures}
-\crefname{table}{taula}{taules}
 \numberwithin{table}{section}
 \numberwithin{figure}{section}
 \numberwithin{equation}{section}
@@ -47,8 +46,8 @@
 	math-celsius = {}^{\circ}\kern-\scriptspace C,
 	detect-family = true,
 	detect-shape = true,
-	list-final-separator = { i },
-	list-pair-separator = { i },
+	list-final-separator = { y },
+	list-pair-separator = { y },
 	list-units = single,
 	separate-uncertainty = true
 }
@@ -79,7 +78,7 @@
 
 \newpagestyle{pagina}{
 	\headrule
-	\sethead*{\sffamily \bfseries Informe IV}{}{\theauthor}
+	\sethead*{\sffamily \bfseries Práctica 4}{}{\theauthor}
 	\footrule
 	\setfoot*{}{}{\sffamily \thepage}
 }
@@ -89,12 +88,17 @@
 }
 \pagestyle{pagina}
 
-\title{\sffamily {\bfseries Informe IV:} Gasos reals. Isotermes d'Andrews}
-\author{\sffamily A7: Arnau Mas}
-\date{\sffamily 12 de novembre de 2018}
+\title{\sffamily {\bfseries Práctica 4:} Espectros ópticos. Espectrómetro de prisma}
+\author{\sffamily B2 2: Arnau Mas, Alejandro Plaza}
+\date{\sffamily 28 de marzo de 2019}
 
 \begin{document}
 \maketitle
-\section{Introducció}
+\renewcommand{\abstractname}{\bfseries Resumen:}
+\begin{abstract}
+	Hola hola
+\end{abstract}
+
+\section{Introducción i objetivos}
 
 \end{document}
