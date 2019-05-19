@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	citecolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \, },
+	allow-number-unit-breaks = true,
+	math-celsius = {}^{\circ}\kern-\scriptspace C,
+	detect-family = true,
+	detect-shape = true,
+	list-final-separator = { i },
+	list-pair-separator = { i },
+	list-units = single,
+	separate-uncertainty = true
+}
+
+\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Ry}{\mathit{Ry}}
+\newcommand{\data}[3]{\SI{#1 \pm #2}{#3}}
+\newcommand{\unc}[2]{\ensuremath{{}\pm \SI{#1}{#2}}}
+\DeclareMathOperator{\gr}{gr}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\inn}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+			\raisebox{0.3ex}{$\m@th\cdot$}}%
+		\raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily \bfseries Informe IV}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Informe IV:} Gasos reals. Isotermes d'Andrews}
+\author{\sffamily A7: Arnau Mas}
+\date{\sffamily 12 de novembre de 2018}
+
+\begin{document}
+\maketitle
+\section{Introducció}
+
+\end{document}
