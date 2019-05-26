@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\renewcommand{\arraystretch}{1.4}
+
+\renewcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Ry}{\mathit{Ry}}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\ket}[1]{\vert {#1} \rangle}
+\newcommand{\bra}[1]{\langle #1 \vert}
+\newcommand{\braket}[2]{\langle {#1} \vert {#2} \rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Entrega 3:} Mètode variacional}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Entrega 3:} Mètode variacional}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 3 de juny de 2019}
+
+
+\begin{document}
+\maketitle
+Considerem un hamiltonià \( H \) amb espectre \( E_n \), \( n \geq 1 \), ordenat de manera creixent, és a dir \( E_n \leq E_m \) si \( n \leq m \). Desenvoluparem un mètode per a trobar fites per a qualsevol de les energies. 
+
+Considerem una base ortonormal \( \ket{\phi_k} \), \( k \geq 1 \), i denotem per \( H^{(n)} \) el hamiltonià \( H \) restringit al subespai generat pels estats \( \ket{\phi_1}, \dots, \ket{\phi_n} \). És a dir, \( H^{(n)} \) actua sobre \( \ket{\phi_k} \) segons
+\begin{equation*}
+	H^{(n)}\ket{\phi_k} = \sum_{r = 1}^{n}\bra{\phi_r}H\ket{\phi_k} \ket{\phi_r} 
+\end{equation*}
+per \( 1 \leq k \leq n \). \( H^{(n)} \) és hermític ja que tenim
+\begin{equation*}
+	\bra{\phi_i}H^{(n)}\ket{\phi_j} = \bra{\phi_i} H \ket{\phi_j} = \bra{\phi_j} H \ket{\phi_i} = \bra{\phi_j} H^{(n)} \ket{\phi_i}. 
+\end{equation*}
+
+Com que \( H^{(n)} \) és hermític hi ha una base ortonormal que el diagonalitza, que denotarem per \( \ket{\phi_k^{(n)}} \), \( 1 \leq n \). L'espectre de \( H^{(n)} \) el denotarem per \( E_k^{(n)} \), \( 1 \leq k \leq n \). Primer provarem que \( E_k^{(n)} \geq E_k \) per a tot \( n \geq 1 \) i \( 1 \leq k \leq n \) per inducció sobre \( n \). El cas \( n = 1 \) és el mètode variacional usual. En efecte, si restringim el hamiltonià a un sol estat \( \ket{\phi_1^{(1)}} \) aleshores tenim
+\begin{equation*}
+	H^{(1)} \ket{\phi_1} = \bra{\phi_1}H\ket{\phi_1} \ket{\phi_1}.
+\end{equation*}
+Per tant \( \ket{\phi_1} \) és propi de \( H^{(1)} \) amb valor propi \( E_1^{(1)} = \bra{\phi_1}H\ket{\phi_1} \) i sabem que \( E_1^{(1)} \geq E_1 \).
+
+Suposem, doncs, que hem diagonalitzat \( H^{(n)} \) i que el seu espectre satisfà \( E_k^{(n)} \geq E_k \) per a tot \( 1 \leq k \leq n \). Els estats \( \ket{\phi_1^{(n)}}, \dots, \ket{\phi_n^{(n)}}, \ket{\phi_{n + 1}} \) són una base del subespai on està definit \( H^{(n+1)} \). La representació matricial de \( H^{(n+1)} \) en aquesta base és 
+\begin{align*}
+	H^{(n+1)} & = \begin{pmatrix}
+		\bra{\phi_1^{(n)}} H \ket{\phi_1^{(n)}} & \cdots & \bra{\phi_1^{(n)}} H \ket{\phi_n^{(n)}} & \bra{\phi_1^{(n)}} H \ket{\phi_{n+1}} \\
+		\vdots & \ddots & \vdots & \vdots \\
+		\bra{\phi_n^{(n)}} H \ket{\phi_1^{(n)}} & \cdots & \bra{\phi_n^{(n)}} H \ket{\phi_n^{(n)}} & \bra{\phi_{n}^{(n)}} H \ket{\phi_{n+1}} \\
+		\bra{\phi_{n+1}} H \ket{\phi_1^{(n)}} & \cdots & \bra{\phi_{n+1}} H \ket{\phi_n^{(n)}} & \bra{\phi_{n+1}} H \ket{\phi_{n+1}}
+	\end{pmatrix} \\
+	& =
+	\begin{pmatrix}
+		E_1^{(n)} & \cdots & 0 & h_1 \\
+		\vdots & \ddots & \vdots & \vdots \\
+		0 & \cdots & E_n^{(n)} & h_n \\
+		h_1^{\ast} & \cdots & h_n^{\ast} & H_{n+1}
+	\end{pmatrix},
+\end{align*}
+on hem definit \( h_i = \bra{\phi_i^{(n)}} H \ket{\phi_{n+1}} \) i \( H_{n+1} = \bra{\phi_{n+1}} H \ket{\phi_{n+1}} \).
+
+Per diagonalitzar \( H^{(n+1)} \) hem de calcular-ne primer els valors propis, que són les arrels del seu polinomi característic. Si el denotem per \( P_{n+1}(x) \)	aleshores
+\begin{align*}
+	P_{n+1}(x) & = \begin{vmatrix}
+		E_1^{(n)} - x & \cdots & 0 & h_1 \\
+		\vdots & \ddots & \vdots & \vdots \\
+		0 & \cdots & E_n^{(n)} - x & h_n \\
+		h_1^{\ast} & \cdots & h_n^{\ast} & H_{n+1} - x
+	\end{vmatrix} \\
+	& = (E_1^{(n)} - x) 
+	\begin{vmatrix}
+		E_2^{(n)} - x & \cdots & 0 & h_2 \\
+		\vdots & \ddots & \vdots & \vdots \\
+		0 & \cdots & E_n^{(n)} - x & h_n \\
+		h_1^{\ast} & \cdots & h_n^{\ast} & H_{n+1} - x
+	\end{vmatrix} \\
+	& {} + (-1)^{n+1}h_1
+	\begin{vmatrix}
+		0 & E_2^{(n)} - x & \cdots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & 0 & E_n^{(n)}	- x \\
+		h_1^{\ast} & h_2^{\ast} & \cdots & h_n^{\ast}
+	\end{vmatrix} \\
+	& = (E_1^{(n)} - x) 
+	\begin{vmatrix}
+		E_2^{(n)} - x & \cdots & 0 & h_2 \\
+		\vdots & \ddots & \vdots & \vdots \\
+		0 & \cdots & E_n^{(n)} - x & h_n \\
+		h_1^{\ast} & \cdots & h_n^{\ast} & H_{n+1} - x
+	\end{vmatrix} - \abs{h_1}^2 \prod_{k = 2}^{n}(E_k^{(n)} - x) 
+\end{align*}
+El primer terme és un determinant de la mateixa forma que el que acabem de calcular. Així doncs apareixerà per una banda el terme \( -\abs{h_2}^2 \prod_{k = 3}^n (E_k^{(n)} - x) \) multiplicat per \( (E_1^{(n)} - x) \) i un determinant de la mateixa forma multiplicat per \( (E_1^{(n)} - x)(E_2^{(n)} - x) \). Inductivament arribem a 
+\begin{equation*}
+	P_{n+1}(x) = (H_{n+1} - x)\prod_{k = 1}^n(E_k^{(n)} - x) - \sum_{k = 1}^{n}\abs{h_k}^2 \prod_{\substack{r = 1 \\ r \neq k}}^n (E_r^{(n)} - x).
+\end{equation*}
+
+Calculem \( P_{n+1}(E_k^{(n)}) \):
+\begin{equation*}
+	P_{n+1}(E_k^{(n)}) = -\abs{h_k}^2 \prod_{\substack{r = 1 \\ r \neq k}}^n (E_r^{(n)} - E_s^{(n)}).
+\end{equation*}
+Com que \( E_k^{(n)} \leq E_r^{(n)} \) quan \( k \leq r \) i \( E_k^{(n)} \geq E_r^{(n)} \) si \( k \geq r \), hi ha \( k - 1 \) factors negatius i \( n - 1 - (k-1) = n - k \) factors positius. Així doncs, si \( k \) és parell aleshores \( k-1 \) és senar i tot el producte acaba sent negatiu, i per tant \( P_{n+1}(E_k^{(n)}) \geq 0 \) ja que va acompanyat d'un signe negatiu. De la mateixa manera, si \( k \) és senar aleshores deduïm \( P_{n+1}(E_k^{(n)}) \leq 0 \).
+
+D'altra banda, tenim
+\begin{equation*}
+ 	P_{n+1}(x) = (-1)^{n+1}(x - H_{n+1})\prod_{k = 1}^n(x - E_k^{(n)}) - (-1)^n \sum_{k = 1}^{n}\abs{h_k}^2 \prod_{\substack{r = 1 \\ r \neq k}}^n (x - E_r^{(n)}),
+\end{equation*}
+i per tant el terme de grau més alt de \( P_{n+1}(x) \) és \( (-1)^{n+1}x^{n+1} \). Si n és senar aleshores és \( x^{n+1} \), per tant \( \lim_{x \to \infty}P_{n+1}(x) = \lim_{x \to -\infty}P_{n+1}(x) = \infty \). I en canvi, si \( n \) és parell aleshores és \( -x^{n+1} \) i per tant \( \lim_{x \to \infty}P_{n+1}(x) = -\infty \) i \( \lim_{x \to -\infty}P_{n+1}(x) = \infty \). 
+
+Com que \( H^{(n+1)} \) és hermític, el seu polinomi característic ha de tenir \( n+1 \) arrels, \( E_k^{(n+1)} \), i per tant alterna de signe \( n + 1 \) vegades. D'altra banda hem vist que el polinomi característic avaluat a \( E_k^{(n)} \) alterna de signe, per tant \( E_k^{(n)} \) ha d'estar entre \( E_k^{(n+1)} \) i \( E_{k+1}^{(n+1)} \). Com que \( \lim_{x \to \infty}P_{n+1}(x) = \infty \), per a \( x < E_1^{(n+1)} \) es té \( P_{n+1}(x) > 0 \). I com que \( P_{n+1}(E_1^{(n)} \leq 0 \) hem de tenir \( E_1^{(n+1)} \leq E_1^{(n)} \leq E_2^{(n+1)} \). I pel que acabem de comentar concloem \( E_k^{(n+1)} \leq E_k^{(n)} \leq E_{k+1}^{(n+1)} \).
+
+Tenim, doncs, que \( E_k^{(m)} \leq E_k^{(n)} \) si \( m > n \). Quan 
+
+
+\end{document}
