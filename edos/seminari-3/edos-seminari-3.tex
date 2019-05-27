@@ -1,0 +1,207 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage[font={footnotesize, sf}, labelfont=bf]{subcaption}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Ry}{\mathit{Ry}}
+\let\Im\relax
+\let\Re\relax
+\let\div\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\div}{div}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\inn}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Seminari 3:} {\sffamily EDPs quasilineals}}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Seminari 3:} {\sffamily EDPs quasilineals}}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 6 de juny de 2019}
+
+\begin{document}
+\maketitle
+
+\addtocounter{section}{1}
+\section*{Problema 1}
+Una equació en derivades parcials lineal es pot escriure com 
+\begin{equation*}
+	A(x,y) \partial_x z + B(x,y) \partial_y z = C(x,y)z.
+\end{equation*}
+El corresponent sistema característic és
+\begin{equation*}
+	\left. 	
+		\begin{aligned}
+			\dot{x} & = A(x,y) \\
+			\dot{y} & = B(x,y) \\
+			\dot{z} & = C(x,y)z
+		\end{aligned}
+	\right\}
+\end{equation*}
+Suposem que existeix una integral primera \( H_1(x,y) \) tal que podem aïllar \( y \) de l'equació \( H_1(x,y) = h \) de la forma \( y = g(x,h) \). Aleshores, si substituïm a la primera i tercera equacions obtenim el sistema
+\begin{equation*}
+	\left. 	
+		\begin{aligned}
+			\dot{x} & = A(x,g(x,h)) \\
+			\dot{z} & = C(x,g(x,h))z
+		\end{aligned}
+	\right\}
+\end{equation*}
+Podem intentar buscar una integral primera d'aquest sistema. Si dividim les dues equacions trobem
+\begin{equation*}
+	\frac{dz}{dx} = \frac{C(x,g(x,h))}{A(x, g(x,h))}z,
+\end{equation*}
+que és una equació separable. Si \( D(x,h) \) és una primitiva de \( \frac{C(x,h)}{A(x,h)} \) respecte \( x \) aleshores la solució és \( z(x) = K e^{D(x,h)} \) per alguna constant \( K \) i per tant una integral primera del sistema és, en termes de \( z \), \( x \) i \( h \)
+\begin{equation*}
+	V(x,h,z) = z e^{-D(x,h)}.
+\end{equation*}
+
+Si ara substituïm \( h = H_1(x,y) \) trobem que la segona integral primera del sistema característic és
+\begin{equation*}
+	H_2(x,y,z) = z e^{-D(x,H(x,y))}.
+\end{equation*}
+
+Comprovem que \( H_2 \) és efectivament una integral primera del sistema. Calculem les parcials de \( H_2 \) i trobem
+\begin{equation*}
+	\partial_z H_2(x,y,z) = e^{-D(x,H_1(x,y))}
+\end{equation*}
+i
+\begin{equation*}
+	\partial_y H_2(x,y,z) = -ze^{-D(x,H_1(x,y))} \big(\partial_h D(x, H_1(x,y)) \partial_y H_1(x,y)\big).
+\end{equation*}
+I finalment, com que \( g(x, H_1(x,y)) = y \), tenim
+\begin{align*}
+	\partial_x H_2(x,y,z) & = -ze^{-D(x,H_1(x,y))} \big(\partial_x D(x,H_1(x,y)) + \partial_h D(x, H_1(x,y)) \partial_x H_1(x,y)\big) \\
+												& = -ze^{-D(x,H_1(x,y))} \left(\frac{C(x,y)}{A(x,y)} + \partial_h D(x, H_1(x,y)) \partial_x H_1(x,y)\right).
+\end{align*}
+Així doncs
+\begin{align*}
+	\dot{H}_2(x,y,z) & = A(x,y)\partial_x H_2(x,y,z) + B(x,y)\partial_y H_2(x,y,z) + C(x,y)z\partial_z H_2(x,y,z) \\
+									 & = -zC(x,y) e^{-D(x,H_1(x,y))} \\
+									 & -z e^{-D(x,H_1(x,y))} \partial_h D(x, H_1(x,y)) \big( A(x,y) \partial_x H_1(x,y) + B(x,y) \partial_y H_1(x,y) \big) \\ 
+									 & + zC(x,y) e^{-D(x,H_1(x,y))} = 0,
+\end{align*}
+on hem fet servir que \( H_1 \) és integral primera i per tant \( A\partial_xH_1 + B\partial_yH_1 = 0 \). Veiem, doncs, que \( H_2 \) és efectivament integral primera. 
+
+Finalment hem de comprovar que \( H_1 \) i \( H_2 \) són funcionalment independents. Però això és clar ja que \( \partial_z H_2 \) mai no s'anu\l.la i en canvi \( \partial_z H_1 \) és 0 a tot arreu. Els gradients de \( H_1 \) i \( H_2 \), per tant, són linealment independents i en conseqüència \( H_1 \) i \( H_2 \) són funcionalment independents. 
+
+\parbreak
+
+Anem a resoldre fent servir els resultats que acabem de desenvolupar l'equació
+\begin{equation*}
+	x \partial_x z + 2y \partial_y z = 4yx^2 z,
+\end{equation*}
+que és lineal. El sistema característic és 
+\begin{equation*}
+	\left. 	
+		\begin{aligned}
+			\dot{x} & = x \\
+			\dot{y} & = 2y \\
+			\dot{z} & = 4yx^2z
+		\end{aligned}
+	\right\}
+\end{equation*}
+
+Busquem en primer lloc una integral primera per a les dues primeres equacions. Tenim
+\begin{equation*}
+	\frac{dy}{dx} = \frac{2y}{x},
+\end{equation*}
+que és una equació separable. Si la resolem trobem
+\begin{equation*}
+	\tfrac{1}{2}\log{y} = K + \log{x}
+\end{equation*}
+i per tant
+\begin{equation*}
+	e^{2K} = \frac{y}{x^2}.
+\end{equation*}
+Deduïm d'aquí que \( H_1(x,y) = \frac{y}{x^2} \) és una integral primera. De l'equació \( H_1(x,y) = h \) podem aïllar-ne \( y \) com \( y = hx^2 \). Si ara substituïm això a la primera i tercera equacions arribem al sistema
+\begin{equation*}
+	\left. 	
+		\begin{aligned}
+			\dot{x} & = x \\
+			\dot{z} & = 4hx^4z
+		\end{aligned}
+	\right\}
+\end{equation*}
+
+
+\addtocounter{section}{2}
+\addtocounter{section}{-1}
+\setcounter{equation}{0}
+\section*{Problema 2}
+
+\end{document}
+
