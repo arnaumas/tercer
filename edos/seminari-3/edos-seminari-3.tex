@@ -63,6 +63,7 @@
 \DeclareMathOperator{\div}{div}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\inn}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\set}[2]{\left\{ #1 \mid #2 \right\}}
 \newcommand{\parbreak}{
 	\begin{center}
 		--- $\ast$ ---
@@ -158,6 +159,12 @@ on hem fet servir que \( H_1 \) és integral primera i per tant \( A\partial_xH_
 
 Finalment hem de comprovar que \( H_1 \) i \( H_2 \) són funcionalment independents. Però això és clar ja que \( \partial_z H_2 \) mai no s'anu\l.la i en canvi \( \partial_z H_1 \) és 0 a tot arreu. Els gradients de \( H_1 \) i \( H_2 \), per tant, són linealment independents i en conseqüència \( H_1 \) i \( H_2 \) són funcionalment independents. 
 
+Per a fer tots aquests càlculs hem estat suposant que \( A \) no és idènticament 0 ---si \( A \) no és idènticament 0 tots aquests càlculs tenen sentit als punts on no s'anu\l.la---. Si és el cas aleshores \( \dot{x} = 0 \) i per tant \( x \) és una integral primera. Si tenim una altra integral primera \( H_1(x,y) \) de la qual podem aïllar \( y \) aleshores ha de ser funcionalment independent a \( x \). Però això no pot ser ja que en un entorn d'un punt regular, un sistema de \( 2 \) equacions no pot tenir dues integrals primeres funcionalment independents. Així doncs, estrictament parlant no estaríem en les hipòtesis del problema. El que passa en aquesta situació és que tenim una integral primera per a les dues primeres equacions de la qual podem aillar \( x \) ---trivialment \( x = h \)--- però no \( y \). Per a trobar la segona integral primera podem fer servir la segona i tercera equacions, en lloc de la primera i tercera, ja que quan substituïm \( x = h \) aleshores són dues equacions en dues variables, i el seu quocient és una equació separable. Els càlculs són anàlegs als que hem fet abans i arriabaríem a
+\begin{equation*}
+	H_2(x,y,z) = ze^{-D(x,y)}
+\end{equation*}
+on \( D \) és una primitva de \( \frac{C(x,y)}{B(x,y)} \) respecte \( y \). Hem dividit per \( B \) i per tant cal que no sigui idènticametn 0 ---si no ho és, els càlculs serien vàlids als punts on \( B \) no s'anu\l.li---. Però si tant \( A \) com \( B \) són idènticament 0 aleshores l'única solució de l'equació és \( z \) idènticament 0. 
+
 \parbreak
 
 Anem a resoldre fent servir els resultats que acabem de desenvolupar l'equació
@@ -192,16 +199,120 @@ Deduïm d'aquí que \( H_1(x,y) = \frac{y}{x^2} \) és una integral primera. De 
 	\left. 	
 		\begin{aligned}
 			\dot{x} & = x \\
-			\dot{z} & = 4hx^4z
+			\dot{z} & = 4hx^4z.
 		\end{aligned}
 	\right\}
 \end{equation*}
+Mirem de trobar-ne una integral primera. Tenim
+\begin{equation*}
+	\frac{dz}{dx} = 4hx^3z
+\end{equation*}
+i per tant \( \log{z} = hx^4 + K \). Deduïm que \( V(x,z,h) = \log{z} - hx^4 \) i per tant, substituïnt \( h = H_1(x,y) \), la segona integral primera del sistema és
+\begin{equation*}
+	H_2(x,y,z) = \log{z} - yx^2.
+\end{equation*}
+Podem verificar que \( H_2 \) efectivament és integral primera calculant \( \dot{H}_2 \):
+\begin{equation*}
+	\dot{H}_2(x,y,z) = -2yx^2 -2yx^2 + \frac{4yx^2z}{z} = 0.
+\end{equation*}
+
+Així doncs, la solució ímplicita del sistema és
+\begin{equation*}
+	\phi\left(\frac{y}{x^2}, \log{z} - yx^2\right) = 0,
+\end{equation*}
+per a qualsevol funció \( \phi \colon \R^2 \to \R \). Si aïllem, mitjançant el teorema de la funció implícita, \( \log{z} - yx^2 \) aleshores arribem a la solució explícita. Tenim
+\begin{equation*}
+	\log{z} - yx^2 = \varphi\left(\frac{y}{x^2}\right)
+\end{equation*}
+per a qualsevol funció \( \psi \colon \R \to \R \). I per tant
+\begin{equation*}
+	z(x,y) = \psi\left(\frac{y}{x^2}\right) e^{yx^2}
+\end{equation*}
+on \( \psi(x) = e^{\varphi(x)} \). 
+
+Busquem la solució que satisfà \( z(-2,y) = -1 \). Això requereix
+\begin{equation*}
+	\psi\left(\frac{y}{4}\right) e^{4y} = -1
+\end{equation*}
+i per tant \( \psi(y) = -e^{-16y} \). La solució particular que busquem és
+\begin{equation*}
+	z(x,y) = -e^{-\frac{16y}{x^2}} e^{yx^2} = -e^{\frac{x^4 - 16}{x^2}y}.
+\end{equation*}
+
 
 
 \addtocounter{section}{2}
 \addtocounter{section}{-1}
 \setcounter{equation}{0}
 \section*{Problema 2}
+Considerem la família de superfícies
+\begin{equation*}
+	\set{(x,y,z) \in \R^3}{(x+y)z = c(3z + 1)}
+\end{equation*}
+per a \( c\in \R \). Hem de trobar una altra família de superfícies que hi siguin ortogonals. Observem que podem pensar aquestes superfícies com a superfícies de nivell de la funció de 3 variables
+\begin{equation*}
+	f(x,y,z) = \frac{(x+y)z}{3z+1}.
+\end{equation*}
+Així, el gradient de \( f \) és, a cada punt, ortogonal a la corresponent superfície de nivell. El gradient de \( f \) és
+\begin{equation*}
+	\nabla f(x,y,z) = \left(\frac{z}{3z+1}, \frac{z}{3z+1}, \frac{x+y}{(3z+1)^2}\right).
+\end{equation*}
+Per a trobar superfícies ortogonals a la família que estem considerant podem buscar superfícies de la forma \( z = u(x,y) \). Un camp ortogonal a aquesta superfície és 
+\begin{equation*}
+	\left(\partial_xu(x,y), \partial_y u(x,y), -1\right).
+\end{equation*}
+Per tant hem d'imposar que el producte escalar d'aquest camp i \( \nabla f \) sigui nul. De manera equivalent podem fer servir qualsevol altre camp que sigui proporcional a \( \nabla f \), per exemple \( (3z+1)\nabla f(x,y,z) \). Així doncs, l'equació diferencial a resoldre és
+\begin{equation*}
+	u (\partial_x u + \partial_y u) = \frac{x+y}{3u + 1}.
+\end{equation*}
+El sistema característic és
+\begin{equation*}
+	\left. 	
+		\begin{aligned}
+			\dot{x} & = u \\
+			\dot{y} & = u \\
+			\dot{u} & = \frac{x+y}{3u + 1}
+		\end{aligned}
+	\right\}
+\end{equation*}
+Podem trobar dues integrals primeres de manera immediata fent servir el mètode dels multiplicadors. D'una banda tenim que \( H_1(x,y,z) = x - y \) compleix
+\begin{equation*}
+	\dot{H}_1(x,y,z) = u - u = 0
+\end{equation*}
+i per tant és integral primera. I d'altra banda, prenent \( H_2(x,y,z) = x^2 + y^2 - 2u^3 - u^2 \) tenim
+\begin{equation*}
+	\dot{H}_2(x,y,z) = 2xu + 2yu - \frac{6u^2 + 2u}{3u + 1} (x+y) = 2u(x+y) - 2u(x+y) = 0
+\end{equation*}
+i deduïm que també és integral primera. 
+
+La solució general serà de la forma
+\begin{equation*}
+	\phi(x - y, x^2 + y^2 -2u^3 - u^2)
+\end{equation*}
+per a qualsevol funció \( \phi \colon \R^2 \to \R \)
+Per tant, si \( z = u(x,y) \) aleshores la família de superfícies que busquem és
+\begin{equation*}
+	\set{(x,y,z) \in \R^3}{\phi(x - y, x^2 + y^2 - z^2 -2z^3) = 0}.
+\end{equation*}
+
+\parbreak
+
+Hem de determinar la superfície, d'entre totes les que hem trobat abans, que contingui el cercle de radi 1 para\l.lel al pla \( x \)-\( y \) i centrat a l'eix \( z \) a una alçada \( z_0 \). Podem parametritzar aqeusta corva com \( \gamma(t) = (\cos{t}, \sin{t}, z_0) \). Si fem servir el teorema de la funció implícita, podem expressar la superfície en forma semiexplícita com
+\begin{equation*}
+	z^2 + 2z^3 - x^2 - y^2 = \psi(x - y).
+\end{equation*}
+Aleshores, sobre la corva de condicions inicials hem de tenir
+\begin{equation*}
+	z_0^2 + 2z_0^3 - 1 = \psi(\cos{t}- \sin{t}).
+\end{equation*}
+Prenent \( \psi(x) = z_0^2 + 2z_0^3 - 1 \) aleshores satisfem les condicions de contorn i la superfície en qüestió ve donada per l'equació implícita
+\begin{equation*}
+	z^2 + 2z^3 - x^2 -y^2 = z_0^2 + 2z_0^3 -1.
+\end{equation*}
+
+Podem verificar que aquesta és l'única solució comprovant que el vector \( \dot{\gamma}(t) \) i \( (3z+1) \nabla f(x,y,z) \) són linealment independents avaluats sobre els punts de la corva de condicions inicials. Efectivament, \( \dot{\gamma}(t) = (-\sin{t}, \cos{t}, 0) \) i \( (3z_0 + 1) \nabla f(\gamma(t)) = \left(z_0, z_0, \frac{\cos{t} + \sin{t}}{3z_0 + 1}\right)  \) són linealment independents. 
+
+
 
 \end{document}
 
