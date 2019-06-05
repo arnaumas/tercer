@@ -1,0 +1,164 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage[catalan,sort]{cleveref}
+\usepackage{enumitem}
+
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	linktoc = page
+}
+
+\crefname{figure}{figura}{figures}
+\crefname{table}{taula}{taules}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\graphicspath{{./figs/}}
+
+% Unitats
+\sisetup{
+	inter-unit-product = \ensuremath{ \cdot },
+	allow-number-unit-breaks = true,
+	detect-family = true,
+	list-final-separator = { i },
+	list-units = single
+}
+
+\renewcommand{\arraystretch}{1.4}
+
+\renewcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Ry}{\mathit{Ry}}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\ket}[1]{\vert {#1} \rangle}
+\newcommand{\bra}[1]{\langle #1 \vert}
+\newcommand{\braket}[2]{\langle {#1} \vert {#2} \rangle}
+\newcommand{\parbreak}{
+	\begin{center}
+		--- $\ast$ ---
+	\end{center} 
+}
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+    \raisebox{0.3ex}{$\m@th\cdot$}}%
+  \raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=
+}
+\makeatother
+
+\newpagestyle{pagina}{
+	\headrule
+	\sethead*{\sffamily {\bfseries Entrega 4:} Teoria de pertorbacions}{}{\theauthor}
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\renewpagestyle{plain}{
+	\footrule
+	\setfoot*{}{}{\sffamily \thepage}
+}
+\pagestyle{pagina}
+
+\title{\sffamily {\bfseries Entrega 4:} Teoria de pertorbacions}
+\author{\sffamily Arnau Mas}
+\date{\sffamily 17 de juny de 2019}
+
+
+\begin{document}
+\maketitle
+El hamiltonià per a una partícula de massa \( m \) i càrrega \( q \) que es mou lliurement en un anell de radi \( a \) és
+\begin{equation*}
+	H_0 = \frac{L_z^2}{2ma^2}.
+\end{equation*}
+Per a buscar els estats propis hem de resoldre
+\begin{equation*}
+	\frac{L_z^2}{2ma^2}\ket{\psi} = E \ket{\psi}.
+\end{equation*}
+En la representació de l'angle \( \theta \) aquesta equació és
+\begin{equation*}
+	-\frac{\hbar^2}{2ma^2}\psi''(\theta) = E \psi(\theta).
+\end{equation*}
+Definim \( \lambda = \frac{a}{\hbar}\sqrt{2mE} \) de manera que hem de resoldre l'equació diferencial \( \psi''(\theta) = -\lambda \psi(\theta) \). La solució d'aquesta equació diferencial és de la forma
+\begin{equation*}
+	\psi(\theta) = Ae^{i\lambda\theta} + Be^{-i\lambda\theta}
+\end{equation*}
+amb \( A,B \in \C \). Ara bé, cal que les solucions siguin \( 2\pi \)-periòdiques. Per tant hem de requerir
+\begin{equation*}
+	\psi(\theta + 2\pi) = Ae^{2\pi i \lambda}e^{i\lambda\theta} + Be^{-2\pi i \lambda}e^{-i\lambda\theta} = \psi(\theta) = Ae^{i\lambda\theta} + Be^{-i\lambda\theta}.
+\end{equation*}
+Això només pot passar si \( \lambda \in \Z \). Així l'espectre d'energies és discret i queda
+\begin{equation*}
+	E_n = \frac{\hbar^2}{2ma^2}n^2.
+\end{equation*}
+Veiem que \( E_n = E_{-n} \) i per tant tenim degeneració per a \( n > 0 \). Triem com a base del subespai propi de valor propi \( E_n \) els estats \( \ket{n, +} \) i \( \ket{n, -} \) que venen donats per les funcions d'ona
+\begin{equation*}
+	\braket{\theta}{n, \pm} = \psi_n(\theta) = Ae^{\pm in\theta}.
+\end{equation*}
+Només ens queda normalitzar-los:
+\begin{equation*}
+ 1 = \braket{n,\pm}{n,\pm} = \int_0^{2\pi} \abs{A}^2 d\theta = 2\pi\abs{A}^2.
+\end{equation*}
+Si imposem que \( A \) sigui real i positiu ha de ser \( A = \frac{1}{\sqrt{2\pi}} \). 
+
+\parbreak
+
+Si ara afegim un camp elèctric uniforme el hamiltonià esdevé
+\begin{equation*}
+	H_1 = H_0 - q\epsilon a \cos{\theta}.
+\end{equation*}
+Pensarem en la contribució del camp elèctric, \( \delta H \), com una pertorbació governada pel paràmetre \( \epsilon \).
+
+L'estat fonamental és no degenerat per tant podem calcular-ne directament la correcció a l'energia de primer ordre:
+\begin{equation*}
+	E_0^{(1)} = \bra{0}\delta H \ket{0} = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} \cos{\theta} \, d\theta	= 0.
+\end{equation*}
+
+Fem el càlcul de la correcció a segon ordre. En primer lloc calculem els solapaments \( \bra{0}\delta H \ket{n, \pm} \):
+\begin{equation*}
+	\bra{0}\delta H\ket{n,\pm} = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} e^{\pm in\theta} \cos{\theta} \,d\theta = - \frac{q\epsilon a}{2\pi} \int_0^{2\pi} \cos{n\theta} \cos{\theta} \,d\theta.
+\end{equation*}
+Com que \( \cos{n\theta} \) i \( \cos{m\theta} \) són ortogonals si \( n \neq m \), només tindrem contribució quan \( n = 1 \), que serà
+\begin{equation*}
+	\bra{0}\delta H\ket{1,\pm} = - \frac{q\epsilon a}{2\pi} \int_0^{2\pi} (\cos{\theta})^2 \,d\theta = - \frac{q\epsilon a}{2\pi}\frac{2\pi}{2} = - \frac{q \epsilon a}{2}.
+\end{equation*}
+Per tant la correcció de segon ordre és
+\begin{equation*}
+	E_0^{(2)} = \frac{\abs{\bra{0}\delta H \ket{n, +}}^2 + \abs{\bra{0}\delta H \ket{n, -}}^2}{E_0 - E_n} = -\frac{4ma^2}{\hbar^2} \frac{q^2a^4\epsilon^2}{4} = - \frac{q^2a^4}{\hbar^2}\epsilon^2.
+\end{equation*}
+Per tant la nova energia fonamental, fins a ordre 2, és
+\begin{equation*}
+	E_0(\epsilon) = -\frac{q^2a^4}{\hbar^2}\epsilon^2 + O(\epsilon^3).
+\end{equation*}
+
+
+\end{document}
