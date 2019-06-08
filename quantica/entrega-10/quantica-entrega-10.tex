@@ -35,7 +35,6 @@
 \crefname{table}{taula}{taules}
 \numberwithin{table}{section}
 \numberwithin{figure}{section}
-\numberwithin{equation}{section}
 
 \graphicspath{{./figs/}}
 
@@ -136,29 +135,185 @@ Si ara afegim un camp elèctric uniforme el hamiltonià esdevé
 \begin{equation*}
 	H_1 = H_0 - q\epsilon a \cos{\theta}.
 \end{equation*}
-Pensarem en la contribució del camp elèctric, \( \delta H \), com una pertorbació governada pel paràmetre \( \epsilon \).
+Pensarem en la contribució del camp elèctric, \( V \), com una pertorbació governada pel paràmetre \( \epsilon \).
 
 L'estat fonamental és no degenerat per tant podem calcular-ne directament la correcció a l'energia de primer ordre:
-\begin{equation*}
-	E_0^{(1)} = \bra{0}\delta H \ket{0} = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} \cos{\theta} \, d\theta	= 0.
-\end{equation*}
+\begin{equation}\label{eq:correccio energia fonamental}
+	E_0^{(1)} = \bra{0}V \ket{0} = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} \cos{\theta} \, d\theta	= 0.
+\end{equation}
 
-Fem el càlcul de la correcció a segon ordre. En primer lloc calculem els solapaments \( \bra{0}\delta H \ket{n, \pm} \):
+Fem el càlcul de la correcció a segon ordre. En primer lloc calculem els solapaments \( \bra{0}V \ket{n, \pm} \):
 \begin{equation*}
-	\bra{0}\delta H\ket{n,\pm} = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} e^{\pm in\theta} \cos{\theta} \,d\theta = - \frac{q\epsilon a}{2\pi} \int_0^{2\pi} \cos{n\theta} \cos{\theta} \,d\theta.
+	\bra{0}V\ket{n,\pm} = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} e^{\pm in\theta} \cos{\theta} \,d\theta = - \frac{q\epsilon a}{2\pi} \int_0^{2\pi} \cos{n\theta} \cos{\theta} \,d\theta.
 \end{equation*}
 Com que \( \cos{n\theta} \) i \( \cos{m\theta} \) són ortogonals si \( n \neq m \), només tindrem contribució quan \( n = 1 \), que serà
-\begin{equation*}
-	\bra{0}\delta H\ket{1,\pm} = - \frac{q\epsilon a}{2\pi} \int_0^{2\pi} (\cos{\theta})^2 \,d\theta = - \frac{q\epsilon a}{2\pi}\frac{2\pi}{2} = - \frac{q \epsilon a}{2}.
-\end{equation*}
+\begin{equation}\label{eq:overlap fonamental}
+	\bra{0}V\ket{1,\pm} = - \frac{q\epsilon a}{2\pi} \int_0^{2\pi} (\cos{\theta})^2 \,d\theta = - \frac{q\epsilon a}{2\pi}\frac{2\pi}{2} = - \frac{q \epsilon a}{2}.
+\end{equation}
 Per tant la correcció de segon ordre és
 \begin{equation*}
-	E_0^{(2)} = \frac{\abs{\bra{0}\delta H \ket{n, +}}^2 + \abs{\bra{0}\delta H \ket{n, -}}^2}{E_0 - E_n} = -\frac{4ma^2}{\hbar^2} \frac{q^2a^4\epsilon^2}{4} = - \frac{q^2a^4}{\hbar^2}\epsilon^2.
+	E_0^{(2)} = \frac{\abs{\bra{0}V \ket{1, +}}^2 + \abs{\bra{0}V \ket{1, -}}^2}{E_0 - E_1} = -\frac{4ma^2}{\hbar^2} \frac{q^2a^4\epsilon^2}{4} = - \frac{q^2a^4}{\hbar^2}\epsilon^2.
 \end{equation*}
 Per tant la nova energia fonamental, fins a ordre 2, és
 \begin{equation*}
 	E_0(\epsilon) = -\frac{q^2a^4}{\hbar^2}\epsilon^2 + O(\epsilon^3).
 \end{equation*}
+
+A continuació busquem la correcció de l'estat fonamental a primer ordre. Pel que acabem de calcular tenim
+\begin{align*}
+	\ket{\psi_0^{(1)}} &= \sum_{n = 0}^{\infty} \frac{1}{E_0 - E_n} \big( \bra{n, +}V\ket{0} \ket{n,+} + \bra{n,-}V\ket{0}\ket{n,-} \big) \\
+										 &= -\frac{\bra{1,+}V\ket{0}}{E_1} \ket{1,+} -\frac{\bra{1,-}V\ket{0}}{E_1} \ket{1,-} \\
+										 &= \frac{2ma^3q\epsilon}{\hbar^2}\big(\ket{1,+} + \ket{1,-}\big).
+\end{align*}
+Per tant el nou estat fonamental serà, fins a primer ordre,
+\begin{equation*}
+	\ket{\psi_0} = \ket{0} +\frac{2ma^3q\epsilon}{\hbar^2}\big(\ket{1,+} + \ket{1,-}\big) + O(\epsilon^2)
+\end{equation*}
+I la corresponent funció d'ona (sense normalitzar):
+\begin{equation*}
+	\psi_0(\theta) = \braket{\theta}{\psi_0} = \frac{1}{\sqrt{2\pi}} + \frac{2ma^3q\epsilon}{\hbar^2\sqrt{2\pi}} \cos{\theta} + O(\epsilon^2).
+\end{equation*}
+
+\parbreak
+
+Calculem el valor esperat del moment dipolar, \( d = qx = qa\cos{\theta} \), sobre l'estat fonamental corregit a primer ordre:
+\begin{align*}
+	\bra{\psi_0}qa\cos{\theta}\ket{\psi_0} & = qa\bra{0}\cos{\theta}\ket{0} + \frac{4ma^4q^2\epsilon}{\hbar^2} \big( \bra{0}\cos{\theta}\ket{1,+} + \bra{0}\cos{\theta}\ket{1,-} \big) \\
+																				 & + \frac{8m^2a^7q^3\epsilon^3}{\hbar^4} \big( \bra{1,+}\cos{\theta}\ket{1,+} + \bra{1,-}\cos{\theta}\ket{1,-} + \bra{1,+}\cos{\theta}\ket{1,-} \big).
+\end{align*}
+Observem que \( \cos{\theta} = -\frac{V}{q\epsilon a} \), per tant el primer terme és nul per l'\cref{eq:correccio energia fonamental}. També són nuls els tres últims termes: d'una banda
+\begin{equation*}
+	\bra{1,\pm}\cos{\theta}\ket{1,\pm} = \int_0^{2\pi} e^{\mp i\theta} e^{\pm i\theta} \cos{\theta} \,d\theta = \int_0^{2\pi} \cos{\theta} \, d\theta = 0.
+\end{equation*}
+I d'altra banda
+\begin{equation*}
+	\bra{1,+}\cos{\theta}\ket{1,-} = \int_0^{2\pi} e^{- i\theta} e^{- i\theta} \cos{\theta} \,d\theta = \int_0^{2\pi} e^{2i\theta}\cos{\theta} \, d\theta = 0.
+\end{equation*}
+I, per l'\cref{eq:overlap fonamental}, deduïm que \( \bra{0}\cos{\theta}\ket{1,+} = \bra{0}\cos{\theta}\ket{1,-} = \frac{1}{2} \) i per tant 
+\begin{equation*}
+	\langle d \rangle = \frac{4ma^4q^2}{\hbar^2}\epsilon.
+\end{equation*}
+La polaritzabilitat, \( \alpha \), és, per tant
+\begin{equation*}
+	\alpha = \frac{\langle d \rangle}{\epsilon} = \frac{4ma^4q^2}{\hbar^2}.
+\end{equation*}
+
+\parbreak
+
+Calculem la correcció a primer ordre de les energies de la resta dels estats. Com que estan degenerats primer hem de determinar la base que diagonalitza la perturbació restringida a cada subespai propi. Tenim
+\begin{equation*}
+	\bra{n,\pm} V \ket{n,\pm} = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} e^{\mp in\theta} e^{\pm in \theta} \cos{\theta} \,d\theta = 0
+\end{equation*}
+i
+\begin{equation*}
+	\bra{n,\mp} V \ket{n,\pm} = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} e^{\pm in\theta} e^{\pm in \theta} \cos{\theta} \,d\theta = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} e^{\pm 2in\theta} \cos{\theta} \,d\theta = 0.
+\end{equation*}
+Per tant la perturbació restringida a cada subespai propi de fet és l'aplicació nu\l.la. Així qualsevol tria de base és una base pròpia amb valor propi 0 i per tant la correcció de l'energia a primer ordre per a qualsevol estat excitat és 0. 
+
+\parbreak
+
+Com que les correccions a primer ordre de les energies excitades són nu\l.les, continuem tenim degeneració dels nivells energètics a segon ordre. Per a trencar la degeneració hem de trobar els estats que diagonalitzen la matriu donada per
+\begin{equation} \label{eq:segona pertorbacio}
+	M_{ij} = \sum_{\substack{m = 0 \\ m \neq n}}^{\infty} \sum_{k \in \{+,-\}} \frac{\bra{n,i}V\ket{m,k} \bra{m,k}V\ket{n,j}}{E_n - E_m}. 
+\end{equation}
+Calculem, doncs, els següents overlaps \( \bra{n,+}V\ket{m,\pm} \) i \( \bra{n,-}V\ket{m,\pm} \):
+\begin{equation*}
+	\bra{n,+} V \ket{m,\pm} = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} e^{i(n \pm m)\theta} \cos{\theta} \,d\theta = -\frac{q\epsilon a}{2\pi} \int_0^{2\pi} \cos{\big((n\pm m)\theta\big)} \cos{\theta} \,d\theta.
+\end{equation*}
+Aquest overlap serà diferent de zero només si \( \abs{n \pm m} = 1 \), i això només passarà si \( -m = -n -1 \) o \( -m  = -n+1 \). Per tant
+\begin{equation*}
+	\bra{n,+} V \ket{n \pm	1,-} = -\frac{q\epsilon a}{2}.
+\end{equation*}
+Similarment, si calculem amb \( \ket{n,-} \) concloem que només seran diferents de zero els overlaps amb \( \ket{n \pm 1, +} \) i
+\begin{equation*}
+	\bra{n,-} V \ket{n \pm	1,+} = -\frac{q\epsilon a}{2}.
+\end{equation*}
+Aleshores, per a \( n > 1 \), \( M_{+-} = M_{-+} = 0 \). En efecte, tal i com acabem de veure, a \cref{eq:segona pertorbacio} només sobreviuen els termes amb \( m = n+1 \) i \( m = n-1 \). Però
+\begin{equation*}
+	\bra{n,+}V\ket{n\pm1,-}V\bra{n\pm1,-}V\ket{n,-} = \bra{n,-}V\ket{n\pm1,+}V\bra{n\pm1,+}V\ket{n,+} = 0.
+\end{equation*}
+Només sobreviuen els termes diagonals:
+\begin{align*}
+	M_{++} &= \frac{\abs{\bra{n+1,-}V\ket{n,+}}^2}{E_n - E_{n+1}} + \frac{\abs{\bra{n-1,-}V\ket{n,+}}^2}{E_n - E_{n-1}} \\
+				 &= \frac{2ma^2}{\hbar^2}\frac{q^2\epsilon^2a^2}{4}\left(\frac{1}{2n - 1} - \frac{1}{2n + 1}\right) \\
+				 &= \frac{mq^2a^4}{(4n^2 - 1)\hbar^2}\epsilon^2,
+\end{align*}
+i \( M_{--} = M_{++} \). Per tant, per a \( n > 1 \) tenim que la correcció de l'energia a segon ordre és
+\begin{equation*}
+	E_{\pm n}(\epsilon) = \frac{\hbar^2}{2ma^2n^2} + \frac{mq^2a^4}{(4n^2 - 1)\hbar^2}\epsilon^2 + O(\epsilon^3) 
+\end{equation*}
+i encara tenim degeneració.
+
+Pel que fa al cas \( n = 1 \), els dos estats excitats es poden parlar a través de l'estat fonamental ja que ara tenim, tal i com hem calculat a \cref{eq:overlap fonamental},
+\begin{equation*}
+	\bra{1,\pm}V\ket{0}\bra{0}V\ket{1,\pm} = \frac{q^2a^2\epsilon^2}{\hbar^2}
+\end{equation*}
+i aleshores la matriu de la pertorbació restringida al subespai propi amb \( n = 1 \) és
+\begin{equation*}
+	M = \frac{mq^2a^4\epsilon^2}{2\hbar^2}\begin{pmatrix}
+		1 & 1 \\ 1 & 1
+	\end{pmatrix}.
+\end{equation*}
+Els dos estats propis d'aquesta matriu són 
+\begin{equation*}
+	\ket{1,2} \defeq \frac{1}{\sqrt{2}}\big(\ket{1,+} + \ket{1,-}\big)
+\end{equation*} i
+\begin{equation*}
+	\ket{1,0} \defeq \frac{1}{\sqrt{2}}\big(\ket{1,+} - \ket{1,-}\big) 
+\end{equation*}
+amb valors propis \( 2\frac{mq^2a^4\epsilon^2}{2\hbar^2} \) i 0 respectivament. Per tant ara es trenca la degeneració i tenim
+\begin{equation*}
+	E_{1,2}(\epsilon) = \frac{\hbar}{2ma^2} + \frac{mq^2a^4}{\hbar^2}\epsilon^2 + O(\epsilon^3)
+\end{equation*}
+i
+\begin{equation*}
+	E_{1,0}(\epsilon) = \frac{\hbar}{2ma^2} + O(\epsilon^3).
+\end{equation*}
+
+\parbreak
+
+Pensarem que l'hidrogen de l'hidroxil de la molècula és una partícula carregada que es mou en un anell de radi \( a \) sota la influència del hamiltonià
+\begin{equation*}
+	H = \frac{L_z^2}{2ma^2} + \eta\frac{\hbar^2}{2ma^2}\cos{3\theta}.
+\end{equation*}
+El segon terme, \( V \), correspon a la interacció electrostàtica deguda a la presència del metil i el considerarem una pertorbació governada per \( \eta \). Ja coneixem els estats i energies del hamiltonià sense pertorbar. La correcció de primer ordre a l'energia fonamental és
+\begin{equation*}
+	E_0^{(1)} = \frac{\hbar^2 \eta}{2ma^2}\bra{0}\cos{(3\theta)}\ket{0} = \frac{\hbar^2 \eta}{4\pi ma^2}\int_0^{2\pi} \cos{3\theta} \, d\theta = 0.
+\end{equation*}
+Per a calcular la correcció a primer ordre de l'estat i a segon ordre de l'energia ens calen els overlaps \( \bra{0}\cos{(3\theta)}\ket{n,\pm} \):
+\begin{equation*}
+	\bra{0}\cos{(3\theta)}\ket{n,\pm} = \frac{1}{2\pi} \int_0^{2\pi}e^{\pm in\theta}\cos{3\theta}\,d\theta = \frac{1}{2\pi} \int_0^{2\pi}\cos{(3\theta)}\cos{(n\theta)} \,d\theta.
+\end{equation*}
+El resultat és 0 tret de quan \( n = 3 \), que és \( \frac{1}{2} \). Aleshores
+\begin{equation*}
+	E_0^{(2)} = \frac{\hbar^4\eta^2}{4ma^4}\frac{\abs{\bra{0}\cos{(3\theta)}\ket{3,+}}^2 + \abs{\bra{0}\cos{(3\theta)}\ket{3,-}}^2}{E_0 - E_3} = -\frac{\hbar^4\eta^2}{8m^2a^4}\frac{2ma^2}{9\hbar^2} = - \frac{\hbar^2}{36ma^2}\eta^2
+\end{equation*}
+i per tant
+\begin{equation*}
+	E_0(\eta) = -\frac{\hbar^2}{36ma^2}\eta^2 + O(\eta^3).
+\end{equation*}
+
+Pel que fa a l'estat tenim que la correcció a primer ordre és
+\begin{equation*}
+	\ket{\psi_0^{(1)}} = -\frac{\bra{3,+}V\ket{0}}{E_3}\ket{3,+} -\frac{\bra{3,-}V\ket{0}}{E_3}\ket{3,-} = -\frac{\eta}{18}\big( \ket{3,+} + \ket{3,-} \big).
+\end{equation*}
+L'estat corregit és, doncs,
+\begin{equation*}
+	\ket{\psi_0} = \ket{0} -\frac{\eta}{18}\big( \ket{3,+} + \ket{3,-} \big) + O(\eta^2).
+\end{equation*}
+La funció d'ona corresponent és, sense normalitzar,
+\begin{equation*}
+	\psi_0(\theta) = \braket{\theta}{\psi_0} = \frac{1}{\sqrt{2\pi}} - \frac{\eta}{18\sqrt{2\pi}}\cos{3\theta}
+\end{equation*}
+i si normalitzem
+\begin{equation*}
+	\psi_0(\theta) = \frac{1}{\sqrt{\left(2 + \frac{\eta^2}{18^2}\right)\pi}}\left(1 - \frac{\eta}{18}\cos{3\theta}\right).
+\end{equation*}
+La corresponent densitat de probabilitat és
+\begin{equation*}
+	p(\theta) = \psi(\theta)^2 = \frac{1}{\left(2 + \frac{\eta^2}{18^2}\right)\pi}\left(1 - \frac{\eta}{18}\cos{3\theta}\right)^2.
+\end{equation*}
+Els màxims d'aquesta distribució apareixen quan \( 1 - \frac{\eta}{18}\cos{3\theta} \) assoleix el seu valor mínim, que passa quan \( \cos{3\theta} = -1 \), és a dir per \( \theta = \frac{\pi}{3}, \pi, \frac{5\pi}{3} \). Aquestes posicions corresponen precisament a trobar l'hidrogen just al mig de dos dels hidrogens del metil.
 
 
 \end{document}
