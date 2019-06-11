@@ -76,6 +76,8 @@
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\funcio}[3]{#1 \colon #2 \longrightarrow #3}
+\newcommand{\funcioC}[3]{#1 \colon #2 \longrightarrow \C}
 \let\Im\relax
 \let\Re\relax
 \DeclareMathOperator{\Im}{Im}
@@ -319,6 +321,33 @@ Observem que aquests exemples semblen indicar que una corva és homòloga a 0 si
 \begin{proof}
 	\( (\Rightarrow) \) Suposem que \( \Omega \subseteq \C \) és simplement connex, de manera que \( \Ci - \Omega \) és connex. Aleshores, si \( a \notin \Omega \), hi ha un arc \( \gamma \) contingut a \( \Ci - \Omega \) que connecta \( a \) amb \( \infty \).
 \end{proof}
+
+\section{Funcions harmòniques}
+Les funcions harmòniques juguen un paper important en la teoria de les equacions diferencials en derivades parcials. També tenen relació amb les funcions holomorfes. En aquesta secció les introduïm en aquest segon context. 
+
+\begin{defn}[Funció harmònica]
+	Diem que una funció \( \funcio{u}{\Omega \subseteq \R^2}{\R} \), on \( \Omega \) és un domini, és harmònica si \( \Delta u = \partial_x^2 u + \partial_y^2 u = 0 \) a \( \Omega \). L'operador \( \Delta \) s'anomena el laplacià.
+\end{defn}
+
+\begin{exe}
+	\begin{punts}
+		\item[]
+		\item La funció \( u_1(x,y) = x^2 - y^2 \) és harmònica a tot \( \R^2 \). En efecte,
+			\begin{equation*}
+				\Delta u_1(x,y) = \partial_x^2 u_1(x,y) + \partial_y^2 u_2(x,y) = 2 - 2 = 0.
+			\end{equation*}
+		\item La funció \( u_2(x,y) = x^2 + y^2 \) no és harmònica a cap domini de \( \R^2 \):
+			\begin{equation*}
+				\Delta u_2(x,y) = \partial_x^2 u_2(x,y) + \partial_y^2 u_2(x,y) = 2 + 2 = 4.
+			\end{equation*}
+	\end{punts}	
+\end{exe}
+
+Amb aquests dos exemples no és clar com podem identificar si una funció és harmònica o no. Ara bé, si escrivim aquestes dues funcions com a funcions d'una variable complexa trobem
+\begin{equation*}
+	\tilde{u}_1(z) = u_1\left(\frac{z + \bar{z}}{2}, \frac{z - \bar{z}}{2i}\right) = \frac{z^2 + \bar{z}^2 + 2z\bar{z} + z^2 + \bar{z}^2 - 2z\bar{z}}{4} = \frac{z^2 + \bar{z}^2}{2},
+\end{equation*}
+
 
 \chapter{El teorema dels residus}
 \section{Sèries de Laurent}
