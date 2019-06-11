@@ -6,8 +6,8 @@
 \usepackage{lmodern}
 \usepackage{cmbright}
 \usepackage{geometry}
+\usepackage{tikz}
 \usepackage{hyperref}
-\usepackage[dvipsnames]{xcolor}
 \usepackage[bf,sf,pagestyles]{titlesec}
 \usepackage{titling}
 \usepackage[runin]{abstract}
@@ -116,6 +116,14 @@ Caterpillar Inc. (CAT) és el fabricant de maquinària de construcció més gran
 	\centering \small \sffamily
 	\includegraphics[scale = 1.5]{cat-logo}
 	\caption{Logotip de Caterpillar}
+	\label{fig:logo}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering \sffamily \small
+	\input{figs/serie-preus.tex}
+	\caption{Evolució del preu de tancament de Caterpillar entre 2015 i 2018}
+	\label{fig:serie preus}
 \end{figure}
 
 \subsection{Dades econòmics de l'empresa}
