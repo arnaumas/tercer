@@ -1,0 +1,10 @@
+\begin{thebibliography}{1}
+
+\bibitem{Rhelp}
+{R Core Team}, {\em RDocumentation: optimize}.
+\newblock R Foundation for Statistical Computing.
+
+\bibitem{method}
+T.~P. Minka, ``Beyond newton’s method.''
+
+\end{thebibliography}

@@ -33,7 +33,7 @@
 Definim primer els paràmetres que farem servir (alpha, nu, i nombre de mostres.)
 {\footnotesize
   <<echo=T,results='hold',message=F, warning=F>>=
-  al<-0.2;nu<-1;n<-500;n.rep<-1000
+  al<-1;nu<-8;n<-500;n.rep<-1000
  @
 }
 Estimem els paràmetres pel mètode dels moments i pel mètode de màxima versemblança
@@ -48,7 +48,7 @@ Estimem els paràmetres pel mètode dels moments i pel mètode de màxima versem
   mu<-mean(xdat);s2<-var(xdat);mlog<-mean(log(xdat));
   alm[k]<-mu/s2
   num[k]<-mu^2/s2
-  nus[k]<-optimize(lpG,lower=0.01,upper=5,maximum=TRUE)$maximum;
+  nus[k]<-optimize(lpG,lower=0.01,upper=10,maximum=TRUE)$maximum;
   als[k]<-nus[k]/mu
   nuaux[k]<-num[k]
   for(j in 1:3){
@@ -72,7 +72,7 @@ Fem el print de les mitjanes dels valors obtinguts i realitzem els plots compara
  rownames(param)=c("moments","versemblança","real");colnames(param)=c("alpha","nu");param
 
  par(mfrow=c(1,1))
- hist(nus,xlim=c(0.4,3),ylim=c(0,350),xlab="num",ylab="Freq��ncia",main="Histograma per a nus (n=500)",col="orange",cex.main=1)
+ hist(nus,xlim=c(0.4,3),ylim=c(0,350),xlab="num",ylab="Freq??ncia",main="Histograma per a nus (n=500)",col="orange",cex.main=1)
  abline(v=mean(nus),col="red")
  abline(v=nu,col="blue")
  
