@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://git.overleaf.com/5cff653990559407e7c81302
+	branch = master
+	commit = cb8268ecc9851a5835db1062911ad10e2e7994b4
+	parent = 7b954bfa541a443424dd34d5b22eae652830c961
+	method = merge
+	cmdver = 0.4.0
