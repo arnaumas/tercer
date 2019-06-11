@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[catalan]{babel}
 \usepackage{lmodern}
+\usepackage{cmbright}
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
@@ -14,9 +15,15 @@
 \usepackage{siunitx}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{listings}
+\usepackage{textcomp}
 \usepackage{amsmath,amssymb}
-\usepackage[catalan,sort]{cleveref}
+\usepackage[sort]{cleveref}
 \usepackage{enumitem}
+
+\renewcommand{\familydefault}{\rmdefault}
+\renewcommand{\sfdefault}{cmbr}
+\renewcommand{\ttdefault}{cmtl}
 
 \geometry{
 	a4paper,
@@ -51,6 +58,26 @@
 	list-units = single,
 	separate-uncertainty = true
 }
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+	breakatwhitespace = true,
+	postbreak = \textrightarrow\,,
+  xleftmargin=\parindent,
+	frame = l,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\sffamily\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+	numbers = left, 
+	numberstyle = \tiny\ttfamily,
+}
+\lstset{texcl=true,style=customc}
+\renewcommand{\lstlistingname}{Programa}
 
 \newpagestyle{pagina}{
 	\headrule
@@ -88,7 +115,15 @@ Caterpillar Inc. (CAT) és el fabricant de maquinària de construcció més gran
 \begin{figure}[htb]
 	\centering \small \sffamily
 	\includegraphics[scale = 1.5]{cat-logo}
-\caption{Logotip de Caterpillar}
+	\caption{Logotip de Caterpillar}
 \end{figure}
+
+\subsection{Dades econòmics de l'empresa}
+
+\begin{lstlisting}[language=R, caption=Codi per simular el model amb \( q_1 \), label={lst:codi 1}]
+# Comentari
+
+Codi R
+\end{lstlisting}
 
 \end{document}
