@@ -62,6 +62,7 @@
 
 \lstdefinestyle{customc}{
   belowcaptionskip=1\baselineskip,
+	backgroundcolor = \color{gray!20!white},
   breaklines=true,
 	breakatwhitespace = true,
 	postbreak = \textrightarrow\,,
@@ -110,32 +111,45 @@
 	\end{abstract}
 	
 	\center \includegraphics[scale = 0.3]{uab}
-	\begin{figure}[htb]
-	\centering \small \sffamily
-	\includegraphics[width=0.4\textwidth]{cat-logo}
-	\caption{Logotip de Caterpillar}
-	\label{fig:logo}
-\end{figure}
 \end{titlepage}
 
 \textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=7.786318$, una desviació estàndard anual de $\hat{\sigma}_a=26.7607$, i finalment una curtosi diària de $\hat{ku}_d=2.806694$. }
 
 \section{Context}
-Caterpillar Inc. (NYSE: CAT) és una empresa multinacional amb seu a Illinois . EL seu negoci es basa en la fabricació de el fabricant de maquinària de construcció més gran del món. 
+\begin{figure}[htb]
+	\centering \small \sffamily
+	\includegraphics[width=0.4\textwidth]{cat-logo}
+	\caption{Logotip de Caterpillar}
+	\label{fig:logo}
+\end{figure}
 
+Caterpillar Inc. (NYSE: CAT) és una empresa multinacional de maquinària industrial i de construcció amb seu a Illinois. Actualment és l'empresa líder en l'àmbit de la mquinària de construcció i industrial \cite{cat} i es troba en la posició 65 al rànquing \emph{Fortune 500} i en la posició 238 del rànquing \emph{Fortune Global 500} de l'any 2019 \cite{fortune,global}. El preu actual de l'acció de Caterpillar és d'uns \$127. Actualment té \num{104000} treballadors. 
 
+Caterpillar va néixer l'any 1925 de la fusió de les empreses Holt Manufacturing Company i C. L: Best Tractor Co. El fundador de la primera, Benjamin Holt, va patentar un dels primers vehicles que funcionaven amb tracció per eruga (d'aquí el nom Caterpillar), un sistema de tracció que consisteix en una sèrie de plaques rígides unides per una cinta que gira al voltant de les rodes del vehicle. Amb aquest sistema, la superfície de contacte del vehicle amb el sòl s'incrementa de manera que s'exerceix menys pressió i és possible circular per a terrenys més complicats. Originalment, els vehicles de Holt es feien servir a l'oest americà, on la combinació del terreny àrid i irregular del desert californià i la manca d'infrastructura dificultaven les tasques agràries i de transport. Molt aviat, però, l'empresa va desenvolupar vehicles militars durant la Primera Guerra mundial, sent un dels precursors del tanc. Durant el període d'entreguerra i sobretot després de la Segona Guerra mundial, Caterpillar va evolucionar cap a l'àmbit de la construcció, primer al mercat americà i després a escala global, sobretot als països en desenvolupament. 
 
 \begin{figure}[htb]
 	\centering \sffamily \small
+	\input{figs/tancament.tex}
+	\caption{Preus de tancament anual entre 2000 i 2018 de Caterpillar}
+	\label{fig:tancament}
+\end{figure}
+
+A la \cref{fig:tancament} podem veure els preus de tancament anuals entre l'any 2000 i l'actualitat. La tendència és en general a l'alça. Tot i així, cal remarcar una caiguda de prop del \SI{50}{\percent} durant l'any 2008, naturalment deguda a la crisi financera del mateix any. Aquesta crisi va afectar fortament el sector de la construcció, que és una de les principals àrees de negoci de Caterpillar.
+
+\section{Previsió futura}
+\begin{figure}[htb]
+	\centering \sffamily \small
 	\input{figs/serie-preus.tex}
-	\caption{Evolució del preu de tancament de Caterpillar entre 2015 i 2018}
+	\caption{Evolució del preu de tancament i rendibilitat diàries de Caterpillar entre 2015 i 2018}
 	\label{fig:serie preus}
 \end{figure}
+
+\section{Resta}
 
 \begin{figure}[htb]
 	\centering \sffamily \small
 	\input{figs/inversio.tex}
-	\caption{Evolució d'una inversió de \$100}
+	\caption{Evolució d'una inversió de \$100 en Caterpillar i l'índex DJI entre l'any 2000 i el 2018}
 	\label{fig:inversio}
 \end{figure}
 
@@ -151,12 +165,14 @@ Caterpillar Inc. (NYSE: CAT) és una empresa multinacional amb seu a Illinois . 
 	\caption{Comparació amb una distribució NIG}
 	\label{fig:comparacio nig}
 \end{figure}
-\subsection{Dades econòmics de l'empresa}
 
-\begin{lstlisting}[language=R, caption=Codi per simular el model amb \( q_1 \), label={lst:codi 1}]
+\begin{lstlisting}[language=R]
 # Comentari
 
 Codi R
 \end{lstlisting}
+
+\bibliographystyle{plain}
+\bibliography{fonts}
 
 \end{document}
