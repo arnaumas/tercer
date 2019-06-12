@@ -12,17 +12,26 @@ rendibilitat <- function(preus) {
 rend.CAT <- rendibilitat(preus.CAT)
 
 # Sèrie de preus ----
-tikz(file = "../figs/serie-preus.tex", width = 5, height = 4)
-serie <- plot(preus.CAT, main = "Evolució del preu de tancament")
+tikz(file = "../figs/serie-preus.tex", width = 6, height = 3)
+serie <- plot(preus.CAT, main = "Evolució del preu de tancament", col = 'blue')
 serie <- addPanel(rendibilitat, type = 'h', method = 'discrete', col = 'red')
 plot(serie)
 dev.off()
 
+# Tancaments
+getSymbols("CAT",from="2000-01-01",to="2019-01-01")
+tanc.CAT <- CAT$CAT.Close
+anys <- endpoints(tanc.CAT, "years")
+tanc.CAT <- tanc.CAT[anys]
+tikz(file = "../figs/tancament.tex", width = 6, height = 1.7)
+plot(tanc.CAT, main = "Tancaments anuals entre 2000 i 2018", col = 'blue')
+dev.off()
+
 # Evolució d'una inversió de $100 ----
-tikz(file = "../figs/inversio.tex", width = 5, height = 4)
+tikz(file = "../figs/inversio.tex", width = 6, height = 2)
 inv <- plot(100*preus.CAT/as.numeric(preus.CAT[1]), main = "Evolució d'una inversió de \\$100", col = 'blue')
 inv <- lines(100*preus.DJI/as.numeric(preus.DJI[1]), col = 'red', lwd = 2)
-inv <- addLegend("topright", legend.names = c("CAT", "DJI"), 
+inv <- addLegend("topleft", legend.names = c("CAT", "DJI"), 
           lty=c(1, 1), lwd=c(2, 2),
           col=c("blue", "red"))
 plot(inv)
