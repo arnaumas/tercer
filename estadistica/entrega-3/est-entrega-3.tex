@@ -3,8 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[catalan]{babel}
-\usepackage{lmodern}
 \usepackage{cmbright}
+\usepackage{lmodern}
 \usepackage{geometry}
 \usepackage{tikz}
 \usepackage{hyperref}
@@ -24,6 +24,10 @@
 \renewcommand{\familydefault}{\rmdefault}
 \renewcommand{\sfdefault}{cmbr}
 \renewcommand{\ttdefault}{cmtl}
+\usepackage{gensymb}
+\usepackage{authblk}
+
+
 
 \geometry{
 	a4paper,
@@ -87,14 +91,20 @@
 }
 \pagestyle{pagina}
 
-\title{\sffamily \bfseries Modelització de l'empresa Caterpillar}
+
 \author{\sffamily Andreu Arderiu, Arnau Mas}
 \date{\sffamily 14 de juny de 2019}
+
+\title{\sffamily \bfseries Modelització de l'empresa Caterpillar}
+
+
+
+
 
 \begin{document}
 
 \begin{titlepage}
-	\clearpage
+\clearpage
 	\maketitle	
 
 	\renewcommand{\abstractname}{\bfseries \sffamily Resum:}
@@ -106,18 +116,41 @@
 	\begin{abstract}
 		Abstract en anglès
 	\end{abstract}
+	
 	\center \includegraphics[scale = 0.3]{uab}
-\end{titlepage}
-
-\section{Introducció}
-Caterpillar Inc. (CAT) és el fabricant de maquinària de construcció més gran del món. 
-
-\begin{figure}[htb]
+	\begin{figure}[htb]
 	\centering \small \sffamily
-	\includegraphics[scale = 1.5]{cat-logo}
+	\includegraphics[width=0.4\textwidth]{cat-logo}
 	\caption{Logotip de Caterpillar}
 	\label{fig:logo}
 \end{figure}
+\end{titlepage}
+
+
+
+
+
+
+
+
+
+
+
+\textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=7.786318$, una desviació estàndard anual de $\hat{\sigma}_a=26.7607$, i finalment una curtosi diària de $\hat{ku}_d=2.806694$. }
+
+
+
+
+\section{Context}
+Caterpillar Inc. (CAT) és el fabricant de maquinària de construcció més gran del món. 
+
+
+
+
+
+
+
+
 
 \begin{figure}[htb]
 	\centering \sffamily \small
