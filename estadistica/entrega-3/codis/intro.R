@@ -1,5 +1,6 @@
 library(quantmod)
 library(fBasics)
+library(tikzDevice)
 getSymbols("^DJI",from="2015-01-01",to="2018-12-31")
 getSymbols("CAT",from="2015-01-01",to="2018-12-31")
 
@@ -7,7 +8,7 @@ getSymbols("CAT",from="2015-01-01",to="2018-12-31")
 preus.CAT <- CAT$CAT.Close
 preus.DJI <- DJI$DJI.Close
 rendibilitat <- function(preus) {
-  100*diff(log(preus))[-1]
+  diff(log(preus))[-1]
 }
 rend.CAT <- rendibilitat(preus.CAT)
 
@@ -18,7 +19,7 @@ serie <- addPanel(rendibilitat, type = 'h', method = 'discrete', col = 'red')
 plot(serie)
 dev.off()
 
-# Tancaments
+# Tancaments ----
 getSymbols("CAT",from="2000-01-01",to="2019-01-01")
 tanc.CAT <- CAT$CAT.Close
 anys <- endpoints(tanc.CAT, "years")
@@ -42,15 +43,23 @@ volat.CAT <- sqrt(250)*sd(rend.CAT)
 mitj.CAT <- 250*mean(rend.CAT)
 n.dades <- length(rend.CAT)
 
-tikz(file = "../figs/dist-rend.tex", width = 5, height = 4)
+tikz(file = "../figs/dist-rend.tex", width = 3.5, height = 2)
 nf <- layout(mat = matrix(c(2,1), 2, 1, byrow = TRUE), height = c(3,1))
 par(mar = c(3,4,0,0))
-boxplot(as.numeric(rend.CAT), horizontal = TRUE, frame = FALSE, col = 'lightblue', whiskcol = 'black', staplecol = 'black', border = 'white', medcol = 'black', medlwd = 1)
+boxplot(as.numeric(rend.CAT), horizontal = TRUE, frame = FALSE,
+        col = 'lightblue', whiskcol = 'black', staplecol = 'black', 
+        border = 'white', medcol = 'black', medlwd = 1)
 par(mar = c(0,4,3,0))
-hist(rend.CAT, ylim = c(0,0.3), breaks = 12, xlab = "", ylab = "Densitat", xaxt = 'n', freq = FALSE, col = 'lightblue', border = FALSE, main = "Distribució de les rendibilitats diàries")
-curve(dnorm(x, mean = mean(rend.CAT), sd = sd(rend.CAT)), add = TRUE, col = 'orchid', lty = 3, lw = 4)
-curve(dnig(x, mu = mean(rend.CAT), delta = sqrt(phi*w), alpha = sqrt(w/phi), beta = 0), add = TRUE, col = 'limegreen', lty = 3, lw = 4)
-legend("topleft", inset = 0.03, box.lty = 0, col = c("orchid", "limegreen"), legend = c("Normal", "NIG"), lty = 3, lw = 4, border = FALSE)
+hist(rend.CAT, ylim = c(0,30), breaks = 12, xlab = "", ylab = "Densitat", 
+     xaxt = 'n', probability = TRUE, col = 'lightblue', border = FALSE,
+     main = "Distribució de les rendibilitats diàries")
+curve(dnorm(x, mean = mean(rend.CAT), sd = sd(rend.CAT)), 
+      add = TRUE, col = 'orchid', lty = 3, lw = 3)
+curve(dnig(x, mu = mean(rend.CAT), delta = sqrt(phi*w), alpha = sqrt(w/phi), beta = 0),
+      add = TRUE, col = 'limegreen', lty = 3, lw = 3)
+legend("topleft", inset = 0.03, box.lty = 0, 
+       col = c("orchid", "limegreen"), legend = c("Normal", "NIG"), 
+       lty = 3, lw = 4, border = FALSE)
 dev.off() 
 
 # Test per a normalitat de les rendibilitats en un període t ----
@@ -92,4 +101,43 @@ qqPlot(as.numeric(rend.CAT), main = "QQ-plot amb una normal", xlab = "Quantils N
 abline(0,1, lty = 'dashed', col = 'red', lw = 3)
 ppnig(rend.CAT, main = "PP-plot amb una NIG", xlab = "$F(x)$", ylab = "$F_n(x)$", mu = mean(rend.CAT), delta = sqrt(phi*w), alpha = sqrt(w/phi), beta = 0, pch = 4, col = 'gray40', line = FALSE)
 abline(0,1, lty = 'dashed', col = 'red', lw = 3)
+dev.off()
+
+
+# Simulació ----
+passeig <- function(n, inicial, mu, sigma) {
+  cumsum(c(inicial, rnorm(n - 1, mu, sigma)))
+}
+preu.inicial <- 100
+dies <- (1:500)
+N <- 10
+passejos <- matrix(nrow = N, ncol = length(dies))
+for (k in 1:N) { passejos[k,] <- passeig(length(dies),
+                                         log(preu.inicial),
+                                         mean(rend.CAT), 
+                                         sd(rend.CAT))}
+
+tikz(file = "../figs/simulacio.tex", width = 6, height = 3)
+nf <- layout(mat = matrix(c(1,2), 1, 2, byrow = TRUE), widths = c(2.5,2.5))
+par(mar = c(4,4,2,0.5))
+
+curve(log(preu.inicial) + mean(rend.CAT)*x + qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT),
+      main= "Evolució dels log-preus", 
+      xlab = "Dies", ylab = "$p_t$", 
+      ylim = c(4,5.5), xlim = c(0,500), 
+      lty = 'dashed', col = 'red')
+curve(log(preu.inicial) + mean(rend.CAT)*x - qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT),
+      add = TRUE,
+      lty = 'dashed', col = 'red')
+for(k in 1:N) {lines(dies, passejos[k,], type = "l", col = 'blue')}
+
+curve(preu.inicial * exp(mean(rend.CAT)*x + qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT)),
+      main= "Evolució dels preus", 
+      xlab = "Dies", ylab = "$P_t$", 
+      ylim = c(50,250), xlim = c(0,500), 
+      lty = 'dashed', col = 'red')
+curve(preu.inicial * exp(mean(rend.CAT)*x - qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT)),
+      add = TRUE,
+      lty = 'dashed', col = 'red')
+for(k in 1:N) {lines(dies, exp(passejos[k,]), type = "l", col = 'blue')}
 dev.off()

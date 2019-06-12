@@ -117,7 +117,7 @@
 	\end{figure}
 \end{titlepage}
 
-\textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=7.786318$, una desviació estàndard anual de $\hat{\sigma}_a=26.7607$, i finalment una curtosi diària de $\hat{ku}_d=2.806694$. }
+\textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=0.07786318$, una desviació estàndard anual de $\hat{\sigma}_a=0.267607$, i finalment una curtosi diària de $REVISAR! \hat{ku}_d=2.806694$. }
 
 \section{Context}
 \begin{figure}[htb]
@@ -157,15 +157,22 @@ La hipòtesi, doncs, és que \( r_t \sim N(\mu, \sigma^2) \). Aquest model s'ano
 \end{equation*}
 que és la fórmula de l'interès compost. Així doncs, \( \sigma \) governa el risc en l'evolució i s'anomena la volatilitat. 
 
-Si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Seguint el model de Samuelson-Bachieler podem estimar els paràmetres de la distribució de les rendibilitats i amb aquests fer una previsió de l'evolució dels preus dels actius.  
+Si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Seguint el model de Samuelson-Bachelier podem estimar els paràmetres de la distribució de les rendibilitats i amb aquests fer una previsió de l'evolució dels preus dels actius.  
 
 A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1004 dades. La mitjana i desviació estàndard mostrals són
 \begin{equation} \label{eq:parametres}
 	\begin{gathered}
-		\hat{\mu}_d = 0.0311 \\
-		\hat{\sigma}_d	= 1.70 \\
+		\hat{\mu}_d = 0.000311 \\
+		\hat{\sigma}_d	= 0.0169 \\
 	\end{gathered}
 \end{equation}
+
+\begin{figure}[htb]
+	\centering \sffamily \small
+	\input{figs/simulacio.tex}
+	\caption{Simulació de l'evolució d'una inversió de \$100 en actius de Caterpillar durant 500 dies. A l'esquerra es mostren els log-preus i a la dreta els preus.}
+	\label{fig:simulacio}
+\end{figure}
 
 \section{Resta}
 
