@@ -90,14 +90,15 @@
 \pagestyle{pagina}
 
 
-\title{\sffamily \bfseries Modelització de l'empresa Caterpillar}
+\title{\sffamily \bfseries Modelització i anàlisi financera de l'empresa Caterpillar \vspace{1em} \hrule}
 \author{\sffamily Andreu Arderiu, Arnau Mas}
 \date{\sffamily 14 de juny de 2019}
 
 \begin{document}
 
 \begin{titlepage}
-	\clearpage\thispagestyle{empty}
+	\clearpage
+	\thispagestyle{empty}
 	\maketitle	
 
 	\renewcommand{\abstractname}{\bfseries \sffamily Resum:}
@@ -110,7 +111,10 @@
 		Abstract en anglès
 	\end{abstract}
 	
-	\center \includegraphics[scale = 0.3]{uab}
+	\begin{figure}[b]
+		\thispagestyle{empty}
+		\center \includegraphics[scale = 0.3]{uab}
+	\end{figure}
 \end{titlepage}
 
 \textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=7.786318$, una desviació estàndard anual de $\hat{\sigma}_a=26.7607$, i finalment una curtosi diària de $\hat{ku}_d=2.806694$. }
@@ -143,6 +147,25 @@ A la \cref{fig:tancament} podem veure els preus de tancament anuals entre l'any 
 	\caption{Evolució del preu de tancament i rendibilitat diàries de Caterpillar entre 2015 i 2018}
 	\label{fig:serie preus}
 \end{figure}
+El model més senzill per a l'evolució dels actius financers d'una empresa és la hipòtesi que les rendibilitats diàries són independents normalment distribuïdes amb paràmetres independents del temps. La rendibilitat (a vegades anomenada renbilitat neta per a distingir-la de la rendibilitat bruta) diària es defineix com el logaritme del quocient de preus. És a dir, si \( P_t \) és el preu el dia \( t \) aleshores la rendibilitat d'aquest dia, \( r_t \) és
+\begin{equation*}
+	r_t = \log{\left(\frac{P_t}{P_{t-1}}\right)}.
+\end{equation*}
+La hipòtesi, doncs, és que \( r_t \sim N(\mu, \sigma^2) \). Aquest model s'anomena el model de Samuelson-Bachelier. Observem que si \( \sigma = 0 \) aleshores la rendibilitat és constant i els preus evolucionen exponencialment segons,
+\begin{equation*}
+	P_t = e^{r}P_{t-1}
+\end{equation*}
+que és la fórmula de l'interès compost. Així doncs, \( \sigma \) governa el risc en l'evolució i s'anomena la volatilitat. 
+
+Si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Seguint el model de Samuelson-Bachieler podem estimar els paràmetres de la distribució de les rendibilitats i amb aquests fer una previsió de l'evolució dels preus dels actius.  
+
+A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1004 dades. La mitjana i desviació estàndard mostrals són
+\begin{equation}
+	\begin{gather}
+		\hat{\mu}_d = 0.0311 \\
+		\hat{\sigma}_d	= 1.70 \\
+	\end{gather}
+\end{equation}
 
 \section{Resta}
 
