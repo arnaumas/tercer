@@ -146,9 +146,6 @@ A la Figura \ref{fig:serie preus} podem veure l'històric dels preus de tancamen
 
 %Fer aqui comparatva 2015-16 amb 2017-18. Es podria fer recta de regressió, o simplement mitjanes i desviació estàndard
 
-
-
-
 \begin{figure}[htb]
 	\centering \sffamily \small
 	\input{figs/serie-preus.tex}
@@ -156,8 +153,15 @@ A la Figura \ref{fig:serie preus} podem veure l'històric dels preus de tancamen
 	\label{fig:serie preus}
 \end{figure}
 
-
-
+Ara, per a fer-nos una idea de la idoneïtat o no de fer una inversió a Caterpillar i comparar-la amb la mitjana de les empreses que formen el Dow Jones, representem a la Figura \ref{fig:inversio} simultàniament l'evolució que hauria tingut una inversió de $\$100$ a principis de l'any 2015 a l'empresa Caterpillar i al conjunt del Dow Jones.
+\begin{figure}[H]
+	\centering \sffamily \small
+	\input{figs/inversio.tex}
+	\caption{Evolució d'una inversió de \$100 en Caterpillar i l'índex DJI entre l'any 2000 i el 2018}
+	\label{fig:inversio}
+\end{figure}
+\newpage
+Vegem que 
 
 
 \section{Previsió futura}
@@ -197,13 +201,7 @@ Amb aquests paràmetres podem simular la possible evolució del valor dels actiu
 	\label{fig:simulacio}
 \end{figure}
 
-\begin{figure}[H]
-	\centering \sffamily \small
-	\input{figs/inversio.tex}
-	\caption{Evolució d'una inversió de \$100 en Caterpillar i l'índex DJI entre l'any 2000 i el 2018}
-	\label{fig:inversio}
-\end{figure}
-\newpage
+
 
 \section{Estudi de les hipòtesis}
 Tots els resultats anteriors els hem obtingut suposant el model estàndard del mercat, és a dir, suposant que les rendibilitats diàries són variables aleatòries normals idènticament distribuïdes i independents. Procedim doncs a veure si les dades empíriques de que disposem, corroboren, o no, la validesa de les nostres suposicions.
