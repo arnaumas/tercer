@@ -19,13 +19,13 @@ serie <- addPanel(rendibilitat, type = 'h', method = 'discrete', col = 'red')
 plot(serie)
 dev.off()
 
-# Tancaments ----
-getSymbols("CAT",from="2000-01-01",to="2019-01-01")
-tanc.CAT <- CAT$CAT.Close
-anys <- endpoints(tanc.CAT, "years")
-tanc.CAT <- tanc.CAT[anys]
-tikz(file = "../figs/tancament.tex", width = 6, height = 1.7)
-plot(tanc.CAT, main = "Tancaments anuals entre 2000 i 2018", col = 'blue')
+# Obertures ----
+getSymbols("CAT",from="2000-01-01",to="2019-01-07")
+ober.CAT <- CAT$CAT.Close
+anys <- endpoints(ober.CAT, "years")[-length(anys) - 1] + 1
+ober.CAT <- tanc.CAT[anys]
+tikz(file = "../figs/inici.tex", width = 6, height = 1.7)
+plot(ober.CAT, main = "Preus d'obertura entre 2000 i 2019", col = 'blue')
 dev.off()
 
 # Evolució d'una inversió de $100 ----
