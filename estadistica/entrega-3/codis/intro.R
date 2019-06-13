@@ -115,12 +115,14 @@ passejos <- matrix(nrow = N, ncol = length(dies))
 for (k in 1:N) { passejos[k,] <- passeig(length(dies),
                                          log(preu.inicial),
                                          mean(rend.CAT), 
-                                         sd(rend.CAT))}
+                                         sd(rend.CAT))
+}
 
 tikz(file = "../figs/simulacio.tex", width = 6, height = 3)
 nf <- layout(mat = matrix(c(1,2), 1, 2, byrow = TRUE), widths = c(2.5,2.5))
 par(mar = c(4,4,2,0.5))
 
+ultims <- order(passejos[,length(dies)], decreasing = TRUE)
 curve(log(preu.inicial) + mean(rend.CAT)*x + qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT),
       main= "Evolució dels log-preus", 
       xlab = "Dies", ylab = "$p_t$", 
@@ -129,7 +131,7 @@ curve(log(preu.inicial) + mean(rend.CAT)*x + qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.C
 curve(log(preu.inicial) + mean(rend.CAT)*x - qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT),
       add = TRUE,
       lty = 'dashed', col = 'red')
-for(k in 1:N) {lines(dies, passejos[k,], type = "l", col = 'blue')}
+for(k in 1:N) {lines(dies, passejos[k,], type = "l", col = viridis(N)[ultims[k]])}
 
 curve(preu.inicial * exp(mean(rend.CAT)*x + qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT)),
       main= "Evolució dels preus", 
@@ -139,5 +141,5 @@ curve(preu.inicial * exp(mean(rend.CAT)*x + qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CA
 curve(preu.inicial * exp(mean(rend.CAT)*x - qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT)),
       add = TRUE,
       lty = 'dashed', col = 'red')
-for(k in 1:N) {lines(dies, exp(passejos[k,]), type = "l", col = 'blue')}
+for(k in 1:N) {lines(dies, exp(passejos[k,]), type = "l", col = viridis(N)[ultims[k]])}
 dev.off()
