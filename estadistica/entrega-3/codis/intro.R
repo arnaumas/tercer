@@ -11,6 +11,7 @@ rendibilitat <- function(preus) {
   diff(log(preus))[-1]
 }
 rend.CAT <- rendibilitat(preus.CAT)
+rend.DJI <- rendibilitat(preus.DJI)
 
 # Sèrie de preus ----
 tikz(file = "../figs/serie-preus.tex", width = 6, height = 3)
@@ -43,7 +44,7 @@ volat.CAT <- sqrt(250)*sd(rend.CAT)
 mitj.CAT <- 250*mean(rend.CAT)
 n.dades <- length(rend.CAT)
 
-tikz(file = "../figs/dist-rend.tex", width = 3.5, height = 2)
+tikz(file = "../figs/dist-rend.tex", width = 3.5, height = 3.5)
 nf <- layout(mat = matrix(c(2,1), 2, 1, byrow = TRUE), height = c(3,1))
 par(mar = c(3,4,0,0))
 boxplot(as.numeric(rend.CAT), horizontal = TRUE, frame = FALSE,
@@ -122,24 +123,48 @@ tikz(file = "../figs/simulacio.tex", width = 6, height = 3)
 nf <- layout(mat = matrix(c(1,2), 1, 2, byrow = TRUE), widths = c(2.5,2.5))
 par(mar = c(4,4,2,0.5))
 
-ultims <- order(passejos[,length(dies)], decreasing = TRUE)
-curve(log(preu.inicial) + mean(rend.CAT)*x + qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT),
+confiança <- function(t, inicial, mu, sd, signe) {
+  log(inicial) + mu*t + signe*qnorm(1 - 0.05/2)*sqrt(t)*sd
+}
+library(colorRamps)
+colors <- blue2green(10)
+
+ultims <- order(passejos[,length(dies)])
+curve(confiança(x, preu.inicial, mean(rend.CAT), sd(rend.CAT), 1),
       main= "Evolució dels log-preus", 
       xlab = "Dies", ylab = "$p_t$", 
       ylim = c(4,5.5), xlim = c(0,500), 
-      lty = 'dashed', col = 'red')
-curve(log(preu.inicial) + mean(rend.CAT)*x - qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT),
+      lty = 'dashed', col = 'magenta')
+curve(confiança(x, preu.inicial, mean(rend.CAT), sd(rend.CAT), -1),
+      add = TRUE,
+      lty = 'dashed', col = 'magenta')
+for(k in 1:N) { lines(dies, passejos[ultims[k],], type = "l", col = colors[k])}
+curve(confiança(x, preu.inicial, mean(rend.DJI), sd(rend.DJI), -1),
       add = TRUE,
       lty = 'dashed', col = 'red')
-for(k in 1:N) {lines(dies, passejos[k,], type = "l", col = viridis(N)[ultims[k]])}
+curve(confiança(x, preu.inicial, mean(rend.DJI), sd(rend.DJI), 1),
+      add = TRUE,
+      lty = 'dashed', col = 'red')
+legend("topleft", legend = c("CAT", "DJI"), 
+       lty="dashed", lwd=c(2, 2),
+       col=c("magenta", "red"), bty = 'n')
 
-curve(preu.inicial * exp(mean(rend.CAT)*x + qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT)),
+curve(exp(confiança(x, preu.inicial, mean(rend.CAT), sd(rend.CAT), 1)),
       main= "Evolució dels preus", 
       xlab = "Dies", ylab = "$P_t$", 
       ylim = c(50,250), xlim = c(0,500), 
-      lty = 'dashed', col = 'red')
-curve(preu.inicial * exp(mean(rend.CAT)*x - qnorm(1 - 0.05/2)*sqrt(x)*sd(rend.CAT)),
+      lty = 'dashed', col = 'magenta')
+curve(exp(confiança(x, preu.inicial, mean(rend.CAT), sd(rend.CAT), -1)),
+      add = TRUE,
+      lty = 'dashed', col = 'magenta')
+for(k in 1:N) {lines(dies, exp(passejos[ultims[k],]), type = "l", col = colors[k])}
+curve(exp(confiança(x, preu.inicial, mean(rend.DJI), sd(rend.DJI), -1)),
       add = TRUE,
       lty = 'dashed', col = 'red')
-for(k in 1:N) {lines(dies, exp(passejos[k,]), type = "l", col = viridis(N)[ultims[k]])}
+curve(exp(confiança(x, preu.inicial, mean(rend.DJI), sd(rend.DJI), 1)),
+      add = TRUE,
+      lty = 'dashed', col = 'red')
+legend("topleft", legend = c("CAT", "DJI"), 
+       lty="dashed", lwd=c(2, 2),
+       col=c("magenta", "red"), bty = 'n')
 dev.off()

@@ -93,8 +93,6 @@
 }
 \pagestyle{pagina}
 
-
-
 \title{\sffamily \bfseries Modelització i anàlisi financera de l'empresa Caterpillar \vspace{1em} \hrule}
 \author{\sffamily Andreu Arderiu, Arnau Mas}
 \date{\sffamily 14 de juny de 2019}
@@ -130,7 +128,7 @@
 	\caption{Logotip de Caterpillar}
 	\label{fig:logo}
 \end{figure}
-Caterpillar Inc. (NYSE: CAT) és una empresa multinacional de maquinària industrial i de construcció amb seu a Illinois. Actualment és l'empresa líder en l'àmbit de la maquinària de construcció i industrial \cite{cat} i es troba en la posició 65 al rànquing \emph{Fortune 500} i en la posició 238 del rànquing \emph{Fortune Global 500} de l'any 2019 \cite{fortune,global}. El preu actual de l'acció de Caterpillar és d'uns \$127. Actualment té \num{104000} treballadors. 
+Caterpillar Inc. (NYSE: CAT) és una empresa multinacional de maquinària industrial i de construcció amb seu a Illinois. Avui en dia és l'empresa líder en l'àmbit de la maquinària de construcció i industrial \cite{cat} i es troba en la posició 65 al rànquing \emph{Fortune 500} i en la posició 238 del rànquing \emph{Fortune Global 500} de l'any 2019 \cite{fortune,global}. El preu més recent de l'acció de Caterpillar és d'uns \$127. Actualment té \num{104000} treballadors. 
 
 Caterpillar va néixer l'any 1925 de la fusió de les empreses Holt Manufacturing Company i C. L: Best Tractor Co. El fundador de la primera, Benjamin Holt, va patentar un dels primers vehicles que funcionaven amb tracció per eruga (d'aquí el nom Caterpillar), un sistema de tracció que consisteix en una sèrie de plaques rígides unides per una cinta que gira al voltant de les rodes del vehicle. Amb aquest sistema, la superfície de contacte del vehicle amb el sòl s'incrementa de manera que s'exerceix menys pressió i és possible circular per a terrenys més complicats. Originalment, els vehicles de Holt es feien servir a l'oest americà, on la combinació del terreny àrid i irregular del desert californià i la manca d'infraestructura dificultaven les tasques agràries i de transport. Molt aviat, però, l'empresa va desenvolupar vehicles militars durant la Primera Guerra mundial, que van ser uns dels precursors del tanc. Durant el període d'entreguerra i sobretot després de la Segona Guerra mundial, Caterpillar va evolucionar cap a l'àmbit de la construcció, primer al mercat americà i després a escala global, sobretot als països en desenvolupament. 
 
@@ -155,21 +153,29 @@ El model més senzill per a l'evolució dels actius financers d'una empresa és 
 \begin{equation*}
 	r_t = \log{\left(\frac{P_t}{P_{t-1}}\right)}.
 \end{equation*}
-La hipòtesi, doncs, és que \( r_t \sim N(\mu, \sigma^2) \). Aquest model s'anomena el model de Samuelson-Bachelier. Observem que si \( \sigma = 0 \) aleshores la rendibilitat és constant i els preus evolucionen exponencialment segons,
+La hipòtesi, doncs, és que \( r_t \sim N(\mu_d, \sigma_d^2) \). Aquest model s'anomena el model de Samuelson-Bachelier. Observem que si \( \sigma_d = 0 \) aleshores la rendibilitat és constant i els preus evolucionen exponencialment segons,
 \begin{equation*}
 	P_t = e^{r}P_{t-1}
 \end{equation*}
-que és la fórmula de l'interès compost. Així doncs, \( \sigma \) governa el risc en l'evolució i s'anomena la volatilitat. 
+que és la fórmula de l'interès compost. Així doncs, \( \sigma_d \) governa el risc en l'evolució i s'anomena la volatilitat. 
 
-Si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Seguint el model de Samuelson-Bachelier podem estimar els paràmetres de la distribució de les rendibilitats i amb aquests fer una previsió de l'evolució dels preus dels actius.  
+Si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Aleshores
+\begin{equation} \label{eqn:passeig aleatori}
+	p_t = p_0 + \sum_{k = 1}^{t-1}r_k 
+\end{equation}
+i com que la suma de normals independents també és normal, la distribució dels log-preus és
+\begin{equation} \label{eqn:distribucio log-preus}
+	p_t \sim N(p_0 + \mu_d t, t\sigma_d^2).
+\end{equation}
 
-A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 i 1004 dades, respectivament. La mitjana i desviació estàndard mostrals per a la rendibilitat diària són
+A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 dades. La mitjana i desviació estàndard mostrals per a la rendibilitat diària són
 \begin{equation} \label{eq:parametres}
 	\begin{gathered}
 		\hat{\mu}_d = 0.000311 \\
-		\hat{\sigma}_d	= 0.0169 \\
+		\hat{\sigma}_d	= 0.0169. \\
 	\end{gathered}
 \end{equation}
+Amb aquests paràmetres podem simular la possible evolució del valor dels actius de caterpilar fent servir l'\cref{eqn:distribucio log-preus}. A la \cref{fig:simulacio} es mostren els resultats d'aquesta simulació. Primerament hem simulat 10 possibles evolucions 
 
 \begin{figure}[htb]
 	\centering \sffamily \small
