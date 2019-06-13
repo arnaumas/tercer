@@ -45,14 +45,14 @@ mitj.CAT <- 250*mean(rend.CAT)
 n.dades <- length(rend.CAT)
 
 tikz(file = "../figs/dist-rend.tex", width = 3.5, height = 3.5)
-nf <- layout(mat = matrix(c(2,1), 2, 1, byrow = TRUE), height = c(3,1))
-par(mar = c(3,4,0,0))
-boxplot(as.numeric(rend.CAT), horizontal = TRUE, frame = FALSE,
+nf <- layout(mat = matrix(c(2,1), 2, 1, byrow = TRUE), height = c(4,1))
+par(mar = c(0,4,0,0))
+boxplot(as.numeric(rend.CAT), horizontal = TRUE, frame = FALSE, xaxt = 'n',
         col = 'lightblue', whiskcol = 'black', staplecol = 'black', 
-        border = 'white', medcol = 'black', medlwd = 1)
-par(mar = c(0,4,3,0))
-hist(rend.CAT, ylim = c(0,30), breaks = 12, xlab = "", ylab = "Densitat", 
-     xaxt = 'n', probability = TRUE, col = 'lightblue', border = FALSE,
+        border = 'white', outcol = "gray40", outpch = 4, medcol = 'black', medlwd = 1)
+par(mar = c(1,4,3,0))
+hist(rend.CAT, ylim = c(0,30), xlim = c(-0.1, 0.1), breaks = 12, xlab = "", ylab = "Densitat", 
+     probability = TRUE, col = 'lightblue', border = FALSE,
      main = "Distribució de les rendibilitats diàries")
 curve(dnorm(x, mean = mean(rend.CAT), sd = sd(rend.CAT)), 
       add = TRUE, col = 'orchid', lty = 3, lw = 3)
@@ -92,12 +92,15 @@ nig <- pnig(ord, mu = mean(rend.CAT), delta = sqrt(phi*w), alpha = sqrt(w/phi), 
 tikz(file = "../figs/nig.tex", width = 5, height = 2.5)
 nf <- layout(mat = matrix(c(1,2), 1, 2, byrow = TRUE), widths = c(2.5,2.5))
 par(mar = c(4,4,2,0.5))
-qqnig(rend.CAT, main = "QQ-plot amb una NIG", xlab = "Quantils NIG", ylab = "Quantils mostrals", mu = mean(rend.CAT), delta = sqrt(phi*w), alpha = sqrt(w/phi), beta = 0, pch = 4, col = 'gray40', line = FALSE)
-abline(0,1, lty = 'dashed', col = 'red', lw = 3)
+qqnig(rend.CAT, main = "QQ-plot amb una NIG", 
+      xlab = "Quantils NIG", ylab = "Quantils mostrals", 
+      mu = mean(rend.CAT), delta = sqrt(phi*w), alpha = sqrt(w/phi), beta = 0, 
+      pch = 4, cex = 0.5, col = 'gray40', line = FALSE)
+abline(0,1, lty = 'dashed', col = 'red', lw = 2)
 plot(prob, nig, main = "PP-plot amb una NIG", 
      xlab = "$F_n(x)$", ylab = "$F(x)$",
-     pch = 4, col = 'gray40')
-abline(0,1, lty = 'dashed', col = 'red', lw = 3)
+     pch = 4, cex = 0.5, col = 'gray40')
+abline(0,1, lty = 'dashed', col = 'red', lw = 2)
 dev.off()
 
 # Comparació amb una normal
@@ -105,14 +108,14 @@ tikz(file = "../figs/normal.tex", width = 5, height = 2.5)
 nf <- layout(mat = matrix(c(1,2), 1, 2, byrow = TRUE), widths = c(2.5,2.5))
 par(mar = c(4,4,2,0.5))
 qqplot(qnorm((1:length(rend.CAT)/length(rend.CAT)), mean(rend.CAT), sd(rend.CAT)), ord,
-             main = "QQ-plot amb una normal", 
-             xlab = "Quantils normals", ylab = "Quantils mostrals",
-             pch = 4, col = 'gray40')
-abline(0,1, lty = 'dashed', col = 'red', lw = 3)
+       main = "QQ-plot amb una normal", 
+       xlab = "Quantils normals", ylab = "Quantils mostrals",
+       pch = 4, cex = 0.5, col = 'gray40')
+abline(0,1, lty = 'dashed', col = 'red', lw = 2)
 plot(prob, norm, main = "PP-plot amb una normal", 
      xlab = "$F_n(x)$", ylab = "$F(x)$",
-     pch = 4, col = 'gray40')
-abline(0,1, lty = 'dashed', col = 'red', lw = 3)
+     pch = 4, cex = 0.5, col = 'gray40')
+abline(0,1, lty = 'dashed', col = 'red', lw = 2)
 dev.off()
 
 
