@@ -120,15 +120,16 @@
 	\end{figure}
 \end{titlepage}
 
-\textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=0.07786318$, una desviació estàndard anual de $\hat{\sigma}_a=0.267607$, i finalment una curtosi diària de $\hat{ku}_d=2.806694$. }
-\section{Context}
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering \small \sffamily
 	\includegraphics[width=0.4\textwidth]{cat-logo}
-	\caption{Logotip de Caterpillar}
-	\label{fig:logo}
 \end{figure}
-Caterpillar Inc. (NYSE: CAT) és una empresa multinacional de maquinària industrial i de construcció amb seu a Illinois. Avui en dia és l'empresa líder en l'àmbit de la maquinària de construcció i industrial \cite{cat} i es troba en la posició 65 al rànquing \emph{Fortune 500} i en la posició 238 del rànquing \emph{Fortune Global 500} de l'any 2019 \cite{fortune,global}. El preu més recent de l'acció de Caterpillar és d'uns \$127. Actualment té \num{104000} treballadors. 
+\textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=0.07786318$, una desviació estàndard anual de $\hat{\sigma}_a=0.267607$, i finalment una curtosi diària de $\hat{ku}_d=2.806694$. }
+
+
+
+\section{Context}
+Caterpillar Inc. (NYSE: CAT) és una empresa multinacional de maquinària industrial i de construcció amb seu a Illinois. Actualment és l'empresa líder en l'àmbit de la maquinària de construcció i industrial \cite{cat} i es troba en la posició 65 al rànquing \emph{Fortune 500} i en la posició 238 del rànquing \emph{Fortune Global 500} de l'any 2019 \cite{fortune,global}. El preu actual de l'acció de Caterpillar és d'uns \$127. Actualment té \num{104000} treballadors. 
 
 Caterpillar va néixer l'any 1925 de la fusió de les empreses Holt Manufacturing Company i C. L: Best Tractor Co. El fundador de la primera, Benjamin Holt, va patentar un dels primers vehicles que funcionaven amb tracció per eruga (d'aquí el nom Caterpillar), un sistema de tracció que consisteix en una sèrie de plaques rígides unides per una cinta que gira al voltant de les rodes del vehicle. Amb aquest sistema, la superfície de contacte del vehicle amb el sòl s'incrementa de manera que s'exerceix menys pressió i és possible circular per a terrenys més complicats. Originalment, els vehicles de Holt es feien servir a l'oest americà, on la combinació del terreny àrid i irregular del desert californià i la manca d'infraestructura dificultaven les tasques agràries i de transport. Molt aviat, però, l'empresa va desenvolupar vehicles militars durant la Primera Guerra mundial, que van ser uns dels precursors del tanc. Durant el període d'entreguerra i sobretot després de la Segona Guerra mundial, Caterpillar va evolucionar cap a l'àmbit de la construcció, primer al mercat americà i després a escala global, sobretot als països en desenvolupament. 
 
@@ -140,9 +141,35 @@ Caterpillar va néixer l'any 1925 de la fusió de les empreses Holt Manufacturin
 \end{figure}
 
 A la \cref{fig:tancament} podem veure els preus d'obertura anuals entre l'any 2000 i l'actualitat. La tendència és en general a l'alça, tot i que podem remarcar varis punts d'inflexió. És notable la forta caiguda de prop del \SI{35}{\percent} durant l'any 2008, naturalment deguda a la crisi financera del mateix any. Aquesta crisi va afectar fortament el sector de la construcció, que és una de les principals àrees de negoci de Caterpillar. Tot i així, tal i com apunta \cite{recupera} l'empresa ja anticipava la recessió, i va prendre una sèrie de mesures que van alleujar l'impacte de la crisi. Això, juntament amb un canvi en la direcció, i un canvi d'estratègia enfocat a majors inversions a països amb un ràpid creixement econòmic com la Xina, Índia i Brasil, van fer que Caterpillar tingués una espectacular recuperació durant l'any 2010.
-Més endavant, durant l'any 2015 podem veure que l'empresa va experimentar una altra davallada, de més del \SI{25}{\percent}, degut a la crisi del mercat financer xinès \cite{xina}, un dels principals clients de Caterpillar. Tot i així es va recuperar ràpidament durant 2016, iniciant l'any 2017 dos punts per sobre que el 2015, degut a un creixement del mercat, entre d'altres \cite{crush}. Per últim, l'increment dels aranzels sobre les importacions d'acer introduït pel govern de Trump han causat que el valor de Caterpillar hagi baixat prop d'un \SI{20}{\percent} durant l'any 2018 \cite{trump}. 
+Més endavant, durant l'any 2015 podem veure que l'empresa va experimentar una altra davallada, de més del \SI{25}{\percent}, degut a la crisi del mercat financer xinès \cite{xina}, un dels principals clients de Caterpillar. Tot i així es va recuperar ràpidament durant 2016, iniciant l'any 2017 dos punts per sobre que el 2015, degut a un creixement del mercat, entre d'altres \cite{crush}. Per últim, l'increment dels aranzels sobre les importacions d'acer introduït pel govern de Trump han causat que el valor de Caterpillar hagi baixat prop d'un \SI{20}{\percent} durant l'any 2018 \cite{trump}.
+
+
 \section{Estudi de les rendibilitats}
-A la Figura \ref{fig:serie preus} podem veure l'històric dels preus de tancament i rendibilitats diàries durant el període 2015-2018, i ens podem fer una idea 
+El model més senzill per a l'evolució dels actius financers d'una empresa és la hipòtesi que les rendibilitats diàries són independents normalment distribuïdes amb paràmetres independents del temps. La rendibilitat (a vegades anomenada renbilitat neta per a distingir-la de la rendibilitat bruta) diària es defineix com el logaritme del quocient de preus. És a dir, si \( P_t \) és el preu el dia \( t \) aleshores la rendibilitat d'aquest dia, \( r_t \) és
+\begin{equation}
+	r_t = \log{\left(\frac{P_t}{P_{t-1}}\right)}.
+	\label{eq:rend}
+\end{equation}
+La hipòtesi, doncs, és que \( r_t \sim N(\mu, \sigma^2) \). Aquest model s'anomena el model de Samuelson-Bachelier. Observem que si \( \sigma = 0 \) aleshores la rendibilitat és constant i els preus evolucionen exponencialment segons,
+\begin{equation*}
+	P_t = e^{r_t}P_{t-1}
+\end{equation*}
+que és la fórmula de l'interès compost. Així doncs, \( \sigma \) governa el risc en l'evolució i s'anomena la volatilitat. \\
+
+A la \ref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 i 1004 dades, respectivament. La mitjana i desviació estàndard mostrals per a la rendibilitat diària són
+\begin{equation} \label{eq:parametres}
+	\begin{gathered}
+		\hat{\mu}_d = 0.000311 \\
+		\hat{\sigma}_d	= 0.0169 \\
+	\end{gathered}
+\end{equation}
+on, el valor positiu obtingut per a $\hat{\mu}_d$, es pot resumir en que el creixement mitja del valor de Caterpillar durant aquest període ha estat positiu.
+
+Observant la figura \ref{fig:serie preus} però, veiem que hi ha hagut etapes molt diferents a nivell de rendibilitat (i.e de creixement i decreixement). En concret, ens centrarem en la comparació de les rendibilitats dels anys 2015-2016 i 2017-2018.
+
+
+
+
 
 %Fer aqui comparatva 2015-16 amb 2017-18. Es podria fer recta de regressió, o simplement mitjanes i desviació estàndard
 
@@ -160,39 +187,18 @@ Ara, per a fer-nos una idea de la idoneïtat o no de fer una inversió a Caterpi
 	\caption{Evolució d'una inversió de \$100 en Caterpillar i l'índex DJI entre l'any 2000 i el 2018}
 	\label{fig:inversio}
 \end{figure}
-\newpage
-Vegem que 
+
+A primer cop d'ull, observem que en totes dues inversions tindríem un augment del capital al final del període de la inversió. És interessant veure que, tot i que tant el capital invertit al Dow Jones com el de Caterpillar experimenten una caiguda a finals del 2018, la inversió al Dow Jones presenta un creixement força sostingut amb alguns decreixements puntuals, i, en canvi, el capital invertit a Caterpillar passa per etapes de creixement i decreixement sobtats.\\
+En efecte, durant el període 2015-2017, el valor del capital en la inversió al DJ és superior al de Caterpillar, el qual pateix una forta caiguda i es manté per sota del valor dels $\$100$ de la inversió inicial, i en canvi, Durant el 2017, tal i com hem comentat en la secció anterior, Caterpillar experimenta un gran creixement, i el valor de la inversió supera amb escreix al del DJ. Finalment durant el 2018 ambdós capitals presenten un decreixement però l'any tanca amb un valor per a la inversió de Caterpillar major que la del Dow Jones  ($\$136.7$ en front de  $\$129.3$). 
+
+
+
 
 
 \section{Previsió futura}
+Tenint en compte la definició de rendibilitat (\ref{eq:rend}), si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Seguint el model de Samuelson-Bachelier, amb les estimacions realitzades (veure \ref{eq:parametres}) dels paràmetres de la distribució de les rendibilitats, podem fer una previsió de l'evolució dels preus dels actius.  
 
-El model més senzill per a l'evolució dels actius financers d'una empresa és la hipòtesi que les rendibilitats diàries són independents normalment distribuïdes amb paràmetres independents del temps. La rendibilitat (a vegades anomenada renbilitat neta per a distingir-la de la rendibilitat bruta) diària es defineix com el logaritme del quocient de preus. És a dir, si \( P_t \) és el preu el dia \( t \) aleshores la rendibilitat d'aquest dia, \( r_t \) és
-\begin{equation*}
-	r_t = \log{\left(\frac{P_t}{P_{t-1}}\right)}.
-\end{equation*}
-La hipòtesi, doncs, és que \( r_t \sim N(\mu_d, \sigma_d^2) \). Aquest model s'anomena el model de Samuelson-Bachelier. Observem que si \( \sigma_d = 0 \) aleshores la rendibilitat és constant i els preus evolucionen exponencialment segons,
-\begin{equation*}
-	P_t = e^{r_t}P_{t-1}
-\end{equation*}
-que és la fórmula de l'interès compost. Així doncs, \( \sigma_d \) governa el risc en l'evolució i s'anomena la volatilitat. 
 
-Si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Aleshores
-\begin{equation} \label{eqn:passeig aleatori}
-	p_t = p_0 + \sum_{k = 1}^{t-1}r_k 
-\end{equation}
-i com que la suma de normals independents també és normal, la distribució dels log-preus és
-\begin{equation} \label{eqn:distribucio log-preus}
-	p_t \sim N(p_0 + \mu_d t, t\sigma_d^2).
-\end{equation}
-
-A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 dades. La mitjana i desviació estàndard mostrals per a la rendibilitat diària són
-\begin{equation} \label{eq:parametres}
-	\begin{gathered}
-		\hat{\mu}_d = 0.000311 \\
-		\hat{\sigma}_d	= 0.0169. \\
-	\end{gathered}
-\end{equation}
-Amb aquests paràmetres podem simular la possible evolució del valor dels actius de caterpilar fent servir l'\cref{eqn:distribucio log-preus}. A la \cref{fig:simulacio} es mostren els resultats d'aquesta simulació. Primerament hem simulat 10 possibles evolucions 
 
 \begin{figure}[htb]
 	\centering \sffamily \small
