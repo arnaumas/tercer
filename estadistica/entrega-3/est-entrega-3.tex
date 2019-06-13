@@ -22,12 +22,13 @@
 \usepackage[sort]{cleveref}
 \usepackage{enumitem}
 \usepackage[sorting=none,citestyle=numeric]{biblatex}
-\addbibresource{fonts.bib} %Imports bibliography file
-
+\usepackage{subfig}
 \renewcommand{\familydefault}{\rmdefault}
 \renewcommand{\sfdefault}{cmbr}
 \renewcommand{\ttdefault}{cmtl}
 
+\addbibresource{fonts.bib} 
+\defbibheading{biblio}{\section*{#1}}
 
 \geometry{
 	a4paper,
@@ -49,6 +50,8 @@
 \numberwithin{equation}{section}
 
 \graphicspath{{./figs/}}
+1
+
 
 % Unitats
 \sisetup{
@@ -119,23 +122,22 @@
 		\thispagestyle{empty}
 		\center \includegraphics[scale = 0.3]{uab}
 	\end{figure}
-\end{titlepage}
-
-\textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=0.07786318$, una desviació estàndard anual de $\hat{\sigma}_a=0.267607$, i finalment una curtosi diària de $\hat{ku}_d=2.806694$. }
-
-\section{Context}
-\begin{figure}[htb]
+	\begin{figure}[H]
 	\centering \small \sffamily
 	\includegraphics[width=0.4\textwidth]{cat-logo}
 	\caption{Logotip de Caterpillar}
 	\label{fig:logo}
 \end{figure}
+\end{titlepage}
+
+\textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=0.07786318$, una desviació estàndard anual de $\hat{\sigma}_a=0.267607$, i finalment una curtosi diària de $\hat{ku}_d=2.806694$. }
+\section{Context}
 
 Caterpillar Inc. (NYSE: CAT) és una empresa multinacional de maquinària industrial i de construcció amb seu a Illinois. Actualment és l'empresa líder en l'àmbit de la mquinària de construcció i industrial \cite{cat} i es troba en la posició 65 al rànquing \emph{Fortune 500} i en la posició 238 del rànquing \emph{Fortune Global 500} de l'any 2019 \cite{fortune,global}. El preu actual de l'acció de Caterpillar és d'uns \$127. Actualment té \num{104000} treballadors. 
 
 Caterpillar va néixer l'any 1925 de la fusió de les empreses Holt Manufacturing Company i C. L: Best Tractor Co. El fundador de la primera, Benjamin Holt, va patentar un dels primers vehicles que funcionaven amb tracció per eruga (d'aquí el nom Caterpillar), un sistema de tracció que consisteix en una sèrie de plaques rígides unides per una cinta que gira al voltant de les rodes del vehicle. Amb aquest sistema, la superfície de contacte del vehicle amb el sòl s'incrementa de manera que s'exerceix menys pressió i és possible circular per a terrenys més complicats. Originalment, els vehicles de Holt es feien servir a l'oest americà, on la combinació del terreny àrid i irregular del desert californià i la manca d'infrastructura dificultaven les tasques agràries i de transport. Molt aviat, però, l'empresa va desenvolupar vehicles militars durant la Primera Guerra mundial, sent un dels precursors del tanc. Durant el període d'entreguerra i sobretot després de la Segona Guerra mundial, Caterpillar va evolucionar cap a l'àmbit de la construcció, primer al mercat americà i després a escala global, sobretot als països en desenvolupament. 
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering \sffamily \small
 	\input{figs/tancament.tex}
 	\caption{Preus de tancament anual entre 2000 i 2018 de Caterpillar}
@@ -143,7 +145,7 @@ Caterpillar va néixer l'any 1925 de la fusió de les empreses Holt Manufacturin
 \end{figure}
 
 A la \cref{fig:tancament} podem veure els preus de tancament anuals entre l'any 2000 i l'actualitat. La tendència és en general a l'alça, tot i que podem remarcar varis punts d'inflexió. Vegem la forta caiguda de prop del \SI{50}{\percent} durant l'any 2008, naturalment deguda a la crisi financera del mateix any. Aquesta crisi va afectar fortament el sector de la construcció, que és una de les principals àrees de negoci de Caterpillar. Tot i així, tal i com apunta \cite{recupera} l'empresa ja anticipava la recessió i va prendre una sèrie de mesures que van alleujar l'impacte de la crisi. Això, juntament amb un canvi en la direcció i un canvi d'estratègia enfocat a majors inversions a països amb un ràpid creixement econòmic com la Xina, India i Brasil, van fer que Caterpillar tingués una espectacular recuperació durant l'any 2010.
-Més endavant, durant l'any 2015 podem veure a la \cref{fig:tancament} com l'empresa va patir una forta caiguda, degut a la Crisi del mercat financer Xinès \cite{xina}, un dels principals clients de Caterpillar. Tanmateix cal remarcar el fort ceixement posterior, durant el 2017, de prop del $50\%$, degut a un creixement del mercat, entre d'altres \cite{crush}. Finalment, vegem que durant el 2018 l'empresa torna a patir una forta caiguda degut a l'anunci del president Trump de l'increment dels aranzels sobre les importacions d'acer \cite{t
+Més endavant, durant l'any 2015 podem veure a la \cref{fig:tancament} com l'empresa va patir una forta caiguda, degut a la Crisi del mercat financer Xinès \cite{xina}, un dels principals clients de Caterpillar. Tanmateix cal remarcar el fort creixement posterior, durant el 2017, de prop del $50\%$, degut a un creixement del mercat, entre d'altres \cite{crush}. Finalment, vegem que durant el 2018 l'empresa torna a patir una forta caiguda degut a l'anunci del president Trump de l'increment dels aranzels sobre les importacions d'acer \cite{trump}.
 
 \section{Previsió futura}
 \begin{figure}[htb]
@@ -164,7 +166,7 @@ que és la fórmula de l'interès compost. Així doncs, \( \sigma \) governa el 
 
 Si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Seguint el model de Samuelson-Bachelier podem estimar els paràmetres de la distribució de les rendibilitats i amb aquests fer una previsió de l'evolució dels preus dels actius.  
 
-A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1004 dades. La mitjana i desviació estàndard mostrals són
+A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 i 1004 dades, respectivament. La mitjana i desviació estàndard mostrals per a la rendibilitat diària són
 \begin{equation} \label{eq:parametres}
 	\begin{gathered}
 		\hat{\mu}_d = 0.000311 \\
@@ -179,14 +181,49 @@ A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibil
 	\label{fig:simulacio}
 \end{figure}
 
-\section{Resta}
-
 \begin{figure}[H]
 	\centering \sffamily \small
 	\input{figs/inversio.tex}
 	\caption{Evolució d'una inversió de \$100 en Caterpillar i l'índex DJI entre l'any 2000 i el 2018}
 	\label{fig:inversio}
 \end{figure}
+\newpage
+
+\section{Estudi de les hipòtesis}
+Tots els resultats anteriors els hem obtingut suposant el model estàndard del mercat, és a dir, suposant que les rendibilitats diàries són variables aleatòries normals idènticament distribuïdes i independents. Procedim doncs a veure si les dades empíriques de que disposem, corroboren, o no, la validesa de les nostres suposicions.
+
+\subsection{Independència i no-correlació}%Aqui fer Ljung -Box
+Primer de tot volem contrastar la hipòtesi de no-correlació entre les rendibilitats diàries (com a variables aleatòries).
+\begin{equation}
+    \begin{cases}
+    H_0: \text{rendibilitats no-correlacionades}\\
+    H_1: \text{rendibilitats correlacionades}
+    \end{cases}
+\end{equation}
+Un bon test per comprovar la no-correlació entre variables aleatòries és el Ljung-Box. Apliquem doncs aquest test a les rendibilitats a través de la comanda Box.test de R i obtenim un p-valor de $0.2336$, pel que s'accepta la hipòtesi nul·la amb un $95\%$ de confiança, i no podem dir que les nostres dades estiguin correlacionades. Això és un bon indici per pensar que són independents, però recordem que tot i que independència implica no correlació, el recíproc té perquè ser cert. Sabem que si dues variables aleatòries són independents llavors funcions d’aquestes també ho seran. Per tant, si trobem alguna funció de les rendibilitats tal que no siguin independents, llavors quedarà provat que les rendibilitats tindran una certa dependència entre si.  Provem doncs a fer el test d’independència per a la funció del quadrat de les rendibilitats, i, en aquest cas, obtenim un p-valor de $0.0006127$, pel que amb un $95\%$ de confiança tenim que les rendibilitats al quadrat són no-correlacionades. Així doncs, podem concloure que les dades originals de rendibilitats no són independents. 
+\begin{figure}[H]
+     \subfloat[Rendibilitats\label{fig:rend1}]{
+       \includegraphics[width=0.48\textwidth]{figs/corrend.png}
+     }
+     \subfloat[Rendibilitats al quadrat\label{fig:rend2}]{
+       \includegraphics[width=0.48\textwidth]{figs/corrend2.png}
+       }
+     \caption{Autocorrelacions de les rendibilitats i rendibilitats al quadrat.}
+   \end{figure}
+   Aquests resultats eren d'esperar, ja que en general en els mercats financers les correlacions entre les rendibilitats són insignificants (excepte en escales de temps menors a 20 minuts) \cite{20}.\\
+   En canvi, en general, al fer una funció que anul·li el signe, com pot ser elevar al quadrat, s’observen correlacions. Això es deu en part a que esdeveniments d’alta volatilitat tendeixen a ocórrer junts, és a dir que hi ha pujades i baixades abruptes en temps curts. Aquest fet però, no el detecta la correlació directa ja que després d’una alta pujada pot haver-hi tant una altra pujada com una baixada. Ara bé, en prendre el valor absolut de les variacions, aquests dos fets no es diferencien i és aleshores quan detectem les correlacions.\\
+   Finalment cal remarcar que, tot i que suposar normalitat pot semblar una mica contradictori amb tenir variables aleatòries no correlacionades però dependents, veurem que això s’explica pel fet que, com veurem en la pròxima secció, les rendibilitats no són exactament normals.
+   
+
+
+
+
+
+
+\subsection{Normalitat}%Aqui fer Jarque-Bera,pearson,Kolgomorov,QQ-PPplots
+
+
+
 
 \begin{figure}[H]
 	\centering \sffamily \small
@@ -201,6 +238,16 @@ A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibil
 	\label{fig:comparacio nig}
 \end{figure}
 
+
+\section{Conclusions}
+
+
+
+
+
+
+
+
 \begin{lstlisting}[language=R]
 # Comentari
 
@@ -209,7 +256,6 @@ Codi R
 
 %\bibliographystyle{plain}
 %\bibliography{fonts}
-\newpage
-\printbibliography
+\printbibliography[heading = biblio]
 
 \end{document}
