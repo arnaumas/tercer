@@ -33,18 +33,18 @@
 \defbibheading{biblio}{\section*{#1}}
 
 \geometry{
-	a4paper,
-	right = 2.5cm,
-	left = 2.5cm,
-	bottom = 3cm,
-	top = 3cm
+a4paper,
+right = 2.5cm,
+left = 2.5cm,
+bottom = 3cm,
+top = 3cm
 }
 
 \hypersetup{
-	colorlinks,
-	linkcolor = {red!50!blue},
-	citecolor = {red!50!blue},
-	linktoc = page
+colorlinks,
+linkcolor = {red!50!blue},
+citecolor = {red!50!blue},
+linktoc = page
 }
 
 \numberwithin{table}{section}
@@ -55,43 +55,43 @@
 
 % Unitats
 \sisetup{
-	inter-unit-product = \ensuremath{ \, },
-	allow-number-unit-breaks = true,
-	math-celsius = {}^{\circ}\kern-\scriptspace C,
-	detect-family = true,
-	detect-shape = true,
-	list-final-separator = { y },
-	list-pair-separator = { y },
-	list-units = single,
-	separate-uncertainty = true
+inter-unit-product = \ensuremath{ \, },
+allow-number-unit-breaks = true,
+math-celsius = {}^{\circ}\kern-\scriptspace C,
+detect-family = true,
+detect-shape = true,
+list-final-separator = { y },
+list-pair-separator = { y },
+list-units = single,
+separate-uncertainty = true
 }
 
 \lstdefinestyle{customc}{
-  belowcaptionskip=1\baselineskip,
-	backgroundcolor = \color{gray!20!white},
-  breaklines=true,
-	breakatwhitespace = true,
-	postbreak = \textrightarrow\,,
-  xleftmargin=\parindent,
-	frame = l,
-  language=C,
-  showstringspaces=false,
-  basicstyle=\small\ttfamily,
-  keywordstyle=\bfseries\color{green!40!black},
-  commentstyle=\sffamily\itshape\color{purple!40!black},
-  identifierstyle=\color{blue},
-  stringstyle=\color{orange},
-	numbers = left, 
-	numberstyle = \tiny\ttfamily,
+belowcaptionskip=1\baselineskip,
+backgroundcolor = \color{gray!20!white},
+breaklines=true,
+breakatwhitespace = true,
+postbreak = \textrightarrow\,,
+xleftmargin=\parindent,
+frame = l,
+language=C,
+showstringspaces=false,
+basicstyle=\small\ttfamily,
+keywordstyle=\bfseries\color{green!40!black},
+commentstyle=\sffamily\itshape\color{purple!40!black},
+identifierstyle=\color{blue},
+stringstyle=\color{orange},
+numbers = left, 
+numberstyle = \tiny\ttfamily,
 }
 \lstset{texcl=true,style=customc}
 \renewcommand{\lstlistingname}{Programa}
 
 \newpagestyle{pagina}{
-	\headrule
-	\sethead*{\sffamily \bfseries Práctica 4}{}{\theauthor}
-	\footrule
-	\setfoot*{}{}{\sffamily \thepage}
+\headrule
+\sethead*{\sffamily \bfseries Práctica 4}{}{\theauthor}
+\footrule
+\setfoot*{}{}{\sffamily \thepage}
 }
 \pagestyle{pagina}
 
@@ -102,30 +102,30 @@
 \begin{document}
 
 \begin{titlepage}
-	\clearpage
+\clearpage
+\thispagestyle{empty}
+\maketitle	
+
+\renewcommand{\abstractname}{\bfseries \sffamily Resum:}
+\begin{abstract}
+	Abstract en català
+\end{abstract}
+
+\renewcommand{\abstractname}{\bfseries \sffamily Abstract:}
+\begin{abstract}
+	Abstract en anglès
+\end{abstract}
+
+\begin{figure}[b]
 	\thispagestyle{empty}
-	\maketitle	
-
-	\renewcommand{\abstractname}{\bfseries \sffamily Resum:}
-	\begin{abstract}
-		Abstract en català
-	\end{abstract}
-
-	\renewcommand{\abstractname}{\bfseries \sffamily Abstract:}
-	\begin{abstract}
-		Abstract en anglès
-	\end{abstract}
-
-	\begin{figure}[b]
-		\thispagestyle{empty}
-		\center \includegraphics[scale = 0.3]{uab}
-	\end{figure}
+	\center \includegraphics[scale = 0.3]{uab}
+\end{figure}
 \end{titlepage}
 
 \begin{figure}[H]
-	\centering \small \sffamily
-	\includegraphics[width=0.4\textwidth]{cat-logo}
-	\caption{Logotip de Caterpillar}
+\centering \small \sffamily
+\includegraphics[width=0.4\textwidth]{cat-logo}
+\caption{Logotip de Caterpillar}
 \end{figure}
 \textbf{En aquest estudi de l'empresa Caterpillar amb \textit{Symbol} bursàtil a la borsa de Nova York CAT, ens centrarem en els anys $2015-2018$. Mitjançant la comanda $getSymbols$ de R prenem un total de $1005$ dades corresponents als preus de tancament diari. A partir d'aquestes dades, podem calcular els estadístics bàsics de les rendibilitats, és a dir, els increments dels logaritmes dels preus. Trobem així una mitjana anual de $\hat{\mu}_a=0.07786318$, una desviació estàndard anual de $\hat{\sigma}_a=0.267607$, i finalment una curtosi diària de $\hat{ku}_d=2.806694$. }
 
@@ -137,10 +137,10 @@ Caterpillar Inc. (NYSE: CAT) és una empresa multinacional de maquinària indust
 Caterpillar va néixer l'any 1925 de la fusió de les empreses Holt Manufacturing Company i C. L. Best Tractor Co. El fundador de la primera, Benjamin Holt, va patentar un dels primers vehicles que funcionaven amb tracció per eruga (d'aquí el nom Caterpillar), un sistema de tracció que consisteix en una sèrie de plaques rígides unides per una cinta que gira al voltant de les rodes del vehicle. Amb aquest sistema, la superfície de contacte del vehicle amb el sòl s'incrementa de manera que s'exerceix menys pressió i és possible circular per a terrenys més complicats. Originalment, els vehicles de Holt es feien servir a l'oest americà, on la combinació del terreny àrid i irregular del desert californià i la manca d'infraestructura dificultaven les tasques agràries i de transport. Molt aviat, però, l'empresa va desenvolupar vehicles militars durant la Primera Guerra Mundial, que van ser uns dels precursors del tanc. Durant el període d'entreguerra i sobretot després de la Segona Guerra Mundial, Caterpillar va evolucionar cap a l'àmbit de la construcció, primer al mercat americà i després a escala global, sobretot als països en desenvolupament. 
 
 \begin{figure}[htb]
-	\centering \sffamily \small
-	\input{figs/inici.tex}
-	\caption{Preus d'obertura de Caterpillar entre els anys 2000 i 2019}
-	\label{fig:tancament}
+\centering \sffamily \small
+\input{figs/inici.tex}
+\caption{Preus d'obertura de Caterpillar entre els anys 2000 i 2019}
+\label{fig:tancament}
 \end{figure}
 
 A la \cref{fig:tancament} podem veure els preus d'obertura anuals de les accions de Caterpillar entre l'any 2000 i l'actualitat. La tendència és en general a l'alça, tot i que valen a remarcar diversos punts d'inflexió. És notable la forta caiguda de prop del \SI{35}{\percent} durant l'any 2008, naturalment deguda a la crisi financera del mateix any. Aquesta crisi va afectar fortament el sector de la construcció, que és una de les principals àrees de negoci de Caterpillar. Tanmateix, tal i com apunta \cite{recupera} l'empresa ja anticipava la recessió, i va prendre una sèrie de mesures que van alleujar l'impacte de la crisi. Això, juntament amb un canvi en la direcció, i un canvi d'estratègia enfocat a majors inversions a països amb un ràpid creixement econòmic com la Xina, Índia i Brasil, van fer que Caterpillar tingués una espectacular recuperació durant l'any 2010. Més endavant, durant l'any 2015 l'empresa va experimentar una altra davallada, de més del \SI{25}{\percent}, degut a la crisi del mercat financer xinès \cite{xina}, un dels principals clients de Caterpillar. Tot i així es va recuperar ràpidament durant 2016, iniciant l'any 2017 dos punts per sobre que el 2015, degut a un creixement del mercat, entre d'altres \cite{crush}. Per últim, l'increment dels aranzels sobre les importacions d'acer introduït pel govern de Trump han causat que el valor de Caterpillar hagi baixat prop d'un \SI{20}{\percent} durant l'any 2018 \cite{trump}.
@@ -150,35 +150,35 @@ A la \cref{fig:tancament} podem veure els preus d'obertura anuals de les accions
 
 
 
- 
+
 
 
 
 A la Figura \ref{fig:serie preus} veiem representat l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 i 1004 dades, respectivament. La mitjana i desviació estàndard mostrals per a la rendibilitat anual són $\hat{\mu}_a=0.07786318$ i $\hat{\sigma}_a=0.267607$, respectivament. El valor positiu obtingut per a $\hat{\mu}_a$, es pot resumir en que el creixement mitja del valor de les accions de Caterpillar durant aquest període ha estat positiu.\\
 \begin{figure}[H]
-	\centering \sffamily \small
-	\input{figs/serie-preus.tex}
-	\caption{Evolució del preu de tancament i rendibilitat diàries de Caterpillar entre 2015 i 2018}
-	\label{fig:serie preus}
+\centering \sffamily \small
+\input{figs/serie-preus.tex}
+\caption{Evolució del preu de tancament i rendibilitat diàries de Caterpillar entre 2015 i 2018}
+\label{fig:serie preus}
 \end{figure}
 
 Observant la figura \ref{fig:serie preus} podem veure que hi ha hagut etapes molt diferents a nivell de rendibilitat (i.e de creixement i decreixement). En concret, ens centrarem en la comparació de les rendibilitats dels anys 2015-2016 i 2017-2018.\\
-Qualitativament, vegem que el preu dels actius al principi i al final del període 2015-2016 té valors semblants, mentre que si mirem el període 2017-2018, observem un creixement substancial. Tanmateix, totes dues etapes presenten zones de creixement i decreixement sobtats. Per a poder fer un anàlisi amb més fonament, hem calculem els estimadors de la  mitjana i desviació estàndard de les rendibilitats anuals per als dos períodes
+Qualitativament, vegem que el preu dels actius al principi i al final del període 2015-2016 té valors semblants, mentre que si mirem el període 2017-2018, observem un creixement substancial. Tanmateix, totes dues etapes presenten zones de creixement i decreixement sobtats. Per a poder fer un anàlisi amb més fonament, hem calculat els estimadors de la  mitjana i desviació estàndard de les rendibilitats anuals per als dos períodes, i hem obtingut els resultats que es mostren a la Taula \ref{tb:estim}
 
 
 A nivell quantitatiu, podem calcular els estimadors de la  mitjana i  desviació estàndard de les rendibilitats anuals per als dos períodes i obtenim
 \begin{align}
-    \begin{split}
-    \hat{\mu}_{a1} &= 0.004630473 \\
-	\hat{\sigma}_{a1}&=0.262774056
-    \end{split}
+  \begin{split}
+  \hat{\mu}_{a1} &= 0.004630473 \\
+\hat{\sigma}_{a1}&=0.262774056
+  \end{split}
 \end{align}
-    per al període 2015-2016, i
- \begin{align}
-    \begin{split}
-    \hat{\mu}_{a2} &= 0.1449968 \\
-	\hat{\sigma}_{a2}&= 0.2726803
-    \end{split}
+  per al període 2015-2016, i
+\begin{align}
+  \begin{split}
+  \hat{\mu}_{a2} &= 0.1449968 \\
+\hat{\sigma}_{a2}&= 0.2726803
+  \end{split}
 \end{align}
 per al període 2017-2018.
 
@@ -193,10 +193,10 @@ Vegem que, l'estimador de la mitjana de les rendibilitats anuals és molt major 
 
 Ara, per a fer-nos una idea de la idoneïtat o no de fer una inversió a Caterpillar i comparar-la amb la mitjana de les empreses que formen el Dow Jones Industrial (DJI), representem a la Figura \ref{fig:inversio} simultàniament l'evolució que hauria tingut una inversió de $\$100$ a principis de l'any 2015 a l'empresa Caterpillar i al conjunt del Dow Jones.
 \begin{figure}[H]
-	\centering \sffamily \small
-	\input{figs/inversio.tex}
-	\caption{Evolució d'una inversió de \$100 en Caterpillar i l'índex DJI entre l'any 2000 i el 2018}
-	\label{fig:inversio}
+\centering \sffamily \small
+\input{figs/inversio.tex}
+\caption{Evolució d'una inversió de \$100 en Caterpillar i l'índex DJI entre l'any 2000 i el 2018}
+\label{fig:inversio}
 \end{figure}
 
 A primer cop d'ull, observem que en totes dues inversions tindríem un augment del capital al final del període de la inversió. És interessant veure que, tot i que tant el capital invertit al DJI com el de Caterpillar experimenten una caiguda a finals del 2018, la inversió al DJI presenta un creixement força sostingut amb alguns decreixements puntuals, i, en canvi, el capital invertit a Caterpillar passa per etapes de creixement i decreixement sobtats.\\
