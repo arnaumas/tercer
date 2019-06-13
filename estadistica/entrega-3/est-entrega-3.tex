@@ -21,8 +21,10 @@
 \usepackage{amsmath,amssymb}
 \usepackage[sort]{cleveref}
 \usepackage{enumitem}
+\usepackage{mathtools}
 \usepackage[sorting=none,citestyle=numeric]{biblatex}
 \usepackage{subfig}
+\usepackage{multirow}
 \renewcommand{\familydefault}{\rmdefault}
 \renewcommand{\sfdefault}{cmbr}
 \renewcommand{\ttdefault}{cmtl}
@@ -161,15 +163,32 @@ A la \ref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibili
 \end{equation}
 on, el valor positiu obtingut per a $\hat{\mu}_d$, es pot resumir en que el creixement mitja del valor de Caterpillar durant aquest període ha estat positiu.\\
 
-Observant la figura \ref{fig:serie preus} podem veure que hi ha hagut etapes molt diferents a nivell de rendibilitat (i.e de creixement i decreixement). En concret, ens centrarem en la comparació de les rendibilitats dels anys 2015-2016 i 2017-2018.
-Qualitativament vegem que durant el primer període 
+Observant la figura \ref{fig:serie preus} podem veure que hi ha hagut etapes molt diferents a nivell de rendibilitat (i.e de creixement i decreixement). En concret, ens centrarem en la comparació de les rendibilitats dels anys 2015-2016 i 2017-2018.\\
+Qualitativament, vegem que el preu dels actius al principi i al final del període 2015-2016 té valors semblants, mentre que si mirem el període 2017-2018, observem un creixement substancial. Tanmateix, totes dues etapes presenten zones de creixement i decreixement sobtats. A nivell quantitatiu, podem calcular els estimadors de la  mitjana i  desviació estàndard de les rendibilitats anuals per als dos períodes i obtenim
+\begin{align}
+    \begin{split}
+    \hat{\mu}_{a1} &= 0.004630473 \\
+	\hat{\sigma}_{a1}&=0.262774056
+    \end{split}
+\end{align}
+    per al període 2015-2016, i
+ \begin{align}
+    \begin{split}
+    \hat{\mu}_{a2} &= 0.1449968 \\
+	\hat{\sigma}_{a2}&= 0.2726803
+    \end{split}
+\end{align}
+per al període 2017-2018.
+
+Vegem que, l'estimador de la mitjana de les rendibilitats anuals és molt major (més del doble) durant el període 2017-2018 que durant el 2015-2016. Això concorda amb el fet que durant aquest segon període hi ha un augment net substancial del valor dels actius, mentre que al primer període aquest augment és més aviat modest. D'altra banda, cal remarcar que pel que fa a la desviació estàndard (o volatilitat) la diferència entre els dos períodes és petita, pel que, tot i les diferències en les rendibilitats, sembla ser que el risc és manté més o menys constant durant els dos períodes.
+
 
 
 
 
 %Fer aqui comparatva 2015-16 amb 2017-18. Es podria fer recta de regressió, o simplement mitjanes i desviació estàndard
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering \sffamily \small
 	\input{figs/serie-preus.tex}
 	\caption{Evolució del preu de tancament i rendibilitat diàries de Caterpillar entre 2015 i 2018}
