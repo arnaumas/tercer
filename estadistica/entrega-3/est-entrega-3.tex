@@ -154,17 +154,19 @@ A la \cref{fig:tancament} podem veure els preus d'obertura anuals de les accions
 
 
 
-A la \ref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 i 1004 dades, respectivament. La mitjana i desviació estàndard mostrals per a la rendibilitat diària són
-\begin{equation} \label{eq:parametres}
-	\begin{gathered}
-		\hat{\mu}_d = 0.000311 \\
-		\hat{\sigma}_d	= 0.0169 \\
-	\end{gathered}
-\end{equation}
-on, el valor positiu obtingut per a $\hat{\mu}_d$, es pot resumir en que el creixement mitja del valor de Caterpillar durant aquest període ha estat positiu.\\
+A la Figura \ref{fig:serie preus} veiem representat l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 i 1004 dades, respectivament. La mitjana i desviació estàndard mostrals per a la rendibilitat anual són $\hat{\mu}_a=0.07786318$ i $\hat{\sigma}_a=0.267607$, respectivament. El valor positiu obtingut per a $\hat{\mu}_a$, es pot resumir en que el creixement mitja del valor de les accions de Caterpillar durant aquest període ha estat positiu.\\
+\begin{figure}[H]
+	\centering \sffamily \small
+	\input{figs/serie-preus.tex}
+	\caption{Evolució del preu de tancament i rendibilitat diàries de Caterpillar entre 2015 i 2018}
+	\label{fig:serie preus}
+\end{figure}
 
 Observant la figura \ref{fig:serie preus} podem veure que hi ha hagut etapes molt diferents a nivell de rendibilitat (i.e de creixement i decreixement). En concret, ens centrarem en la comparació de les rendibilitats dels anys 2015-2016 i 2017-2018.\\
-Qualitativament, vegem que el preu dels actius al principi i al final del període 2015-2016 té valors semblants, mentre que si mirem el període 2017-2018, observem un creixement substancial. Tanmateix, totes dues etapes presenten zones de creixement i decreixement sobtats. A nivell quantitatiu, podem calcular els estimadors de la  mitjana i  desviació estàndard de les rendibilitats anuals per als dos períodes i obtenim
+Qualitativament, vegem que el preu dels actius al principi i al final del període 2015-2016 té valors semblants, mentre que si mirem el període 2017-2018, observem un creixement substancial. Tanmateix, totes dues etapes presenten zones de creixement i decreixement sobtats. Per a poder fer un anàlisi amb més fonament, hem calculem els estimadors de la  mitjana i desviació estàndard de les rendibilitats anuals per als dos períodes
+
+
+A nivell quantitatiu, podem calcular els estimadors de la  mitjana i  desviació estàndard de les rendibilitats anuals per als dos períodes i obtenim
 \begin{align}
     \begin{split}
     \hat{\mu}_{a1} &= 0.004630473 \\
@@ -188,12 +190,6 @@ Vegem que, l'estimador de la mitjana de les rendibilitats anuals és molt major 
 
 %Fer aqui comparatva 2015-16 amb 2017-18. Es podria fer recta de regressió, o simplement mitjanes i desviació estàndard
 
-\begin{figure}[H]
-	\centering \sffamily \small
-	\input{figs/serie-preus.tex}
-	\caption{Evolució del preu de tancament i rendibilitat diàries de Caterpillar entre 2015 i 2018}
-	\label{fig:serie preus}
-\end{figure}
 
 Ara, per a fer-nos una idea de la idoneïtat o no de fer una inversió a Caterpillar i comparar-la amb la mitjana de les empreses que formen el Dow Jones Industrial (DJI), representem a la Figura \ref{fig:inversio} simultàniament l'evolució que hauria tingut una inversió de $\$100$ a principis de l'any 2015 a l'empresa Caterpillar i al conjunt del Dow Jones.
 \begin{figure}[H]
@@ -298,7 +294,12 @@ Finalment cal remarcar que, tot i que suposar normalitat pot semblar una mica co
 	\caption{Comparació amb una distribució NIG}
 	\label{fig:comparacio nig}
 \end{figure}
-
+\begin{figure}[H]
+	\centering \sffamily \small
+	\input{figs/normal.tex}
+	\caption{Comparació amb una distribució normal}
+	\label{fig:comparacio normal}
+\end{figure}
 
 \section{Conclusions}
 \newpage
