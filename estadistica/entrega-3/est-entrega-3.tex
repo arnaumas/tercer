@@ -14,12 +14,15 @@
 \usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
 \usepackage{siunitx}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{booktabs}
 \usepackage{listings}
 \usepackage{textcomp}
 \usepackage{amsmath,amssymb}
 \usepackage[sort]{cleveref}
 \usepackage{enumitem}
+\usepackage[sorting=none,citestyle=numeric]{biblatex}
+\addbibresource{fonts.bib} %Imports bibliography file
 
 \renewcommand{\familydefault}{\rmdefault}
 \renewcommand{\sfdefault}{cmbr}
@@ -90,7 +93,8 @@
 \pagestyle{pagina}
 
 
-\title{\sffamily \bfseries Modelització i anàlisi financera de l'empresa Caterpillar \vspace{1em} \hrule}
+
+\title{\sffamily \bfseries Modelització i anàlisi financera de l'empresa Caterpillar \vspace{1em}}
 \author{\sffamily Andreu Arderiu, Arnau Mas}
 \date{\sffamily 14 de juny de 2019}
 
@@ -138,7 +142,8 @@ Caterpillar va néixer l'any 1925 de la fusió de les empreses Holt Manufacturin
 	\label{fig:tancament}
 \end{figure}
 
-A la \cref{fig:tancament} podem veure els preus de tancament anuals entre l'any 2000 i l'actualitat. La tendència és en general a l'alça. Tot i així, cal remarcar una caiguda de prop del \SI{50}{\percent} durant l'any 2008, naturalment deguda a la crisi financera del mateix any. Aquesta crisi va afectar fortament el sector de la construcció, que és una de les principals àrees de negoci de Caterpillar.
+A la \cref{fig:tancament} podem veure els preus de tancament anuals entre l'any 2000 i l'actualitat. La tendència és en general a l'alça, tot i que podem remarcar varis punts d'inflexió. Vegem la forta caiguda de prop del \SI{50}{\percent} durant l'any 2008, naturalment deguda a la crisi financera del mateix any. Aquesta crisi va afectar fortament el sector de la construcció, que és una de les principals àrees de negoci de Caterpillar. Tot i així, tal i com apunta \cite{recupera} l'empresa ja anticipava la recessió i va prendre una sèrie de mesures que van alleujar l'impacte de la crisi. Això, juntament amb un canvi en la direcció i un canvi d'estratègia enfocat a majors inversions a països amb un ràpid creixement econòmic com la Xina, India i Brasil, van fer que Caterpillar tingués una espectacular recuperació durant l'any 2010.
+Més endavant, durant l'any 2015 podem veure a la \cref{fig:tancament} com l'empresa va patir una forta caiguda, degut a la Crisi del mercat financer Xinès \cite{xina}, un dels principals clients de Caterpillar. Tanmateix cal remarcar el fort ceixement posterior, durant el 2017, de prop del $50\%$, degut a un creixement del mercat, entre d'altres \cite{crush}. Finalment, vegem que durant el 2018 l'empresa torna a patir una forta caiguda degut a l'anunci del president Trump de l'increment dels aranzels sobre les importacions d'acer \cite{t
 
 \section{Previsió futura}
 \begin{figure}[htb]
@@ -176,20 +181,20 @@ A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibil
 
 \section{Resta}
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering \sffamily \small
 	\input{figs/inversio.tex}
 	\caption{Evolució d'una inversió de \$100 en Caterpillar i l'índex DJI entre l'any 2000 i el 2018}
 	\label{fig:inversio}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering \sffamily \small
 	\input{figs/dist-rend.tex}
 	\caption{Evolució del preu de tancament de Caterpillar entre 2015 i 2018}
 	\label{fig:distribucio rendibilitats}
 \end{figure}
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering \sffamily \small
 	\input{figs/nig.tex}
 	\caption{Comparació amb una distribució NIG}
@@ -202,7 +207,9 @@ A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibil
 Codi R
 \end{lstlisting}
 
-\bibliographystyle{plain}
-\bibliography{fonts}
+%\bibliographystyle{plain}
+%\bibliography{fonts}
+\newpage
+\printbibliography
 
 \end{document}
