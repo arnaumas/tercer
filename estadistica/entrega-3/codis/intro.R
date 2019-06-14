@@ -34,8 +34,8 @@ tikz(file = "../figs/inversio.tex", width = 6, height = 2)
 inv <- plot(100*preus.CAT/as.numeric(preus.CAT[1]), main = "Evolució d'una inversió de \\$100", col = 'blue')
 inv <- lines(100*preus.DJI/as.numeric(preus.DJI[1]), col = 'red', lwd = 2)
 inv <- addLegend("topleft", legend.names = c("CAT", "DJI"), 
-          lty=c(1, 1), lwd=c(2, 2),
-          col=c("blue", "red"))
+                 lty=c(1, 1), lwd=c(2, 2),
+                 col=c("blue", "red"))
 plot(inv)
 dev.off()
 
@@ -92,7 +92,7 @@ nig <- pnig(ord, mu = mean(rend.CAT), delta = sqrt(phi*w), alpha = sqrt(w/phi), 
 
 max(abs(prob - norm))
 
-.Las# Comparació amb una NIG
+# Comparació amb una NIG
 tikz(file = "../figs/nig.tex", width = 5, height = 2.5)
 nf <- layout(mat = matrix(c(1,2), 1, 2, byrow = TRUE), widths = c(2.5,2.5))
 par(mar = c(4,4,2,0.5))
@@ -193,3 +193,23 @@ totals.exp <- hist(ord, intervals, plot = FALSE)$counts
 totals.norm <- length(ord) * diff(pnorm(intervals, mean = mean(ord), sd = sd(ord)))
 totals.nig <- length(ord) * diff(pnig(intervals, mu = mean(rend.CAT),
                                       delta = sqrt(phi*w), alpha = sqrt(w/phi), beta = 0))
+totals <- matrix(c(totals.exp, totals.norm, totals.nig), 
+                 ncol = 8, nrow = 3, byrow = TRUE)
+noms <- c("(-0.08, -0.06)", "(-0.06, -0.04)", "(-0.04, -0.02)", 
+                      "(-0.02, 0)", "(0, 0.02)", "(0.02, 0.04)", "(0.04, 0.06)",
+                      "(0.06, 0.08)")
+tikz(file = "../figs/intervals.tex", width = 6, height = 3)
+par(mar = c(7,4,2,0))
+barplot(totals, beside = TRUE, col = c("orchid", "lightblue", "limegreen"),
+         names = noms, las = 2, border = FALSE)
+legend("topleft", inset = 0.03, box.lty = 0, 
+       col = c("lightblue", "orchid", "limegreen"), legend = c("Observat", "Normal", "NIG"), 
+       lty = 1, lw = 8, border = FALSE)
+dev.off()
+
+tikz(file = "../figs/corr.tex", width = 6, height = 2.5)
+nf <- layout(mat = matrix(c(1,2), 1, 2, byrow = TRUE), widths = c(2.5,2.5))
+par(mar = c(4,4,3,0.5))
+plot(acf(rend.CAT, plot = FALSE)[1:20], main = "Rendibilitats", xlab = "Decalatge", ylab = "Autocorrelacions")
+plot(acf(rend.CAT^2, plot = FALSE)[1:20], main = "Rendibilitats quadrades", xlab = "Decalatge", ylab = "Autocorrelacions")
+dev.off()
