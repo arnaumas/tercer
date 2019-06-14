@@ -44,14 +44,15 @@ volat.CAT <- sqrt(250)*sd(rend.CAT)
 mitj.CAT <- 250*mean(rend.CAT)
 n.dades <- length(rend.CAT)
 
-tikz(file = "../figs/dist-rend.tex", width = 3.5, height = 3.5)
+tikz(file = "../figs/dist-rend.tex", width = 3.5, height = 2.5)
 nf <- layout(mat = matrix(c(2,1), 2, 1, byrow = TRUE), height = c(4,1))
 par(mar = c(0,4,0,0))
-boxplot(as.numeric(rend.CAT), horizontal = TRUE, frame = FALSE, xaxt = 'n',
+boxplot(as.numeric(rend.CAT), horizontal = TRUE, frame = FALSE, xaxt = 'n', ylim = c(-0.1, 0.1),
         col = 'lightblue', whiskcol = 'black', staplecol = 'black', 
         border = 'white', outcol = "gray40", outpch = 4, medcol = 'black', medlwd = 1)
 par(mar = c(1,4,3,0))
-hist(rend.CAT, ylim = c(0,30), xlim = c(-0.1, 0.1), breaks = 12, xlab = "", ylab = "Densitat", 
+hist(rend.CAT, ylim = c(0,30), xlim = c(-0.1, 0.1), breaks = 12,
+     xlab = "", ylab = "Densitat", 
      probability = TRUE, col = 'lightblue', border = FALSE,
      main = "Distribució de les rendibilitats diàries")
 curve(dnorm(x, mean = mean(rend.CAT), sd = sd(rend.CAT)), 
