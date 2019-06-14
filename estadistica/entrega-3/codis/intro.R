@@ -82,6 +82,7 @@ jarqueberaTest(rend.CAT)
 # Comparació amb les distribucions normal i NIG ----
 library(GeneralizedHyperbolic)
 
+# Test de Lilliefors
 phi <- as.numeric(var(rend.CAT))
 w <- as.numeric(3/(kurtosi.dia))
 ord <- sort(as.numeric(rend.CAT))
@@ -89,7 +90,9 @@ prob <- (1:length(rend.CAT))/length(rend.CAT)
 norm <- pnorm(ord, mean(rend.CAT), sd(rend.CAT))
 nig <- pnig(ord, mu = mean(rend.CAT), delta = sqrt(phi*w), alpha = sqrt(w/phi), beta = 0)
 
-# Comparació amb una NIG
+max(abs(prob - norm))
+
+.Las# Comparació amb una NIG
 tikz(file = "../figs/nig.tex", width = 5, height = 2.5)
 nf <- layout(mat = matrix(c(1,2), 1, 2, byrow = TRUE), widths = c(2.5,2.5))
 par(mar = c(4,4,2,0.5))
@@ -184,7 +187,7 @@ legend("topleft", legend = c("CAT", "DJI"),
        col=c("magenta", "red"), bty = 'n')
 dev.off()
 
-# Separació en intervals
+# Separació en intervals ----
 intervals <- seq(from = -0.08, to = 0.08, by = 0.02)
 totals.exp <- hist(ord, intervals, plot = FALSE)$counts
 totals.norm <- length(ord) * diff(pnorm(intervals, mean = mean(ord), sd = sd(ord)))
