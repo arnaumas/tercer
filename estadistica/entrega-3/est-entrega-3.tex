@@ -147,51 +147,43 @@ A la \cref{fig:tancament} podem veure els preus d'obertura anuals de les accions
 
 
 \section{Estudi de les rendibilitats}
-
-
-
-
-
-
+El model més senzill per a l'evolució dels actius financers d'una empresa és la hipòtesi que les rendibilitats diàries són independents normalment distribuïdes amb paràmetres independents del temps. La rendibilitat (a vegades anomenada rendibilitat neta per a distingir-la de la rendibilitat bruta) diària es defineix com el logaritme del quocient de preus. És a dir, si \( P_t \) és el preu el dia \( t \) aleshores la rendibilitat d'aquest dia, \( r_t \) és
+\begin{equation}
+	r_t = \log{\left(\frac{P_t}{P_{t-1}}\right)}.
+	\label{eq:rend}
+\end{equation}
+La hipòtesi, doncs, és que \( r_t \sim N(\mu_d, \sigma_d^2) \). Aquest model s'anomena el model de Samuelson-Bachelier. Observem que si \( \sigma_d = 0 \) aleshores la rendibilitat és constant i els preus evolucionen exponencialment segons,
+\begin{equation*}
+	P_t = e^{r_t}P_{t-1}
+\end{equation*}
+que és la fórmula de l'interès compost. Així doncs, \( \sigma_d \) governa el risc en l'evolució i s'anomena la volatilitat.\\
 
 A la Figura \ref{fig:serie preus} veiem representat l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 i 1004 dades, respectivament. La mitjana i desviació estàndard mostrals per a la rendibilitat anual són $\hat{\mu}_a=0.07786318$ i $\hat{\sigma}_a=0.267607$, respectivament. El valor positiu obtingut per a $\hat{\mu}_a$, es pot resumir en que el creixement mitja del valor de les accions de Caterpillar durant aquest període ha estat positiu.\\
 \begin{figure}[H]
-\centering \sffamily \small
-\input{figs/serie-preus.tex}
-\caption{Evolució del preu de tancament i rendibilitat diàries de Caterpillar entre 2015 i 2018}
-\label{fig:serie preus}
+	\centering \sffamily \small
+	\input{figs/serie-preus.tex}
+	\caption{Evolució del preu de tancament i rendibilitat diàries de Caterpillar entre 2015 i 2018}
+	\label{fig:serie preus}
 \end{figure}
 
 Observant la figura \ref{fig:serie preus} podem veure que hi ha hagut etapes molt diferents a nivell de rendibilitat (i.e de creixement i decreixement). En concret, ens centrarem en la comparació de les rendibilitats dels anys 2015-2016 i 2017-2018.\\
-Qualitativament, vegem que el preu dels actius al principi i al final del període 2015-2016 té valors semblants, mentre que si mirem el període 2017-2018, observem un creixement substancial. Tanmateix, totes dues etapes presenten zones de creixement i decreixement sobtats. Per a poder fer un anàlisi amb més fonament, hem calculat els estimadors de la  mitjana i desviació estàndard de les rendibilitats anuals per als dos períodes, i hem obtingut els resultats que es mostren a la Taula \ref{tb:estim}
+Qualitativament, vegem que el preu dels actius al principi i al final del període 2015-2016 té valors semblants, mentre que si mirem el període 2017-2018, observem un creixement substancial. Tanmateix, totes dues etapes presenten zones de creixement i decreixement sobtats. Per a poder fer un anàlisi amb més fonament, hem calculat els estimadors de la  mitjana i desviació estàndard de les rendibilitats anuals per als dos períodes, i hem obtingut els resultats que es mostren a la Taula \ref{tb:estim}.
 
+\begin{table}[H]
+\centering
+\caption{Valors dels estimadors de la mitjana i desviació estàndard de les rendibilitats anuals durant els períodes 2015-2016 i 2017-2018.}
+\begin{tabular}{|c|c|c|}
+\hline
+Període   & $\hat{\mu}_a$& $\hat{\sigma}_a$      \\ \hline
+2015-2016 & 0.004630473 & 0.262774056 \\ \hline
+2017-2018 & 0.1449968   & 0.2726803   \\ \hline
+\end{tabular}
+\label{tb:estim}
+\end{table}
 
-A nivell quantitatiu, podem calcular els estimadors de la  mitjana i  desviació estàndard de les rendibilitats anuals per als dos períodes i obtenim
-\begin{align}
-  \begin{split}
-  \hat{\mu}_{a1} &= 0.004630473 \\
-\hat{\sigma}_{a1}&=0.262774056
-  \end{split}
-\end{align}
-  per al període 2015-2016, i
-\begin{align}
-  \begin{split}
-  \hat{\mu}_{a2} &= 0.1449968 \\
-\hat{\sigma}_{a2}&= 0.2726803
-  \end{split}
-\end{align}
-per al període 2017-2018.
+Observem que l'estimador de la mitjana de les rendibilitats anuals és molt major (més del triple) durant el segon període 2017-2018 que durant el primer període 2015-2016. Això concorda amb el fet que durant el segon període hi ha un augment net substancial ($+25.4\%$) del valor dels actius, mentre que en el primer període aquest augment és ínfim (concretament del $+0.9\%$). D'altra banda, cal remarcar que pel que fa a la desviació estàndard (o volatilitat) la diferència entre els dos períodes és petita, pel que, tot i les diferències en les rendibilitats, sembla ser que el risc és manté més o menys constant durant els dos períodes.\\
 
-Vegem que, l'estimador de la mitjana de les rendibilitats anuals és molt major (més del doble) durant el període 2017-2018 que durant el 2015-2016. Això concorda amb el fet que durant aquest segon període hi ha un augment net substancial del valor dels actius, mentre que al primer període aquest augment és més aviat modest. D'altra banda, cal remarcar que pel que fa a la desviació estàndard (o volatilitat) la diferència entre els dos períodes és petita, pel que, tot i les diferències en les rendibilitats, sembla ser que el risc és manté més o menys constant durant els dos períodes.
-
-
-
-
-
-%Fer aqui comparatva 2015-16 amb 2017-18. Es podria fer recta de regressió, o simplement mitjanes i desviació estàndard
-
-
-Ara, per a fer-nos una idea de la idoneïtat o no de fer una inversió a Caterpillar i comparar-la amb la mitjana de les empreses que formen el Dow Jones Industrial (DJI), representem a la Figura \ref{fig:inversio} simultàniament l'evolució que hauria tingut una inversió de $\$100$ a principis de l'any 2015 a l'empresa Caterpillar i al conjunt del Dow Jones.
+Ara, per a fer-nos una idea de la idoneïtat o no de fer una inversió a Caterpillar, i comparar-la amb la mitjana de les empreses que formen el Dow Jones Industrial (DJI), representem a la Figura \ref{fig:inversio} simultàniament l'evolució que hauria tingut una inversió de $\$100$ a principis de l'any 2015 a l'empresa Caterpillar i al conjunt del Dow Jones.
 \begin{figure}[H]
 \centering \sffamily \small
 \input{figs/inversio.tex}
@@ -203,21 +195,8 @@ A primer cop d'ull, observem que en totes dues inversions tindríem un augment d
 En efecte, durant el període 2015-2017, el valor del capital en la inversió al DJI és superior al de Caterpillar, el qual pateix una forta caiguda i es manté per sota del valor dels $\$100$ de la inversió inicial, i en canvi, Durant el 2017, tal i com hem comentat en la secció anterior, Caterpillar experimenta un gran creixement, i el valor de la inversió supera amb escreix al del DJ. Finalment durant el 2018 ambdós capitals presenten un decreixement però l'any tanca amb un valor per a la inversió de Caterpillar major que la del DJI  ($\$136.7$ en front de  $\$129.3$). Així doncs, una hipotètica inversió de $\$100$ durant el període $(2015-2018)$ hauria estat més rentable a Caterpillar que al Dow Jones Industrial.
 
 
-
-
-
 \section{Previsió futura}
-El model més senzill per a l'evolució dels actius financers d'una empresa és la hipòtesi que les rendibilitats diàries són independents normalment distribuïdes amb paràmetres independents del temps. La rendibilitat (a vegades anomenada renbilitat neta per a distingir-la de la rendibilitat bruta) diària es defineix com el logaritme del quocient de preus. És a dir, si \( P_t \) és el preu el dia \( t \) aleshores la rendibilitat d'aquest dia, \( r_t \) és
-\begin{equation*}
-	r_t = \log{\left(\frac{P_t}{P_{t-1}}\right)}.
-\end{equation*}
-La hipòtesi, doncs, és que \( r_t \sim N(\mu_d, \sigma_d^2) \). Aquest model s'anomena el model de Samuelson-Bachelier. Observem que si \( \sigma_d = 0 \) aleshores la rendibilitat és constant i els preus evolucionen exponencialment segons,
-\begin{equation*}
-	P_t = e^{r_t}P_{t-1}
-\end{equation*}
-que és la fórmula de l'interès compost. Així doncs, \( \sigma_d \) governa el risc en l'evolució i s'anomena la volatilitat. 
-
-Si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Aleshores
+Tenint en compte la definició de rendibilitat donada per l'\cref{eq:rend}, si introduïm els log-preus, \( p_t = \log{P_t} \), tenim que \( p_t = p_{t-1} + r_t \), i per tant que l'evolució dels log-preus és un passeig aleatori. Aleshores
 \begin{equation} \label{eqn:passeig aleatori}
 	p_t = p_0 + \sum_{k = 1}^{t-1}r_k 
 \end{equation}
@@ -225,25 +204,41 @@ i com que la suma de normals independents també és normal, la distribució del
 \begin{equation} \label{eqn:distribucio log-preus}
 	p_t \sim N(p_0 + \mu_d t, t\sigma_d^2).
 \end{equation}
+A partir de les dades dels últims 4 anys (2015-2018) representades a la \cref{fig:serie preus} podem calcular la mitjana i desviació estàndard mostrals per a la rendibilitat diària:
+\begin{align} \label{eq:parametres}
+	\begin{split}
+		\hat{\mu}_d &= 0.000311 \\
+		\hat{\sigma}_d&	= 0.0169. \\
+	\end{split}
+\end{align}
+Coneixent doncs la mitjana i variància de la rendibilitats diàries, podem modelar el comportament del logaritme dels preus de les accions com un passeig aleatori. Fem doncs 10 simulacions de
+possibles escenaris futurs en 500 dies útils, partint d'un capital inicial de $\$100$, tal com veiem en la \cref{fig:simulacio}. Les corbes vermelles i rosades representades representen el continu d'intervals de confiança del $95\%$ de la distribució de log-preus (\cref{eqn:distribucio log-preus}) de Caterpillar i el DJI, respectivament. Vegem que a la \cref{fig:simulacio} a banda de simular el passeig aleatori dels logaritmes dels preus també hem simulat l'evolució dels preus. Per a fer-ho simplement cal aplicar la funció exponencial als càlculs fets per als log-preus.\\
 
-A la \cref{fig:serie preus} hi ha l'històric dels preus de tancament i rendibilitats diàries de Caterpillar al llarg dels últims 4 anys (2015-2018), en total 1005 dades. La mitjana i desviació estàndard mostrals per a la rendibilitat diària són
-\begin{equation} \label{eq:parametres}
-	\begin{gathered}
-		\hat{\mu}_d = 0.000311 \\
-		\hat{\sigma}_d	= 0.0169. \\
-	\end{gathered}
-\end{equation}
-Amb aquests paràmetres podem simular la possible evolució del valor dels actius de caterpilar fent servir l'\cref{eqn:distribucio log-preus}. A la \cref{fig:simulacio} es mostren els resultats d'aquesta simulació. Primerament hem simulat 10 possibles evolucions
 
 
-
+Observant la \cref{fig:simulacio}, veiem que tots els passeigs aleatoris es mantenen dins l'interval de confiança de Caterpillar, però molts surten del de DJI. Això és degut a que la volatilitat dels actius de Caterpillar és molt major que la dels del DJI (té una volatilitat diària de $\hat{\sigma}_d=0.01692499$ .
 \begin{figure}[htb]
 	\centering \sffamily \small
 	\input{figs/simulacio.tex}
 	\caption{Simulació de l'evolució d'una inversió de \$100 en actius de Caterpillar durant 500 dies. A l'esquerra es mostren els log-preus i a la dreta els preus.}
 	\label{fig:simulacio}
 \end{figure}
-
+Quan ens estem plantejant fer una inversió, també ens interessarà saber el seu valor esperat al cap d’un temps $t$. Per estimar-lo, prenem $P_i$ el preu de les accions el dia útil $i$ i $p_i = log(P_i)$, aleshores:
+\begin{equation}
+    p_t-p_0\sim \mathcal{N}(\mu_d t, t\sigma_d^2)\Longrightarrow\frac{P_t}{P_0}=e^{p_t-p_0}\sim\mathcal{LN}(\mu_d t, t\sigma_d^2)
+\end{equation}
+pel que $E[P_t]=P_0e^{n(\mu_d+\frac{1}{2}\sigma_d^2}$ seria el preu esperat en funció del preu inicial i el temps transcorregut.\\
+Suposem que, a dia 2 de gener de 2015, ens estem plantejant fer una inversió a 1 any vista, és a dir, que finalitzi el 4 de gener de 2016. En aquest cas, $t =250$, ja que considerem que cada any té 250 dies útils, i obtindrem
+\begin{equation*}
+   E[P_t]=P_0e^{250(0.000311+\frac{1}{2}0.0169^2)}=1.12P_0 ,
+\end{equation*}
+pel que $E[P_t]>P_0$ i, per tant, això ens diu que l’esperança és de guanyar diners, de fet, uns guanys esperats del $12\%$. 
+En particular, com que $P_0 = 4.61$, $E[P_t] = 5.16$. Tot i així, degut a l’alta variància, el valor esperat no té perquè ser proper al valor obtingut. De fet, en el nostre cas el valor real del log-preu el dia 2 de gener de 2018, tal i com es pot veure a la \cref{fig:inversio}, és de 4.30 i, per tant, $P_t<P_0$. Aquest valor però no ens ha de sobtar, ja que l'interval de confiança del $95\%$ el dia $t=250$ de la inversió és de  $(4.16,5.21)$.
+Seguint un raonament similar, podríem estudiar la probabilitat de perdre diners el primer trimestre de 2019 (des del 2 de gener fins a l'1 d'abril). En aquest cas $t=62$, i procedim de la següent manera.
+\begin{equation}
+    P\left\{P_t<P_0\right\}=P\left\{P_t/P_0<1\right\}=P\left\{p_t-p_0<0\right\}=P\left\{\frac{p_t-p_0-t\mu_d}{\sqrt{t}\sigma_d}<\frac{-t\mu_d}{\sqrt{t}\sigma}\right\}=\phi\left(\frac{-\sqrt{t}\mu_d}{\sigma_d}\right)
+\end{equation}
+Fent els càlculs amb R, obtenim que $P\left\{P_t<P_0\right\}=0.44$, pel que a priori es tractaria d'una bona inversió. Vegem que en la realitat el preu de les accions durant aquest període va pujar un $11\%$, pel que en efecte hauria estat una bona inversió.
 
 
 \section{Estudi de les hipòtesis}
