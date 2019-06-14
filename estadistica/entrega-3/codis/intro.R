@@ -182,3 +182,10 @@ legend("topleft", legend = c("CAT", "DJI"),
        lty="dashed", lwd=c(2, 2),
        col=c("magenta", "red"), bty = 'n')
 dev.off()
+
+# Separació en intervals
+intervals <- seq(from = -0.08, to = 0.08, by = 0.02)
+totals.exp <- hist(ord, intervals, plot = FALSE)$counts
+totals.norm <- length(ord) * diff(pnorm(intervals, mean = mean(ord), sd = sd(ord)))
+totals.nig <- length(ord) * diff(pnig(intervals, mu = mean(rend.CAT),
+                                      delta = sqrt(phi*w), alpha = sqrt(w/phi), beta = 0))
