@@ -287,6 +287,12 @@ Finalment cal remarcar que, tot i que suposar normalitat pot semblar una mica co
 \end{figure}
 A continuació avaluarem la hipòtesi de normalitat de les rendibilitats. Hem estimat la mitjana i desviació estàndard de les rendibilitat ---\cref{eq:parametres}---. Si, tal i com hem suposat, les rendibilitats fossin normals amb aquests paràmetres aleshores la probabilitat d'observar rendibilitats superiors a \num{0.07} o inferiors a \num{-0.07} és de l'ordre de \num{e-5} i per tant, en una mostra de mida 1000 no n'esperariem cap. Amb tot hi ha 5 observacions en aquest rang. Això és indicatiu de que la distribució de les rendibilitats no és normal. Una altra dada que ens fa pensar que la distribució no és normal és la seva curtosi. Concretament, la mostra té un excés de curtosi de \num{2.8} i per tant és una distribució leptocúrtica ---la distribució normal té un excés de curtosi de 0---. Això vol dir que té cues més pesades que la normal i per tant és més probable observar valors extrems, com és el cas. 
 
+Podem acabar de determinar que la distribució no és normal amb el test Jarque-Bera. Aquest test fa servir l'estadístic
+\begin{equation} \label{eqn:jarque-bera}
+	JB = \frac{n-k}{6}\left(b^2 + \tfrac{1}{4}\kappa_e^2\right)
+\end{equation}
+on \( b \) és el biaix de la mostra, \( \kappa_e \) l'excés de curtosi, \( n \) la mida de la mostra i \( k \) el nombre de regressors per generar la sèrie. Aquest estadístic té distribució asimptòtica \( \chi^2 \) amb dos graus de llibertat. Sota la hipotesi nu\l.la de normalitat esperem que sigui nul ja que una distribució normal té biaix i excés de curtosi 0. Per a la sèrie de rendibilitats l'estadístic val aproximadament \num{342}, i per tant tenim un \( p \)-valor de l'ordre de \num{e-75}. Així doncs podem rebutjar la hipòtesi nu\l.la amb confiança pràcticament de \SI{100}{\percent}. Cal remarcar que la hipòtesi nu\l.la és que la distribució té biaix i excés de curtosi nuls, no que la distribució sigui normal ja que la distribució normal no és l'única amb biaix i excés de kurtosi 0. Tot i així, com que rebutgem la hipòtesi nu\l.la podem afirmar que les dades que tenim no són normals. 
+
 
 
 
