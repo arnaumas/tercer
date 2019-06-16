@@ -7,7 +7,7 @@
 \usepackage{lmodern}
 \usepackage{geometry}
 \usepackage{tikz}
-\usetikzlibrary{positioning,calc,math,arrows.meta,decorations.markings}
+\usetikzlibrary{positioning,calc,math,arrows.meta,decorations.markings,intersections}
 \usepackage{hyperref}
 \usepackage[bf,sf,pagestyles]{titlesec}
 \usepackage{titling}
@@ -62,7 +62,7 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Ry}{\mathit{Ry}}
-\newcommand{\conv}[2]{\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (#1,0) ellipse [x radius = 0.1, y radius = #2]}
+\newcommand{\conv}[2]{\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (#1,0) ellipse [x radius = 0.1, y radius = #2];}
 \newcommand{\data}[3]{\SI{#1 \pm #2}{#3}}
 \newcommand{\unc}[2]{\ensuremath{{}\pm \SI{#1}{#2}}}
 \DeclareMathOperator{\gr}{gr}
@@ -106,6 +106,8 @@
 
 \section{Introducción y objetivos}
 
+\section{Telescopio astronómico}
+
 \begin{figure}[htb]
 	\centering \footnotesize \sffamily 
 	\newcommand{\setcoords}{
@@ -131,20 +133,21 @@
 				color = red!30!white,
 				decoration = {markings, mark = between positions 0.25 and 0.75 step 0.25 with {\arrow{>}}},
 				postaction = decorate
-		}};
+			}
+		};
 		\draw[raig] (obj) ++ (0,-\yob) -- (ocu |- 10,1.5) -- (10,1.5) ;
 		\draw[raig] (obj) ++ (0,\yob) -- (ocu |- 10,-1.5) -- (10,-1.5) ;
 
 
 		% Objectiu
-		\conv{\xob}{\yob};
+		\conv{\xob}{\yob}
 		\draw[-|, thick, color = olive] (\xob,\yob + 0.5) -- (\xob,\yob);
 		\draw[-|, thick, color = olive] (\xob,-\yob - 0.5) -- (\xob,-\yob);
 		\node [above,gray] at (\xob,\yob + 0.5) {Objetivo};
 		\node [below, olive, align = center] at (\xob,-\yob - 0.5) {DO\\PE};
 
 		% Ocular
-		\conv{\xoc}{\yoc};
+		\conv{\xoc}{\yoc}
 		\draw[-|, thick, color = olive] (\xoc,\yoc + 0.5) -- (\xoc,\yoc);
 		\draw[-|, thick, color = olive] (\xoc,-\yoc - 0.5) -- (\xoc,-\yoc);
 		\node [above,gray] at (\xoc,\yoc + 0.5) {Ocular};
@@ -161,7 +164,7 @@
 		\begin{scope}[yshift = -20pt]
 			\setcoords
 			\draw[|<->|, dist] (obj) -- node [below] {\( f'_{\text{obj}} = \SI{50}{cm} \)} (focus);
-			\draw[<->|, dist] (focus) -- node [below] {\( f_{\text{oc}} = \SI{50}{cm} \)} (ocu);
+			\draw[<->|, dist] (focus) -- node [below] {\( f_{\text{oc}} = \SI{5}{cm} \)} (ocu);
 			\draw[<->|, dist] (ocu) -- node [below] {\( l = \SI{3.7}{cm} \)} +(2,0);
 			\draw[color = gray, thin, densely dashed] (focus) -- ++(0,20pt);
 		\end{scope}
@@ -175,7 +178,7 @@
 		\end{scope}
 		\begin{scope}[xshift = 3.2cm]
 			\setcoords
-			\draw[|<->|, dist] (ocu) ++ (0,1.75) -- node [below, rotate = 90] {\( \Phi_{\text{Ull}} = \SI{6}{mm} \)} +(0,-3.5);
+			\draw[|<->|, dist] (ocu) ++ (0,1.75) -- node [below, rotate = 90] {\( \Phi_{\text{Ojo}} = \SI{6}{mm} \)} +(0,-3.5);
 		\end{scope}
 
 		% Pupil·la de sortida
@@ -201,6 +204,221 @@
 	\label{fig:telescopio astronómico}
 \end{figure}
 
+En la figura 
+
+\section{Telescopio terrestre}
+
+\begin{figure}[htb]
+	\centering \footnotesize \sffamily 
+	
+	\begin{tikzpicture}
+		\tikzmath{
+			% Posicions de les lents
+			\xoc = 9;
+			\xin = 5.5;
+			\xob = 1; 
+			\y = 2;
+			% Focals
+			\foc = 1.5;
+			\fob = 2.5; 
+			\sin = 2;
+		}
+
+		\coordinate (focus1) at (\xob + \fob, 0);
+		\coordinate (focus2) at (\xoc - \foc, 0);
+		\coordinate (ocu) at (\xoc, 0);
+		\coordinate (obj) at (\xob, 0);
+		\coordinate (inv) at (\xin, 0);
+
+		% Eix òptic
+		\draw[dashdotted, color = gray, name path = eix] (0,0) -- (12,0);	
+
+		\tikzset{raig/.style = {
+				color = red!30!white,
+				decoration = {markings, mark = between positions 0.25 and 0.75 step 0.25 with {\arrow{>}}},
+				postaction = decorate
+			}
+		};
+
+		% Objectiu
+		\conv{\xob}{\y}
+		\draw [-|, thick, color = olive] (\xob,\y + 0.5) -- (\xob,\y);
+		\draw[-|, thick, color = olive] (\xob,-\y - 0.5) -- (\xob,-\y);
+		\node [above,gray] at (\xob,\y + 0.5) {Objetivo};
+		\node [below, olive, align = center] at (\xob,-\y - 0.5) {DO\\PE};
+
+		% Ocular
+		\conv{\xoc}{\y}
+		\draw[-|, thick, color = olive] (\xoc,\y + 0.5) -- (\xoc,\y);
+		\draw[-|, thick, color = olive] (\xoc,-\y - 0.5) -- (\xoc,-\y);
+		\node [above,gray] at (\xoc,\y + 0.5) {Ocular};
+		\node [below, olive, align = center] at (\xoc,-\y - 0.5) {DC\\LS};
+
+		% Lent inversora
+		\conv{\xin}{\y}
+		\node [above,gray] at (\xin,\y + 0.5) {Lente inversora};
+
+		% Distàncies
+		\tikzset{dist/.style = {
+				arrows = {[ line width = 0pt 1.5]}, 
+				color = gray, thin
+			}
+		}
+		% Focal ocular
+		\draw [dist, |<->|] let \p{ocu} = (ocu), \p{focus2} = (focus2) in {
+				[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( f_{\text{oc}} = \SI{5}{cm} \)} (\p{focus2})
+			}; 
+		% Focal objectiu
+		\draw [dist, |<->|] let \p{obj} = (obj), \p{focus1} = (focus1) in {
+			[yshift = 40pt] (\p{obj}) -- node[above, gray!50!black] {\( f'_{\text{obj}} = \SI{20}{cm} \)} (\p{focus1})
+		};
+		% Lent inversora
+		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus1} = (focus1) in {
+			[yshift = 40pt] (\p{focus1}) -- node[above, gray!50!black] {\( s' = \SI{10}{cm} \)} (\p{inv})
+		};
+		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus2} = (focus2) in {
+			[yshift = 40pt] (\p{inv}) -- node[above, gray!50!black] {\( s = \SI{10}{cm} \)} (\p{focus2})
+		};
+		\draw [dist, dashed] (focus1) ++(0,40pt) -- ++(0,-80pt);
+		\draw [dist, dashed] (focus2) ++(0,40pt) -- ++(0,-80pt);
+		% Distància entre lents
+		\draw [dist, <->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
+			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( d = \SI{10}{cm} \)} (\p{obj})
+		};
+		% Pupil·la de sortida
+		\draw [dist, <->|] let \p{ocu} = (ocu) in {
+			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( l = \SI{11.7}{cm} \)} ++ (2,0) 
+		};
+
+		% Diàmetre pupil·la entrada
+		\draw [dist, |<->|] let \p{obj} = (obj) in {
+			[xshift = -0.2cm] (\p{obj}) ++(0,2) -- node[above, gray!50!black, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4}{cm} \)} ++(0,-4) 
+		};
+
+		% Diàmetre pupil·la sortida
+		\draw [dist, |<->|] let \p{ocu} = (ocu) in {
+			[xshift = 0.2cm] (\p{ocu}) ++(2,1.6) -- node[below, gray!50!black, rotate = 90] {\( \Phi_{\text{PS}} = \SI{0.9}{cm} \)} ++(0,-3.2) 
+		};
+
+		% Pupil·la de sortida
+		\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (ocu) ++ (2,1.6) -- +(0,0.5);
+		\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (ocu) ++ (2,-1.6)-- +(0,-0.5) node[below, olive, opacity = 1] {PS};
+
+		% Finestra d'entrada
+		\draw[olive, <-] (-0.5, 2) -- node [above] {LE} (0.5,2);
+	\end{tikzpicture}
+
+	\caption{Diagrama del telescopio terrestre con lente inversora sin ojo}
+	\label{fig:telescopio terrestre}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering \footnotesize \sffamily 
+	
+	\begin{tikzpicture}
+		\tikzmath{
+			% Posicions de les lents
+			\xoc = 9;
+			\xin = 5.5;
+			\xob = 1; 
+			\y = 2;
+			% Focals
+			\foc = 1.5;
+			\fob = 2.5; 
+			\sin = 2;
+		}
+
+		\coordinate (focus1) at (\xob + \fob, 0);
+		\coordinate (focus2) at (\xoc - \foc, 0);
+		\coordinate (ocu) at (\xoc, 0);
+		\coordinate (obj) at (\xob, 0);
+		\coordinate (inv) at (\xin, 0);
+
+		% Eix òptic
+		\draw[dashdotted, color = gray, name path = eix] (0,0) -- (12,0);	
+
+		\tikzset{raig/.style = {
+				color = red!30!white,
+				decoration = {markings, mark = between positions 0.25 and 0.75 step 0.25 with {\arrow{>}}},
+				postaction = decorate
+			}
+		};
+
+		% Objectiu
+		\conv{\xob}{\y}
+		\draw [-|, thick, color = olive] (\xob,\y + 0.5) -- (\xob,\y);
+		\draw[-|, thick, color = olive] (\xob,-\y - 0.5) -- (\xob,-\y);
+		\node [above,gray] at (\xob,\y + 0.5) {Objetivo};
+		\node [below, olive, align = center] at (\xob,-\y - 0.5) {PE};
+
+		% Pupil·la d'entrada
+		\draw [-|, densely dashed, thick, opacity = 0.7, color = olive] (\xob,\y - 0.5) -- (\xob,\y - 1);
+		\draw[-|, densely dashed, thick, opacity = 0.7, color = olive] (\xob,-\y + 0.5) -- (\xob,-\y + 1);
+
+
+		% Ocular
+		\conv{\xoc}{\y}
+		\draw[-|, thick, color = olive] (\xoc,\y + 0.5) -- (\xoc,\y);
+		\draw[-|, thick, color = olive] (\xoc,-\y - 0.5) -- (\xoc,-\y);
+		\node [above,gray] at (\xoc,\y + 0.5) {Ocular};
+		\node [below, olive, align = center] at (\xoc,-\y - 0.5) {DC\\LS};
+
+		% Lent inversora
+		\conv{\xin}{\y}
+		\node [above,gray] at (\xin,\y + 0.5) {Lente inversora};
+
+		% Distàncies
+		\tikzset{dist/.style = {
+				arrows = {[ line width = 0pt 1.5]}, 
+				color = gray, thin
+			}
+		}
+		% Focal ocular
+		\draw [dist, |<->|] let \p{ocu} = (ocu), \p{focus2} = (focus2) in {
+				[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( f_{\text{oc}} = \SI{5}{cm} \)} (\p{focus2})
+			}; 
+		% Focal objectiu
+		\draw [dist, |<->|] let \p{obj} = (obj), \p{focus1} = (focus1) in {
+			[yshift = 40pt] (\p{obj}) -- node[above, gray!50!black] {\( f'_{\text{obj}} = \SI{20}{cm} \)} (\p{focus1})
+		};
+		% Lent inversora
+		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus1} = (focus1) in {
+			[yshift = 40pt] (\p{focus1}) -- node[above, gray!50!black] {\( s' = \SI{10}{cm} \)} (\p{inv})
+		};
+		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus2} = (focus2) in {
+			[yshift = 40pt] (\p{inv}) -- node[above, gray!50!black] {\( s = \SI{10}{cm} \)} (\p{focus2})
+		};
+		\draw [dist, dashed] (focus1) ++(0,40pt) -- ++(0,-80pt);
+		\draw [dist, dashed] (focus2) ++(0,40pt) -- ++(0,-80pt);
+		% Distància entre lents
+		\draw [dist, <->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
+			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( d = \SI{10}{cm} \)} (\p{obj})
+		};
+		% Pupil·la de sortida
+		\draw [dist, <->|] let \p{ocu} = (ocu) in {
+			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( l = \SI{11.7}{cm} \)} ++ (2,0) 
+		};
+		
+		% Diàmetre ull
+		\draw [dist, |<->|] let \p{ocu} = (ocu) in {
+			[xshift = 0.2cm] (\p{ocu}) ++(2,0.8) -- node[below, gray!50!black, rotate = 90] {\( \Phi_{\text{Ojo}} = \SI{6}{mm} \)} ++(0,-1.6) 
+		};
+
+		% Ull 
+		\draw[|-, thick, color = olive] (ocu) ++ (2,0.8) -- +(0,0.5);
+		\draw[|-, thick, color = olive] (ocu) ++ (2,-0.8)-- +(0,-0.5) node[below = 20pt, olive, opacity = 1, align = center] {DO\\PS};
+		\node [above,gray] at (\xoc + 2,\y + 0.5) {Ojo};
+
+		% Finestra d'entrada
+		\draw[olive, <-] (-0.5, 2) -- node [above] {LE} (0.5,2);
+	\end{tikzpicture}
+
+	\caption{Diagrama del telescopio terrestre con lente inversora con ojo}
+	\label{fig:telescopio terrestre ojo}
+\end{figure}
+
+\section{Telescopio de Galileo}
+
 \begin{figure}[htb]
 	\centering \footnotesize \sffamily 
 	
@@ -223,17 +441,27 @@
 		\coordinate (obj) at (\xob, 0);
 
 		% Eix òptic
-		\draw[dashdotted, color = gray] (0,0) -- (12,0);
+		\draw[dashdotted, color = gray, name path = eix] (0,0) -- (12,0);
 
 
 		\tikzset{raig/.style = {
 				color = red!30!white,
 				decoration = {markings, mark = between positions 0.25 and 0.75 step 0.25 with {\arrow{>}}},
 				postaction = decorate
-		}};
+			}
+		};
 
-	% Objectiu
-	\conv{\xob}{\y};
+	\draw[raig, dashed, name path = focal1] (\xoc - \foc, 0) -- (\xoc, \y);
+	\draw[raig, dashed, name path = focal2] (\xoc - \foc, 0) -- (\xoc, -\y);
+	\path[name path = central1] (\xob, \y) -- (\xoc, 0);
+	\path[name path = central2] (\xob, -\y) -- (\xoc, 0);
+	\path[name intersections = {of = central1 and focal1, by = PS1}];
+	\path[name intersections = {of = central2 and focal2, by = PS2}];
+	\draw[raig] (\xob, \y) -- (\xoc, \y) -- ($ (PS1)!1.7!(\xoc, \y) $);
+	\draw[raig] (\xob, -\y) -- (\xoc, -\y) -- ($ (PS2)!1.7!(\xoc, -\y) $);
+
+		% Objectiu
+		\conv{\xob}{\y}
 	\draw [-|, thick, color = olive] (\xob,\y + 0.5) -- (\xob,\y);
 	\draw[-|, thick, color = olive] (\xob,-\y - 0.5) -- (\xob,-\y);
 	\node [above,gray] at (\xob,\y + 0.5) {Objetivo};
@@ -247,8 +475,8 @@
 	\node [below, olive, align = center] at (\xoc,-\y - 0.5) {DC\\LS};
 
 	% Pupil·la de sortida
-	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (\xoc - \xso, 0) ++ (0,\yso) -- +(0,0.5);
-	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (\xoc - \xso, 0) [yscale = -1] ++ (0,\yso) -- +(0,0.5) node[below, olive, opacity = 1] {PS};
+	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (PS1) -- +(0,0.5);
+	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (PS2) -- +(0,-0.5) node[below, olive, opacity = 1] {PS};
 
 	% Distàncies
 	\tikzset{dist/.style = {
@@ -272,13 +500,111 @@
 	\draw [dist, |<->|] let \p{obj} = (obj) in {
 		[xshift = -0.2cm] (\p{obj}) ++(0,2) -- node[above, gray!50!black, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4.5}{cm} \)} ++(0,-4) 
 	};
+
+
+	% Finestra d'entrada
+	\draw[olive, <-] (-0.5, 2) -- node [above] {LE} (0.5,2);
 \end{tikzpicture}
-
-
 
 	\caption{Diagrama del telescopio de Galileo sin ojo}
 	\label{fig:telescopio galileo}
 \end{figure}
 
+\begin{figure}[htb]
+	\centering \footnotesize \sffamily 
+	
+	\begin{tikzpicture}
+		\tikzmath{
+			% Posicions de les lents
+			\xoc = 9;
+			\xob = 1; 
+			\y = 2;
+			% Focals
+			\foc = 2;
+			\fob = 10; 
+			% Posició de la pupil·la de sortida
+			\xso = 1/(1/\foc + 1/\fob);
+			\yso = \xso*\y / (\xoc - \xob); 
+		}
+
+		\coordinate (focus) at (\xoc + \foc, 0);
+		\coordinate (ocu) at (\xoc, 0);
+		\coordinate (obj) at (\xob, 0);
+
+		% Eix òptic
+		\draw[dashdotted, color = gray, name path = eix] (0,0) -- (12,0);
+
+
+		\tikzset{raig/.style = {
+				color = red!30!white,
+				decoration = {markings, mark = between positions 0.25 and 0.75 step 0.25 with {\arrow{>}}},
+				postaction = decorate
+			}
+		};
+
+	\draw[raig, dashed, name path = focal1] (\xoc - \foc, 0) -- (\xoc, \y);
+	\draw[raig, dashed, name path = focal2] (\xoc - \foc, 0) -- (\xoc, -\y);
+	\path[name path = central1] (\xob, \y) -- (\xoc, 0);
+	\path[name path = central2] (\xob, -\y) -- (\xoc, 0);
+	\path[name intersections = {of = central1 and focal1, by = PS1}];
+	\path[name intersections = {of = central2 and focal2, by = PS2}];
+	\draw[raig] (\xob, \y) -- (\xoc, \y) -- ($ (PS1)!1.7!(\xoc, \y) $);
+	\draw[raig] (\xob, -\y) -- (\xoc, -\y) -- ($ (PS2)!1.7!(\xoc, -\y) $);
+
+		% Objectiu
+		\conv{\xob}{\y};
+	\draw [-|, thick, color = olive] (\xob,\y + 0.5) -- (\xob,\y);
+	\draw[-|, thick, color = olive] (\xob,-\y - 0.5) -- (\xob,-\y);
+	\node [above,gray] at (\xob,\y + 0.5) {Objetivo};
+	\node [below, olive, align = center] at (\xob,-\y - 0.5) {DC\\LE};
+
+	% Ocular
+	\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (\xoc + 0.15,2) arc [start angle = 90, end angle = 270, x radius = 0.1, y radius = \y ] -- ++(-0.3,0) arc [start angle = 270, end angle = 90, x radius = -0.1, y radius = \y ] -- cycle;
+	\draw[-|, thick, color = olive] (\xoc,\y + 0.5) -- (\xoc,\y);
+	\draw[-|, thick, color = olive] (\xoc,-\y - 0.5) -- (\xoc,-\y);
+	\node [above,gray] at (\xoc,\y + 0.5) {Ocular};
+
+	% Pupil·la de sortida
+	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (PS1) -- +(0,0.5);
+	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (PS2) -- +(0,-0.5) node[below, olive, opacity = 1] {LS};
+	% Ull
+	\draw[|-, thick, color = olive] (\xoc + 0.5, 1) -- +(0,0.5);
+	\draw[|-, thick, color = olive] (\xoc + 0.5, -1) -- ++(0,-0.5) node[below, gray] {Ojo};
+	\node[below, olive, align = center] at (\xoc + 0.5, -2) {DO\\PS};
+
+	% Distàncies
+	\tikzset{dist/.style = {
+			arrows = {[ line width = 0pt 1.5]}, 
+			color = gray, thin
+	}};
+	% Focal ocular
+	\draw [dist, |<->|] let \p{ocu} = (ocu), \p{focus} = (focus) in {
+		[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( f_{\text{oc}} = \SI{10}{cm} \)} (\p{focus})
+	};
+	% Focal objectiu
+	\draw [dist, <->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
+		[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( d = \SI{10}{cm} \)} (\p{obj})
+	};
+	\draw [dist, dashed] (focus) ++(0,40pt) -- ++(0,-80pt);
+	% Distància entre lents
+	\draw [dist, |<->|] let \p{obj} = (obj), \p{focus} = (focus) in {
+		[yshift = -40pt] (\p{obj}) -- node[below, gray!50!black] {\( f'_{\text{obj}} = \SI{50}{cm} \)} (\p{focus})
+	};
+	% Diàmetre pupil·la entrada
+	\draw [dist, |<->|] let \p{obj} = (obj) in {
+		[xshift = -0.2cm] (\p{obj}) ++(0,2) -- node[above, gray!50!black, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4.5}{cm} \)} ++(0,-4) 
+	};
+	% Diàmetre de l'ull
+	\draw [dist, |<->|] let \p{ocu} = (ocu) in {
+		[xshift = 0.7cm] (\p{ocu}) ++(0,1) -- node[below, gray!50!black, rotate = 90] {\( \Phi_{\text{Ojo}} = \SI{6}{mm} \)} ++(0,-2) 
+	};
+
+	% Finestra d'entrada
+	\draw[olive, <-] (-0.5, 2) -- node [above] {PE} (0.5,2);
+\end{tikzpicture}
+
+	\caption{Diagrama del telescopio de Galileo con ojo}
+	\label{fig:telescopio galileo ojo}
+\end{figure}
 
 \end{document}
