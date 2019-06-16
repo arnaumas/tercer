@@ -17,7 +17,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath,amssymb}
-\usepackage[catalan,sort]{cleveref}
+\usepackage[spanish,sort]{cleveref}
 \usepackage{enumitem}
 
 \geometry{
@@ -99,7 +99,7 @@
 
 \begin{document}
 \maketitle
-\renewcommand{\abstractname}{\bfseries Resumen:}
+\renewcommand{\abstractname}{\sffamily \bfseries Resumen:}
 \begin{abstract}
 	Hola hola
 \end{abstract}
@@ -123,18 +123,18 @@
 			\xob = 1;
 			\yob = 2;
 		}
-		\setcoords
 
 		% Eix òptic
 		\draw[dashdotted, color = gray] (0,0) -- (12,0);
 
-		\setcoords
+		\coordinate (focus) at (5,0);
+		\coordinate (obj) at (1,0);
+		\coordinate (ocu) at (8,0);
 		\tikzset{raig/.style = {
 				color = red!30!white,
 				decoration = {markings, mark = between positions 0.25 and 0.75 step 0.25 with {\arrow{>}}},
 				postaction = decorate
-			}
-		};
+		}}
 		\draw[raig] (obj) ++ (0,-\yob) -- (ocu |- 10,1.5) -- (10,1.5) ;
 		\draw[raig] (obj) ++ (0,\yob) -- (ocu |- 10,-1.5) -- (10,-1.5) ;
 
@@ -143,14 +143,14 @@
 		\conv{\xob}{\yob}
 		\draw[-|, thick, color = olive] (\xob,\yob + 0.5) -- (\xob,\yob);
 		\draw[-|, thick, color = olive] (\xob,-\yob - 0.5) -- (\xob,-\yob);
-		\node [above,gray] at (\xob,\yob + 0.5) {Objetivo};
-		\node [below, olive, align = center] at (\xob,-\yob - 0.5) {DO\\PE};
+		\node [above] at (\xob,\yob + 0.5) {Objetivo};
+		\node [below, olive, align = center] at (\xob,-\yob - 0.5) {DA\\PE};
 
 		% Ocular
 		\conv{\xoc}{\yoc}
 		\draw[-|, thick, color = olive] (\xoc,\yoc + 0.5) -- (\xoc,\yoc);
 		\draw[-|, thick, color = olive] (\xoc,-\yoc - 0.5) -- (\xoc,-\yoc);
-		\node [above,gray] at (\xoc,\yoc + 0.5) {Ocular};
+		\node [above] at (\xoc,\yoc + 0.5) {Ocular};
 		\node [below, olive, align = center] at (\xoc,-\yoc - 0.5) {DC\\LS};
 
 		% Distàncies
@@ -158,27 +158,27 @@
 		\begin{scope}[yshift = 20pt]
 			\setcoords
 			\draw[color = gray, thin, densely dashed] (obj) -- ++(0,-20pt);
-			\draw[|<->|, dist] (obj) -- node [above] {\( d = \data{53}{3}{cm} \)} (ocu);
+			\draw[|<->|, dist] (obj) -- node [above, black] {\( d = \data{53}{3}{cm} \)} (ocu);
 			\draw[color = gray, thin, densely dashed] (ocu) -- ++(0,-20pt);
 		\end{scope}
 		\begin{scope}[yshift = -20pt]
 			\setcoords
-			\draw[|<->|, dist] (obj) -- node [below] {\( f'_{\text{obj}} = \SI{50}{cm} \)} (focus);
-			\draw[<->|, dist] (focus) -- node [below] {\( f_{\text{oc}} = \SI{5}{cm} \)} (ocu);
-			\draw[<->|, dist] (ocu) -- node [below] {\( l = \SI{3.7}{cm} \)} +(2,0);
+			\draw[|<->|, dist] (obj) -- node [below,black] {\( f'_{\text{obj}} = \SI{50}{cm} \)} (focus);
+			\draw[<->|, dist] (focus) -- node [below,black] {\( f_{\text{oc}} = \SI{5}{cm} \)} (ocu);
+			\draw[<->|, dist] (ocu) -- node [below,black] {\( l = \SI{3.7}{cm} \)} +(2,0);
 			\draw[color = gray, thin, densely dashed] (focus) -- ++(0,20pt);
 		\end{scope}
 		\begin{scope}[xshift = 2.2cm]
 			\setcoords
-			\draw[|<->|, dist] (ocu) ++ (0,1.5) -- node [below, rotate = 90] {\( \Phi_{\text{PS}} = \SI{4}{mm} \)} +(0,-3);
+			\draw[|<->|, dist] (ocu) ++ (0,1.5) -- node [below, rotate = 90,black] {\( \Phi_{\text{PS}} = \SI{4}{mm} \)} +(0,-3);
 		\end{scope}
 		\begin{scope}[xshift = -0.2cm]
 			\setcoords
-			\draw[|<->|, dist] (obj) ++ (0,2) -- node [above, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4.3}{cm} \)} +(0,-4);
+			\draw[|<->|, dist] (obj) ++ (0,2) -- node [above, rotate = 90,black] {\( \Phi_{\text{PE}} = \SI{4.3}{cm} \)} +(0,-4);
 		\end{scope}
 		\begin{scope}[xshift = 3.2cm]
 			\setcoords
-			\draw[|<->|, dist] (ocu) ++ (0,1.75) -- node [below, rotate = 90] {\( \Phi_{\text{Ojo}} = \SI{6}{mm} \)} +(0,-3.5);
+			\draw[|<->|, dist] (ocu) ++ (0,1.75) -- node [below, rotate = 90,black] {\( \Phi_{\text{Ojo}} = \SI{6}{mm} \)} +(0,-3.5);
 		\end{scope}
 
 		% Pupil·la de sortida
@@ -194,7 +194,7 @@
 		% Ull
 		\begin{scope}[xshift = 3cm]
 			\setcoords
-			\draw[-|, thick, color = olive] (ocu) ++ (0,2.25) node[above, gray] {Ojo} -- +(0,-0.5);
+			\draw[-|, thick, color = olive] (ocu) ++ (0,2.25) node[above, black] {Ojo} -- +(0,-0.5);
 			\draw[-|, thick, color = olive] (ocu) [yscale = -1] ++ (0,2.25) -- +(0,-0.5);
 		\end{scope}
 
@@ -204,10 +204,31 @@
 	\label{fig:telescopio astronómico}
 \end{figure}
 
-En la figura 
+En la \cref{fig:telescopio astronómico} se muestra el diagram del telescopio astronómico construido en el laboratorio. Con las lentes disponibles, la configuración con los máximos aumentos hubiese sido con un ocular con distancia focal de \SI{2}{cm}. Sin embargo, con esta focal tan corta la aberración esférica sificulta mucho la observación. Es por esto que se utilizó un ocular con focal de \SI{5}{cm}.
+
+El diafragma de campo y de apertura se identificaron experimentalmente por el método usual: si al cubrir parcialmente un diafragma se observa una bajada de la intensidad en la imagen entonces se trata del diafragma de apertura, mientras que si se observa una reducción del campo visual entonces se trata del diafragma de campo. De esta manera se determinó que el objetivo actúa como diafragma de apertura mientras que el ocular actúa como diafragma de campo. 
+
+Una vez localizados los diafragmas de campo y de apertura se puede proceder a la identificación de pupilas y lucarnas de entrada y salida. Recordamos que la pupila de entrada es la imagen del diafragma de apertura a través de todas las lentes anteriores, mientras que la pupila de salida es la imagen del mismo a través de las lentes posteriores. Las lucarnas de entrada y salida son análogas pero con el diafragma de campo en lugar del de apertura. La pupila de entrada, pues, se encuentra en el mismo lugar que el diafragma de apertura, puesto que no hay lentes anteriores a éste. Lo mismo ocurre con la lucarna de salida: se encuentra en el mismo diafragma de campo ya que no hay lentes posteriores a éste. Se puede localizar la pupila de salida con la ayuda de una pantalla semitransparente. Ésta se desplaza a lo largo del eje óptico hasta que se puede observar la imagen del objetivo bien enfocada. Esto ocurre a \SI{3.7}{cm} del ocular. También con la pantalla se puede determinar el diámetro de la pupila de salida midiéndolo directamente sobre la imagen. Se obtuvo un diámetro de \SI{4}{mm}.
+La lucarna de entrada se encuentra detrás del objetivo a mucha distancia, puesto que el diafragma de campo es cercano al foco del objetivo. Se puede calcular su posición, \( s_\text{LE} \) mediante la ecuación de lente fina,
+\begin{equation} \label{eqn:LE astronomico}
+	-\frac{1}{s_\text{DC}} + \frac{1}{s_\text{LE}} = \frac{1}{f_\text{obj}}.
+\end{equation}
+Puesto que \( f_\text{obj} = \SI{50}{cm} \) y la posición del diafragma de campo respecto al objetvo es \( s_\text{DC} = \SI{-55}{cm} \)\footnote{Realizamos esta cálculo considerando rayos que viajan del ocular al objetivo, por lo que el convenio de signos se invierte} encontramos \( s_\text{LE} = \SI{550}{cm} \), por lo que la lucarna de entrada se encuentra a \SI{5.5}{m} del diafragma de apertura.
+
+Por último calculamos los aumentos del telescopio. En general, los aumentos son el factor de escala entre las longitudes de los objetos y las correspondientes longitudes de las imagenes. Entonces podemos calcular los aumentos como el cociente entre el diámetro de la pupila de entrada y de salida, añadiendo un signo negativo puesto que el telescopio astronómico es inversor:
+\begin{equation} \label{eqn:aumentos astronomico}
+	\Gamma = - \frac{\Phi_\text{PE}}{\Phi_\text{PS}} = -\num{10.75}.
+\end{equation}
+Se puede demostrar que para el telescopio astronómico los aumentos son el cociente de la focal del objetivo y del ocular, y entonces, usando los valores nominales de las focales, obtenemos
+\begin{equation} \label{eqn:}
+	\Gamma = -\frac{f'_\text{obj}}{f_\text{oc}} = -10.
+\end{equation}
+La discrepancia entre estos dos resultados tiene varias explicaciones. Por un lado hay que tener en cuenta la tolerancia del fabricante de las lentes a la hora de dar su distancia focal. Tal y como vemos en la \cref{fig:telescopio astronómico}, la separación entre las lentes es de \SI{53}{cm}, que difiere de la suma de distancias focales nominales. Por otro lado, la medida de los diámetros de las pupilas, y en especial de la pupila de salida, no es muy precisa. Para medir el diámetro de la pupila de salida primero hay que colocar la pantalla en el plano en el que se forma la imagen del objetivo, difícil de determinar, y a continuación medir el diámetro de la imagen, una medida complicada puesto que no se trata de un objeto físico y no podemos utilizar instrumentos más adecuados para la medida de un diámetro como puede ser un pie de rey. 
+
+Todo este análisis es sin considerar el ojo. En esta sección y en las que siguen consideraremos que el ojo, o más concretamente la pupila actúa solamente como un diafragma, obviando el sistema óptico del ojo. Tal y como nos dicta la experiencia, la pupila actúa siempre como diafragma de apertura. El diámetro de la pupila es de  \SI{6}{mm}. Esto implica que no hay diferencia en considerar o no el ojo para el telescopio astronómico puesto que la pupila de salida tiene un diámetro menor que la pupila del ojo y entonces ésta última no actúa como limitante.
 
 \section{Telescopio terrestre}
-
+\subsection{Análisi sin ojo}
 \begin{figure}[htb]
 	\centering \footnotesize \sffamily 
 	
@@ -279,8 +300,8 @@ En la figura
 		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus2} = (focus2) in {
 			[yshift = 40pt] (\p{inv}) -- node[above, gray!50!black] {\( s = \SI{10}{cm} \)} (\p{focus2})
 		};
-		\draw [dist, dashed] (focus1) ++(0,40pt) -- ++(0,-80pt);
-		\draw [dist, dashed] (focus2) ++(0,40pt) -- ++(0,-80pt);
+		\draw [dist, dashed] (focus1) ++(0,40pt) -- ++(0,-40pt);
+		\draw [dist, dashed] (focus2) ++(0,40pt) -- ++(0,-40pt);
 		% Distància entre lents
 		\draw [dist, <->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
 			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( d = \SI{10}{cm} \)} (\p{obj})
@@ -388,8 +409,8 @@ En la figura
 		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus2} = (focus2) in {
 			[yshift = 40pt] (\p{inv}) -- node[above, gray!50!black] {\( s = \SI{10}{cm} \)} (\p{focus2})
 		};
-		\draw [dist, dashed] (focus1) ++(0,40pt) -- ++(0,-80pt);
-		\draw [dist, dashed] (focus2) ++(0,40pt) -- ++(0,-80pt);
+		\draw [dist, dashed] (focus1) ++(0,40pt) -- ++(0,-40pt);
+		\draw [dist, dashed] (focus2) ++(0,40pt) -- ++(0,-40pt);
 		% Distància entre lents
 		\draw [dist, <->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
 			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( d = \SI{10}{cm} \)} (\p{obj})
