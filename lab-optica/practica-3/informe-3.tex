@@ -31,7 +31,7 @@
 \newcommand{\sfbright}{\fontfamily{cmbr}\selectfont}
 \renewcommand{\familydefault}{\rmdefault}
 \renewcommand{\sfdefault}{cmbr}
-
+\renewcommand{\arraystretch}{1.4}
 
 \hypersetup{
 	colorlinks,
@@ -101,13 +101,59 @@
 \maketitle
 \renewcommand{\abstractname}{\sffamily \bfseries Resumen:}
 \begin{abstract}
-	Hola hola
+	Esta práctica consta de dos partes. Primeramente se realizarán una serie de observaciones cualitativas en relación a las lentes convergentes y divergentes y su distinción, así como la determinación de su distancia focal. En una segunda parte se construyen tres sistemas ópticos: el telescopio astronómico, el telescopio terrestre y el telescopio de Galileo. Para los tres se estudian sus diafragmas de campo y apertura así como pupilas de entrada y salida con y sin la presencia de la pupila del ojo. Se determinan los aumentos de cada sistema teórica y experimentalmente y finalmente se discuten las distintas aberraciones que aparecen en cada sistema.
 \end{abstract}
+\hrule
 
-\section{Introducción y objetivos}
+\section{Objetivos}
+En esta práctica se utilizan las herramientas de la óptica geométrica para, en primer lugar, analizar y discutir las propiedades de las lentes convergentes y divergentes, y en segundo lugar analizar y construir tres telescopios ópticos: el telescopio astronómico, el telescopio terrestre y el telescopio de Galileo. Además también se estudian conceptos relacionados con los sistemas ópticos como son los diafragmas de apertura y campo y las pupilas y lucarnas de entrada y salida. Finalmente se estudiarán las aberraciones que pueden aparecer en esta clase de sistemas ópticos.
+
+\section{Formación de imágenes con lentes}
+Para una lente de focal \( f \), los aumentos a distancia \( d \) son
+\begin{equation*}
+	\Gamma = \frac{f}{f - d}.
+\end{equation*}
+Si la lente es divergente entonces \( f < 0 \) por lo que deducimos que los aumentos son siempre positivos y menores que 1. Esto significa que la imagen a través de una lente divergente siempre es reducida y no invertida. En cambio, si la lente es convergente entonces \( f > 0 \) y deducimos que para \( d > 2f \) entonces \( -1 < \Gamma < 0 \) por lo que la imagen está reducida e invertida. Si \( f < d < 2f \) entonces \( M  < -1 \) por lo que la imagen estará aumentada e invertida. Y para \( d < f \) entonces la imagen estará aumentada y no invertida. Así pues, si a través de una lente vemos una imagen invertida podemos afirmar que es convergente. Si la viesemos no invertida entonces tendríamos que alejarnos lo suficiente del objeto para comprovar si tiene lugar una inversión o no. Esto es factible para focales relativamente cortas.    
+
+Las lentes convergentes suelen ser más gruesas en el centro que en los bordes, mientras que los divergentes son más finas en el centro. Este es otro criterio para distinguir entre convergente y divergente. 
+
+Otra manera de distinguir entre convergente y divergente es el hecho de que sólo las lentes convergente producen imágenes reales por lo que si con una lente podemos colimar un haz de luz podemos estar seguros de que es convergente. 
+
+\begin{table}[htb]
+	\small \sffamily \centering
+	\caption{Distintos rasgos que diferencian entre lentes convergentes y divergentes}
+	\label{tab:rasgos}
+	\begin{tabular}{@{}rllll@{}}
+		\toprule 
+		\textbf{Tipo de lente} & ¿Puede invertir? & ¿Puede magnificar? & ¿Puede colimar? & Grueso \\
+		\midrule
+		\emph{Convergente} & Sí, más lejos que \( f \) & Sí, más cerca que \( 2f \) & Sí, más lejos que \( f \) & Convexa \\ 
+		\emph{Divergente} & No & No & No & Cóncava  \\ 
+\bottomrule
+	\end{tabular}
+\end{table}
+
+Para determinar la distancia focal de una lente convergente podemos iluminarla con una funete alejada de manera que el haz que llega a la lente sea esencialmente paralelo. Sabemos que la lente va a concentrar el haz en su foco. Podemos encontrar el plano en el cual esto ocurre con una pantalla semitransparente, deslizándola hasta que el haz se concentre en un punto. En ese momento la distancia entre la lente y la pantalla será la focal de la lente.
+
+Este procedimiento no sirve para encontrar la focal de una lente divergente pues la imagen de un objeto real nunca será real. Una opción es utilizar una lente convergente de focal conocida \( f_1 \) y utilizar la imagen que forma como objeto virtual. Concretamente, si colocamos la lente convergente seguida de la divergente a una distancia \( d < f \) entonces la luz proveniente del infinito converge a distancia \( f_1 \) de la lente convergente y por lo tanto a \( f_1 - d \) de la lente divergente. Utilizando la ecuación de lentes finas encontramos que la imagen total se formará en \( s' \) dada por
+\begin{equation*}
+	-\frac{1}{f_1 - d} + \frac{1}{s'} = \frac{1}{f_2}
+\end{equation*}
+donde \( f_2 \) es la focal desconocida de la lente divergente. Como la imagen va a ser real podemos utilizar el método de la pantalla semitransparente para determinar \( s' \) y por lo tanto encontrar \( f_2 \).
 
 \section{Telescopio astronómico}
 
+El telescopio astronómico consiste de dos lentes convergentes, el objetivo y el ocular, colocadas de manera que sus focos coincidan. El objetivo forma una imagen de un objeto en el infinito en su plano focal, que sirve de objeto al ocular para formar una imagen en el infinito aumentada pero invertida.
+
+Los aumentos de este telescopio vienen dados por
+\begin{equation} \label{eqn:aumentos astronomico}
+	\Gamma = -\frac{f'_\text{obj}}{f_\text{oc}}
+\end{equation}
+y también por \( \Gamma = - \frac{\Phi_\text{PE}}{\Phi_\text{PS}} \).
+
+Con las lentes disponibles, la configuración con los máximos aumentos hubiese sido con un ocular con distancia focal de \SI{2}{cm}. Sin embargo, con esta focal tan corta la aberración esférica dificulta mucho la observación. Es por esto que se utilizó un ocular con focal de \( f_\text{oc} = \SI{5}{cm} \) y un objetivo con distancia focal \( f'_\text{obj} = \SI{50}{cm} \).
+
+\subsection{Análisis con y sin ojo}
 \begin{figure}[htb]
 	\centering \footnotesize \sffamily 
 	\newcommand{\setcoords}{
@@ -158,7 +204,7 @@
 		\begin{scope}[yshift = 20pt]
 			\setcoords
 			\draw[color = gray, thin, densely dashed] (obj) -- ++(0,-20pt);
-			\draw[|<->|, dist] (obj) -- node [above, black] {\( d = \data{53}{3}{cm} \)} (ocu);
+			\draw[|<->|, dist] (obj) -- node [above, black] {\( d = \SI{53}{cm} \)} (ocu);
 			\draw[color = gray, thin, densely dashed] (ocu) -- ++(0,-20pt);
 		\end{scope}
 		\begin{scope}[yshift = -20pt]
@@ -204,33 +250,65 @@
 	\label{fig:telescopio astronómico}
 \end{figure}
 
-En la \cref{fig:telescopio astronómico} se muestra el diagram del telescopio astronómico construido en el laboratorio. Con las lentes disponibles, la configuración con los máximos aumentos hubiese sido con un ocular con distancia focal de \SI{2}{cm}. Sin embargo, con esta focal tan corta la aberración esférica sificulta mucho la observación. Es por esto que se utilizó un ocular con focal de \SI{5}{cm}.
+En la \cref{fig:telescopio astronómico} se muestra el diagrama del telescopio astronómico construido en el laboratorio. 
 
 El diafragma de campo y de apertura se identificaron experimentalmente por el método usual: si al cubrir parcialmente un diafragma se observa una bajada de la intensidad en la imagen entonces se trata del diafragma de apertura, mientras que si se observa una reducción del campo visual entonces se trata del diafragma de campo. De esta manera se determinó que el objetivo actúa como diafragma de apertura mientras que el ocular actúa como diafragma de campo. 
 
-Una vez localizados los diafragmas de campo y de apertura se puede proceder a la identificación de pupilas y lucarnas de entrada y salida. Recordamos que la pupila de entrada es la imagen del diafragma de apertura a través de todas las lentes anteriores, mientras que la pupila de salida es la imagen del mismo a través de las lentes posteriores. Las lucarnas de entrada y salida son análogas pero con el diafragma de campo en lugar del de apertura. La pupila de entrada, pues, se encuentra en el mismo lugar que el diafragma de apertura, puesto que no hay lentes anteriores a éste. Lo mismo ocurre con la lucarna de salida: se encuentra en el mismo diafragma de campo ya que no hay lentes posteriores a éste. Se puede localizar la pupila de salida con la ayuda de una pantalla semitransparente. Ésta se desplaza a lo largo del eje óptico hasta que se puede observar la imagen del objetivo bien enfocada. Esto ocurre a \SI{3.7}{cm} del ocular. También con la pantalla se puede determinar el diámetro de la pupila de salida midiéndolo directamente sobre la imagen. Se obtuvo un diámetro de \SI{4}{mm}.
+Una vez localizados los diafragmas de campo y de apertura se puede proceder a la identificación de pupilas y lucarnas de entrada y salida. Recordamos que la pupila de entrada es la imagen del diafragma de apertura a través de todas las lentes anteriores, mientras que la pupila de salida es la imagen del mismo a través de las lentes posteriores. Las lucarnas de entrada y salida son análogas pero con el diafragma de campo en lugar del de apertura. La pupila de entrada, pues, se encuentra en el mismo lugar que el diafragma de apertura, puesto que no hay lentes anteriores a éste. Su diámetro es \( \Phi_\text{PE} = \data{4.3}{0.5}{cm} \). Lo mismo ocurre con la lucarna de salida: se encuentra en el mismo diafragma de campo ya que no hay lentes posteriores a éste. Se puede localizar la pupila de salida con la ayuda de una pantalla semitransparente. Ésta se desplaza a lo largo del eje óptico hasta que se puede observar la imagen del objetivo bien enfocada. Esto ocurre a \( l = \data{3.7}{0.5}{cm} \) del ocular. También con la pantalla se puede determinar el diámetro de la pupila de salida midiéndolo directamente sobre la imagen. Se obtuvo un diámetro de \( \Phi_\text{PS} = \data{4}{1}{mm} \).
+
+Podemos contrastar estos valores con los resultados que esperaríamos teóricamente. Por un lado, aplicando la ecuación de lentes finas encontramos
+\begin{equation} \label{eqn:PS astronomico}
+	-\frac{1}{s_\text{DA}} + \frac{1}{s_\text{PS}} = \frac{1}{f_\text{oc}}
+\end{equation}
+La posicición del diafragma de apertura respecto al ocular es \( s_{\text{DA}} = \SI{-55}{cm} \) y por lo tanto \( s_\text{PS} = \SI{5.56}{cm} \). La discrepancia entre los resultados es en parte debida a que las focales nominales no son exactamente las focales reales, tal y como pone de manifiesto que la distancia entre las lentes es menor que la suma de las focales, y que la medida del plano de formación de la pupila de salida es bastante imprecisa. Por otro lado, los aumentos del ocular a \SI{55}{cm} son de \( -0.1 \), por lo que el diámetro teórico de la pupila de salida es de \SI{4.3}{mm}, que es compatible con el valor medido atendiendo a su incertidumbre. 
+
 La lucarna de entrada se encuentra detrás del objetivo a mucha distancia, puesto que el diafragma de campo es cercano al foco del objetivo. Se puede calcular su posición, \( s_\text{LE} \) mediante la ecuación de lente fina,
 \begin{equation} \label{eqn:LE astronomico}
 	-\frac{1}{s_\text{DC}} + \frac{1}{s_\text{LE}} = \frac{1}{f_\text{obj}}.
 \end{equation}
-Puesto que \( f_\text{obj} = \SI{50}{cm} \) y la posición del diafragma de campo respecto al objetvo es \( s_\text{DC} = \SI{-55}{cm} \)\footnote{Realizamos esta cálculo considerando rayos que viajan del ocular al objetivo, por lo que el convenio de signos se invierte} encontramos \( s_\text{LE} = \SI{550}{cm} \), por lo que la lucarna de entrada se encuentra a \SI{5.5}{m} del diafragma de apertura.
+Puesto que \( f_\text{obj} = \SI{50}{cm} \) y la posición del diafragma de campo respecto al objetivo es \( s_\text{DC} = \SI{-55}{cm} \)\footnote{Realizamos esta cálculo considerando rayos que viajan del ocular al objetivo, por lo que el convenio de signos se invierte} encontramos \( s_\text{LE} = \SI{550}{cm} \), por lo que la lucarna de entrada se encuentra a \SI{5.5}{m} del diafragma de apertura.
 
-Por último calculamos los aumentos del telescopio. En general, los aumentos son el factor de escala entre las longitudes de los objetos y las correspondientes longitudes de las imagenes. Entonces podemos calcular los aumentos como el cociente entre el diámetro de la pupila de entrada y de salida, añadiendo un signo negativo puesto que el telescopio astronómico es inversor:
-\begin{equation} \label{eqn:aumentos astronomico}
-	\Gamma = - \frac{\Phi_\text{PE}}{\Phi_\text{PS}} = -\num{10.75}.
-\end{equation}
-Se puede demostrar que para el telescopio astronómico los aumentos son el cociente de la focal del objetivo y del ocular, y entonces, usando los valores nominales de las focales, obtenemos
-\begin{equation} \label{eqn:}
+Por último calculamos los aumentos del telescopio. Usando la \cref{eqn:aumentos astronomico} y las focales nominales obtenemos
+\begin{equation*} 
 	\Gamma = -\frac{f'_\text{obj}}{f_\text{oc}} = -10.
+\end{equation*}
+Los aumentos empíricos son, en base a las medidas tomadas:
+\begin{equation*} 
+	\Gamma = - \frac{\Phi_\text{PE}}{\Phi_\text{PS}} = -\num{10.75}\footnote{Los aumentos son negativos porque el telescopio es inversor}.
+\end{equation*}
+El error asociado a este resultado viene dado por
+\begin{equation} \label{eqn:error aumentos}
+	u(L)^2 = \left(\frac{u(\Phi_\text{PE})}{\Phi_\text{PS}}\right)^2 + \left(\frac{\Phi_\text{PE}u(\Phi_\text{PS})}{\Phi_\text{PS}^2}\right)^2,
 \end{equation}
-La discrepancia entre estos dos resultados tiene varias explicaciones. Por un lado hay que tener en cuenta la tolerancia del fabricante de las lentes a la hora de dar su distancia focal. Tal y como vemos en la \cref{fig:telescopio astronómico}, la separación entre las lentes es de \SI{53}{cm}, que difiere de la suma de distancias focales nominales. Por otro lado, la medida de los diámetros de las pupilas, y en especial de la pupila de salida, no es muy precisa. Para medir el diámetro de la pupila de salida primero hay que colocar la pantalla en el plano en el que se forma la imagen del objetivo, difícil de determinar, y a continuación medir el diámetro de la imagen, una medida complicada puesto que no se trata de un objeto físico y no podemos utilizar instrumentos más adecuados para la medida de un diámetro como puede ser un pie de rey. 
+por lo que \( u(\Gamma) = 3 \). La alta inertidumbre es debida a varios motivos. Por un lado hay que tener en cuenta la tolerancia del fabricante de las lentes a la hora de dar su distancia focal. Tal y como vemos en la \cref{fig:telescopio astronómico}, la separación entre las lentes es de \SI{53}{cm}, que difiere de la suma de distancias focales nominales. Por otro lado, la medida de los diámetros de las pupilas, y en especial de la pupila de salida, no es muy precisa. Para medir el diámetro de la pupila de salida primero hay que colocar la pantalla en el plano en el que se forma la imagen del objetivo, difícil de determinar, y a continuación medir el diámetro de la imagen, una medida complicada puesto que no se trata de un objeto físico y no podemos utilizar instrumentos más adecuados para la medida de un diámetro como puede ser un pie de rey. 
 
-Todo este análisis es sin considerar el ojo. En esta sección y en las que siguen consideraremos que el ojo, o más concretamente la pupila actúa solamente como un diafragma, obviando el sistema óptico del ojo. Tal y como nos dicta la experiencia, la pupila actúa siempre como diafragma de apertura. El diámetro de la pupila es de  \SI{6}{mm}. Esto implica que no hay diferencia en considerar o no el ojo para el telescopio astronómico puesto que la pupila de salida tiene un diámetro menor que la pupila del ojo y entonces ésta última no actúa como limitante.
+Todo este análisis es sin considerar el ojo. En esta sección y en las que siguen consideraremos que el ojo, o más concretamente la pupila actúa solamente como un diafragma, obviando el sistema óptico del ojo. Tal y como nos dicta la experiencia, la dilatación o contracción de la pupila limita la intensidad de luz que llega a la retina y no el campo de visión. Por esta razón, si el ojo tiene carácter limitante entonces actuará como diafragma de apertura. Ahora bien, si el diámetro de la pupila de salida sin el ojo es menor que el diámetro de la pupila del ojo entonces el ojo no tiene función limitante y los diafragmas de campo y apertura no cambian si introducimos el ojo o no. Esto es lo que ocurre en este caso puesto que el diámetro de la pupila con la que se observó el telescopio es de \data{6}{1}{mm}.
+
+Ahora bien, si alejamos el ojo lo suficiente de la pupila de salida, habrá rayos que no entrarán en el ojo por lo que se va reducir la cantidad de luz que entra. La imagen, pues, se va a ver más oscurecida en los bordes, un fenómeno que recibe el nombre de \emph{vignetting} en inglés y viñeteado en castellano. 
+
+\subsection{Aberraciones}
+En este telescopio se pueden observar la aberración esférica, cromática y la distorsión de corsé. La primera es debida al espesor variable de una lente, que hace que rayos a distintas inclinaciones se enfoquen a distintas posiciones a lo largo del eje óptico. El efecto es que los bordes de la imagen no se ven enfocados. Se puede reducir cerrando el diafragma de campo de forma que se recojan sólo los rayos paraxiales.
+
+La aberración cromática que se observa s econoce como dispersión cromática de aumento. Es debida a que los aumentos dependen de la longitud de onda por lo que la imagen de un mismo objeto se ve con diferentes tamaños en función de la longitud de onda, luego se observan ``bordes'' de color alrededor de los objetos. Esta es la clase de dispersión cromática típica para focales cortas. 
+
+Finalmente se puede observar distorsión de corsé: las línias se curvan hacia el origen más y más según nos alejamos del eje óptico. Este efecto es debido a la variabilidad de los aumentos con el espesor de la lente.
 
 \section{Telescopio terrestre}
-\subsection{Análisi sin ojo}
+El telescopio terrestre consiste de tres lentes convergentes: un objetivo, un ocular y una lente inversora que se coloca entre ambos para deshacer la inversión de la imagen.  
+
+Los aumentos de un telescopio terrestre vienen dados por 
+\begin{equation} \label{eqn:aumentos terrestre}
+	\Gamma = \frac{s'f'_\text{obj}}{sf_\text{oc}}
+\end{equation}
+donde \( s' \) y \( s \) son la distancia entre la lente inversora y el ocular y objetivo, respectivamente. Vemos que si la lente inversora se coloca equidistante a los focos del objetivo y el ocular con \( s = s' = 2f_\text{inv} \) entonces no afecta los aumentos y el efecto neto es el de un telescopio astronómico sin inversión.
+
+
+Para construir el telescopio terrestre se utilizó un objetivo con una focal \( f'_\text{obj} = \SI{20}{cm} \), un ocular de focal \( f_\text{oc} = \SI{5}{cm} \) y una lente inversora de focal \( f_\text{inv} = \SI{5}{cm} \).
+
+\subsection{Análisis sin ojo}
+
 \begin{figure}[htb]
-	\centering \footnotesize \sffamily 
+	\centering \footnotesize \sffamily
 	
 	\begin{tikzpicture}
 		\tikzmath{
@@ -265,19 +343,19 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 		\conv{\xob}{\y}
 		\draw [-|, thick, color = olive] (\xob,\y + 0.5) -- (\xob,\y);
 		\draw[-|, thick, color = olive] (\xob,-\y - 0.5) -- (\xob,-\y);
-		\node [above,gray] at (\xob,\y + 0.5) {Objetivo};
-		\node [below, olive, align = center] at (\xob,-\y - 0.5) {DO\\PE};
+		\node [above] at (\xob,\y + 0.5) {Objetivo};
+		\node [below, olive, align = center] at (\xob,-\y - 0.5) {DA\\PE};
 
 		% Ocular
 		\conv{\xoc}{\y}
 		\draw[-|, thick, color = olive] (\xoc,\y + 0.5) -- (\xoc,\y);
 		\draw[-|, thick, color = olive] (\xoc,-\y - 0.5) -- (\xoc,-\y);
-		\node [above,gray] at (\xoc,\y + 0.5) {Ocular};
+		\node [above] at (\xoc,\y + 0.5) {Ocular};
 		\node [below, olive, align = center] at (\xoc,-\y - 0.5) {DC\\LS};
 
 		% Lent inversora
 		\conv{\xin}{\y}
-		\node [above,gray] at (\xin,\y + 0.5) {Lente inversora};
+		\node [above] at (\xin,\y + 0.5) {Lente inversora};
 
 		% Distàncies
 		\tikzset{dist/.style = {
@@ -287,38 +365,38 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 		}
 		% Focal ocular
 		\draw [dist, |<->|] let \p{ocu} = (ocu), \p{focus2} = (focus2) in {
-				[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( f_{\text{oc}} = \SI{5}{cm} \)} (\p{focus2})
+				[yshift = 40pt] (\p{ocu}) -- node[above,black] {\( f_{\text{oc}} = \SI{5}{cm} \)} (\p{focus2})
 			}; 
 		% Focal objectiu
 		\draw [dist, |<->|] let \p{obj} = (obj), \p{focus1} = (focus1) in {
-			[yshift = 40pt] (\p{obj}) -- node[above, gray!50!black] {\( f'_{\text{obj}} = \SI{20}{cm} \)} (\p{focus1})
+			[yshift = 40pt] (\p{obj}) -- node[above,black] {\( f'_{\text{obj}} = \SI{20}{cm} \)} (\p{focus1})
 		};
 		% Lent inversora
-		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus1} = (focus1) in {
-			[yshift = 40pt] (\p{focus1}) -- node[above, gray!50!black] {\( s' = \SI{10}{cm} \)} (\p{inv})
+		\draw [dist, <->|] let \p{inv} = (inv), \p{focus1} = (focus1) in {
+			[yshift = 40pt] (\p{focus1}) -- node[above, black] {\( s = \SI{10}{cm} \)} (\p{inv})
 		};
 		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus2} = (focus2) in {
-			[yshift = 40pt] (\p{inv}) -- node[above, gray!50!black] {\( s = \SI{10}{cm} \)} (\p{focus2})
+			[yshift = 40pt] (\p{inv}) -- node[above, black] {\( s' = \SI{10}{cm} \)} (\p{focus2})
 		};
 		\draw [dist, dashed] (focus1) ++(0,40pt) -- ++(0,-40pt);
 		\draw [dist, dashed] (focus2) ++(0,40pt) -- ++(0,-40pt);
 		% Distància entre lents
-		\draw [dist, <->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
-			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( d = \SI{10}{cm} \)} (\p{obj})
+		\draw [dist, |<->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
+			[yshift = -40pt] (\p{ocu}) -- node[below, black] {\( d = \SI{55}{cm} \)} (\p{obj})
 		};
 		% Pupil·la de sortida
 		\draw [dist, <->|] let \p{ocu} = (ocu) in {
-			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( l = \SI{11.7}{cm} \)} ++ (2,0) 
+			[yshift = -40pt] (\p{ocu}) -- node[below, black] {\( l = \SI{11.7}{cm} \)} ++ (2,0) 
 		};
 
 		% Diàmetre pupil·la entrada
 		\draw [dist, |<->|] let \p{obj} = (obj) in {
-			[xshift = -0.2cm] (\p{obj}) ++(0,2) -- node[above, gray!50!black, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4}{cm} \)} ++(0,-4) 
+			[xshift = -0.2cm] (\p{obj}) ++(0,2) -- node[above, black, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4}{cm} \)} ++(0,-4) 
 		};
 
 		% Diàmetre pupil·la sortida
 		\draw [dist, |<->|] let \p{ocu} = (ocu) in {
-			[xshift = 0.2cm] (\p{ocu}) ++(2,1.6) -- node[below, gray!50!black, rotate = 90] {\( \Phi_{\text{PS}} = \SI{0.9}{cm} \)} ++(0,-3.2) 
+			[xshift = 0.2cm] (\p{ocu}) ++(2,1.6) -- node[below, black, rotate = 90] {\( \Phi_{\text{PS}} = \SI{0.9}{cm} \)} ++(0,-3.2) 
 		};
 
 		% Pupil·la de sortida
@@ -333,6 +411,21 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 	\label{fig:telescopio terrestre}
 \end{figure}
 
+En la \cref{fig:telescopio terrestre} vemos el diagrama del telescopio construido sin tener en cuenta el ojo. Igual como en el apartado anterior se determinó que el objetivo actúa como diafragma de apertura mientras que el ocular actúa como diafragma de campo. Luego la pupila de entrada se encuentra en el mismo DA y la lucarna de salida en el DC. La pupila de salida se encontró por el mismo procedimiento que antes: desplazando una pantalla semitransparente hasta que se formase sobre ella la imagen del objetivo. Esto ocurre a \( l = \data{11.7}{0.5}{cm} \) del ocular. Sobre la pantalla se midió el diámetro de la pupila de salida, \( \Phi_\text{PS} = \data{9}{1}{mm} \). El diámetro de la pupila de entrada es \( \Phi_\text{PE} = \data{4}{0.5}{cm} \).
+
+Podemos calcular estos valores a partir de las focales nominales. En primer lugar, la imagen del DA a través de la lente inversora se forma en \( s'_\text{DA} \) dada por
+\begin{equation*}
+	-\frac{1}{s_\text{DA}} + \frac{1}{s'_\text{DA}} = \frac{1}{f_\text{inv}}.
+\end{equation*}
+El DA se encuentra a \( s_\text{DA} = \SI{-30}{cm} \) de la lente inversora, por lo que encontramos \( s'_\text{DA} = \SI{6}{cm} \). Esta imagen, pues, se forma a \SI{9}{cm} del ocular. La PS será la sucesiva imagen a través del ocular:
+\begin{equation*}
+	\frac{1}{9} + \frac{1}{s_\text{PS}} = \frac{1}{f_\text{oc}}
+\end{equation*}
+por lo que \( s_\text{PS} = \SI{11.25}{cm} \). Este resultado es compatible con el valor medido teniendo en cuenta su incertidumbre. 
+
+Usando las focales nominales y la \cref{eqn:aumentos terrestre} encontramos \( \Gamma = 4 \). Por otro lado, los aumentos empíricos vienen dados por \( \Gamma = \frac{ \SI{4}{cm}}{ \SI{0.9}{cm}} = \data{4.4}{0.7}{} \), donde el error ha sido calculado con la \cref{eqn:error aumentos}.
+
+\subsection{Análisi con ojo}
 \begin{figure}[htb]
 	\centering \footnotesize \sffamily 
 	
@@ -356,7 +449,7 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 		\coordinate (inv) at (\xin, 0);
 
 		% Eix òptic
-		\draw[dashdotted, color = gray, name path = eix] (0,0) -- (12,0);	
+		\draw[dashdotted, color = black, name path = eix] (0,0) -- (12,0);	
 
 		\tikzset{raig/.style = {
 				color = red!30!white,
@@ -369,7 +462,7 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 		\conv{\xob}{\y}
 		\draw [-|, thick, color = olive] (\xob,\y + 0.5) -- (\xob,\y);
 		\draw[-|, thick, color = olive] (\xob,-\y - 0.5) -- (\xob,-\y);
-		\node [above,gray] at (\xob,\y + 0.5) {Objetivo};
+		\node [above,black] at (\xob,\y + 0.5) {Objetivo};
 		\node [below, olive, align = center] at (\xob,-\y - 0.5) {PE};
 
 		% Pupil·la d'entrada
@@ -381,12 +474,12 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 		\conv{\xoc}{\y}
 		\draw[-|, thick, color = olive] (\xoc,\y + 0.5) -- (\xoc,\y);
 		\draw[-|, thick, color = olive] (\xoc,-\y - 0.5) -- (\xoc,-\y);
-		\node [above,gray] at (\xoc,\y + 0.5) {Ocular};
+		\node [above,black] at (\xoc,\y + 0.5) {Ocular};
 		\node [below, olive, align = center] at (\xoc,-\y - 0.5) {DC\\LS};
 
 		% Lent inversora
 		\conv{\xin}{\y}
-		\node [above,gray] at (\xin,\y + 0.5) {Lente inversora};
+		\node [above,black] at (\xin,\y + 0.5) {Lente inversora};
 
 		% Distàncies
 		\tikzset{dist/.style = {
@@ -396,39 +489,39 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 		}
 		% Focal ocular
 		\draw [dist, |<->|] let \p{ocu} = (ocu), \p{focus2} = (focus2) in {
-				[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( f_{\text{oc}} = \SI{5}{cm} \)} (\p{focus2})
+			[yshift = 40pt] (\p{ocu}) -- node[above, black] {\( f_{\text{oc}} = \SI{5}{cm} \)} (\p{focus2})
 			}; 
 		% Focal objectiu
 		\draw [dist, |<->|] let \p{obj} = (obj), \p{focus1} = (focus1) in {
-			[yshift = 40pt] (\p{obj}) -- node[above, gray!50!black] {\( f'_{\text{obj}} = \SI{20}{cm} \)} (\p{focus1})
+			[yshift = 40pt] (\p{obj}) -- node[above, black] {\( f'_{\text{obj}} = \SI{20}{cm} \)} (\p{focus1})
 		};
 		% Lent inversora
 		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus1} = (focus1) in {
-			[yshift = 40pt] (\p{focus1}) -- node[above, gray!50!black] {\( s' = \SI{10}{cm} \)} (\p{inv})
+			[yshift = 40pt] (\p{focus1}) -- node[above, black] {\( s = \SI{10}{cm} \)} (\p{inv})
 		};
 		\draw [dist, |<->|] let \p{inv} = (inv), \p{focus2} = (focus2) in {
-			[yshift = 40pt] (\p{inv}) -- node[above, gray!50!black] {\( s = \SI{10}{cm} \)} (\p{focus2})
+			[yshift = 40pt] (\p{inv}) -- node[above, black] {\( s' = \SI{10}{cm} \)} (\p{focus2})
 		};
 		\draw [dist, dashed] (focus1) ++(0,40pt) -- ++(0,-40pt);
 		\draw [dist, dashed] (focus2) ++(0,40pt) -- ++(0,-40pt);
 		% Distància entre lents
 		\draw [dist, <->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
-			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( d = \SI{10}{cm} \)} (\p{obj})
+			[yshift = -40pt] (\p{ocu}) -- node[below, black] {\( d = \SI{55}{cm} \)} (\p{obj})
 		};
 		% Pupil·la de sortida
 		\draw [dist, <->|] let \p{ocu} = (ocu) in {
-			[yshift = -40pt] (\p{ocu}) -- node[below, gray!50!black] {\( l = \SI{11.7}{cm} \)} ++ (2,0) 
+			[yshift = -40pt] (\p{ocu}) -- node[below, black] {\( l = \SI{11.7}{cm} \)} ++ (2,0) 
 		};
 		
 		% Diàmetre ull
 		\draw [dist, |<->|] let \p{ocu} = (ocu) in {
-			[xshift = 0.2cm] (\p{ocu}) ++(2,0.8) -- node[below, gray!50!black, rotate = 90] {\( \Phi_{\text{Ojo}} = \SI{6}{mm} \)} ++(0,-1.6) 
+			[xshift = 0.2cm] (\p{ocu}) ++(2,0.8) -- node[below, black, rotate = 90] {\( \Phi_{\text{Ojo}} = \SI{6}{mm} \)} ++(0,-1.6) 
 		};
 
 		% Ull 
 		\draw[|-, thick, color = olive] (ocu) ++ (2,0.8) -- +(0,0.5);
-		\draw[|-, thick, color = olive] (ocu) ++ (2,-0.8)-- +(0,-0.5) node[below = 20pt, olive, opacity = 1, align = center] {DO\\PS};
-		\node [above,gray] at (\xoc + 2,\y + 0.5) {Ojo};
+		\draw[|-, thick, color = olive] (ocu) ++ (2,-0.8)-- +(0,-0.5) node[below = 20pt, olive, opacity = 1, align = center] {DA\\PS};
+		\node [above,black] at (\xoc + 2,\y + 0.5) {Ojo};
 
 		% Finestra d'entrada
 		\draw[olive, <-] (-0.5, 2) -- node [above] {LE} (0.5,2);
@@ -438,8 +531,20 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 	\label{fig:telescopio terrestre ojo}
 \end{figure}
 
-\section{Telescopio de Galileo}
+En este caso el diámetro de la PS es mayor que el de la pupila del ojo por lo que al considerar el ojo cambia la posición del diafragma de campo y abertura. Ahora es el ojo el que limita la cantidad de luz que atraviesa todo el sistema telescopio-ojo por lo que es el diafragma de apertura y sobre él se forma la pupila de salida. La PE se encontrará en la antiimagen de la PS. Puesto que el número de lentes no ha cambiado, la PE sigue estando en el objetivo, solo que ahora es más pequeña ya que el diámetro del ojo es menor que el diámetro de la PS que se formaba previamente. Las lucarnas de entrada y salida se mantienen ya que no ha cambiado el diafragma de campo.  
 
+\subsection{Aberraciones}
+En el telescopio terrestre es en el que se perciben más aberraciones. Se observan las aberraciones esféricas y cromáticas que se obserbaban en el telescopio astronómico, pero intensificadas puesto que tenemos tres lentes en lugar de dos. También se percibe distorsión de corsé. Además se puede observar el fenómeno del coma. Esta es una aberración que no tiene simetría rotacional y que hace que las imágenes tengan un ``trazo'' (la coma) en una cierta dirección. Puede ser debida tanto a defectos de las lentes como a una mala alineación de los elementos ópticos. Como el telescopio terrestre tiene tres lentes en lugar de dos, aumenta la dificultad a la hora de alinear los elementos, lo que puede explicar la aparición del coma. 
+
+\section{Telescopio de Galileo}
+El telescopio de Galileo es un telescopio de dos lentes, una convergente que actúa como objetivo y una divergente que actúa como ocular. Las lentes se disponen de manera que el foco del objetivo y el ocular coincidan. Al usar una lente divergente el telescopio de Galileo no invierte la imagen. Al usar una lente divergente el telescopio de Galileo no invierte la imagen.
+
+Los aumentos de un telescopio de Galileo vienen dados por \( \Gamma = \frac{f'_\text{obj}}{f_\text{oc}} \).
+
+En este caso se utilizó un objetivo de focal \( f'_\text{obj} = \SI{50}{cm} \) y un ocular de focal \( f_\text{oc} = \SI{10}{cm} \), tal y como puede verse en la \cref{fig:telescopio galileo}.
+
+
+\subsection{Análisis sin ojo}
 \begin{figure}[htb]
 	\centering \footnotesize \sffamily 
 	
@@ -485,19 +590,19 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 		\conv{\xob}{\y}
 	\draw [-|, thick, color = olive] (\xob,\y + 0.5) -- (\xob,\y);
 	\draw[-|, thick, color = olive] (\xob,-\y - 0.5) -- (\xob,-\y);
-	\node [above,gray] at (\xob,\y + 0.5) {Objetivo};
-	\node [below, olive, align = center] at (\xob,-\y - 0.5) {DO\\PE};
+	\node [above,black] at (\xob,\y + 0.5) {Objetivo};
+	\node [below, olive, align = center] at (\xob,-\y - 0.5) {DA\\PE};
 
 	% Ocular
 	\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (\xoc + 0.15,2) arc [start angle = 90, end angle = 270, x radius = 0.1, y radius = \y ] -- ++(-0.3,0) arc [start angle = 270, end angle = 90, x radius = -0.1, y radius = \y ] -- cycle;
 	\draw[-|, thick, color = olive] (\xoc,\y + 0.5) -- (\xoc,\y);
 	\draw[-|, thick, color = olive] (\xoc,-\y - 0.5) -- (\xoc,-\y);
-	\node [above,gray] at (\xoc,\y + 0.5) {Ocular};
+	\node [above,black] at (\xoc,\y + 0.5) {Ocular};
 	\node [below, olive, align = center] at (\xoc,-\y - 0.5) {DC\\LS};
 
 	% Pupil·la de sortida
-	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (PS1) -- +(0,0.5);
-	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (PS2) -- +(0,-0.5) node[below, olive, opacity = 1] {PS};
+	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] ($ (\xoc-\foc,0)!0.5!(\xoc, \y) $) -- +(0,0.5);
+	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] ($ (\xoc-\foc,0)!0.5!(\xoc, -\y) $) -- +(0,-0.5) node[below, olive, opacity = 1] {PS};
 
 	% Distàncies
 	\tikzset{dist/.style = {
@@ -506,20 +611,20 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 	}};
 	% Focal ocular
 	\draw [dist, |<->|] let \p{ocu} = (ocu), \p{focus} = (focus) in {
-		[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( f_{\text{oc}} = \SI{10}{cm} \)} (\p{focus})
+		[yshift = 40pt] (\p{ocu}) -- node[above, black] {\( f_{\text{oc}} = \SI{10}{cm} \)} (\p{focus})
 	};
 	% Focal objectiu
 	\draw [dist, <->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
-		[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( d = \SI{10}{cm} \)} (\p{obj})
+		[yshift = 40pt] (\p{ocu}) -- node[above, black] {\( d = \SI{40}{cm} \)} (\p{obj})
 	};
 	\draw [dist, dashed] (focus) ++(0,40pt) -- ++(0,-80pt);
 	% Distància entre lents
 	\draw [dist, |<->|] let \p{obj} = (obj), \p{focus} = (focus) in {
-		[yshift = -40pt] (\p{obj}) -- node[below, gray!50!black] {\( f'_{\text{obj}} = \SI{50}{cm} \)} (\p{focus})
+		[yshift = -40pt] (\p{obj}) -- node[below, black] {\( f'_{\text{obj}} = \SI{50}{cm} \)} (\p{focus})
 	};
 	% Diàmetre pupil·la entrada
 	\draw [dist, |<->|] let \p{obj} = (obj) in {
-		[xshift = -0.2cm] (\p{obj}) ++(0,2) -- node[above, gray!50!black, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4.5}{cm} \)} ++(0,-4) 
+		[xshift = -0.2cm] (\p{obj}) ++(0,2) -- node[above, black, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4.5}{cm} \)} ++(0,-4) 
 	};
 
 
@@ -530,7 +635,19 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 	\caption{Diagrama del telescopio de Galileo sin ojo}
 	\label{fig:telescopio galileo}
 \end{figure}
+El telescopio de Galileo se construyó con un  tal y como se puede ver en la \cref{fig:telescopio galileo}. Se puede demostrar que en un telescopio de Galileo el objetivo actúa como diafragma de apertura y el ocular acúa como diafragma de campo. No es posible verificar esto experimentalmente puesto que la imagen del objetivo a través del ocular es virtual. Así pues, la pupila de entrada se encuentra en el DA y la lucarna de salida se encuentra en el DC. La pupila de salida se encuentra en un punto intermedio entre el DA y el DC, y la lucarna de entrada se encuentra detrás del objetivo alejada ya que el ocular es cercano  al foco del objetivo. Podemos calcular la posición de la PS, \( s_\text{PS} \), con la ecuación de lentes finas:
+\begin{equation} \label{eqn:PS galileo}
+	-\frac{1}{s_\text{DA}} + \frac{1}{s_\text{PS}} = \frac{1}{f'_\text{oc}}.
+\end{equation}
+Tenemos que \( s_\text{DA} = \SI{-40}{cm} \) y \( f'_\text{oc} = \SI{-10}{cm} \) por lo que obtenemos \( s_\text{DA} = \SI{-13.33}{cm} \). El signo negativo indica que la imagen se encuentra antes de la lente, es decir, es virtual. Por este hecho no se puede medir la posición de la pupila de salida con la pantalla semitransparente porque los rayos que salen del ocular no convergen en ningún punto. Los aumentos del ocular a \SI{40}{cm} son de \num{0.2}, por lo que el diámetro de la PS es de \( \SI{9}{mm} \).
 
+Los aumentos nominales del telescopio son 
+\begin{equation} \label{eqn:aumentos galileo}
+	\Gamma = \frac{f'_\text{obj}}{f_\text{oc}} = \frac{ \SI{50}{cm}}{ \SI{10}{cm}} = 5.
+\end{equation}
+
+
+\subsection{Análisis con ojo}
 \begin{figure}[htb]
 	\centering \footnotesize \sffamily 
 	
@@ -576,22 +693,22 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 		\conv{\xob}{\y};
 	\draw [-|, thick, color = olive] (\xob,\y + 0.5) -- (\xob,\y);
 	\draw[-|, thick, color = olive] (\xob,-\y - 0.5) -- (\xob,-\y);
-	\node [above,gray] at (\xob,\y + 0.5) {Objetivo};
+	\node [above,black] at (\xob,\y + 0.5) {Objetivo};
 	\node [below, olive, align = center] at (\xob,-\y - 0.5) {DC\\LE};
 
 	% Ocular
 	\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (\xoc + 0.15,2) arc [start angle = 90, end angle = 270, x radius = 0.1, y radius = \y ] -- ++(-0.3,0) arc [start angle = 270, end angle = 90, x radius = -0.1, y radius = \y ] -- cycle;
 	\draw[-|, thick, color = olive] (\xoc,\y + 0.5) -- (\xoc,\y);
 	\draw[-|, thick, color = olive] (\xoc,-\y - 0.5) -- (\xoc,-\y);
-	\node [above,gray] at (\xoc,\y + 0.5) {Ocular};
+	\node [above,black] at (\xoc,\y + 0.5) {Ocular};
 
 	% Pupil·la de sortida
-	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (PS1) -- +(0,0.5);
-	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] (PS2) -- +(0,-0.5) node[below, olive, opacity = 1] {LS};
+	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] ($ (\xoc-\foc,0)!0.5!(\xoc, \y) $) -- +(0,0.5);
+	\draw[|-, densely dashed, thick, opacity = 0.7, color = olive] ($ (\xoc-\foc,0)!0.5!(\xoc, -\y) $) -- +(0,-0.5) node[below, olive, opacity = 1] {LS};
 	% Ull
-	\draw[|-, thick, color = olive] (\xoc + 0.5, 1) -- +(0,0.5);
-	\draw[|-, thick, color = olive] (\xoc + 0.5, -1) -- ++(0,-0.5) node[below, gray] {Ojo};
-	\node[below, olive, align = center] at (\xoc + 0.5, -2) {DO\\PS};
+	\draw[|-, thick, color = olive] (\xoc + 0.5, 0.5) -- +(0,0.5);
+	\draw[|-, thick, color = olive] (\xoc + 0.5, -0.5) -- ++(0,-0.5) node[below, black] {Ojo};
+	\node[below, olive, align = center] at (\xoc + 0.5, -2) {DA\\PS};
 
 	% Distàncies
 	\tikzset{dist/.style = {
@@ -600,24 +717,24 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 	}};
 	% Focal ocular
 	\draw [dist, |<->|] let \p{ocu} = (ocu), \p{focus} = (focus) in {
-		[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( f_{\text{oc}} = \SI{10}{cm} \)} (\p{focus})
+		[yshift = 40pt] (\p{ocu}) -- node[above, black] {\( f_{\text{oc}} = \SI{10}{cm} \)} (\p{focus})
 	};
 	% Focal objectiu
 	\draw [dist, <->|] let \p{ocu} = (ocu), \p{obj} = (obj) in {
-		[yshift = 40pt] (\p{ocu}) -- node[above, gray!50!black] {\( d = \SI{10}{cm} \)} (\p{obj})
+		[yshift = 40pt] (\p{ocu}) -- node[above, black] {\( d = \SI{40}{cm} \)} (\p{obj})
 	};
 	\draw [dist, dashed] (focus) ++(0,40pt) -- ++(0,-80pt);
 	% Distància entre lents
 	\draw [dist, |<->|] let \p{obj} = (obj), \p{focus} = (focus) in {
-		[yshift = -40pt] (\p{obj}) -- node[below, gray!50!black] {\( f'_{\text{obj}} = \SI{50}{cm} \)} (\p{focus})
+		[yshift = -40pt] (\p{obj}) -- node[below, black] {\( f'_{\text{obj}} = \SI{50}{cm} \)} (\p{focus})
 	};
 	% Diàmetre pupil·la entrada
 	\draw [dist, |<->|] let \p{obj} = (obj) in {
-		[xshift = -0.2cm] (\p{obj}) ++(0,2) -- node[above, gray!50!black, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4.5}{cm} \)} ++(0,-4) 
+		[xshift = -0.2cm] (\p{obj}) ++(0,2) -- node[above, black, rotate = 90] {\( \Phi_{\text{PE}} = \SI{4.5}{cm} \)} ++(0,-4) 
 	};
 	% Diàmetre de l'ull
 	\draw [dist, |<->|] let \p{ocu} = (ocu) in {
-		[xshift = 0.7cm] (\p{ocu}) ++(0,1) -- node[below, gray!50!black, rotate = 90] {\( \Phi_{\text{Ojo}} = \SI{6}{mm} \)} ++(0,-2) 
+		[xshift = 0.7cm] (\p{ocu}) ++(0,0.5) -- node[below, black, rotate = 90] {\( \Phi_{\text{Ojo}} = \SI{6}{mm} \)} ++(0,-1) 
 	};
 
 	% Finestra d'entrada
@@ -627,5 +744,8 @@ Todo este análisis es sin considerar el ojo. En esta sección y en las que sigu
 	\caption{Diagrama del telescopio de Galileo con ojo}
 	\label{fig:telescopio galileo ojo}
 \end{figure}
+Hemos calculado anteriormente que el diámetro de la PS es de \SI{9}{mm}. Esto significa que al incluir el ojo debemos considerar su acción como diafragma. Como hemos comentado anteriormente, actuará como diafragma de apertura y por lo tanto sobre él se encontrará la PS. Experimentalmente podemos determinar que el diagrama de campo pasará a ser el objetivo y que por lo tanto sobre él se encuentra la LE. Entonces lo que antes era la PS pasará a ser la LS, y lo que antes era la LE ahora será la PE. Todo esto se muestra en la \cref{fig:telescopio galileo ojo}.
 
+\subsection{Aberraciones}
+Las aberraciones que se observan con el telescopio de Galileo son parecidos a las que se observan con el telescopio astronómico. Se puede observar una ligera aberración cromática así como esférica y también distorsión de corsé. No hay coma apreciable.
 \end{document}
