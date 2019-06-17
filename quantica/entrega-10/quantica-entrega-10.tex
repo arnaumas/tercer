@@ -171,7 +171,7 @@ Per tant el nou estat fonamental serà, fins a primer ordre,
 \end{equation*}
 I la corresponent funció d'ona (sense normalitzar):
 \begin{equation*}
-	\psi_0(\theta) = \braket{\theta}{\psi_0} = \frac{1}{\sqrt{2\pi}} + \frac{2ma^3q\epsilon}{\hbar^2\sqrt{2\pi}} \cos{\theta} + O(\epsilon^2).
+	\psi_0(\theta) = \braket{\theta}{\psi_0} = \frac{1}{\sqrt{2\pi}} + \frac{ma^3q\epsilon}{\hbar^2\sqrt{2\pi}} \cos{\theta} + O(\epsilon^2).
 \end{equation*}
 
 \parbreak
@@ -240,19 +240,23 @@ Només sobreviuen els termes diagonals:
 \end{align*}
 i \( M_{--} = M_{++} \). Per tant, per a \( n > 1 \) tenim que la correcció de l'energia a segon ordre és
 \begin{equation*}
-	E_{\pm n}(\epsilon) = \frac{\hbar^2}{2ma^2n^2} + \frac{mq^2a^4}{(4n^2 - 1)\hbar^2}\epsilon^2 + O(\epsilon^3) 
+	E_{\pm n}(\epsilon) = \frac{\hbar^2n^2}{2ma^2} + \frac{mq^2a^4}{(4n^2 - 1)\hbar^2}\epsilon^2 + O(\epsilon^3) 
 \end{equation*}
 i encara tenim degeneració.
 
 Pel que fa al cas \( n = 1 \), els dos estats excitats es poden parlar a través de l'estat fonamental ja que ara tenim, tal i com hem calculat a \cref{eq:overlap fonamental},
 \begin{equation*}
-	\bra{1,\pm}V\ket{0}\bra{0}V\ket{1,\pm} = \frac{q^2a^2\epsilon^2}{\hbar^2}
+	\bra{1,\pm}V\ket{0}\bra{0}V\ket{1,\pm} = \frac{q^2a^2\epsilon^2}{4}.
 \end{equation*}
-i aleshores la matriu de la pertorbació restringida al subespai propi amb \( n = 1 \) és
+Aleshores apareixen elements fora de la diagonal. Tenint en compte els termes diagonals que apareixen de la interaccio amb els estats \( \ket{2,+} \) i \( \ket{2,-} \) aleshores la matriu de la pertorbació restringida al subespai propi amb \( n = 1 \) és
 \begin{equation*}
 	M = \frac{mq^2a^4\epsilon^2}{2\hbar^2}\begin{pmatrix}
-		1 & 1 \\ 1 & 1
-	\end{pmatrix}.
+		0 & 1 \\ 1 & 0
+	\end{pmatrix} + \frac{mq^2a^4\epsilon^2}{3\hbar^2}\begin{pmatrix}
+		1 & 0 \\ 0 & 1
+	\end{pmatrix} = \frac{mq^2a^4\epsilon^2}{6\hbar^2}\begin{pmatrix}
+		2 & 3 \\ 3 & 2.
+	\end{pmatrix}
 \end{equation*}
 Els dos estats propis d'aquesta matriu són 
 \begin{equation*}
@@ -261,13 +265,13 @@ Els dos estats propis d'aquesta matriu són
 \begin{equation*}
 	\ket{1,0} \defeq \frac{1}{\sqrt{2}}\big(\ket{1,+} - \ket{1,-}\big) 
 \end{equation*}
-amb valors propis \( 2\frac{mq^2a^4\epsilon^2}{2\hbar^2} \) i 0 respectivament. Per tant ara es trenca la degeneració i tenim
+amb valors propis \( \frac{5mq^2a^4\epsilon^2}{6\hbar^2} \) i \( -\frac{mq^2a^4\epsilon^2}{6\hbar^2} \) respectivament. Per tant ara es trenca la degeneració i tenim
 \begin{equation*}
-	E_{1,2}(\epsilon) = \frac{\hbar}{2ma^2} + \frac{mq^2a^4}{\hbar^2}\epsilon^2 + O(\epsilon^3)
+	E_{1,2}(\epsilon) = \frac{\hbar}{2ma^2} + \frac{5mq^2a^4}{6\hbar^2}\epsilon^2 + O(\epsilon^3)
 \end{equation*}
 i
 \begin{equation*}
-	E_{1,0}(\epsilon) = \frac{\hbar}{2ma^2} + O(\epsilon^3).
+	E_{1,0}(\epsilon) = \frac{\hbar}{2ma^2} - \frac{mq^2a^4\epsilon^2}{6\hbar^2} O(\epsilon^3).
 \end{equation*}
 
 \parbreak
@@ -303,15 +307,15 @@ L'estat corregit és, doncs,
 \end{equation*}
 La funció d'ona corresponent és, sense normalitzar,
 \begin{equation*}
-	\psi_0(\theta) = \braket{\theta}{\psi_0} = \frac{1}{\sqrt{2\pi}} - \frac{\eta}{18\sqrt{2\pi}}\cos{3\theta}
+	\psi_0(\theta) = \braket{\theta}{\psi_0} = \frac{1}{\sqrt{2\pi}} - \frac{\eta}{9\sqrt{2\pi}}\cos{3\theta}
 \end{equation*}
 i si normalitzem
 \begin{equation*}
-	\psi_0(\theta) = \frac{1}{\sqrt{\left(2 + \frac{\eta^2}{18^2}\right)\pi}}\left(1 - \frac{\eta}{18}\cos{3\theta}\right).
+	\psi_0(\theta) = \frac{1}{\sqrt{\left(2 + \frac{\eta^2}{9^2}\right)\pi}}\left(1 - \frac{\eta}{9}\cos{3\theta}\right).
 \end{equation*}
 La corresponent densitat de probabilitat és
 \begin{equation*}
-	p(\theta) = \psi(\theta)^2 = \frac{1}{\left(2 + \frac{\eta^2}{18^2}\right)\pi}\left(1 - \frac{\eta}{18}\cos{3\theta}\right)^2.
+	p(\theta) = \psi(\theta)^2 = \frac{1}{\left(2 + \frac{\eta^2}{9^2}\right)\pi}\left(1 - \frac{\eta}{9}\cos{3\theta}\right)^2.
 \end{equation*}
 Els màxims d'aquesta distribució apareixen quan \( 1 - \frac{\eta}{18}\cos{3\theta} \) assoleix el seu valor mínim, que passa quan \( \cos{3\theta} = -1 \), és a dir per \( \theta = \frac{\pi}{3}, \pi, \frac{5\pi}{3} \). Aquestes posicions corresponen precisament a trobar l'hidrogen just al mig de dos dels hidrogens del metil.
 
