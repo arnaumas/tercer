@@ -3,10 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
+\usepackage{cmbright}
 \usepackage{lmodern}
 \usepackage{geometry}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,math,arrows.meta,decorations.markings,intersections}
 \usepackage{hyperref}
-\usepackage[dvipsnames]{xcolor}
 \usepackage[bf,sf,pagestyles]{titlesec}
 \usepackage{titling}
 \usepackage[runin]{abstract}
@@ -15,7 +18,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath,amssymb}
-\usepackage[catalan,sort]{cleveref}
+\usepackage[spanish,sort]{cleveref}
 \usepackage{enumitem}
 
 \geometry{
@@ -25,6 +28,11 @@
 	bottom = 3cm,
 	top = 3cm
 }
+
+\newcommand{\sfbright}{\fontfamily{cmbr}\selectfont}
+\renewcommand{\familydefault}{\rmdefault}
+\renewcommand{\sfdefault}{cmbr}
+\renewcommand{\arraystretch}{1.4}
 
 \hypersetup{
 	colorlinks,
@@ -45,19 +53,18 @@
 	allow-number-unit-breaks = true,
 	math-celsius = {}^{\circ}\kern-\scriptspace C,
 	detect-family = true,
-	detect-shape = true,
+	mode = text,
 	list-final-separator = { y },
 	list-pair-separator = { y },
 	list-units = single,
 	separate-uncertainty = true
 }
 
-\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
-
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Ry}{\mathit{Ry}}
+\newcommand{\conv}[2]{\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (#1,0) ellipse [x radius = 0.1, y radius = #2];}
 \newcommand{\data}[3]{\SI{#1 \pm #2}{#3}}
 \newcommand{\unc}[2]{\ensuremath{{}\pm \SI{#1}{#2}}}
 \DeclareMathOperator{\gr}{gr}
@@ -88,17 +95,159 @@
 }
 \pagestyle{pagina}
 
-\title{\sffamily {\bfseries Práctica 4:} Espectros ópticos. Espectrómetro de prisma}
+\title{\sffamily {\bfseries Práctica 4:} Espectros ópticos. Determinación de longitudes de onda con un espectrómetro de prisma}
 \author{\sffamily B2 2: Arnau Mas, Alejandro Plaza}
-\date{\sffamily 28 de marzo de 2019}
+\date{\sffamily 14 de marzo de 2019}
 
 \begin{document}
 \maketitle
-\renewcommand{\abstractname}{\bfseries Resumen:}
+\renewcommand{\abstractname}{\sffamily \bfseries Resumen:}
 \begin{abstract}
-	Hola hola
+Abstract aquí
 \end{abstract}
+\hrule
 
-\section{Introducción i objetivos}
+\section{Objetivos}
+
+\section{Puesta a punto del sistema}
+\section{Calibración del espectrómetro}
+\begin{figure}[htb]
+	\small \centering \sffamily
+	\input{hartmann.pgf}
+	\caption{Mesures de desviació mínima amb la corva de Hartmann \( \lambda(\delta) \) amb els valors estimats. Los errores en el ángulo son del orden de \num{e-2} por lo que no se pueden apreciar}
+	\label{fig:hartmann Hg}
+\end{figure}
+
+Hechas las medidas de los ángulos de desviación mínima para un espectro conocido, el del mercurio (véase el \cref{tab:datos Hg}) podemos calibrar el espectrómetro para determinar las longitudes de onda de un espectro desconocido. Esto es, determinaremos las constantes de la fórmula de Hartmann que relaciona la desviación mínima con la longitud de onda:
+\begin{equation} \label{eqn:hartmann}
+	\lambda(\delta) = \lambda_0 + \frac{C}{\delta - \delta_0}.
+\end{equation}
+Con la función \texttt{curve\_fit} del módulo \textsf{SciPy} podemos hacer este ajuste y obtenemos
+\begin{equation} \label{eqn:parametros hartmann}
+	\begin{aligned}
+		\lambda_0 & = \data{245}{4e1}{\angstrom} \\
+		\delta_0 & = \data{59.6}{0.2}{\degree} \\
+		C & = \data{232}{8e2}{\angstrom}.
+	\end{aligned}
+\end{equation}
+La fórmula de Hartmann con estos valores es 
+\begin{equation} \label{eqn:hartmann con parametros}
+	\lambda(\delta) = \num{2450} + \frac{\num{23200}}{\delta - \num{59.6}}.
+\end{equation}
+En la \cref{fig:hartmann Hg} se muestran los puntos correspondientes a las medidas así como el gráfico del ajuste hecho. El ajuste tiene un coeficiente de correlación de \( R^2 = \num{0.99997} \).
+
+\section{Determinación del espectro del cadmio}
+Una vez hemos calibrado el espectrómetro podemos utilizarlo para determinar el espectro del cadmio. En el \cref{tab:datos Cd} se muestran las medidas de desviación mínimas tomadas. Para cada franja se tomó la media de las observaciones.  
+
+\begin{table}[hbt]
+	\centering \small \sffamily
+	\caption{Comparación de las longitudes de onda del espectro del cadmio teóricas y las obtenidas experimentalmente}
+	\label{tab:longs cd}
+	\begin{tabular}{SSS}
+		\toprule
+		{\( \lambda_\text{teó} \) (\si{nm})} & {\( \lambda_\text{exp} \) (\si{nm})} & {\( \abs{\lambda_\text{teó} - \lambda_\text{exp}} \) (\si{nm})} \\
+		\midrule
+		441.3 & 441 \pm 3 & 0.038 \\
+		467.82 & 469 \pm 1 & 0.76 \\
+		479.99 & 480 \pm 3 & 0.36 \\
+		508.58 & 509 \pm 2 & 0.35 \\
+		515.51 & 515 \pm 4 & 0.056 \\
+		643.85 & 641 \pm 10 & 2.6 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+En el \cref{tab:longs cd} se muestran los resultados de calcular las longitudes de onda con la fórmula de Hartmann y las diferencias con las longitudes de onda teóricas ---los errores asociados se han calculado con la \cref{eqn:error longitud}---. Como vemos, los resultados se ajustan muy bien a los valores teóricos. Cabe subrayar el error que aparece asociado a la línea de longitud \( \lambda = \SI{643}{nm} \), que es mucho más grande que el resto. Esto es debido principalmente  
+
+\appendix
+\section{Cálculo de las incertidumbres}\label{sec:errores}
+A continuación se detallan los cálculos realizados para estimar las incertidumbres en los resultados.
+
+En primer lugar, dado que se tomaron más de una medida para cada ángulo de desviación mínima, se tomó como valor su media y entonces el error viene dado por
+\begin{equation} \label{eqn:error desviacion}
+	u(\delta)^2 = \frac{s^2_{\delta} + u_\text{exp}(\delta)^2}{n}
+\end{equation}
+donde \( s^2_{\delta} \) es la variancia muestral de los datos tomados, \( n \) el número de datos tomados y \( u_\text{exp}(\delta) \) la precisión en la medida. Con el goniómetre que se utilizó se podían realizar medidas con una precisión de medio minuto de ángulo, aproximadamente \( \SI{0.008}{\degree} \).
+
+Con la serie de desviación mínima del espectro del mercurio se realizó un ajuste para encontrar los parámetros en la fórmula de Hartmann, cuyos errores asociados figuran en la \cref{eqn:parametros hartmann}.
+
+A continuación discutimos la estimación de las incertidumbres asociadas a la determinación de las longitudes de onda del espectro del cadmio. Las calculamos usando las medidas del ángulo de desviación mínima del cadmio usando la fórmula de Hartmann con los parámetros estimados. Así pues, su error asociado tendrá dos componentes, una parte debida a la propagación del error en la medida de la desviación mínima a través de la fórmula de Hartmann y otra asociada a las fluctuaciones estadísticas del ajuste. Entonces tenemos
+\begin{equation} \label{eqn:error longitud}
+	u(\lambda(\delta))^2 = \frac{\sigma^2}{n(\delta)} + \left(\frac{C}{(\delta - \delta_0)^2}\right)^2 u(\delta)^2,
+\end{equation}
+donde \( \sigma^2 \) es la variancia de las fluctuaciones estadísticas, \( n(\delta) \) es el tama~o efectivo de la muestra y \( u(\delta) \) es el error en el ángulo, calculado según la \cref{eqn:error desviacion}. El segundo término es el que corresponde a la propagación del error en el ángulo. El primero es el que va asociado a fluctuaciones estadísticas. Por un lado tenemos \( \sigma^2 \), que se calcula como
+\begin{equation*}
+	\sigma^2 = \frac{1}{n-2} \sum_{k = 1}^{n} (\lambda_k - \lambda(\delta_k))^2,
+\end{equation*}
+donde \( \lambda_k \) son las longitudes de onda teóricas del espectro del mercurio y \( \lambda(\delta_k) \) son las correspondientes longitudes calculadas con Hartmann. Finalmente \( n \) es el número de franjas observadas (7 en este caso). Por otra parte tenemos el tamaño efectivo de la muestra:
+\begin{equation*}
+	\frac{1}{n(\delta)} = \frac{1}{n} + \frac{(\delta - \bar{\delta})^2}{\sum_{k = 1}^{n}(\delta_k - \bar{\delta})^2 },
+\end{equation*}
+donde \( \delta_k \) son las deviaciones mínimas medidas para el mercurio y \( \bar{\delta} \) su promedio. Vemos que como más nos alejamos del rango donde hemos hecho el ajuste el tamaño efectivo de la muestra aumenta y por lo tanto incrementa el error estadístico.
+
+\section{Datos experimentales}
+\begin{table}[htb]
+	\small \centering \sffamily
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\caption{Medidas de la desviación mínima de cada franja del espectro del mercurio}
+		\label{tab:datos Hg}
+		\begin{tabular}{SS}
+			\toprule
+			{\( \lambda \) (\si{\angstrom})} & {\( \delta \) (\unc{0.008}{\degree})} \\
+			\midrule
+			4046.60 & 35.950 \\ 
+ 			{} & 35.925 \\
+			\midrule
+			4078.20 & 36.150 \\ 
+ 			{} & 36.217 \\
+			\midrule
+			4358.30 & 38.300 \\ 
+ 			{} & 38.300 \\
+			\midrule
+			4916.00 & 41.042 \\ 
+ 			{} & 41.100 \\
+			\midrule
+			5460.70 & 42.783 \\ 
+ 			{} & 42.750 \\
+			\midrule
+			5769.60 & 43.450 \\ 
+ 			{} & 43.500 \\
+			\midrule
+			5789.70 & 43.550 \\ 
+ 			{} & 43.542 \\
+			\bottomrule
+		\end{tabular}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\caption{Medidas de la desviación mínima de cada franja del espectro del cadmio}
+		\label{tab:datos Cd}
+		\begin{tabular}{SS}
+			\toprule
+			{\( \lambda \) (\si{\angstrom})} & {\( \delta \) (\unc{0.008}{\degree})} \\
+			\midrule
+			4413.00 & 38.625 \\ 
+ 			{} & 38.658 \\
+			\midrule
+			4678.20 & 40.092 \\ 
+ 			{} & 40.092 \\
+			\midrule
+			4799.90 & 40.600 \\ 
+ 			{} & 40.625 \\
+			\midrule
+			5085.80 & 41.683 \\ 
+ 			{} & 41.683 \\
+			\midrule
+			5155.10 & 41.883 \\ 
+ 			{} & 41.908 \\
+			\midrule
+			6438.50 & 44.600 \\ 
+ 			{} & 44.650 \\
+ 			\bottomrule
+		\end{tabular}
+	\end{minipage}
+\end{table}
 
 \end{document}
