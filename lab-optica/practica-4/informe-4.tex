@@ -110,11 +110,237 @@ Abstract aquí
 \section{Objetivos}
 
 \section{Puesta a punto del sistema}
+El espectrómetro consta de una fuente de luz, seguida de una rendija que a su vez está seguida de una lente colimadora. La función de la lente colimadora es hacer que la luz que se emite desde la rendija salga con frentes de onda planos, es decir, que los rayos sean paralelos. Para conseguir esto hace falta que la rendija esté en el foco de la lente colimadora. 
+
+Para poder hacer las observaciones se dispone de un telescopio. Para ello es necesario que el telescopio funcione como tal, es decir, es necesario que los focos del objetivo y el ocular coincidan. Esta configuración se muestra en la \cref{fig:esquema}.
+
+\begin{figure}[htb]
+	\centering \small \sffamily
+	\begin{tikzpicture}
+		% Fuente
+		\shade[inner color = orange!50!yellow, outer color = white] (0,0) circle (.5);
+		\node[above] at (0,0.5) {Fuente};
+
+		% Rendija
+		\draw[-|, thick, color = brown] (0.75,0.5) -- +(0,-0.45);
+		\draw[-|, thick, color = brown] [yscale = -1] (0.75,0.5) -- +(0,-0.45);
+		\node[below] at (0.75,-0.5) {Rendija};
+
+		% Lente colimadora
+		\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (2,0) ellipse [x radius = 0.1, y radius = 0.75];
+		\node[above] at (2,1) {Lente colimadora};
+
+		% Centro del prisma
+		\coordinate (prisma) at (5,-0.3);
+		% Prisma
+		\begin{scope}[shift = {(prisma)}, rotate = -10]
+			\coordinate (A) at (90:1.5);
+			\coordinate (B) at (210:1.5);
+			\coordinate (C) at (330:1.5);
+
+			\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!, name path = prisma] (A) -- (B) -- (C) -- cycle;
+		\end{scope}
+		\node[above = 1.7] at (prisma) {Prisma};
+
+		\tikzset{raig/.style = {
+				color = orange!50!yellow,
+				decoration = {markings, mark = between positions 0.25 and 0.75 step 0.25 with {\arrow{>}}},
+				postaction = decorate
+		}}
+
+		\path[name path = raig11] (0,0) -- (5,0);
+		\path[name intersections = {of = prisma and raig11, by = entrada1}];  
+		\path[name path = raig12] (entrada1) -- + (-7:2);
+		\path[name intersections = {of = prisma and raig12, by = sortida1}];  
+
+		% Telescopio
+		\begin{scope}[shift = {(sortida1)}, rotate = -15]
+			\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (4,0) ellipse [x radius = 0.1, y radius = 0.75];
+\node[above] at (4,1) {Objetivo};
+			\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (6,0) ellipse [x radius = 0.1, y radius = 0.75];
+\node[above] at (6,1) {Ocular};
+		\end{scope}
+
+		\draw[raig, name path = raig1] (0,0) -- (entrada1) -- (sortida1) [shift = {(sortida1)}, rotate = -15] -- (4,0) coordinate (obj) -- +(3,0);
+
+		\path[name path = raig21] (2, 0.5) -- (2,0.5 -| prisma);
+		\path[name intersections = {of = prisma and raig21, by = entrada2}];  
+		\path[name path = raig22]  [rotate around = {-7:(entrada2)}] (entrada2) ++ (0.1,0) -- +(3,0);
+		\path[name intersections = {of = prisma and raig22, by = sortida2}];  
+
+		\path[name path = raig31] (2, -0.5) -- (2,-0.5 -| prisma);
+		\path[name intersections = {of = prisma and raig31, by = entrada3}];  
+		\path[name path = raig32]  [rotate around = {-7:(entrada3)}] (entrada3) ++ (0.1,0) -- +(3,0);
+		\path[name intersections = {of = prisma and raig32, by = sortida3}];  
+
+		\draw[raig, name path = raig2] (0.75,0) -- (2,0.5) -- (entrada2) -- (sortida2) [rotate around = {-15:(sortida2)}, shift = {(obj)}] -- (0,0.5) -- (2,-0.5) -- +(1,0);
+		\draw[raig, name path = raig3] (0.75,0) -- (2,-0.5) -- (entrada3) -- (sortida3) [rotate around = {-15:(sortida3)}, shift = {(obj)}] -- (0,-0.5) -- (2,0.5) -- +(1,0);
+
+		\begin{scope}[shift = {(sortida1)}, rotate = -15]
+			\draw (8,0) arc [start angle = 270, end angle = 180, radius = 0.3];
+			\draw (8,0) arc [start angle = 90, end angle = 180, radius = 0.3];
+			\draw (8,0) ++ (150:0.3) arc [start angle = 150, end angle = 210, radius = 0.3];
+		\end{scope}
+	\end{tikzpicture}
+	\caption{Esquema de la disposición del espectrómetro. El sistema óptico onjetivo-ocular tiene un efecto magnificador que no se muestra en la figura.}	
+	\label{fig:esquema}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering \small \sffamily
+	\begin{tikzpicture}
+		% Fuente
+		\shade[inner color = orange!50!yellow, outer color = white] (0,0) circle (.5);
+		\node[above] at (0,0.5) {Fuente};
+
+		% Rendija
+		\draw[-|, thick, color = brown] (0.75,0.5) -- +(0,-0.45);
+		\draw[-|, thick, color = brown] [yscale = -1] (0.75,0.5) -- +(0,-0.45);
+		\node[below] at (0.75,-0.5) {Rendija};
+
+		% Lente colimadora
+		\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (2,0) ellipse [x radius = 0.1, y radius = 0.75];
+		\node[above] at (2,1) {Lente colimadora};
+
+		% Centro del prisma
+		\coordinate (prisma) at (5,-0.3);
+		% Prisma
+		\begin{scope}[shift = {(prisma)}, rotate = -10]
+			\coordinate (A) at (90:1.5);
+			\coordinate (B) at (210:1.5);
+			\coordinate (C) at (330:1.5);
+
+			\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!, name path = prisma] (A) -- (B) -- (C) -- cycle;
+		\end{scope}
+		\node[above = 1.7] at (prisma) {Prisma};
+
+		\tikzset{raig/.style = {
+				color = orange!50!yellow,
+				decoration = {markings, mark = between positions 0.25 and 0.75 step 0.25 with {\arrow{>}}},
+				postaction = decorate
+		}}
+
+		\path[name path = raig11] (0,0) -- (5,0);
+		\path[name intersections = {of = prisma and raig11, by = entrada1}];  
+		\path[name path = raig21] (entrada1) -- + (-7:2);
+		\path[name intersections = {of = prisma and raig21, by = sortida1}];  
+		\path[name path = raig22] (entrada1) -- + (-3:2);
+		\path[name intersections = {of = prisma and raig22, by = sortida2}];  
+		\path[name path = raig23] (entrada1) -- + (-11:2);
+		\path[name intersections = {of = prisma and raig23, by = sortida3}];  
+
+
+		\draw[raig, name path = raig1] (0,0) -- (entrada1);
+		\draw[raig, color = green] (entrada1) -- (sortida1) [shift = {(sortida1)}, rotate = -15] -- (4,0) coordinate (obj) -- +(3,0);
+		\draw[raig, color = red] (entrada1) -- (sortida2) [shift = {(sortida2)}, rotate = -11] -- (7,0);
+		\draw[raig, color = blue] (entrada1) -- (sortida3) [shift = {(sortida3)}, rotate = -19] -- (7,0);
+
+		\draw[raig, color = green, dashed] [shift = {(sortida1)}, rotate = -15] (-4,0) -- (sortida1);
+		\draw[raig, color = red, dashed] [shift = {(sortida2)}, rotate = -11] (-4,0) -- (sortida2);
+		\draw[raig, color = blue, dashed] [shift = {(sortida3)}, rotate = -19] (-4,0) -- (sortida3);
+
+		\begin{scope}[shift = {(sortida1)}, rotate = -15]
+			\draw (8,0) arc [start angle = 270, end angle = 180, radius = 0.3];
+			\draw (8,0) arc [start angle = 90, end angle = 180, radius = 0.3];
+			\draw (8,0) ++ (150:0.3) arc [start angle = 150, end angle = 210, radius = 0.3];
+		\end{scope}
+
+	\end{tikzpicture}
+	\caption{}	
+	\label{fig:sin telescopio}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering \small \sffamily
+	\begin{tikzpicture}
+		% Fuente
+		\shade[inner color = orange!50!yellow, outer color = white] (0,0) circle (.5);
+		\node[above] at (0,0.5) {Fuente};
+
+		% Rendija
+		\draw[-|, thick, color = brown] (0.75,0.5) -- +(0,-0.45);
+		\draw[-|, thick, color = brown] [yscale = -1] (0.75,0.5) -- +(0,-0.45);
+		\node[below] at (0.75,-0.5) {Rendija};
+
+		% Lente colimadora
+		\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (2,0) ellipse [x radius = 0.1, y radius = 0.75];
+		\node[above] at (2,1) {Lente colimadora};
+
+		% Centro del prisma
+		\coordinate (prisma) at (5,-0.3);
+		% Prisma
+		\begin{scope}[shift = {(prisma)}, rotate = -10]
+			\coordinate (A) at (90:1.5);
+			\coordinate (B) at (210:1.5);
+			\coordinate (C) at (330:1.5);
+
+			\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!, name path = prisma] (A) -- (B) -- (C) -- cycle;
+		\end{scope}
+		\node[above = 1.7] at (prisma) {Prisma};
+
+		\tikzset{raig/.style = {
+				color = orange!50!yellow,
+				decoration = {markings, mark = between positions 0.25 and 0.75 step 0.25 with {\arrow{>}}},
+				postaction = decorate
+		}}
+
+		\path[name path = raig11] (0,0) -- (5,0);
+		\path[name intersections = {of = prisma and raig11, by = entrada1}];  
+		\path[name path = raig21] (entrada1) -- + (-7:2);
+		\path[name intersections = {of = prisma and raig21, by = sortida1}];  
+		\path[name path = raig22] (entrada1) -- + (-3:2);
+		\path[name intersections = {of = prisma and raig22, by = sortida2}];  
+		\path[name path = raig23] (entrada1) -- + (-11:2);
+		\path[name intersections = {of = prisma and raig23, by = sortida3}];  
+
+		% Telescopio
+		\begin{scope}[shift = {(sortida1)}, rotate = -15]
+			\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (4,0) ellipse [x radius = 0.1, y radius = 0.75];
+			\node[above] at (4,1) {Objetivo};
+			\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (6,0) ellipse [x radius = 0.1, y radius = 0.75];
+			\node[above] at (6,1) {Ocular};
+		\end{scope}
+
+
+		\draw[raig, name path = raig1] (0,0) -- (entrada1);
+		\draw[raig, color = green] (entrada1) -- (sortida1) [shift = {(sortida1)}, rotate = -15] -- (4,0) coordinate (obj) -- ++(2,0) coordinate (ocu) -- ++(1,0);
+
+		\path[name path = obj] [rotate around = {(-15:(sortida1))}] (obj) ++ (0,0.75) -- ++(0,-1.5);
+		\path[name path = ocu] [rotate around = {(-15:(sortida1))}] (ocu) ++ (0,0.75) -- ++(0,-1.5);
+
+		\path[name path = raig32] (sortida2) [shift = {(sortida2)}, rotate = -11] -- (7,0);
+		\path[name intersections = {of = obj and raig32, by = obj2}];  
+		\path[name path = raig33] (sortida3) [shift = {(sortida3)}, rotate = -19] -- (7,0);
+		\path[name intersections = {of = obj and raig33, by = obj3}];  
+
+		\path[name path = raig42] (obj2) [shift = {(sortida1)}, rotate = -15] -- ($(obj2)!3!(4.8,0)$);
+		\path[name intersections = {of = ocu and raig42, by = ocu2}];  
+		\path[name path = raig43] (obj3) [shift = {(sortida1)}, rotate = -15] -- ($(obj3)!3!(4.8,0)$);
+		\path[name intersections = {of = ocu and raig43, by = ocu3}];  
+
+		\draw[raig, color = red] (entrada1) -- (sortida2) -- (obj2) -- (ocu2) [shift = {(ocu2)}, rotate = -14] -- (1,0);
+		\draw[raig, color = blue] (entrada1) -- (sortida3) -- (obj3) -- (ocu3) [shift = {(ocu3)}, rotate = -16] -- (1,0);
+
+		\draw[raig, color = green, dashed] [shift = {(ocu)}, rotate = -15] (-8,0) -- (ocu);
+		\draw[raig, color = red, dashed] [shift = {(ocu2)}, rotate = -14] (-8,0) -- (ocu2);
+		\draw[raig, color = blue, dashed] [shift = {(ocu3)}, rotate = -16] (-8,0) -- (ocu3);
+
+		\begin{scope}[shift = {(sortida1)}, rotate = -15]
+			\draw (8,0) arc [start angle = 270, end angle = 180, radius = 0.3];
+			\draw (8,0) arc [start angle = 90, end angle = 180, radius = 0.3];
+			\draw (8,0) ++ (150:0.3) arc [start angle = 150, end angle = 210, radius = 0.3];
+		\end{scope}
+
+	\end{tikzpicture}
+	\caption{Esquema de la disposición del espectrómetro. El sistema óptico onjetivo-ocular tiene un efecto magnificador que no se muestra en la figura.}	
+	\label{fig:con telescopio}
+\end{figure}
+
 \section{Calibración del espectrómetro}
 \begin{figure}[htb]
 	\small \centering \sffamily
 	\input{hartmann.pgf}
-	\caption{Mesures de desviació mínima amb la corva de Hartmann \( \lambda(\delta) \) amb els valors estimats. Los errores en el ángulo son del orden de \num{e-2} por lo que no se pueden apreciar}
+	\caption{Medidas de desviación mínima con la curva de Hartmann \( \lambda(\delta) \) con los valores estimadoss. Los errores en el ángulo son del orden de \num{e-2} por lo que no se pueden apreciar}
 	\label{fig:hartmann Hg}
 \end{figure}
 
@@ -143,21 +369,83 @@ Una vez hemos calibrado el espectrómetro podemos utilizarlo para determinar el 
 	\centering \small \sffamily
 	\caption{Comparación de las longitudes de onda del espectro del cadmio teóricas y las obtenidas experimentalmente}
 	\label{tab:longs cd}
-	\begin{tabular}{SSS}
+	\begin{tabular}{@{}S[table-parse-only]SSSc@{}}
 		\toprule
-		{\( \lambda_\text{teó} \) (\si{nm})} & {\( \lambda_\text{exp} \) (\si{nm})} & {\( \abs{\lambda_\text{teó} - \lambda_\text{exp}} \) (\si{nm})} \\
+		{\( \delta_m \) (\si{\degree})} & {\( \lambda_\text{teó} \) (\si{nm})} & {\( \lambda_\text{exp} \) (\si{nm})} & {\( \abs{\lambda_\text{teó} - \lambda_\text{exp}} \) (\si{nm})} & Color \\
 		\midrule
-		441.3 & 441 \pm 3 & 0.038 \\
-		467.82 & 469 \pm 1 & 0.76 \\
-		479.99 & 480 \pm 3 & 0.36 \\
-		508.58 & 509 \pm 2 & 0.35 \\
-		515.51 & 515 \pm 4 & 0.056 \\
-		643.85 & 641 \pm 10 & 2.6 \\
+		71.40 \pm 0.02 & 441.3 & 441 \pm 3 & 0.038 & Morado \\
+		69.953 \pm 0.006 & 467.82 & 469 \pm 1 & 0.76 & Azul \\
+		69.43 \pm 0.01 & 479.99 & 480 \pm 3 & 0.36 & Azul \\
+		68.361 \pm 0.006 & 508.58 & 509 \pm 2 & 0.35 & Verde \\
+		68.14 \pm 0.01 & 515.51 & 515 \pm 4 & 0.056 & Verde\\
+		65.42 \pm 0.03 & 643.85 & 641 \pm 10 & 2.6 & Rojo \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-En el \cref{tab:longs cd} se muestran los resultados de calcular las longitudes de onda con la fórmula de Hartmann y las diferencias con las longitudes de onda teóricas ---los errores asociados se han calculado con la \cref{eqn:error longitud}---. Como vemos, los resultados se ajustan muy bien a los valores teóricos. Cabe subrayar el error que aparece asociado a la línea de longitud \( \lambda = \SI{643}{nm} \), que es mucho más grande que el resto. Esto es debido principalmente  
+En el \cref{tab:longs cd} se muestran los resultados de calcular las longitudes de onda con la fórmula de Hartmann y las diferencias con las longitudes de onda teóricas ---los errores asociados se han calculado con la \cref{eqn:error longitud}---. Como vemos, los resultados se ajustan muy bien a los valores teóricos. Cabe subrayar el error y la discrepancia que aparecen asociados a la línea de longitud \( \lambda = \SI{643}{nm} \), que es mucho más grande que el resto. Esto es debido principalmente a que esta longitud corresponde a una desviación de \SI{65.42}{\degree}, que está fuera del rango de ángulos con los que se hizo el ajuste y por lo tanto el error estadístico aumenta. 
+
+\section{Curva de dispersión del vidrio}
+\begin{table}[htb]
+	\centering \small \sffamily
+	\caption{Distintos valores del índice de refracción para diferentes longitudes de onda}
+	\label{tab:refraccion}
+	\begin{tabular}{@{}SScS[table-parse-only]@{}}
+	\toprule
+	{\( \delta_m \) (\si{\degree})} & {\( \lambda \) (\si{\angstrom})} & {Color} & {\( n \)} \\
+	\midrule
+	74.107 & 4046.6 & Morado & 1.84 \pm 0.01 \\
+	73.861 & 4078.2 & Morado & 1.84 \pm 0.03 \\
+	71.744 & 4358.3 & Azul & 1.82 \pm 0.005 \\
+	68.974 & 4916.0 & Verde-azul & 1.80 \pm 0.03 \\
+	67.278 & 5460.7 & Verde & 1.79 \pm 0.02 \\
+	66.569 & 5769.6 & Amarillo & 1.79 \pm 0.02 \\
+	66.499 & 5789.7 & Amarillo & 1.786 \pm 0.007 \\
+	71.403 & 4413   & Morado & 1.82 \pm 0.01 \\
+	69.953 & 4678.2 & Azul & 1.812 \pm 0.005 \\
+	69.432 & 4799.9 & Azul & 1.81 \pm 0.01 \\
+	68.361 & 5085.8 & Verde & 1.800 \pm 0.005 \\
+	68.149 & 5155.1 & Verde & 1.80 \pm 0.01 \\
+	65.419 & 6438.5 & Rojo & 1.78 \pm 0.02 \\
+	\bottomrule
+\end{tabular}
+\end{table}
+
+Existe una relación experimental entre el índice de refracción de un material a una cierta longitud de onda y el ángulo de desviación mínima a sea mísma desviación,
+\begin{equation} \label{eqn:dispersión}
+	n(\lambda) = \frac{\sin{\tfrac{1}{2}(\delta_m + \alpha)}}{\sin{\tfrac{1}{2}\alpha}}
+\end{equation}
+donde \( \alpha \) es el ángulo de birefringencia del prisma. El ángulo de birefringencia del prisma en cuestión es de \SI{60}{\degree} por lo que
+\begin{equation*}
+	n(\lambda) = 2 \sin{\left(\tfrac{1}{2}\delta_m + \SI{30}{\degree}\right)}.
+\end{equation*}
+En el \cref{tab:refraccion} se muestran los índices de refracción obtenidos a partir los valores del ángulo de desviación mínima medidos. Las incertidumbres se han calculado con la \cref{eqn:refraccion}. Con estos resultados podemos calcular el número de Abbe del material del prisma, que es
+\begin{equation*}
+	\nu_\text{Abbe} = \frac{n_\text{amarillo} - 1}{n_\text{azul} - n_\text{rojo}}.
+\end{equation*}
+Si tomamos la media de los índices de refracción correspondientes a longitudes de onda azules, amarillas y rojas entonces obtenemos
+\begin{equation*}
+	\nu_\text{Abbe} = \frac{\num{1.79 \pm 0.01} - 1}{\num{1.814 \pm 0.007} - \num{1.78 \pm 0.02}} = \num{23.2\pm 0.6}
+\end{equation*}
+donde el error se ha calculado mediante la \cref{eqn:error abbe}. Hemos obtenido un número de Abbe menor que 55, lo que indica que se trata de un vidrio flint. Esta clase de vidrios tienen alta dispersión.
+
+\section{Observación de distintos espectros}
+\subsection{Lámpara de sodio}
+Al encenderse la lámpara de sodio se pueden ver una gran cantidad de líneas que se van atenuando conforme la lámpara se calienta. Durante este tiempo la lámpara no emite la luz anaranjada característica del sodio sino más bien luz de un color rojizo. Al cabo de unos minutos pasa a emitir la luz naranja característica y con el espectrómetro se puede ver una raya naranja intensa. Si la rendija se estrecha lo suficiente se puede comprovar que esta raya de hecho es un doblete, el doblete del sodio. La explicación de este cambio en el espectro es que la mayoría de lámapras de sodio contienen una mezcla de gases que sirven para calentar la lámpara hasta que el sodio empieza a evaporarse y a emitir, por lo que la luz que se emite al principio no proviene del sodio sino de la mezcla de otros gases.  
+
+\subsection{Lámpara LED}
+El espectro que emite la lámpara LED es continuo sin rayas. Esto indica que un LED emite en todas las frecuencias y que por lo tanto emite luz blanca. La tecnología LED hace uso de semiconductores para replicar el  espectro de emisión de un cuerpo negro.
+
+\subsection{Lámpara incandescente}
+El espectro que emite una lámpara incandescente es continuo desde el rojo hasta llegar aproximadamente al verde. Lo que vemos, pues, es que no emite a frecuencias altas por lo que la luz no es blanca. Efectivamente, una lámpara incandescente emite luz anaranjada, indicativo de que la luz de altas frecuencias no está presente. Las lámparas incandescentes funcionan gracias a la emisión de energía de un filamento de tungsteno u otros materiales que es calentado por efecto Joule. El mecanismo, pues, no se basa en la emisión por transiciones energéticas de los átomos por lo que su espectro es contínuo.
+
+\subsection{Fluorescente}
+En el espectro del fluorescente se pueden obsevar cuatro rayas bien definidas: un doblete amarillo tenue, una raya verde intensa y una raya morada intensa. Subyacente a estas rayas se puede ver una franja continua muy ténue. Vemos, pues, que el espectro de un fluorescente no es contínuo. Las lámparas fluoresecentes funcionan por la excitación de un gas, típicamente mercurio, por lo que tienen un espectro de emisión discreto.
+
+\section{Conclusiones}
+Disponiendo de un espectro conocido, el del mercurio, hemos calibrado el espectrómetro ajustando los coeficientes en la fórmula de Abbe. El ajuste ha sido lo suficientemente bueno como para obtener las longitudes de onda de un segundo espectro, el del cadmio, con precisión del orden de de nanómetros. Sin embargo, hemos observado que si intentamos determinar longitudes de onda fuera del rango en el que hemos hecho el ajuste nos encotramos con que el error aumenta, tal y como ha ocurrido con la raya roja del cadmio.
+
+Con el espectrómetro también hemos podido observar el espectro de distintas fuentes de luz como una lámpara de sodio, una lámpara incandescente, una lámpara LED y un fluorescente. Hemos podido distinguir entre espectros continuos y discretos así como establecer la relación entre la luz que emite cada fuente y los rasgos más característicos de su espectro.
 
 \appendix
 \section{Cálculo de las incertidumbres}\label{sec:errores}
@@ -185,14 +473,24 @@ donde \( \lambda_k \) son las longitudes de onda teóricas del espectro del merc
 \end{equation*}
 donde \( \delta_k \) son las deviaciones mínimas medidas para el mercurio y \( \bar{\delta} \) su promedio. Vemos que como más nos alejamos del rango donde hemos hecho el ajuste el tamaño efectivo de la muestra aumenta y por lo tanto incrementa el error estadístico.
 
+La incertidumbre asociada al índice de refracción viene dada por
+\begin{equation} \label{eqn:refraccion}
+	u(n) = 2\cos{\left(\tfrac{1}{2}\delta + \SI{30}{\degree}\right)} u(\delta).
+\end{equation}
+
+El error en el cálculo del número de Abbe es de
+\begin{equation} \label{eqn:error abbe}
+	u(\nu_\text{Abbe})^2 = \frac{u(n_\text{amarillo})^2}{(n_\text{azul} - n_\text{rojo})^2} + \left(\frac{n_\text{amarillo} - 1}{(n_\text{azul} - n_\text{rojo})^2}\right)^2(u(n_\text{azul})^2 + u(n_\text{rojo})^2).
+\end{equation}
+
 \section{Datos experimentales}
 \begin{table}[htb]
-	\small \centering \sffamily
+	\footnotesize \centering \sffamily
 	\begin{minipage}{0.45\textwidth}
 		\centering
 		\caption{Medidas de la desviación mínima de cada franja del espectro del mercurio}
 		\label{tab:datos Hg}
-		\begin{tabular}{SS}
+		\begin{tabular}{@{}SS@{}}
 			\toprule
 			{\( \lambda \) (\si{\angstrom})} & {\( \delta \) (\unc{0.008}{\degree})} \\
 			\midrule
@@ -224,7 +522,7 @@ donde \( \delta_k \) son las deviaciones mínimas medidas para el mercurio y \( 
 		\centering
 		\caption{Medidas de la desviación mínima de cada franja del espectro del cadmio}
 		\label{tab:datos Cd}
-		\begin{tabular}{SS}
+		\begin{tabular}{@{}SS@{}}
 			\toprule
 			{\( \lambda \) (\si{\angstrom})} & {\( \delta \) (\unc{0.008}{\degree})} \\
 			\midrule
@@ -251,3 +549,4 @@ donde \( \delta_k \) son las deviaciones mínimas medidas para el mercurio y \( 
 \end{table}
 
 \end{document}
+
