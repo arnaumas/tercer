@@ -103,11 +103,12 @@
 \maketitle
 \renewcommand{\abstractname}{\sffamily \bfseries Resumen:}
 \begin{abstract}
-Abstract aquí
+	En esta práctica se hará uso de un espectrómetro de prisma para la observación de los espectros ópticos de distintas fuentes de luz. Primeramente se realizan una serie de observaciones cualitativas para comprender el funcionamiento de la refracción y de la dispersión cromática. Seguidamente se medirán los ángulos de desviación mínima de las distintas franjas de un espectro conocido, el del mercurio, con el fin de calibrar el espectrómetro mediante la fórmula de Hartmann. Hecho esto se medirán las longitudes de onda de un segundo espectro, el del cadmio y se contrastan los resultados con los valores teóricos. Finakmente se realizan observaciones de distintas fuentes de luz.
 \end{abstract}
 \hrule
 
 \section{Objetivos}
+Los objetivos de esta práctica son el uso de un espectrómetro de prisma para observar los espectros de distintas fuentes de luz gracias a la acción refractora del prisma. También se usará la fórmula de Hartmann para calibrar el espectrómetro con un espectro conocido, el del mercurio, para luego medir las longitudes de onda de un espectro desconocido, el  del cadmio.
 
 \section{Puesta a punto del sistema}
 El espectrómetro consta de una fuente de luz, seguida de una rendija que a su vez está seguida de una lente colimadora. La función de la lente colimadora es hacer que la luz que se emite desde la rendija salga con frentes de onda planos, es decir, que los rayos sean paralelos. Para conseguir esto hace falta que la rendija esté en el foco de la lente colimadora. 
@@ -182,9 +183,11 @@ Para poder hacer las observaciones se dispone de un telescopio. Para ello es nec
 			\draw (8,0) ++ (150:0.3) arc [start angle = 150, end angle = 210, radius = 0.3];
 		\end{scope}
 	\end{tikzpicture}
-	\caption{Esquema de la disposición del espectrómetro. El sistema óptico onjetivo-ocular tiene un efecto magnificador que no se muestra en la figura.}	
+	\caption{Esquema de la disposición del espectrómetro. El sistema óptico objetivo-ocular tiene un efecto magnificador que no se muestra en la figura.}	
 	\label{fig:esquema}
 \end{figure}
+
+\section{Observación con el espectrómetro}
 
 \begin{figure}[htb]
 	\centering \small \sffamily
@@ -246,7 +249,7 @@ Para poder hacer las observaciones se dispone de un telescopio. Para ello es nec
 		\end{scope}
 
 	\end{tikzpicture}
-	\caption{}	
+	\caption{Recorrido de los rayos a través del prisma sin el telescopio. Los rayos discontínuos representan el camino que interpreta el ojo.}	
 	\label{fig:sin telescopio}
 \end{figure}
 
@@ -290,7 +293,7 @@ Para poder hacer las observaciones se dispone de un telescopio. Para ello es nec
 		\path[name intersections = {of = prisma and raig21, by = sortida1}];  
 		\path[name path = raig22] (entrada1) -- + (-3:2);
 		\path[name intersections = {of = prisma and raig22, by = sortida2}];  
-		\path[name path = raig23] (entrada1) -- + (-11:2);
+		\path[name path = raig23] (entrada1) -- + (-5:2);
 		\path[name intersections = {of = prisma and raig23, by = sortida3}];  
 
 		% Telescopio
@@ -303,14 +306,14 @@ Para poder hacer las observaciones se dispone de un telescopio. Para ello es nec
 
 
 		\draw[raig, name path = raig1] (0,0) -- (entrada1);
-		\draw[raig, color = green] (entrada1) -- (sortida1) [shift = {(sortida1)}, rotate = -15] -- (4,0) coordinate (obj) -- ++(2,0) coordinate (ocu) -- ++(1,0);
+		\draw[raig, color = blue] (entrada1) -- (sortida1) [shift = {(sortida1)}, rotate = -15] -- (4,0) coordinate (obj) -- ++(2,0) coordinate (ocu) -- ++(1,0);
 
 		\path[name path = obj] [rotate around = {(-15:(sortida1))}] (obj) ++ (0,0.75) -- ++(0,-1.5);
 		\path[name path = ocu] [rotate around = {(-15:(sortida1))}] (ocu) ++ (0,0.75) -- ++(0,-1.5);
 
 		\path[name path = raig32] (sortida2) [shift = {(sortida2)}, rotate = -11] -- (7,0);
 		\path[name intersections = {of = obj and raig32, by = obj2}];  
-		\path[name path = raig33] (sortida3) [shift = {(sortida3)}, rotate = -19] -- (7,0);
+		\path[name path = raig33] (sortida3) [shift = {(sortida3)}, rotate = -13] -- (7,0);
 		\path[name intersections = {of = obj and raig33, by = obj3}];  
 
 		\path[name path = raig42] (obj2) [shift = {(sortida1)}, rotate = -15] -- ($(obj2)!3!(4.8,0)$);
@@ -318,12 +321,12 @@ Para poder hacer las observaciones se dispone de un telescopio. Para ello es nec
 		\path[name path = raig43] (obj3) [shift = {(sortida1)}, rotate = -15] -- ($(obj3)!3!(4.8,0)$);
 		\path[name intersections = {of = ocu and raig43, by = ocu3}];  
 
-		\draw[raig, color = red] (entrada1) -- (sortida2) -- (obj2) -- (ocu2) [shift = {(ocu2)}, rotate = -14] -- (1,0);
-		\draw[raig, color = blue] (entrada1) -- (sortida3) -- (obj3) -- (ocu3) [shift = {(ocu3)}, rotate = -16] -- (1,0);
+		\draw[raig, color = red] (entrada1) -- (sortida2) -- (obj2) -- (ocu2) [shift = {(ocu2)}, rotate = -19] -- (1,0);
+		\draw[raig, color = green] (entrada1) -- (sortida3) -- (obj3) -- (ocu3) [shift = {(ocu3)}, rotate = -17] -- (1,0);
 
-		\draw[raig, color = green, dashed] [shift = {(ocu)}, rotate = -15] (-8,0) -- (ocu);
-		\draw[raig, color = red, dashed] [shift = {(ocu2)}, rotate = -14] (-8,0) -- (ocu2);
-		\draw[raig, color = blue, dashed] [shift = {(ocu3)}, rotate = -16] (-8,0) -- (ocu3);
+		\draw[raig, color = blue, dashed] [shift = {(ocu)}, rotate = -15] (-10,0) -- (ocu);
+		\draw[raig, color = red, dashed] [shift = {(ocu2)}, rotate = -19] (-10,0) -- (ocu2);
+		\draw[raig, color = green, dashed] [shift = {(ocu3)}, rotate = -17] (-10,0) -- (ocu3);
 
 		\begin{scope}[shift = {(sortida1)}, rotate = -15]
 			\draw (8,0) arc [start angle = 270, end angle = 180, radius = 0.3];
@@ -332,9 +335,15 @@ Para poder hacer las observaciones se dispone de un telescopio. Para ello es nec
 		\end{scope}
 
 	\end{tikzpicture}
-	\caption{Esquema de la disposición del espectrómetro. El sistema óptico onjetivo-ocular tiene un efecto magnificador que no se muestra en la figura.}	
+	\caption{Recorrido de los rayos a través del prisma con el telescopio. Los rayos discontínuos representan el camino que interpreta el ojo.}	
 	\label{fig:con telescopio}
 \end{figure}
+
+Una vez enfocado todo el sistema óptico podemos pasar a la observación. Con el telescopio observamos que las franjas correspondientes a las longitudes de onda más cortas (azul, morado) se encuentran en el extremo de máxima desviación\footnote{Dada la configuración del experimento en el laboratorio de hecho este extremo se encontraba a la derecha mientras que en el esquema corresponde al lado izquierdo por como están dispuestos los elementos en él} mientras que las que tienen longitudes de onda largas (rojo) se encuentran en el otro extremo. Esto es el resultado que esperaríamos puesto que las longitudes de onda más cortas se refractan más. Aún así, si observamos el trazado de rayos en la \cref{fig:con telescopio} vemos que de hecho los rayos de longitudes más cortas llegan por la derecha, y no por la izquierda, ya que el telescopio los está invirtiendo. Lo que ocurre es que el cerebro reconstruye la posición de la fuente de los rayos prolongándolos de forma rectílinea, tal y como muestran las líneas discontinuas de la figura. Vemos, pues, que interpreta que la posición de la fuente es en el orden que observamos. Por contra, si observamos sin el telescopio vemos el patrón de rayas invertido, lo que tiene la misma explicación: el ojo invierte el orden al reconstruir los caminos pero ahora no hay el telescopio para deshacer esta inversión, como vemos en la \cref{fig:sin telescopio}.   
+
+La lámpara de mercuerio emite luz extensa, pues su superficie de emisión no es despreciable. La función de la rendija, pues, es la de reducir la extensión de la fuente. Ahora bien, solo lo hace en el plano horizontal, pues si lo hiciese en ambas direcciones solo observaríamos puntos y no rayas, lo que dificultaría la medición de la desviación de las franjas. Podemos considerar entonces que la fuente de luz es puntual en el plano horizontal, lo que nos permite realizar los diagramas anteriores. En particular podríamos sustituir la lente esférica del montaje por una cílindrica orientada correctamente (la lente debe refractar en el plano horizontal). 
+
+Cuando rotamos el prisma hacemos variar el ángulo de incidencia de los rayos con el mismo. Con el telescopio podemos observar como el ángulo de desviación va disminuyendo de forma que las franjas se desplazan a la derecha, hasta que empieza a aumentar otra vez y las franjas se desplazan hacia la otra dirección. Observamos, pues, un ángulo de desviación mínima. Las franjas de distintos colores alcanzan su mínima desviación en distintos ángulos, que es lo que medimos con el goniómetro.
 
 \section{Calibración del espectrómetro}
 \begin{figure}[htb]
@@ -443,6 +452,8 @@ El espectro que emite una lámpara incandescente es continuo desde el rojo hasta
 En el espectro del fluorescente se pueden obsevar cuatro rayas bien definidas: un doblete amarillo tenue, una raya verde intensa y una raya morada intensa. Subyacente a estas rayas se puede ver una franja continua muy ténue. Vemos, pues, que el espectro de un fluorescente no es contínuo. Las lámparas fluoresecentes funcionan por la excitación de un gas, típicamente mercurio, por lo que tienen un espectro de emisión discreto.
 
 \section{Conclusiones}
+Hemos realizado observaciones con un espectrómetro basado en la refracción de un prisma. Con el montaje hemos podido estudiar los fenómenos de la refracción y de la desviación mínima y como varían a causa de la dispersión cromática del prisma. Este último efecto es precisamente el que nos permite observar los distintos componentes del espectro de emisión de varias fuentes.
+
 Disponiendo de un espectro conocido, el del mercurio, hemos calibrado el espectrómetro ajustando los coeficientes en la fórmula de Abbe. El ajuste ha sido lo suficientemente bueno como para obtener las longitudes de onda de un segundo espectro, el del cadmio, con precisión del orden de de nanómetros. Sin embargo, hemos observado que si intentamos determinar longitudes de onda fuera del rango en el que hemos hecho el ajuste nos encotramos con que el error aumenta, tal y como ha ocurrido con la raya roja del cadmio.
 
 Con el espectrómetro también hemos podido observar el espectro de distintas fuentes de luz como una lámpara de sodio, una lámpara incandescente, una lámpara LED y un fluorescente. Hemos podido distinguir entre espectros continuos y discretos así como establecer la relación entre la luz que emite cada fuente y los rasgos más característicos de su espectro.
