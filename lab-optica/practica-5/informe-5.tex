@@ -59,6 +59,8 @@
 	separate-uncertainty = true
 }
 
+\DeclareUnicodeCharacter{2212}{-}
+
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
@@ -154,6 +156,58 @@ También se puso una pequeña lámina de plástico con varios trozos de cinta ad
 
 Por último se coloca una caja de un CD, que es un plástico rígido, en el polariscopio. Se observan diversos colores en la pantalla como con la cinta adhesiva. Al presionar el plástico, los colores cambian, lo cual se puede explicar porque al sufrir esfuerzos el plástico cambia la orientación de las diversas longitudes de onda de la luz polarizada.
 
+\section{Polarización por reflexión}
 
 
+\section{Verificación de la ley de Malus}
+A continuación verificaremos experimentalmente la ley de Malus. Esta ley da la intensidad transmitida a través de dos polarizadoes en términos de su orientación relativa. Si los dos polarizadores son iguales entonces se puede demostrar que la intensidad transmitida de un haz monocromático que los atraviesa es
+\begin{equation*}
+	I(\theta) = K_1K_2I_0 + \tfrac{1}{2}K_1(K_1 - 2K_2)I_0 (\cos{\theta})^2 
+\end{equation*}
+donde \( K_1 \) y \( K_2 \) son las transmitancias principales de los polarizadores. Ahora bien, si la luz incidente no es monocromática y las transmitancias del polarizador dependen de la longitud de onda entonces debemos integrar sobre la distribución espectral de la luz incidente. Supondremos, pues, que estamos tratando con un polarizador ideal, por lo que la ley de Malus se reduce a la forma más conocida:
+\begin{equation} \label{eqn:malus}
+	I(\theta) = \tfrac{1}{2} (\cos{\theta})^2.
+\end{equation}
+
+\begin{figure}[htb]
+	\centering \small \sffamily
+	\input{malus-1.pgf}
+	\caption{Representación de las medidas de la intensidad transmitida en función del ángulo entre los polarizadores. La incertidumbre en \( \theta \) es de \unc{2}{\degree}, y la de \( I \) es de \unc{0.01}{mW} por lo que no se pueden apreciar en el gráfico.}
+	\label{fig:malus-1}
+\end{figure}
+
+Para tomar las medidas disponemos de dos polarizadores iguales y dos lentes para colimar el haz antes y después de atravesar los polarizadores. Finalmetne disponemos de un fotómetro para medir la intensidad transmitida. Para empezar a tomar medidas colocamos los polarizadores con los ejes perpendiculares de manera que la intensidad transmitida sea lo más cercana a 0 posible y fijamos el 0 del fotómetro. Aún así, el rango de ángulos en el que la lectura era inferior al umbral de tolerancia del fotómetro es considerablemente grande, por lo que es preciso corregir las medidas del ángulo a posteriori. Tomamos medidas cada \SI{10}{\degree} y cada \SI{2}{\degree} alrededor del máximo de intensidad. 
+
+En la \cref{fig:malus-1} se muestran las medidas. Para determinar el ángulo relativo se tomó como origen el pico de intensidad. Las lecturas de intensidad máxima, de \SI{1.01}{mW}, se dieron en \SI{166}{\degree} y \SI{168}{\degree} donde este ángulo corresponde a la lectura en el goniómetro del segundo polarizador. Así pues se tomó el origen en la media de estos valores. 
+
+Podemos ver como los datos se ajustan bien a la forma de un coseno cuadrado. Para determinar exactamente las constantes de proporcionalidad hacemos una regresión lineal de la forma
+\begin{equation} \label{eqn:regresión}
+	I(\theta) = A + B(\cos{\theta})^2.
+\end{equation}
+Con la función \texttt{linregress} del módulo \textsf{SciPy} obtenemos unos valores para los parámetros de
+\begin{equation} \label{eqn:parametros}
+	\begin{gathered}
+		A = \data{0.004}{0.002}{mW} \\
+		B = \data{1.002}{0.003}{mW}
+	\end{gathered}
+\end{equation}
+y un coeficiente de correlación \( r^2 = \num{0.9997} \). El ajuste está representado en la \cref{fig:regr}.
+
+\begin{figure}[htb]
+	\centering \small \sffamily
+	\input{regr.pgf}
+	\caption{Representación del ajuste lineal entre la intensidad y \( (\cos{\theta})^2 \)}  
+	\label{fig:regr}
+\end{figure}
+
+Vemos que \( A \) es a efectos prácticos 0. Esto no debería de sorprendernos puesto que ajustamos el zero de fotómetro de forma que coincidiese con la mínima intensidad leída. No significa, pues, que los polarizadores sean perfectos. De todos modos, nos interesa verificar la relación \( I \propto (\cos{\theta})^2 \) por lo que el valor de \( A \) no resulta especialmente relevante.
+
+\begin{figure}[htb]
+	\centering \small \sffamily
+	\input{malus-2.pgf}
+	\caption{Representación de las medidas de la intensidad transmitida en función del ángulo entre los polarizadores junto con la curva de intensidad teórica utilizando los parámetros estimados, \( I(\theta) = A + B(\cos{\theta})^2 \)}  
+	\label{fig:malus-2}
+\end{figure}
+
+En la \cref{fig:malus-2} están representado los puntos experimentales junto con la curva de intensidad teórica utilizando los parámetros estimados. Vemos que se ajusta muy bien a los datos, tal y como predice la ley de Malus.
 \end{document}
