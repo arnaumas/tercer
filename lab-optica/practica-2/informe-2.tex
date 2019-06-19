@@ -96,7 +96,7 @@
 }
 \pagestyle{pagina}
 
-\title{\sffamily {\bfseries Práctica 2:} Reflexión y refracción en dioptrios planos}
+\title{\sffamily {\bfseries Práctica 2:} Reflexión y refracción en dioptrios planos. Efecto Pffund}
 \author{\sffamily B2 2: Arnau Mas, Alejandro Plaza}
 \date{\sffamily 28 de febrero de 2019}
 
@@ -104,7 +104,9 @@
 \maketitle
 \renewcommand{\abstractname}{\sffamily \bfseries Resumen:}
 \begin{abstract}
-	Abstract aquí
+	En esta práctica se utiliza la refracción de la luz en dioptrios planos para calcular satisfactoriamente el índice de refracción de una lámina de vidrio.
+	
+	También se estudia el efecto Pffund sobre diversos materiales, con el cual se evidencian la reflexión y la refracción de la luz en superficies de separación entre dos medios. Gracias a este efecto se consigue calcular el índice de refracción de una lámina de vidrio y del agua.
 \end{abstract}
 \hrule
 
@@ -151,7 +153,7 @@ Cuando se forma una imagen clara y nítida se dice que el dioptrio es estigmáti
 
 Se quiere utilizar la ecuación (\ref{P2distimagen}) para calcular el índice de refracción de una lámina de vidrio. Para ello se pintan unas rayas en ambas caras de la lámina. Una de las rayas actuará de objeto y el grosor de la lámina será la distancia que separe el objeto del dioptrio $s$. Este dioptrio separa dos medios: vidrio y aire; por lo tanto, $n'$ será el índice de refracción del aire, el cual consideraremos, 0 y $n$ será el índice del vidrio.
 
-El grosor de la lámina se mide con un comparador: se coloca la lámina en la platina y se miden las posiciones de la platina y de la parte superior de la lámina. Su diferencia será el grosor buscado. Se realizan varias medidas con el fin de disminuir la incertidumbre. La incertidumbre de cada medida directa es la precisión del comparador: $ \SI{0.010}{mm}$. La de la diferencia es la anterior multiplicada por $\sqrt{2}$. El valor que se tomará es el de la media aritmética, con incertidumbre la raíz de la suma cuadrática de la incertidumbre experimental y la desviación típica de la media.
+El grosor de la lámina se mide con un comparador: se coloca la lámina en la platina y se miden las posiciones de la platina y de la parte superior de la lámina. Su diferencia será el grosor buscado. Se realizan varias medidas con el fin de disminuir la incertidumbre. La incertidumbre de cada medida directa es la precisión del comparador: $ \SI{0.010}{mm}$. La de la diferencia es la anterior multiplicada por $\sqrt{2}$ como indica la fórmula (\ref{P2incdif}). El valor que se tomará es el de la media aritmética, con incertidumbre calculada según (\ref{P2incmedia}).
 
 \begin{table}[!ht]
 	\small \centering \sffamily
@@ -310,9 +312,10 @@ El rayo que llega a $B$ lo hace con un ángulo de incidencia igual al ángulo l�
 	r=\frac{2d}{\sqrt{n^2-1}};\hspace{2mm}n=\sqrt{1+\frac{16d^2}{\phi^2}},\text{ donde }\phi=2r
 \end{equation}
 
-En resumen, en la gota se ve muy iluminado el punto $A$ sobre el que incide directamente el haz láser. Desde ese punto hasta el punto $C$ se ve una zona oscura y desde el punto $C$ hasta fuera de la gota se ve iluminado, aunque con menor intensidad, pues parte se ha perdido ya en la reflexión difusa del punto $A$. 
+En resumen, en la gota se ve muy iluminado el punto $A$ sobre el que incide directamente el haz láser. Desde ese punto hasta el punto $C$ se ve una zona oscura y desde el punto $C$ hasta fuera de la gota se ve iluminado, aunque con menor intensidad, pues parte se ha perdido ya en la reflexión difusa del punto $A$.
 
 La figura \ref{P2PffFotoAgua} es una fotografía que se hizo de este fenómeno. Se ve claramente un pequeño círculo brillante en el centro, luego una corona oscura y más allá otra corona brillante, lo cual concuerda con lo que se ha explicado de forma teórica.
+\\
 
 Ahora en lugar de una lámina de agua se pone una lámina de vidrio. Entre el vidrio y la mesa se forma una fina película de aire que cambia por completo lo que se observa. La figura \ref{P2PffVidrio} muestra un esquema de lo que les ocurre a los rayos. Sobre el punto $A$ se hace incidir el haz y de ahí se propaga en todas las direcciones. Los rayos que llegan a la cara superior de la lámina con un ángulo menor que el ángulo límite son en parte refractados y en parte reflejados. Su reflejo llega a la mesa y la ilumina. Sin embargo los rayos que llegan a la cara superior con un ángulo de incidencia igual ---o mayor--- al ángulo límite, son enteramente reflejados hacia abajo. Cuando llegan a la cara inferior de la lámina vuelven a llegar a una superficie de separación entre vidrio y aire. Por la ley de la refracción, al reflejarse el rayo en la cara superior sale con el mismo ángulo que el de incidencia, de modo que en la inferior el ángulo de incidencia es nuevamente el ángulo límite y el rayo se vuelve a reflejar totalmente. Así sucesivamente, dando lugar a una zona oscura.
 
@@ -327,7 +330,10 @@ Cuando se pone papel satinado en medio del camino del haz de luz, se dejan de ve
 	\end{center}
 \end{figure}
 
-Por lo tanto se debería observar un punto central muy iluminado, una corona a su alrededor menos iluminada y más allá de la corona se vería oscuro. Como la capa de aire tiene un grosor despreciable, el radio de la zona iluminada viene dado por la misma ecuación (\ref{P2PffRadioParvo}) que en el caso anterior cambiando el índice de refracción del agua por el del vidrio ($n$) y el grosor de la capa de agua por el de la lámina de vidrio ($d$). Esto se ve claramente en la fotografía izquierda de la figura \ref{P2PffFotoVidrio} obtenida experimentalmente.
+Por lo tanto se debería observar un punto central muy iluminado, una corona a su alrededor menos iluminada y más allá de la corona se vería oscuro. Como la capa de aire tiene un grosor despreciable, el radio de la zona iluminada viene dado por la misma ecuación (\ref{P2PffRadioParvo}) que en el caso anterior cambiando el índice de refracción del agua por el del vidrio ($n$) y el grosor de la capa de agua por el de la lámina de vidrio ($d$). Esto se ve claramente en la fotografía de la figura \ref{P2PffFotoVidrio} del anexo obtenida experimentalmente.
+
+Se mide el diámetro de la zona iluminada, el cual es \data{1.80}{0.10}{cm} y el grosor de la placa de vidrio, que es \data{0.4670}{0.0010}{cm}. Con esto se calcula el índice de refracción de la lámina de vidrio utilizada con la ecuación (\ref{P2PffRadioParvo}) y su incertidumbre se calcula con la fórmula (\ref{P2incradioparvo}), dando un valor de $n_{\text{v}}=$\data{1.441}{0.042}{}.
+\\
 
 Si debajo de la lámina de vidrio se pone una fina capa de agua, a los rayos que salen con menor inclinación que el ángulo límite les sucede lo mismo: mayoritariamente se refractan y en una pequeña parte se reflejan; pero los que salen con más que el ángulo límite al llegar a la superficie vidrio-aire se reflejan totalmente y cuando llegan a la superficie vidrio-agua, como el índice de refracción del agua es mayor que el del aire, el rayo se refracta casi totalmente y acaba llegando a la mesa, sobre la cual se refleja de forma difusa.
 
@@ -342,9 +348,9 @@ El índice de refracción del vidrio es mayor que el del agua. Por lo tanto si e
 	\end{center}
 \end{figure}
 
-Se ve un punto central muy iluminado, una corona oscura a su alrededor, fuera de ella se ve una corona más grande iluminada y más allá de ella se queda oscuro. El radio de la corona oscura $r_1$ se calcula con la fórmula (\ref{P2PffRadioParvo}) siendo $n$ y $d$ los parámetros de la lámina de vidrio.
+En la fotografía de la figura \ref{P2PffFotoAgrio} se ve un punto central muy iluminado, una corona oscura a su alrededor, fuera de ella se ve una corona más grande iluminada y más allá de ella se queda oscuro. El radio de la corona oscura $r_1$ se calcula con la fórmula (\ref{P2PffRadioParvo}) siendo $n$ y $d$ los parámetros de la lámina de vidrio.
 
-La corona iluminada se acaba donde el rayo de luz tiene un ángulo incidente $\varepsilon_l'$. $\sen\varepsilon_l'=\frac{n_\text{a}}{n_\text{v}}$. Con esto se puede calcular el radio de la corona oscura.
+La corona iluminada se acaba donde el rayo de luz tiene un ángulo incidente $\varepsilon_l'$. $\sen\varepsilon_l'=\frac{n_\text{a}}{n_\text{v}}$. Con esto se puede calcular el radio de la corona iluminada.
 
 \begin{equation}\label{P2PffRadioMagno}
 	r=\frac{2d}{\sqrt{\left(\frac{n_\text{v}}{n_\text{a}}\right)^2-1}};\hspace{2mm}n_\text{a}=\frac{n_\text{v}}{\sqrt{1+\frac{16d^2}{\phi^2}}}
@@ -361,9 +367,12 @@ Si hay una burbuja, los rayos que llegan a ella son desviados y la zona de donde
 	\end{center}
 \end{figure}
 
-Una fotografía tomada de este caso y que confirma lo que se ha explicado se encuentra en la figura \ref{P2PffFotoVidrio}. Se ve el punto central brillante, una corona oscura y otra iluminada. Además se ve que hay una pequeña burbuja, pues los rayos que vienen de la mancha negra son desviados y parecen venir de la mancha iluminada que hay un poco más arriba en la imagen.
+Una fotografía tomada de este caso y que confirma lo que se ha explicado se encuentra en la figura \ref{P2PffFotoVidrio}. Se ve el punto central brillante, una corona oscura y otra iluminada. Además se ve que hay una pequeña burbuja, pues los rayos que vienen de la mancha negra son desviados y parecen venir de la mancha iluminada que hay un poco más arriba en la fotografía.
 
-Cuando se vierte agua sobre la lámina de vidrio el proceso que ocurre es el mismo, solo que el medio limítrofe con el aire es el agua, por lo que en la fórmula (\ref{P2PffRadioParvo}) del radio de la corona oscura se debe poner el índice de refracción del agua en lugar del del vidrio. Como los índices del agua y del vidrio son parecidos no se aprecia una gran diferencia en el radio. El radio de la corona iluminada, por su parte, permanece igual.
+En este caso se mide el diámetro de la corona iluminada, el cual es \data{3.70}{0.10}{cm}. Se recuerda que el grosor de la placa de vidrio es \data{0.4670}{0.0010}{cm} y que se ha calculado ya $n_{\text{v}}=$\data{1.441}{0.042}{}. Así con la fórmula (\ref{P2PffRadioMagno}) se calcula el índice de refracción del agua y con la fórmula (\ref{P2incradiomagno}), obteniéndose un índice $n_{\text{a}}=$\data{1.287}{0.038}{}.
+\\
+
+Cuando se vierte agua sobre la lámina de vidrio el proceso que ocurre es el mismo, y se visualiza en la figura \ref{P2PffAgria}, solo que el medio limítrofe con el aire es el agua, por lo que en la fórmula (\ref{P2PffRadioParvo}) del radio de la corona oscura se debe poner el índice de refracción del agua en lugar del del vidrio. Como los índices del agua y del vidrio son parecidos no se aprecia una gran diferencia en el radio. El radio de la corona iluminada, por su parte, permanece igual.
 
 \begin{figure}[!ht]
 	\small \centering \sffamily
@@ -401,8 +410,13 @@ Además no todas las superficies son iguales: en algunas los rayos de luz se ref
 
 Se puede concluir que la óptica geométrica es fundamental a la hora de explicar la propagación de la luz. Es capaz de explicar una gran cantidad de fenómenos que se producen cuando la luz llega a superficies de separación entre dos medios.
 
+\begin{thebibliography}{1}
+\bibitem{P2bibguion} \textsc{Grupo de óptica, departamento de física.} \textit{Guión de la práctica 2}. Universidad Autónoma de Barcelona, 2018.
+\end{thebibliography}
+\newpage
+
 \appendix
-\section{Cálculo de las incertidumbres}
+\section{Cálculo de incertidumbres}
 La incertidumbre $u_{x-y}$ de la diferencia entre dos medidas de igual incertidumbre $u_x=u_y=u_0$ es
 \begin{equation}\label{P2incdif}
 u_{x-y}^2=\sqrt{\left(\frac{\partial(x-y)}{\partial x}\right)^2u_x^2+\left(\frac{\partial(x-y)}{\partial y}\right)^2u_y^2}=\sqrt{u_x^2+u_y^2}=\sqrt{2u_0^2}=\sqrt{2}u_0.
@@ -431,6 +445,8 @@ Para calcular la incertidumbre de $n$ de la fórmula \ref{P2PffRadioMagno} se ut
 \begin{equation}\label{P2incradiomagno}
 \frac{1}{\sqrt{1+\frac{16d^2}{\Phi^2}}}\sqrt{u_{n_\text{v}}^2+\frac{n_\text{v}}{\left(1+\frac{16d^2}{\Phi^2}\right)^2}\cdot\frac{256d^2}{\Phi^4}\left(u_d^2+\frac{d^2}{\Phi^2}u_\Phi^2\right)}
 \end{equation}
+
+\newpage
 \section{Fotografías}
 
 \begin{figure}[!ht]
@@ -446,7 +462,7 @@ Para calcular la incertidumbre de $n$ de la fórmula \ref{P2PffRadioMagno} se ut
 	\small \centering \sffamily
 	\begin{center}
 		\includegraphics[width=7cm]{P2PffVidrio.jpeg}
-		\caption{Fotografía de una lámina de vidrio sobre la mesa iluminada con un rayo láser ilustrando el efecto Pffund. En la derecha hay además una capa de agua entre el vidrio y la mesa.}
+		\caption{Fotografía de una lámina de vidrio sobre la mesa iluminada con un rayo láser ilustrando el efecto Pffund.}
 		\label{P2PffFotoVidrio}
 	\end{center}
 \end{figure}
@@ -455,7 +471,7 @@ Para calcular la incertidumbre de $n$ de la fórmula \ref{P2PffRadioMagno} se ut
 	\small \centering \sffamily
 	\begin{center}
 		\includegraphics[width=6.15cm]{P2PffAgrio.jpeg}
-		\caption{Dos fotografías de una lámina de vidrio sobre la mesa iluminada con un rayo láser ilustrando el efecto Pffund. En la derecha hay además una capa de agua entre el vidrio y la mesa.}
+		\caption{Fotografía de una lámina de vidrio sobre una capa de agua sobre la mesa iluminada con un rayo láser ilustrando el efecto Pffund.}
 		\label{P2PffFotoAgrio}
 	\end{center}
 \end{figure}
