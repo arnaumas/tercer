@@ -103,7 +103,9 @@
 \maketitle
 \renewcommand{\abstractname}{\sffamily \bfseries Resumen:}
 \begin{abstract}
-	Abstract aquí
+	Se reproduce el efecto fotoeléctrico y se contrastan el modelo clásico ondulatorio y el modelo corpuscular de Einstein, siendo este segundo el único capaz de explicar los fenómenos observados: la intensidad de la luz determina la cantidad de fotones emitidos y su longitud de onda afecta a la energía de cada uno de estos fotones.
+	
+	Utilizando precisamente el efecto fotoeléctrico se calcula con relativo éxito la constante de Planck gracias a la relación lineal que hay entre la longitud de onda aplicada y el voltaje necesario para detener los electrones arrancados.
 \end{abstract}
 \hrule
 
@@ -114,7 +116,7 @@ Esta práctica ayudará a entender el comportamiento corpuscular de la luz y los
 
 Posteriormente este fenómeno físico será utilizado para estimar la constante de Planck, que es la constante fundamental de toda la física cuántica.
 
-\section{Cuestiones teóricas}
+\section{Cuestiones teóricas previas}
 El efecto fotoeléctrico se produce cuando se ilumina una placa metálica llamada cátodo y se arrancan electrones que van otra placa llamada ánodo. En el modelo que propuso Einstein la luz está formada por corpúsculos a los que llamó fotones. Cada uno de estos fotones tiene una energía que depende de su frecuencia de oscilación.
 \begin{equation}\label{P10Efoton}
 	E_{\text{fotón}}=h\nu
@@ -146,8 +148,7 @@ La lámpara con que se ilumina la fotocélula es de corriente alterna, de modo q
 El circuito en el que se encuentra la fotocélula hay un amplificador que amplifica únicamente la componente alterna con el fin de minimizar el ruido y observar con mejor precisión la señal de la luz proveniente de la lámpara, que es de la que se pueden controlar parámetros como la frecuencia o la intensidad.
 
 \section{Análisis cualitativo}
-%Explicar mejor
-Al principio se enciende el osciloscopio y se observa la señal que aparece en su pantalla. Esta es una señal muy débil que corresponde al ruido electromagnético presente en el aire. Cuando se aprietan con los dedos los extremos de los cables a los que se conecta el osciloscopio, se observa un leve incremento de la señal.
+Al principio se enciende el osciloscopio y se observa la señal que aparece en su pantalla. Esta es una señal muy débil que corresponde al ruido electromagnético presente en el aire. Cuando se aprietan con los dedos los extremos de los cables a los que se conecta el osciloscopio, se observa un leve incremento de la señal. Esto es debido a que cuando con las puntas del cable se toca un material conductor, la intensidad de la señal se amplifica, pues actúa de antena captando el ruido ambiente. De hecho el cuerpo de un humano es conductor de la electricidad. El efecto se aumenta aún más cuando se toca un objeto metálico, que conduce mejor la electricidad.
 
 Ahora se conecta la lámpara con un filtro de color ---sin importar cuál sea---. La lámpara está conectada a un enchufe, que transmite una corriente alterna de \SI{50}{Hz}, de modo que el voltaje y la intensidad variarán con esa frecuencia. El voltaje $V=V_0\sen\omega t$ y la intensidad $I=I_0\sen\omega t$ están en fase. Esta última se representa en la figura \ref{P10intensidadfilamento}. El filamento de tungsteno se calienta por efecto Joule con una potencia $P=IV=P_0\sen^2\omega t$. Su frecuencia es el doble que la de la intensidad porque el filamento se calienta de igual modo cuando la corriente va en un sentido que cuando va en el otro. Se calienta cuando la intensidad tiene un pico (tanto máximo como mínimo) y se enfría cuando la intensidad es 0. La temperatura varía aproximadamente junto con la potencia y se puede ver en la figura \ref{P10temperatura}.
 
@@ -180,7 +181,7 @@ Como consecuencia de todo esto, la intensidad de corriente eléctrica generada e
 	\end{center}
 \end{figure}
 
-Al medir la señal producida por la fotocélula y que llega al osciloscopio, se observa que es una onda periódica con período \data{10}{1}{Hz}. Su frecuencia es la inversa del período y es \data{100}{10}{Hz}, tal como se había predicho.
+Al medir la señal producida por la fotocélula y que llega al osciloscopio, se observa que es una onda periódica con período \data{10}{1}{ms}. Su frecuencia es la inversa del período y es \data{100}{10}{Hz}, tal como se había predicho. Su incertidumbre ha sido calculada con la expresión (\ref{P10incfreq}) del anexo.
 
 \section{Análisis cuantitativo}
 En esta parte de la práctica se mide el voltaje de frenado  necesario para detener los electrones antes de que lleguen al fotoánodo. Para ello se mira con el osciloscopio la señal de la célula fotoeléctrica y se va aumentando el potencial de frenado hasta que la señal del osciloscopio se hace plana. En ese momento el potencial que se está aplicando entre las dos placas es el que aparece en la ecuación (\ref{P10regresion}). Se repite el proceso para varios filtros de diversas frecuencias. Cuanto mayor sea la frecuencia, tanto mayor será la energía de los electrones arrancados y por ende mayor se espera que sea el voltaje de frenado.
@@ -193,14 +194,14 @@ Al medir el voltaje de frenado, el voltaje que marca la ruleta del aparato que a
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=10cm]{P1016,3cm.png}
-		\caption{Representación del voltaje entre las placas en función de la frecuencia de la radiación con la lámpara a una altura de \SI{16.3}{cm}. Se incluye la recta de regresión lineal de pendiente \data{2.03}{0.32e-15}{V Hz^{-1}} y de ordenada en el origen \data{-0.83}{0.18}{V}. El coeficiente de correlación es \num{0.910}.}
+		\caption{Representación del voltaje entre las placas en función de la frecuencia de la radiación con la lámpara a una altura de \SI{16.3}{cm}. Se incluye la recta de regresión lineal de pendiente \data{2.03}{0.32e-15}{V Hz^{-1}} y de ordenada en el origen \data{-0.83}{0.18}{V}. Sus incertidumbres se han calculado con las fórmulas (\ref{P10incpend}) y (\ref{P10incord}) respectivamente. El coeficiente de correlación es \num{0.910}.}
 		\label{P1016,3cm}
 	\end{center}
 \end{figure}
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=10cm]{P1023,5cm.png}
-		\caption{Representación del voltaje entre las placas en función de la frecuencia de la radiación con la lámpara a una altura de \SI{23.5}{cm}. Se incluye la recta de regresión lineal de pendiente \data{1.96}{0.32e-15}{V Hz^{-1}} y de ordenada en el origen \data{-0.80}{0.19}{V}. El coeficiente de correlación es \num{0.903}.}
+		\caption{Representación del voltaje entre las placas en función de la frecuencia de la radiación con la lámpara a una altura de \SI{23.5}{cm}. Se incluye la recta de regresión lineal de pendiente \data{1.96}{0.32e-15}{V Hz^{-1}} y de ordenada en el origen \data{-0.80}{0.19}{V}. Sus incertidumbres se han calculado con las fórmulas (\ref{P10incpend}) y (\ref{P10incord}) respectivamente. El coeficiente de correlación es \num{0.903}.}
 		\label{P1023,5cm}
 	\end{center}
 \end{figure}
@@ -212,7 +213,7 @@ El coeficiente de correlación lineal es cercano a 1, aunque quizá no demasiado
 
 Todo esto genera un cierto error y hace que el coeficiente de correlación no sea tan cercano a 1 como se podría esperar ---aunque sí que se acerca---.
 
-Con la recta de regresión se pueden calcular la función de trabajo del metal del fotocátodo y la constante de Planck. En la ecuación de la recta (\ref{P10regresion}) se ve que la ordenada en el origen es $n=-\Phi=-\frac{q_e\Phi}{q_e}$ donde $q_e\Phi$ es la función de trabajo. También se tiene la pendiente $m=\frac{h}{q_e}$. Se pueden despejar los valores de $h$ y $q_e\Phi$. Sus incertidumbres se calculan con la fórmula de propagación de incertidumbres. El  valor verdadero de la constante de Planck es \SI{6.626e-34}{J s} y el de la carga eléctrica del electrón es \SI{1.602e-19}{C}.
+Con la recta de regresión se pueden calcular la función de trabajo del metal del fotocátodo y la constante de Planck. En la ecuación de la recta (\ref{P10regresion}) se ve que la ordenada en el origen es $b=-\Phi=-\frac{q_e\Phi}{q_e}$ donde $q_e\Phi$ es la función de trabajo. También se tiene la pendiente $m=\frac{h}{q_e}$. Se pueden despejar los valores de $h$ y $q_e\Phi$. Sus incertidumbres se calculan con la fórmula de propagación de incertidumbres. El  valor verdadero de la constante de Planck es \SI{6.626e-34}{J s} y el de la carga eléctrica del electrón es \SI{1.602e-19}{C}.
 
 Con la lámpara a \SI{16.3}{cm} se tiene una función de trabajo $q_e\Phi= \data{1.34}{0.30e-19}{J}$ y una constante de Planck $h= \data{3.25}{0.51e-34}{J s}$. Es aproximadamente la mitad del valor verdadero; su discrepancia es del $51\%$.
 
@@ -232,7 +233,7 @@ Este fenómeno podría ser debido a que los electrones no solo salieran del foto
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=10cm]{P10Anodotapado.png}
-		\caption{Representación del voltaje entre las placas en función de la frecuencia de la radiación con el ánodo tapado. Se incluye la recta de regresión lineal de pendiente \data{1.61}{0.19e-15}{V Hz^{-1}} y de ordenada en el origen \data{-0.61}{0.11}{V}. El coeficiente de correlación es \num{0.949}.}
+		\caption{Representación del voltaje entre las placas en función de la frecuencia de la radiación con el ánodo tapado. Se incluye la recta de regresión lineal de pendiente \data{1.61}{0.19e-15}{V Hz^{-1}} y de ordenada en el origen \data{-0.61}{0.11}{V}. Sus incertidumbres se han calculado con las fórmulas (\ref{P10incpend}) y (\ref{P10incord}) respectivamente. El coeficiente de correlación es \num{0.949}.}
 		\label{P10anodotapado}
 	\end{center}
 \end{figure}
@@ -249,5 +250,43 @@ La teoría clásica de la luz con un comportamiento ondulatorio es útil para ex
 Gracias a este modelo y con las medidas pertinentes se ha conseguido dar una aproximación de la constante de Planck.
 
 Lo que propuso Einstein era rompedor con la física clásica y con todo lo que se creía saber sobre la luz. Y sin embargo se ha comprobado en esta práctica que funciona, lo cual nos dice que es fructífero proponer nuevas ideas revolucionarias para explicar fenómenos hasta el momento inexplicables.
+\begin{thebibliography}{1}
+\bibitem{P10bibguion} \textsc{Grupo de óptica, departamento de física.} \textit{Guión de la práctica 10}. Universidad Autónoma de Barcelona, 2018.
+\end{thebibliography}
+\newpage
 
+\appendix
+\section{Cálculo de incertidumbres}
+Recuérdese la fórmula de propagación de incertidumbres de una función escalar $y=f(x_1,\ldots,x_n)$.
+\begin{equation}\label{P10incprop}
+u_y^2=\sum_{i=1}^n\left(\frac{\partial f}{\partial x_i}\right)^2u_i^2
+\end{equation}
+
+Al final del análisis cualitativo se calcula la frecuencia de una señal a partir del período $\nu=T^{-1}$. Su incertidumbre por tanto es
+\begin{equation}\label{P10incfreq}
+u_\nu=\frac{1}{T^2}u_T.
+\end{equation}
+
+La incertidumbre de la pendiente de una recta de regresión lineal es la siguiente.
+\begin{equation}\label{P10incpend}
+u_m=S_y\sqrt{\frac{n}{\displaystyle{n\sum_{i=1}^nx_i^2-\left(\sum_{i=1}^nx_i\right)^2}}}
+\end{equation}
+La incertidumbre de la ordenada en el origen de una recta de regresión lineal es la siguiente.
+\begin{equation}\label{P10incord}
+u_b=S_y\sqrt{\frac{\displaystyle{\sum_{i=1}^nx_i^2}}{\displaystyle{n\sum_{i=1}^nx_i^2-\left(\sum_{i=1}^nx_i\right)^2}}}
+\end{equation}
+$S_y$ se define así:
+\begin{equation}\label{P10incy}
+S_y=\sqrt{\frac{\displaystyle{\sum_{i=1}^n(y_i-mx_i-b)^2}}{n-2}}.
+\end{equation}
+
+Al calcular la función de trabajo a partir de la ordenada en el origen y la carga eléctrica del electrón la expresión es $q_e\Phi=-bq_e$. Su incertidumbre se calcula con la fórmula \ref{P10incprop} considerando el valor de $q_e$ como valor verdadero que no tiene incertidumbre.
+\begin{equation}\label{P10inctrabajo}
+u_{q_e\Phi}=q_eu_b
+\end{equation}
+
+La expresión para la constante de Planck es $h=mq_e$. Obramos igual que para la función de trabajo a la hora de calcular la incertidumbre.
+\begin{equation}\label{P10incPlanck}
+u_h=q_eu_m
+\end{equation}
 \end{document}
