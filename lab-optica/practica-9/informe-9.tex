@@ -2,11 +2,13 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[catalan]{babel}
+\usepackage[spanish]{babel}
+\usepackage{cmbright}
 \usepackage{lmodern}
 \usepackage{geometry}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,math,arrows.meta,decorations.markings,intersections}
 \usepackage{hyperref}
-\usepackage[dvipsnames]{xcolor}
 \usepackage[bf,sf,pagestyles]{titlesec}
 \usepackage{titling}
 \usepackage[runin]{abstract}
@@ -15,8 +17,11 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath,amssymb}
-\usepackage[catalan,sort]{cleveref}
+\usepackage[spanish,sort]{cleveref}
 \usepackage{enumitem}
+
+\usepackage{biblatex}
+\addbibresource{fonts.bib}
 
 \geometry{
 	a4paper,
@@ -26,6 +31,11 @@
 	top = 3cm
 }
 
+\newcommand{\sfbright}{\fontfamily{cmbr}\selectfont}
+\renewcommand{\familydefault}{\rmdefault}
+\renewcommand{\sfdefault}{cmbr}
+\renewcommand{\arraystretch}{1.4}
+
 \hypersetup{
 	colorlinks,
 	linkcolor = {red!50!blue},
@@ -33,8 +43,6 @@
 	linktoc = page
 }
 
-\crefname{figure}{figura}{figures}
-\crefname{table}{taula}{taules}
 \numberwithin{table}{section}
 \numberwithin{figure}{section}
 \numberwithin{equation}{section}
@@ -47,19 +55,20 @@
 	allow-number-unit-breaks = true,
 	math-celsius = {}^{\circ}\kern-\scriptspace C,
 	detect-family = true,
-	detect-shape = true,
-	list-final-separator = { i },
-	list-pair-separator = { i },
+	mode = text,
+	list-final-separator = { y },
+	list-pair-separator = { y },
 	list-units = single,
 	separate-uncertainty = true
 }
 
-\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
+\DeclareUnicodeCharacter{2212}{-}
 
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\Ry}{\mathit{Ry}}
+\newcommand{\Ry}{\mathrm{Ry}}
+\newcommand{\conv}[2]{\filldraw[fill = white!50!-red, fill opacity = 0.5, draw = -red!] (#1,0) ellipse [x radius = 0.1, y radius = #2];}
 \newcommand{\data}[3]{\SI{#1 \pm #2}{#3}}
 \newcommand{\unc}[2]{\ensuremath{{}\pm \SI{#1}{#2}}}
 \DeclareMathOperator{\gr}{gr}
@@ -80,7 +89,7 @@
 
 \newpagestyle{pagina}{
 	\headrule
-	\sethead*{\sffamily \bfseries Pràctica 9}{}{\theauthor}
+	\sethead*{\sffamily \bfseries Práctica 9}{}{\theauthor}
 	\footrule
 	\setfoot*{}{}{\sffamily \thepage}
 }
@@ -90,27 +99,234 @@
 }
 \pagestyle{pagina}
 
-\title{\sffamily {\bfseries Pràctica 9:} Xarxa de difracció}
+\title{\sffamily {\bfseries Práctica 9:} Red de difracción}
 \author{\sffamily B2 2: Arnau Mas}
-\date{\sffamily 14 de juny de 2019}
+\date{\sffamily 14 de mayo de 2019}
 
 \begin{document}
 \maketitle
-\renewcommand{\abstractname}{\bfseries \sffamily Resum:}
+\renewcommand{\abstractname}{\sffamily \bfseries Resumen:}
 \begin{abstract}
-	Hola hola
+En esta práctica se ha estudiado el fenómeno de la difracción por red. Mediante la combinación del mismo y de la dispersión cromática, se puede separar el espectro de una fuente de luz, de manera similar al espectrómetro de prisma. Primeramente se ha calibrado la red midiendo un espectro conocido, el del mercurio, para determinar la separación entre rendijas. Hecho esto se han medido las líneas el espectro del hidrógeno correspondientes a la serie de Balmer y con ello se ha calculado un valor de la constante de Rydberg de \data{10.98}{0.22}{\micro m^{-1}} con tres cifras significativas correctas. 
 \end{abstract}
+\hrule
 
-\section{Introducció}
+\section{Objetivos}
+Los objetivos principales de esta práctica son el estudio del fenómeno de la difracción de Fraunhofer, el uso y calibración de una red de difracción y el cálculo de la constante de Rydberg a través de la medida de la serie de Balmer con la red de difracción.
 
-\section{Muntatge}
 
-\section{Resultats}
+\section{Introducción teórica}
+Cuando una onda se propaga a través de un obstáculo tiene lugar el fenómeno de difracción debido a la interacción de los frentes de onda con el perfil del objeto. En función de la escala de distancias que consideramos hablamos de difracción de Fraunhofer o de Fresnel. En este caso predomina la difracción de Fraunhofer, pues la rendija a través de la cual se propaga la luz tiene una anchura mucho menor que la distancia que viaja la luz hasta llegar al punto donde hacemos la medición, \cite{hecht}. 
 
-\section{Mesures}
+En el caso de una red de difracción, el obstáculo es una serie de rendijas paralelas separadas por una distancia fija \( a \). El patrón de interferencia consiste en un máximo central y una serie de máximos secundarios distribuidos simétricamente y de intensidad decreciente, tal y como se ve en la \cref{fig:patron}.
 
-\section{Qüestions}
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale = 0.3]{red.pdf}
+	\caption{Patrón de difracción de una red de difracción con 8 rendijas}
+	\label{fig:patron}
+\end{figure}
 
-\section{Conclusions}
+La posición de los máximos depende únicamente de la separación entre las rendijas y de la longitud de onda incidente. Si imponemos la condición de interferencia constructiva encontramos que la posición del máximo de orden \( m \), \( \theta_m \), satisface
+\begin{equation} \label{eqn:interferencia}
+	a\sin{\theta_m} = m\lambda.
+\end{equation}
+
+Esto es suponiendo que el haz de luz incide perpendicularmente con la red de difracción. Si la luz incide a un ángulo \( \epsilon \) ---veánse las \cref{fig:normal,fig:no normal}--- entonces la condición de interferencia constructiva pasa a ser
+\begin{equation} \label{eqn:interferencia1}
+	a(\sin{\theta_m} - \sin{\epsilon}) = m\lambda.
+\end{equation}
+
+\begin{figure}[htb]
+	\centering
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[scale = 0.7]{incidencia.pdf}
+		\caption{Incidencia normal de la luz sobre la red}
+		\label{fig:normal}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[scale = 0.7]{incidencia2.pdf}
+		\caption{Incidencia no normal de la luz sobre la red}
+		\label{fig:no normal}
+	\end{minipage}
+\end{figure}
+
+Tal y como vemos en las \cref{eqn:interferencia,eqn:interferencia1}, la posición de los máximos depende de la longitud de onda. En particular, si la luz incidente no es monocromática veremos los patrones de interferencia para cada longitud de onda superimpuestos, \cref{fig:dispersion}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[scale = 0.5]{dispersion.pdf}
+	\caption{Patrón de difracción con una fuente de luz no monocromática}
+	\label{fig:dispersion}
+\end{figure}
+
+Si iluminamos la red de difracción con una funete de luz con un espectro determinado y medimos la posición de los picos de cada longitud de onda podemos, suponiendo conocido el parámetro \( a \), determinar las longitudes de onda del espectro. Esto es lo que haremos en la parte final con el espectro del hidrógeno, concretamente con la serie de Balmer. Estas son las líneas que corresponden a las transiciones atómicas de un estado cualquiera al primer estado excitado. En general, una transición del nivel \( n_i \) al nivel \( n_f \) implica una emisión o absorción de energia
+\begin{equation*}
+	\Delta E = E_1\left(\frac{1}{n_f^2} - \frac{1}{n_i^2}\right)
+\end{equation*}
+donde \( E_1 = \SI{-13.6}{eV} \) es la energia del nivel fundamental del hidrógeno. Esta energía se emite en forma de fotones con una lonigtud de onda que satisface \( \frac{hc}{\lambda} = -\Delta E \). Entonces, definiendo la constante de Rydberg como \( R_H = -\frac{E_1}{hc} \) llegamos a
+\begin{equation*}
+	\frac{1}{\lambda} = R_H\left(\frac{1}{n_f^2} - \frac{1}{n_i^2}\right)
+\end{equation*}
+por lo que
+\begin{equation} \label{eqn:rydberg}
+	R_H = \frac{n_i^2n_f^2}{(n_i^2 - n_f^2)\lambda}.
+\end{equation}
+Esta es la ecuación que usaremos para calcular la constante de RydbergEsta es la ecuación que usaremos para calcular la constante de Rydberg.
+
+\section{Montaje experimental}
+El montaje de esta práctica consiste de una fuente de luz (una lámpara de mercurio y otra dehidrógeno), una rendija y lente colimadora, una platina sobre la que se coloca la red de difracción, y un telescopio con un goniómetro para medir las desviaciones. Es necesario ajustar bien el telescopio, es decir, hacer coincidir las focales del ocular y el objetivo para que se pueda observar una imagen del infinito. Para ello se trata de enfocar un objeto lejano. Finalmente es importante que todos los elementos estén a la misma altura.
+
+Igual como ocurre en la práctica 4, el orden en el que vemos las líneas cambia según si las observamos directamente o si las observamos a través del telescopio. Cuando las observamos con el telescopio vemos que las longitudes más cortas son las que menos se desvían, tal y como esperaríamos según la \cref{eqn:interferencia}, mientras que si lo observamos sin el telescopio vemos el patrón invertido: las longitudes más largas se desvían menos. Esto es porque cuando el ojo reconstruye el camino de los rayos los invierte, y cuando observamos por el telescopio la imagen se invierte otra vez por lo que vemos el patrón que esperaríamos.
+
+Cuando giramos la red de difracción y por lo tanto alteramos el ángulo de incidencia, observamos que las líneas se acercan al máximo central hasta que llegan a un ángulo de desviación mínima y luego se vuelven a separar. El ángulo de desviación mínima además es diferente para varias longitudes de onda. Esto es llo que esperaríamos según la \cref{eqn:interferencia1}.
+
+\section{Calibraje de la red}
+Una vez hechas las observaciones cualitativas pertinentes pasamos al calibraje de la red. Esto consiste en determinar la separación entre rendijas \( a \). En primer lugar, pero, debemos garantizar que estamos en incidencia normal. Para ello ajustamos el colimador de manera que el haz que sale reflejado de la red vuelva a entrar por el diafragma. También es necesario ajustar la red de manera que sus surcos sean paralelos al haz colimado. Cuando sea así las líneas que vemos con el telescopio serán paralelas a la rendija. 
+
+Una vez hecho esto anotamos la posición del máximo de orden zero, que servirá como ángulo de referencia. En nuestro caso, \( \theta_0 = \data{300.560}{0.008}{\degree} \). A continuación medimos la posición de otros máximos. Pudimos observar el máximo de orden 1 para todas las líneas del espectro del mercurio y el de orden \( 2 \) para las tres primeras. Los resultados se encuentran en el \cref{tab:datos Hg}.
+
+Aunque hemos dispuesto la red intentando garantizar que la incidencia sea normal, podemos verificar que estamos en incidencia normal. En el laboratorio recogimos solamente datos para los máximos de uno de los dos lados, pero si dispusiésemos de los datos para ambos sabríamos que estamos en incidencia normal si las desviaciones fuesen simétricas respecto del ángulo de referencia. Es decir, si \( \theta_m \) es la desviación del máximo de orden \( m \) entonces, suponiendo incidencia normal, se verifica que 
+\begin{equation*}
+	a\sin{\theta_{-m}} =  -m\lambda = -a\sin{\theta_m} = a\sin{-\theta_m}
+\end{equation*}
+por lo que \( \theta_{-m} = -\theta_{m} \). Y si tenemos en cuenta el ángulo de referencia entonces debemos tener \( \theta_m - \theta_0 = -\theta_{-m} - \theta_0 \).
+
+\begin{figure}[htb]
+	\small \sffamily \centering
+	\input{regr.pgf}
+	\caption{Resultado de la regresión para determinar la separación entre rendijas y el ángulo de incidencia}
+	\label{fig:regr}
+\end{figure}
+
+Otra manera es hacer una regresión lineal fijando \( m \). Si tomamos las medidas del primer máximo de las distintas líneas entonces se verifica
+\begin{equation} \label{eqn:regresion}
+	\sin{\theta} = \frac{\lambda}{a} + \sin{\epsilon}
+\end{equation}
+por lo que si determinamos los parámetros de esta regresión podemos encontrar tanto el ángulo de incidencia como el parámetro \( a \). Con la función \texttt{linregress} del módulo \textsf{SciPy} obtenemos
+\begin{equation} \label{eqn:parametros}
+	\begin{gathered}
+		\frac{1}{a} = \data{8.31}{0.03d-5}{\angstrom^{-1}} \\
+		\sin{\epsilon} = \data{0.000}{0.001}{}.
+	\end{gathered}
+\end{equation}
+y un coeficiente de correlación de \( r^2 = \num{0.99994} \), \cref{fig:regr}. Así pues podemos afirmar que efectivamente estamos en incidencia normal. Por otro lado tenemos
+\begin{equation} \label{eqn:separacion}
+	a = \data{1204}{4}{nm}
+\end{equation}
+donde el error se calcula según \cref{eqn:error separacion}.
+
+\section{Cálculo de la constante de Rydberg}
+\begin{table}[htb]
+	\small \centering \sffamily
+	\caption{Cálculo de las longitudes de onda y de la constante de Rydberg mediante el parámetro de la red de difracción. El error relativo es el referente al cálculo de la constant de Rydberg.}
+	\label{tab:resultados}
+	\begin{tabular}{@{}cSSSS@{}}
+		\toprule
+		{\( m \)} & {\( \lambda_\text{teó} \) (\si{nm})} & {\( \lambda_\text{exp} \) (\si{nm})} & {\( R_H\text{ (exp)} \) (\si{\micro m^{-1}})} & {Error relativo} \\ 
+		\midrule
+		1 & 434 & 434 \pm 13 & 10.97 \pm 0.32 & 0.01\% \\
+		1 & 486 & 486 \pm 13 & 10.96 \pm 0.28 & 0.10\% \\
+		1 & 656 & 656 \pm 12 & 10.97 \pm 0.19 & 0.05\% \\
+		2 & 434 & 433 \pm  5 & 11.00 \pm 0.13 & 0.28\% \\
+		2 & 486 & 485 \pm  4 & 10.99 \pm 0.10 & 0.14\% \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Una vez hemos calibrado la red de difracción sustituimos la lámpara de mercurio por una de hidrógeno y repetimos el mismo procedimiento para las tres primeras líneas del espectro (que son las únicas que se pueden observar cómodamente). Las medidas de las desviaciones se muestran en el \cref{tab:datos H}. Una vez hemos hecho las medidas podemos calcular las longitudes de onda que corresponden a cada línea usando que
+\begin{equation} \label{eqn:calculo lambda}
+	\lambda_m = \frac{a}{m} \sin{(\theta_0 - \theta_m)}
+\end{equation}
+donde \( \theta_0 \) es el ángulo de referencia y hemos ignorado el término \( \sin{\epsilon} \) puesto que estamos en incidencia normal. La propagación del error correspondiente se encuentra en la \cref{eqn:error lambda}.
+
+Una vez hemos calculado las longitudes de onda podemos calcular la constante de Rydberg. Usando la \cref{eqn:rydberg} encontramos los valores que se muestran en el \cref{tab:resultados}, donde también figuran las longitudes de onda determinadas experimentalmente. La propagación del error se da en la \cref{eqn:error rydberg}. El valor aceptado de la constante de Rydberg es \SI{10.973731}{\micro m ^{-1}}. Si hacemos la media de los valores de \( R_H \) que hemos obtenido resulta
+\begin{equation*} 
+	R_H = \data{10.98}{0.22}{\micro m^{-1}}
+\end{equation*}
+por lo que hemos obtenido tres cifras significativas de la constante de Rydberg.
+
+\section{Conclusiones}
+En esta práctica hemos estudiado el fenómeno de la difracción por una red y como interacciona con la dispersión cromática dando lugar a los patrones que observamos utilizando como fuente una lámpara de mercurio o hidrógeno. A través de observaciones cualitativas hemos visto el comportamiento del patrón al variar el ángulo de incidencia y al observarlo con o sin telescopio.
+
+A continuación con el goniómetro hemos medido las posiciones de los máximos del espectro del mercurio que podíamos observar con el objetivo de calibrar la red. Mediante una regresión hemos podido concluir que la red había estado dispuesta consiguiendo incidencia normal, así como determinar la separación entre rendijas.
+
+Finalmente, calibrada la rendija hemos medido las desviaciones de los máximos del espectro del hidrógeno correspondientes a la serie de Balmer y con estos datos hemos calculado las respectivas longitudes de onda y la constante de Rydberg. El valor medio obtenido es \data{10.98}{0.22}{\micro m^{-1}} por lo que hemos conseguido tres cifras significativas.
+
+\printbibliography
+
+\appendix
+\section{Cálculo de incertidumbres}
+Si conocemos \( \frac{1}{a} \) y su error entonces
+\begin{equation}\label{eqn:error separacion}
+	u(a) = a^2 u\left(\frac{1}{a}\right).
+\end{equation}
+
+El error asociado al cálculo de la longitud de onda a partir de la desviación en la \cref{eqn:calculo lambda} es
+\begin{equation} \label{eqn:error lambda}
+	u(\lambda)^2 = \left(\frac{u(a)\sin{(\theta_0 - \theta)}}{m}\right)^2 + \left(\frac{a\cos{(\theta_0 - \theta)}}{m}\right)^2 (u(\theta)^2 + u(\theta_0)^2).
+\end{equation}
+
+El error asociado al cálculo de la constante de Rydberg mediante la \cref{eqn:rydberg} es
+\begin{equation} \label{eqn:error rydberg}
+	u(R_H) = \frac{n_f^2n_i^2}{(n_i^2 - n_f)^2 \lambda_2} u(\lambda).
+\end{equation}
+
+
+\newpage
+\section{Datos experimentales}
+\begin{table}[htb]
+	\small \centering \sffamily
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\caption{Medidas de la posición de los distintos máximos del espectro del mercurio. El ángulo de referencia es \( \theta_0 = \SI{300.560}{\degree} \). \( m \) denota el orden del máximo}
+		\label{tab:datos Hg}
+		\begin{tabular}{@{}ScS@{}}
+			\toprule
+			{\( \lambda \) (\si{\angstrom})} & {\( m \)} & {\( \theta \) (\unc{0.008}{\degree}) } \\
+			\midrule
+			4046.6 & 1 & 281.000 \\
+ 					 	 & 2 & 258.430 \\
+			\midrule
+			4078.2 & 1 & 280.750 \\
+ 					 	 & 2 & 258.016 \\
+			\midrule
+			4358.3 & 1 & 279.400 \\
+ 					 	 & 2 & 254.460 \\
+			\midrule
+			4916 & 1 & 276.500 \\
+			\midrule
+			5460.7 & 1 & 273.633 \\
+			\midrule
+			5769.6 & 1 & 271.950 \\
+			\midrule
+			5790.7 & 1 & 271.875 \\
+			\bottomrule
+		\end{tabular}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\caption{Medidas de la posición de los distintos máximos de la red de difracción. El ángulo de referencia es \( \theta_0 = \SI{300.560}{\degree} \). \( m \) denota el orden del máximo}
+		\label{tab:datos H}
+		\begin{tabular}{@{}cccS@{}}
+			\toprule
+			{\( \lambda \) (\si{\angstrom})} & {\( n_i \to n_f \)} & {\( m \)} & {\( \theta \) (\unc{0.008}{\degree}) } \\
+			\midrule
+			434 & $5 \to 2$ & 1 & 279.430 \\
+ 					& $5 \to 2$ & 2 & 254.600 \\
+			\midrule
+			486 & $4 \to 2$ & 1 & 276.725 \\
+ 					& $4 \to 2$ & 2 & 246.825 \\
+			\midrule
+			656 & $3 \to 2$ & 1 & 267.517 \\
+			\bottomrule
+		\end{tabular}
+	\end{minipage}
+\end{table}
+
 
 \end{document}
