@@ -104,7 +104,7 @@
 \maketitle
 \renewcommand{\abstractname}{\sffamily \bfseries Resumen:}
 \begin{abstract}
-Abstract aquí
+	En esta práctica se estudian de manera cualitativa varios fenómenos que dan lugar a la polarización: el dicroísmo, la reflexión, la difusión y la birefringencia. Con el uso de polarizadores podemos comprovar si la luz está polarizada, lo que permite la observación. Finalmente, con el uso de un fotómetro se ha verificado cuantitativamente la ley de Malus.
 \end{abstract}
 \hrule
 
@@ -157,7 +157,49 @@ También se puso una pequeña lámina de plástico con varios trozos de cinta ad
 Por último se coloca una caja de un CD, que es un plástico rígido, en el polariscopio. Se observan diversos colores en la pantalla como con la cinta adhesiva. Al presionar el plástico, los colores cambian, lo cual se puede explicar porque al sufrir esfuerzos el plástico cambia la orientación de las diversas longitudes de onda de la luz polarizada.
 
 \section{Polarización por reflexión}
+\begin{figure}[htb]
+	\small \centering \sffamily
+	\includegraphics[scale = 0.4]{brewster.pdf}
+	\caption{Polarización de un haz de luz que incide sobre un material dieléctrico en el ángulo de Brewster. Como se puede ver el haz reflejado sale polarizado perpendicular al plano de incidencia}
+	\label{fig:brewster}
+\end{figure}
 
+Existe un ángulo de incidencia a través del cual la luz reflejada está linealmente polarizada. Este ángulo se conoce como el ángulo de Brewster. Para observar este fenómeno disponemos de una fuente de luz, un filtro monocromático rojo y una lente colimadora. Con estos elementos podemos producir un haz monocromático que reflejamos en una lámina de cristal. Con un polaroide HN-22 analizamos el haz reflejado cariando el ángulo de incidencia en la lámina.
+
+Para ángulos de incidencia pequeños observamos que la luz reflejada no está polarizada, pues al girar el polaroide no se observa una variación de la intensidad del haz reflejado. En cambio, para ángulos cercanos al ángulo de Brewster se podían observar variaciones notables de la intensidad del haz reflejado al rotar el polaroide, lo que indica que se trata de un haz polarizado.  
+
+La polarización en el ángulo de Brewster tiene la particularidad de que es perpendicular al plano óptico. Así pues, si el haz incidente esta linealmente polarizado paralelo al plano óptico entonces en el ángulo de Brewster no deberíamos observar reflexión puesto que el haz original no tenía componente perpendicular al plano óptico. Efectivamente podemos observar este fenómeno si colocamos un polarizador después del filtro y lo orientamos con su eje de transmisión paralelo al plano óptico. En el ángulo de Brewster no observamos reflejo.
+
+Sustituyendo la lámina de vidrio por una lámina metálica como elemento reflector no observamos sustanciales variaciones en la intensidad del haz reflejado al rotar el analizador. Esto nos indica que no se está dando el fenómeno de polarización en el ángulo de Brewster. El motivo es que la polarización en el ángulo de Brewster sólo se da en materiales dieléctricos, como el vidrio. No se da, en cambio, en materiales conductores como lo es la lámina metálica.
+
+\section{Polarización por difusión Rayleigh}
+
+\begin{figure}[htb]
+	\small \sffamily \centering
+	\includegraphics{dispersion.pdf}
+	\caption{Emisión de un dipolo}
+	\label{fig:disp}
+\end{figure}
+
+Cando un haz de luz linealmente polarizado incide sobre un dipolo este emite luz en todas direcciones excepto en la dirección perpendicular al haz (y por lo tanto paralela al a oscilación del campo eléctrico). Tal y como vemos en la \cref{fig:disp}, esto implica que cuando un haz no polarizado incide sobre un dipolo hay dos direcciones en las que se emite luz linealmente polarizada. Por un lado, en la dirección vertival no se emite la componente que oscila verticlamente, y en el eje horizontal no se emite la componente que oscila horizontalmente. Podemos apreciar este fenómeno observando la luz que proviene del sol. Puesto que el sol emite luz que no está polarizada y que esta interacciona con las moléculas de la atmósfera que se comportan como dipolos, existirán dos direcciones en las que observaremos luz polarizada.
+
+Efectivamente, observando el cielo en la dirección ortogonal al sol con un polarizador podemos ver como la intensidad de la luz decrece cuando rotamos el polarizador. Aún así, el mínimo de intensidad no llega a ser 0 puesto que las moléculas los gases de la atmósfera no son dipolos perfectos. Cuando observamos en una dirección cercana al sol, en cambio, no apreciamos variaciones notables en la intensidad al rotar el analizador, que indica que la luz no está polarizada.  
+
+También pudimos observar la luz reflejada por el cristal una ventana y pudimos comprovar como el haz reflejado en el ángulo de Brewster está polarizado. En cambio la luz reflejada por el marco metálico no lo está, tal y como hemos explicado anteriormente.
+
+Para ver estos fenómenos es mejor utilizar el polarizador HN-22 puesto que tiene una transmitancia principal en el plano de extinción, \( K_2 \), menor que el polarizador HN-38, tal y como se ve en la \cref{P5transmitancias}.
+
+\section{Polarización por birefringencia}
+Cuando un haz de luz atraviesa un material birefringente se separa en dos rayos que se refractan de manera diferente. Estos reciben el nombre de rayo ordinario y rayo extraordinario y están polarizados lienalmente y perpendiculares entre sí. Uno de los materiales con esta propiedad es la calcita. Para analizar el fenómeno observamos un objeto ---en este caso un círculo negro--- a través del cristal. Se observan dos imágenes, una es fija y la otra gira cuando rotamos el cristal de calcita. La primera es la debida al haz ordinario, mientras que la segunda es la debida al haz extraordinario. En los materiales birefringentes, la dirección en la que sale refractado el haz extraordinario viene determinada por el llamado eje óptico del material por lo que un material birefringente es necesariamente anisotrópico. Además con un polarizador podemos ver que los rayos están polarizados perpendicularmente pues en una orientación podemos ver sólo la imagen ordinaria y si rotamos el polarizador \SI{90}{\degree} vemos únicamente la imagen extraordinaria. 
+
+\subsection{Láminas retardadoras}
+Las láminas retardadoras son un elemento óptico que hacen uso de la birefringencia para alterar la fase de una onda electromagnética en una dirección concreta, que denominamos el eje lento. En primer lugar hemos utilizado una lámina retaradadora de \( \frac{\lambda}{4} \). Su funcionamiento es retrasar la fase del ccomponente paralelo a su eje un cuarto de periodo. Con esta lámina podemos conseguir luz linealmente polarizada y circularmente polarizada. Para ello en primer lugar hacemos pasar el haz por un polarizador de manera que obtenemos luz linealmente polarizada en una dirección conocida. Si el ángulo entre el polarizador y la lámina es nulo entonces la lámina no tiene efecto por lo que deberíamos observar luz linealmente polarizada al otro lado. Similarmente, si el ángulo es de \SI{90}{\degree} entonces la lámina retarda el haz incidente pero como originalmente estaba polarizada en una sola dirección la luz que observamos al otro lado sigue estando linealmente polarizada. Podemos comprovar esto con un analizador y verificamos que efectivamente conseguimos intensidad nula rotando el analizador. 
+
+Por otro lado, si el ángulo entre el priemr polarizador y la lámina es de \SI{45}{\degree} entonces el campo eléctrico se descomponen en sus dos proyecciones, sobre el eje lento y el eje rápido. La proyección sobre el eje lento se retrasa un cuarto de periodo por la que la diferencia de fase entre ambas proyecciones es de \( \frac{\pi}{2} \). Entonces la luz que atraviesa la lámina sale circularmente polarizada. Para comporovar esto deberíamos ver como al rotar el analizador no cambia la intensidad de la luz reflectida. Puesto que es complicado obtener un ángulo relativo de exactamente \SI{45}{\degree} no terminamos de ver intensidad constante. Con el fotómetro medimos la intensidad en el máximo y en el mínimo y pudimos conseguir una oscilación de menos de \SI{15}{mW} entre ambos.  
+
+La lámina de \( \frac{\lambda}{2} \) retrasa la proyección sobre el eje lento medio periodo. Si la orientación relativa entre el polarizador y la lámina es de \SI{0}{\degree} o \SI{90}{\degree} entonces toda la oscilación es o bien perpendicular al eje óptica o paralela a él por lo que no altera la polarización del haz. Efectivamente podemos comprovarlo rotando el analizador de manera que si su eje está cruzado con el primer polarizador la luz no atraviesa el sistema. Si el ángulo es de \SI{45}{\degree} ahora introduce una diferencia de fase de \( \pi \) entre las componentes, lo que gira el eje de polarización \SI{90}{\degree}. También pudimos comprovar este hecho ya que al poner el analizador y el polarizador con los ejes paralelos la intensidad transmitida era prácticamente nula mientras que si estaban cruzados era máxima.
+
+Finalmente sustituimos la láminda retardadora por una lámina de mica. Observamos que al rotar la lámina de mica aparecen colores en la imagen que se forma de ella en la pantalla. Los vemos cada \SI{90}{\degree}, y en medio vemos que la imagen es uniformemente blanca., y en medio vemos que la imagen es uniformemente blanca.
 
 \section{Verificación de la ley de Malus}
 A continuación verificaremos experimentalmente la ley de Malus. Esta ley da la intensidad transmitida a través de dos polarizadoes en términos de su orientación relativa. Si los dos polarizadores son iguales entonces se puede demostrar que la intensidad transmitida de un haz monocromático que los atraviesa es
@@ -210,4 +252,10 @@ Vemos que \( A \) es a efectos prácticos 0. Esto no debería de sorprendernos p
 \end{figure}
 
 En la \cref{fig:malus-2} están representado los puntos experimentales junto con la curva de intensidad teórica utilizando los parámetros estimados. Vemos que se ajusta muy bien a los datos, tal y como predice la ley de Malus.
+
+\section{Conclusiones}
+En esta práctica hemos podido comprovar que la polarización aparece como consecuencia de distintos fenómenos ópticos como son el dicroísmo, la reflexión, la dispersión y la birefringencia. Con el uso de polarizadores podemos determinar de manera sencilla si la luz está polarizada por lo que hemos podido observar la polarización en todos estos fenómenos.
+
+Con el uso de un fotómetro hemos tomado medidas cuantitativas con el fin de verificar la ley de Malues. Como hemos podido comprovar, las medidas se ajustan muy bien a lo que predice la teoría.
+
 \end{document}
